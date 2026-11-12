@@ -1,0 +1,15 @@
+LINES = [
+ ("counter","हर सेकंड, इंडिया में लगभग साढ़े नौ हज़ार यूपीआई पेमेंट्स होते हैं।","Har second, India mein lagbhag 9,500 UPI payments hote hain."),
+ ("counter","पर दो हज़ार सोलह में, ये सिस्टम बस एक एक्सपेरिमेंट था।","Par 2016 mein, ye system bas ek experiment tha."),
+ ("pilot","ग्यारह अप्रैल, दो हज़ार सोलह। एनपीसीआई ने सिर्फ़ इक्कीस बैंक्स के साथ, यूपीआई का पायलट शुरू किया।","11 April 2016. NPCI ne sirf 21 banks ke saath UPI ka pilot shuru kiya."),
+ ("ledger","अगस्त में, पूरे महीने में... बस तिरानवे हज़ार ट्रांज़ैक्शंस।","August mein, poore mahine mein... bas 93 hazaar transactions."),
+ ("notes","फिर नवंबर आया। रातों-रात, छियासी प्रतिशत कैश, लीगल टेंडर नहीं रहा।","Phir November aaya. Raaton-raat, 86% cash legal tender nahi raha."),
+ ("notes","लोग एटीएम की लाइन में थे... और फ़ोन में, एक नया रास्ता था।","Log ATM ki line mein the... aur phone mein, ek naya raasta tha."),
+ ("diagram","एक क्यूआर कोड। एक यूपीआई आईडी। बैंक से बैंक, सीधा, एक सेकंड में।","Ek QR code. Ek UPI ID. Bank se bank, seedha, ek second mein."),
+ ("shops","चायवाले से मॉल तक, सबने वही कोड चिपकाया।","Chaiwale se mall tak, sabne wahi code chipkaya."),
+ ("globe","आईएमएफ के मुताबिक, आज यूपीआई दुनिया का सबसे बड़ा रियल-टाइम पेमेंट सिस्टम है।","IMF ke mutabik, aaj UPI duniya ka sabse bada real-time payment system hai."),
+ ("globe","दुनिया के उनचास प्रतिशत रियल-टाइम पेमेंट्स, अकेले इंडिया में होते हैं।","Duniya ke 49% real-time payments, akele India mein hote hain."),
+ ("chart","अक्टूबर दो हज़ार छब्बीस: एक महीने में, पच्चीस अरब से ज़्यादा ट्रांज़ैक्शंस।","October 2026: ek mahine mein, 25 arab se zyada transactions."),
+ ("close","इक्कीस बैंक्स का एक एक्सपेरिमेंट... आज दुनिया का आधा रियल-टाइम पेमेंट।","21 banks ka ek experiment... aaj duniya ka aadha real-time payment."),
+ ("close","आपकी पहली यूपीआई पेमेंट कब थी? कमेंट करो, और फ़ॉलो करो टेक्नी बाबा।","Aapki pehli UPI payment kab thi? Comment karo, aur follow karo TechniBaba."),
+]

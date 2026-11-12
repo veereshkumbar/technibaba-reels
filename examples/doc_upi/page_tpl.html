@@ -1,0 +1,116 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:PF;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-normal.woff2)}
+@font-face{font-family:PF;font-weight:400;font-style:italic;src:url(file:///tmp/fonts/node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff2)}
+@font-face{font-family:PF;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2)}
+@font-face{font-family:PF;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/playfair-display/files/playfair-display-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+@font-face{font-family:Mono;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2)}
+@font-face{font-family:Hand;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+@font-face{font-family:Mono2;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}
+</style></head><body><div id="root"></div><script>
+__CHARS__
+function dosa(){return ''}
+const pop=(t,a,d)=>t<a?0:back(prog(t,a,a+d));
+const TL=__TL__,LINES=TL.lines,TOTAL=TL.total;
+const PAPER='#efe6d2',INK='#1d2a44',RED2='#d64527',TINT='#c9bba0';
+const norm=w=>w.toLowerCase().replace(/[^a-z0-9%']/g,'');
+function words(i){return LINES[i].cap.split(/\s+/)}
+function wordStarts(i){const L=LINES[i],w=words(i),wt=w.map(x=>x.length+1.5),tot=wt.reduce((a,b)=>a+b,0);let c=0;return w.map((x,k)=>{const s=L.start+L.dur*c/tot;c+=wt[k];return s})}
+function W(i,word){const w=words(i),s=wordStarts(i);const k=w.findIndex(x=>norm(x).startsWith(word.toLowerCase()));return k<0?LINES[i].start:s[k]}
+const LS=i=>LINES[i].start,LE=i=>LINES[i].start+LINES[i].dur;
+const ORDER=[];LINES.forEach(l=>{if(!ORDER.includes(l.scene))ORDER.push(l.scene)});
+const SCN={};ORDER.forEach((n,k)=>{const ls=LINES.filter(l=>l.scene==n);SCN[n]={s:k==0?0:ls[0].start-0.35,first:ls[0].i}});ORDER.forEach((n,k)=>{SCN[n].e=k<ORDER.length-1?SCN[ORDER[k+1]].s:TOTAL});
+const SFX=[];const sfx=(t,ty)=>SFX.push([+t.toFixed(3),ty]);
+const STAMP={counter:'2026',pilot:'11.04.2016',ledger:'08.2016',notes:'08.11.2016',diagram:'1 SEC',shops:'EVERYWHERE',globe:'IMF · 2025',chart:'OCT 2026',close:'TECHNIBABA'};
+function rstamp(t,s0,txt){const p=prog(t,s0+.35,s0+.6),sc=1+1.2*(1-eo(p));if(p<=0)return'';return `<g transform="translate(850,222) rotate(-6) scale(${sc*.8})" opacity="${clamp(p*3)*.9}"><rect x="-150" y="-46" width="300" height="84" rx="10" fill="none" stroke="${RED2}" stroke-width="6"/><rect x="-140" y="-36" width="280" height="64" rx="6" fill="none" stroke="${RED2}" stroke-width="2"/><text y="12" text-anchor="middle" font-family="Mono" font-weight="700" font-size="34" fill="${RED2}" letter-spacing="3">${txt}</text></g>`}
+function qr(x,y,s){let o=`<g transform="translate(${x},${y}) scale(${s})"><rect x="-6" y="-6" width="132" height="132" fill="#fff"/>`;const m=[[0,0],[84,0],[0,84]];m.forEach(([a,b])=>o+=`<rect x="${a+2}" y="${b+2}" width="32" height="32" fill="none" stroke="${INK}" stroke-width="6"/><rect x="${a+12}" y="${b+12}" width="12" height="12" fill="${INK}"/>`);
+ for(let i=0;i<12;i++)for(let j=0;j<12;j++){if((i<4&&j<4)||(i>7&&j<4)||(i<4&&j>7))continue;if(((i*7+j*13+i*j)%5)<2)o+=`<rect x="${i*10}" y="${j*10}" width="10" height="10" fill="${INK}"/>`}return o+'</g>'}
+function phone(x,y,s,glow){return `<g transform="translate(${x},${y}) scale(${s})">${glow?`<circle r="170" fill="${RED2}" opacity="${glow*.18}"/>`:''}<rect x="-90" y="-170" width="180" height="340" rx="26" fill="${INK}"/><rect x="-76" y="-148" width="152" height="290" rx="12" fill="#f8f3e6"/>${qr(-60,-120,1)}<text y="70" text-anchor="middle" font-family="Mono" font-size="17" fill="${INK}">name@bank</text><rect x="-50" y="96" width="100" height="30" rx="15" fill="${RED2}"/><text y="117" text-anchor="middle" font-family="Mono" font-weight="700" font-size="16" fill="#fff">PAY</text></g>`}
+function payline(t,a,pts,dur=.8){if(t<a)return'';const p=eo(prog(t,a,a+dur));let L=0,seg=[];for(let k=0;k<pts.length-1;k++){const l=Math.hypot(pts[k+1][0]-pts[k][0],pts[k+1][1]-pts[k][1]);seg.push(l);L+=l}const d=pts.map(q=>q.join(',')).join(' ');return `<polyline points="${d}" fill="none" stroke="${RED2}" stroke-width="7" stroke-linecap="round" stroke-dasharray="${L}" stroke-dashoffset="${L*(1-p)}"/>`}
+function silh(x,y,s,ph){return `<g transform="translate(${x},${y}) scale(${s})" fill="${INK}"><circle cx="0" cy="-150" r="26"/><path d="M-34,-118 Q0,-128 34,-118 L40,-20 L28,-20 L24,60 L6,60 L0,-10 L-6,60 L-24,60 L-28,-20 L-40,-20Z"/>${ph?`<rect x="30" y="-96" width="22" height="36" rx="4" fill="${RED2}"/><circle cx="41" cy="-78" r="${30+6*Math.sin(ph*5)}" fill="${RED2}" opacity=".18"/>`:''}</g>`}
+// ---------- scenes ----------
+function sCounter(t){const s=SCN.counter.s;let o='';const p=eo(prog(t,.1,2.6));const roll=prog(t,LS(1)+.2,LS(1)+1.0);
+ o+=phone(540,560,1,0)+payline(t,.6,[[540,740],[540,820]],.4);
+ if(roll<1){const v=Math.round(9000+514*p).toLocaleString('en-IN');o+=`<g opacity="${1-roll}" transform="translate(0,${-80*roll})"><text x="540" y="1000" text-anchor="middle" font-family="PF" font-weight="900" font-size="230" fill="${INK}">${v}</text><text x="540" y="1100" text-anchor="middle" font-family="PF" font-style="italic" font-size="56" fill="${RED2}">UPI payments, every second</text></g>`}
+ if(roll>0){o+=`<g opacity="${roll}" transform="translate(0,${80*(1-roll)})"><text x="540" y="1000" text-anchor="middle" font-family="PF" font-weight="900" font-size="230" fill="${INK}">2016</text></g>`;if(t>W(1,'experiment')){const q=prog(t,W(1,'experiment'),W(1,'experiment')+.22);o+=`<g transform="translate(540,1060) rotate(-6) scale(${1+1.2*(1-eo(q))})" opacity="${clamp(q*3)}"><rect x="-230" y="-44" width="460" height="80" fill="none" stroke="${RED2}" stroke-width="6"/><text y="14" text-anchor="middle" font-family="Mono" font-weight="700" font-size="42" fill="${RED2}" letter-spacing="6">EXPERIMENT</text></g>`}}
+ return o}
+function sPilot(t){const s=SCN.pilot.s;let o=`<g transform="translate(540,690) rotate(-2)"><rect x="-380" y="-330" width="760" height="680" fill="#fbf7ec" stroke="${TINT}" stroke-width="2"/><rect x="-380" y="-330" width="760" height="70" fill="${INK}"/><text x="-350" y="-284" font-family="Mono" font-weight="700" font-size="24" fill="#fbf7ec" letter-spacing="2">MEMO · PILOT PROGRAMME</text>`;
+ const L=[['SYSTEM','Unified Payments Interface',s+.4],['BY','NPCI, with RBI oversight',s+.9],['DATE','11 APRIL 2016',W(2,'april')],['BANKS','21',W(2,'21')]];
+ L.forEach(([k,v,at],i)=>{const n=t<at?0:Math.floor((t-at)/.03);o+=`<text x="-340" y="${-200+i*58}" font-family="Mono" font-weight="700" font-size="24" fill="#7d6f55">${k}</text><text x="-160" y="${-200+i*58}" font-family="Mono" font-size="28" fill="${INK}">${v.slice(0,n)}</text>`});
+ for(let k=0;k<21;k++){const at=W(2,'banks')+k*.06,c=k%7,r=Math.floor(k/7),x=-270+c*90,y=110+r*80;const on=t>at;o+=`<circle cx="${x}" cy="${y}" r="28" fill="${on?INK:'none'}" stroke="${INK}" stroke-width="3"/>${on?`<path d="M${x-10},${y} l7,8 l14,-16" stroke="#fbf7ec" stroke-width="5" fill="none"/>`:''}`}
+ return o+`</g>`}
+function sLedger(t){const s=SCN.ledger.s;let o=`<g transform="translate(540,700)"><rect x="-420" y="-360" width="840" height="700" rx="10" fill="#7b2d26"/><rect x="-400" y="-340" width="390" height="660" fill="#f7f0de"/><rect x="10" y="-340" width="390" height="660" fill="#f4ecd8"/><line x1="0" y1="-340" x2="0" y2="320" stroke="#b89f74" stroke-width="6"/>`;
+ for(let k=0;k<14;k++)o+=`<line x1="-390" y1="${-290+k*44}" x2="390" y2="${-290+k*44}" stroke="#c7d3e3" stroke-width="2"/>`;o+=`<line x1="-300" y1="-340" x2="-300" y2="320" stroke="#e7a3a3" stroke-width="2"/>`;
+ const hand=(at,x,y,txt,sz,col)=>{if(t<at)return'';const p=prog(t,at,at+.5),w=txt.length*sz*.5;const id='c'+Math.round(at*1000)+x;return `<clipPath id="${id}"><rect x="${x-4}" y="${y-sz}" width="${(w+10)*p}" height="${sz*1.4}"/></clipPath><text clip-path="url(#${id})" x="${x}" y="${y}" font-family="Hand" font-weight="700" font-size="${sz}" fill="${col}">${txt}</text>`};
+ o+=hand(s+.3,-280,-240,'AUGUST 2016',56,INK)+hand(s+.8,-280,-150,'UPI txns, whole month:',40,'#555');
+ const hp=prog(t,W(3,'93'),W(3,'93')+.4);o+=`<rect x="-290" y="-80" width="${560*hp}" height="70" fill="#ffd43b" opacity=".6" transform="rotate(-1)"/>`+hand(W(3,'93')-.1,-280,-28,'93,000',84,RED2);
+ o+=hand(W(3,'transactions'),40,-240,'= a quiet start',44,'#555');
+ const bp=prog(t,s+1.2,s+2);o+=`<rect x="80" y="${200-10*bp}" width="40" height="${10*bp}" fill="${RED2}"/><text x="140" y="196" font-family="Mono" font-size="20" fill="#777">tiny.</text><line x1="60" y1="200" x2="370" y2="200" stroke="${INK}" stroke-width="3"/>`;
+ return o+`</g>`}
+function note(x,y,r,v,c){return `<g transform="translate(${x},${y}) rotate(${r})"><rect x="-200" y="-90" width="400" height="180" rx="8" fill="${c}" stroke="${INK}" stroke-width="3"/><rect x="-180" y="-70" width="360" height="140" rx="6" fill="none" stroke="${INK}" stroke-width="1.5" opacity=".5"/><circle cx="90" cy="0" r="46" fill="none" stroke="${INK}" stroke-width="2" opacity=".5"/><text x="-150" y="22" font-family="PF" font-weight="900" font-size="72" fill="${INK}">${v}</text></g>`}
+function sNotes(t){const s=SCN.notes.s;let o='';const q=prog(t,LS(5)-.1,LS(5)+.6);
+ o+=`<g opacity="${1-q}">`;[[0,-8,'1000','#c6b98f'],[40,4,'500','#b7c3a1'],[-30,12,'500','#c9b2a2'],[20,-2,'1000','#cbbf9a']].forEach(([dx,r,v,c],k)=>{const p=eo(prog(t,s+.1+k*.12,s+.5+k*.12));o+=note(540+dx,560+k*70-200*(1-p),r,v,c)});
+ const xp=prog(t,W(4,'raaton'),W(4,'raaton')+.35);if(xp>0)o+=`<path d="M300,420 L${300+480*xp},${420+480*xp}" stroke="${RED2}" stroke-width="26" stroke-linecap="round"/><path d="M780,420 L${780-480*xp},${420+480*xp}" stroke="${RED2}" stroke-width="26" stroke-linecap="round"/>`;
+ if(t>W(4,'86')){const p=prog(t,W(4,'86'),W(4,'86')+.22);o+=`<g transform="translate(540,1060) rotate(-4) scale(${1+1.2*(1-eo(p))})" opacity="${clamp(p*3)}"><rect x="-350" y="-50" width="700" height="92" fill="${PAPER}" stroke="${RED2}" stroke-width="6"/><text y="16" text-anchor="middle" font-family="Mono" font-weight="700" font-size="38" fill="${RED2}">86% CASH · NOT LEGAL TENDER</text></g>`}
+ o+=`</g>`;
+ if(q>0){o+=`<g opacity="${q}"><rect x="760" y="420" width="200" height="560" rx="10" fill="${INK}"/><rect x="790" y="470" width="140" height="100" fill="#3c4a6e"/><text x="860" y="640" text-anchor="middle" font-family="Mono" font-weight="700" font-size="40" fill="${PAPER}">ATM</text><rect x="800" y="700" width="120" height="14" fill="#3c4a6e"/>`;
+  for(let k=0;k<6;k++)o+=silh(680-k*105,980,.95-(k*.02),k==5?t:0);o+=`<line x1="40" y1="1040" x2="1040" y2="1040" stroke="${INK}" stroke-width="4"/>`;
+  o+=payline(t,W(5,'phone'),[[86,800],[86,560],[300,460]],.7);if(t>W(5,'naya')){const p=eo(prog(t,W(5,'naya'),W(5,'naya')+.5));o+=`<g opacity="${p}">${phone(360,440,.55,1)}</g>`}o+=`</g>`}
+ return o}
+function sDiagram(t){const s=SCN.diagram.s;let o='';const k1=W(6,'qr'),k2=W(6,'upi'),k3=W(6,'bank');
+ o+=`<g opacity="${eo(prog(t,k1-.2,k1+.3))}">${phone(250,560,.85,0)}</g>`;
+ if(t>k2){const p=pop(t,k2,.45);o+=`<g transform="translate(250,830) scale(${p})"><rect x="-150" y="-36" width="300" height="64" rx="32" fill="${INK}"/><text y="9" text-anchor="middle" font-family="Mono" font-weight="700" font-size="26" fill="${PAPER}">veer@okbank</text></g>`}
+ o+=`<g opacity="${eo(prog(t,k3-.3,k3+.2))}"><circle cx="560" cy="560" r="96" fill="none" stroke="${INK}" stroke-width="5"/><text x="560" y="572" text-anchor="middle" font-family="PF" font-weight="900" font-size="40" fill="${INK}">NPCI</text>`;
+ o+=`<g transform="translate(860,560)"><path d="M-100,-40 L0,-110 L100,-40Z" fill="${INK}"/><rect x="-90" y="-40" width="180" height="20" fill="${INK}"/>${[-60,-20,20,60].map(x=>`<rect x="${x-10}" y="-14" width="20" height="100" fill="${INK}"/>`).join('')}<rect x="-100" y="90" width="200" height="22" fill="${INK}"/><text y="150" text-anchor="middle" font-family="Mono" font-weight="700" font-size="24" fill="${INK}">YOUR BANK</text></g></g>`;
+ o+=payline(t,k3,[[345,560],[464,560]],.35)+payline(t,k3+.35,[[656,560],[760,560]],.35);
+ if(t>W(6,'second')){const p=prog(t,W(6,'second'),W(6,'second')+1);o+=`<g transform="translate(560,900)"><circle r="90" fill="none" stroke="${INK}" stroke-width="7"/><rect x="-14" y="-118" width="28" height="22" fill="${INK}"/><line x1="0" y1="0" x2="${Math.sin(p*2*Math.PI)*70}" y2="${-Math.cos(p*2*Math.PI)*70}" stroke="${RED2}" stroke-width="7" stroke-linecap="round"/><text y="150" text-anchor="middle" font-family="PF" font-style="italic" font-size="52" fill="${RED2}">1 second</text></g>`}
+ return o}
+function shop(x,y,name,c,at,t){let o=`<g transform="translate(${x},${y})"><rect x="-140" y="-260" width="280" height="300" fill="${c}" stroke="${INK}" stroke-width="4"/><path d="M-160,-260 L160,-260 L140,-310 L-140,-310Z" fill="${INK}"/>`;for(let k=0;k<7;k++)o+=`<path d="M${-140+k*40},-260 q20,30 40,0" fill="${k%2?RED2:PAPER}" stroke="${INK}" stroke-width="2"/>`;
+ o+=`<text y="-140" text-anchor="middle" font-family="PF" font-weight="900" font-size="46" fill="${INK}">${name}</text><rect x="-60" y="-80" width="120" height="120" fill="${INK}" opacity=".15"/>`;
+ if(t>at){const p=pop(t,at,.4);o+=`<g transform="translate(0,-40) scale(${p}) rotate(-6)">${qr(-45,-45,.75)}</g>`}return o+`</g>`}
+function sShops(t){const s=SCN.shops.s;let o=`<line x1="40" y1="990" x2="1040" y2="990" stroke="${INK}" stroke-width="5"/>`;
+ o+=shop(200,950,'CHAI','#e9d8b4',W(7,'chaiwale')+.2,t)+shop(540,950,'KIRANA','#d7e2c8',W(7,'mall')-.2,t)+shop(880,950,'MALL','#d9d4e6',W(7,'mall')+.2,t);
+ o+=`<text x="540" y="500" text-anchor="middle" font-family="PF" font-style="italic" font-size="64" fill="${INK}" opacity="${prog(t,s+.3,s+.8)}">same code, everywhere</text>`;
+ return o}
+function sGlobe(t){const s=SCN.globe.s;let o='';const q=prog(t,LS(9)-.1,LS(9)+.5);
+ if(q<1){o+=`<g opacity="${1-q}" transform="translate(540,660) rotate(${t*6})"><circle r="300" fill="none" stroke="${INK}" stroke-width="5"/>`;for(let k=-2;k<=2;k++)o+=`<ellipse rx="${Math.abs(300*Math.cos(k*.5+t*.3))}" ry="300" fill="none" stroke="${INK}" stroke-width="2" opacity=".5"/><line x1="-300" y1="${k*110}" x2="300" y2="${k*110}" stroke="${INK}" stroke-width="2" opacity=".5"/>`;o+=`</g>`;
+  if(t>W(8,'sabse')){const p=prog(t,W(8,'sabse'),W(8,'sabse')+.22);o+=`<g transform="translate(540,1050) rotate(-3) scale(${1+1.2*(1-eo(p))})" opacity="${clamp(p*3)*(1-q)}"><rect x="-380" y="-50" width="760" height="92" fill="${PAPER}" stroke="${RED2}" stroke-width="6"/><text y="14" text-anchor="middle" font-family="Mono" font-weight="700" font-size="32" fill="${RED2}">WORLD'S LARGEST FAST-PAYMENT SYSTEM</text></g>`}}
+ if(q>0){const D=[['India',49,RED2],['Brazil',14,'#4a5a7d'],['Thailand',8,'#7a87a3'],['China',6,'#a7b0c4'],['Others',23,'#d3cbb6']];let a0=-90;o+=`<g opacity="${q}" transform="translate(540,640)">`;const gp=eo(prog(t,LS(9),LS(9)+1.6));
+  D.forEach(([n,v,c],k)=>{const sw=v*3.6*gp,a1=a0+sw,r=270,ri=170,P=(a,rr)=>[Math.cos(a*Math.PI/180)*rr,Math.sin(a*Math.PI/180)*rr];const [x0,y0]=P(a0,r),[x1,y1]=P(a1,r),[x2,y2]=P(a1,ri),[x3,y3]=P(a0,ri),lg=sw>180?1:0;if(sw>.5)o+=`<path d="M${x0},${y0} A${r},${r} 0 ${lg} 1 ${x1},${y1} L${x2},${y2} A${ri},${ri} 0 ${lg} 0 ${x3},${y3}Z" fill="${c}" stroke="${PAPER}" stroke-width="4"/>`;
+   const mid=a0+sw/2,[lx,ly]=P(mid,335);if(gp>.95&&k>0)o+=`<text x="${lx}" y="${ly+8}" text-anchor="middle" font-family="Mono" font-weight="700" font-size="24" fill="${INK}">${n} ${v}%</text>`;a0=a1});
+  o+=`<text y="30" text-anchor="middle" font-family="PF" font-weight="900" font-size="120" fill="${RED2}">${Math.round(49*gp)}%</text><text y="84" text-anchor="middle" font-family="Mono" font-weight="700" font-size="26" fill="${INK}">INDIA</text></g><text x="540" y="1080" text-anchor="middle" font-family="Mono" font-size="22" fill="#7d6f55" opacity="${q}">Global real-time payments · ACI Worldwide 2024 · IMF 2025</text>`}
+ return o}
+function sChart(t){const s=SCN.chart.s;let o=`<g transform="translate(120,1000)"><line x1="0" y1="0" x2="840" y2="0" stroke="${INK}" stroke-width="4"/><line x1="0" y1="0" x2="0" y2="-620" stroke="${INK}" stroke-width="4"/>`;
+ ['2016','2018','2020','2022','2024','2026'].forEach((y,k)=>o+=`<text x="${k*168}" y="42" text-anchor="middle" font-family="Mono" font-size="22" fill="${INK}">${y}</text>`);
+ const pts=[];for(let k=0;k<=40;k++){const f=k/40;pts.push([f*840,-Math.pow(f,2.4)*580-6])}const p=eo(prog(t,s+.2,LS(10)+2.2));const n=Math.max(1,Math.floor(40*p));
+ o+=`<polyline points="${pts.slice(0,n+1).map(q=>q.join(',')).join(' ')}" fill="none" stroke="${RED2}" stroke-width="8" stroke-linejoin="round"/>`;
+ const lab=(f,txt,dy,at)=>{if(t<at)return'';const q=prog(t,at,at+.3);const x=f*840,y=-Math.pow(f,2.4)*580-6;return `<g opacity="${q}"><circle cx="${x}" cy="${y}" r="12" fill="${RED2}"/><text x="${x+(f>.9?-20:18)}" y="${y+dy}" text-anchor="${f>.9?'end':'start'}" font-family="Mono" font-weight="700" font-size="26" fill="${INK}">${txt}</text></g>`};
+ o+=lab(.06,"Aug '16 · 93K / month",-24,s+.4)+lab(.08,"Dec '16 · 2M",-64,s+.8);
+ if(p>.97){const q=pop(t,LS(10)+2.2,.4);o+=`<g transform="translate(840,-586)"><circle r="16" fill="${RED2}"/></g><g transform="translate(560,-420) scale(${q})"><text text-anchor="middle" font-family="PF" font-weight="900" font-size="110" fill="${RED2}">25.47B</text><text y="48" text-anchor="middle" font-family="Mono" font-weight="700" font-size="24" fill="${INK}">TRANSACTIONS · OCT 2026</text></g>`}
+ return o+`</g>`}
+function sClose(t){const s=SCN.close.s;let o='';const q=prog(t,LS(12)-.1,LS(12)+.4);
+ if(q<1){o+=`<g opacity="${1-q}"><text x="540" y="560" text-anchor="middle" font-family="PF" font-style="italic" font-size="70" fill="${INK}">21 banks ka</text><text x="540" y="650" text-anchor="middle" font-family="PF" font-style="italic" font-size="70" fill="${INK}">ek experiment...</text>`;
+ if(t>W(11,'aaj')){const p=eo(prog(t,W(11,'aaj'),W(11,'aaj')+.5));o+=`<g opacity="${p}"><text x="540" y="800" text-anchor="middle" font-family="PF" font-weight="900" font-size="84" fill="${RED2}">aaj duniya ka</text><text x="540" y="900" text-anchor="middle" font-family="PF" font-weight="900" font-size="84" fill="${RED2}">aadha payment.</text></g>`}o+=`</g>`}
+ if(q>0){o+=`<g opacity="${q}"><rect x="140" y="380" width="800" height="200" rx="24" fill="#fbf7ec" stroke="${INK}" stroke-width="4"/><text x="540" y="465" text-anchor="middle" font-family="PF" font-weight="700" font-size="50" fill="${INK}">Aapki pehli UPI payment</text><text x="540" y="535" text-anchor="middle" font-family="PF" font-weight="700" font-size="50" fill="${INK}">kab thi? Comment karo.</text></g>`;
+  o+=`<g opacity="${q}">`+person(t,Object.assign({x:310,y:1100,s:.8,pose:'wave'},BABA))+`</g>`;
+  if(t>W(12,'follow')-.2){const p=pop(t,W(12,'follow')-.2,.45);o+=`<g transform="translate(730,860) scale(${p})"><rect x="-210" y="-70" width="420" height="140" rx="30" fill="${INK}"/><text y="-12" text-anchor="middle" font-family="Mono" font-weight="700" font-size="34" fill="${PAPER}">+ FOLLOW</text><text y="38" text-anchor="middle" font-family="Mono" font-weight="700" font-size="28" fill="${RED2}">TECHNIBABA DOCS</text></g>`}}
+ return o}
+const FN={counter:sCounter,pilot:sPilot,ledger:sLedger,notes:sNotes,diagram:sDiagram,shops:sShops,globe:sGlobe,chart:sChart,close:sClose};
+// captions
+const CH=LINES.map(L=>{const w=words(L.i),st=wordStarts(L.i);const ch=[];let cur=[];w.forEach((x,k)=>{cur.push(k);if(cur.length>=5||(/[,.:?!]$/.test(x)&&cur.length>=2)||/\.\.\.$/.test(x)){ch.push(cur);cur=[]}});if(cur.length)ch.push(cur);return ch.map(c=>({ks:c,s:st[c[0]]}))});
+function caption(t){let L=null;for(const l of LINES)if(t>=l.start-.05&&t<l.start+l.dur+.25)L=l;if(!L)return'';const ch=CH[L.i],ws=words(L.i);let ci=0;ch.forEach((c,k)=>{if(t>=c.s-.05)ci=k});const c=ch[ci];const txt=c.ks.map(k=>ws[k]).join(' ');const a=prog(t,c.s-.05,c.s+.2);
+ return `<g opacity="${a}"><text x="540" y="${1235+8*(1-a)}" text-anchor="middle" font-family="PF" font-style="italic" font-weight="700" font-size="56" fill="${PAPER}" stroke="${PAPER}" stroke-width="14" stroke-linejoin="round">${txt}</text><text x="540" y="${1235+8*(1-a)}" text-anchor="middle" font-family="PF" font-style="italic" font-weight="700" font-size="56" fill="${INK}">${txt}</text></g>`}
+function sceneAt(t){for(let k=ORDER.length-1;k>=0;k--)if(t>=SCN[ORDER[k]].s)return k;return 0}
+function plate(name,t){const S=SCN[name],p=prog(t,S.s,S.e),z=1+.06*p,px=(ORDER.indexOf(name)%2?-1:1)*18*p;return `<g transform="translate(540,800) scale(${z}) translate(${-540+px},-800)">${FN[name](t)}</g>${rstamp(t,S.s,STAMP[name])}`}
+function render(t){const k=sceneAt(t),n=ORDER[k],S=SCN[n];let o=`<defs><filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="${Math.floor(t*12)%50}" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .09 0"/></filter><radialGradient id="vig" cx="50%" cy="45%" r="75%"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#3a2a10" stop-opacity=".35"/></radialGradient></defs><rect width="1080" height="1920" fill="${PAPER}"/>`;
+ const fade=prog(t,S.s,S.s+.4);if(k>0&&fade<1)o+=`<g opacity="${1-fade}">${plate(ORDER[k-1],t)}</g>`;o+=`<g opacity="${k>0?fade:1}">${plate(n,t)}</g>`;
+ o+=`<text x="60" y="226" font-family="Mono" font-weight="700" font-size="24" fill="${INK}" letter-spacing="4" opacity=".75">TECHNIBABA DOCS · UPI</text><line x1="60" y1="246" x2="360" y2="246" stroke="${RED2}" stroke-width="4"/>`;
+ o+=caption(t)+`<rect width="1080" height="1920" fill="url(#vig)"/><rect width="1080" height="1920" filter="url(#grain)"/>`;
+ document.getElementById('root').innerHTML=`<svg width="1080" height="1920" viewBox="0 0 1080 1920">${o}</svg>`}
+// sfx: soft page turns
+ORDER.forEach((n,k)=>{if(k)sfx(SCN[n].s,'whoosh')});sfx(W(1,'experiment'),'thud');sfx(W(4,'86'),'thud');sfx(W(8,'sabse'),'thud');sfx(W(6,'second'),'tick');sfx(LS(10)+2.2,'ding');[0,1,2].forEach(k=>sfx(W(7,['chaiwale','mall','mall'][k])+(k==2?.2:k==1?-.2:.2),'pop'));
+for(let k=0;k<21;k+=3)sfx(W(2,'banks')+k*.06,'tick');
+window.render=render;window.SFX=SFX;window.TOTAL=TOTAL;
+</script></body></html>

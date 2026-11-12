@@ -7,3 +7,5 @@
 
 ## Learnings
 - 2026-11-12: both test reels (59–66 s) had 55–59% 3-second skip, 7–12 s average watch, ~115 reach (34 followers). Go 35–45 s, payoff in frame 0.
+
+- 2026-11-12 · pilot · TechniBaba Docs "How UPI beat the world" (52s, documentary format) · sent to Veer for review, not posted yet.
