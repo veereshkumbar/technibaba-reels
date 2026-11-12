@@ -1,0 +1,93 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Serif;font-style:italic;src:url(file:///tmp/fonts/node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2)}
+@font-face{font-family:Pixel;src:url(file:///tmp/fonts/node_modules/@fontsource/press-start-2p/files/press-start-2p-latin-400-normal.woff2)}
+@font-face{font-family:Hand;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}
+</style></head><body><div id="root"></div><script>
+const NAVY='#12104a',RED='#d9534f',MINT='#5de0b0';
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),prog=(t,a,b)=>clamp((t-a)/(b-a)),eo=x=>1-Math.pow(1-x,3);
+const back=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const SK=[['minimal','Minimal Line'],['glow','Glow Sketch'],['chalk','Chalkboard'],['comic','Comic Art'],['flat','Flat Vector'],['pixel','Pixel Art']];
+const DUR=1.45, END=SK.length*DUR, TOTAL=END+2.6;
+const rad=d=>d*Math.PI/180;
+// limb: returns joint points from origin with angles (deg, 0 = straight down)
+function limb(x,y,a1,l1,a2,l2){const x1=x+Math.sin(rad(a1))*l1,y1=y+Math.cos(rad(a1))*l1;const x2=x1+Math.sin(rad(a1+a2))*l2,y2=y1+Math.cos(rad(a1+a2))*l2;return [[x,y],[x1,y1],[x2,y2]]}
+const pl=p=>p.map(q=>q.map(v=>v.toFixed(1)).join(',')).join(' ');
+// Head paths, local coords (head center 0,0)
+const HAIR='M-74,-20 C-80,-100 -42,-126 0,-126 C42,-126 80,-100 74,-20 C78,30 72,70 56,92 L-56,92 C-72,70 -78,30 -74,-20 Z';
+const FACE='M-50,-56 C-44,-84 44,-84 50,-56 L54,40 C30,52 -30,52 -54,40 Z';
+const BEARD='M-62,14 C-66,70 -56,110 -46,140 L-36,128 L-26,160 L-13,142 L0,172 L13,142 L26,160 L36,128 L46,140 C56,110 66,70 62,14 C42,30 20,22 0,26 C-20,22 -42,30 -62,14 Z';
+function head(st){ // st: {fill:bool, ink, face, red, sw}
+ const f=st.fill;let o='';
+ o+=`<circle cx="0" cy="-132" r="22" fill="${f?st.ink:'none'}" stroke="${st.ink}" stroke-width="${st.sw}"/>`;
+ o+=`<path d="${HAIR}" fill="${f?st.ink:'none'}" stroke="${st.ink}" stroke-width="${st.sw}" stroke-linejoin="round"/>`;
+ o+=`<path d="${FACE}" fill="${st.face}" stroke="${f?'none':st.ink}" stroke-width="${st.sw}"/>`;
+ o+=`<path d="${BEARD}" fill="${f?st.ink:'none'}" stroke="${st.ink}" stroke-width="${st.sw}" stroke-linejoin="round"/>`;
+ o+=`<ellipse cx="0" cy="44" rx="27" ry="15" fill="${st.face}" stroke="${f?'none':st.ink}" stroke-width="${st.sw}"/><rect x="-5" y="52" width="10" height="12" fill="${f?st.ink:'none'}" stroke="${f?'none':st.ink}" stroke-width="${st.sw*.7}"/>`;
+ o+=`<g stroke="${st.red}" stroke-width="${Math.max(2.5,st.sw*.7)}" fill="none"><rect x="-26" y="-62" width="52" height="32" rx="3"/><rect x="-19" y="-56" width="38" height="21"/><path d="M-32,-27 L32,-27 L28,-20 L-28,-20 Z"/><path d="M-6,-40 L4,-50 M2,-40 L12,-50" stroke-width="2.5"/></g>`;
+ o+=`<g stroke="${st.ink2||st.ink}" stroke-width="2.5" fill="none" stroke-dasharray="5 5"><path d="M26,-50 C50,-50 52,-34 40,-26"/><path d="M-26,-42 C-52,-38 -46,-8 -6,-8 L-6,10"/></g><path d="M-13,10 L1,10 L-6,20 Z" fill="${st.ink2||st.ink}"/>`;
+ o+=`<text x="38" y="6" font-family="Mono" font-weight="700" font-size="22" fill="${st.ink2||st.ink}">*</text><text x="-52" y="-58" font-family="Mono" font-weight="700" font-size="20" fill="${st.red}">*</text>`;
+ return o}
+function baba(t,st,x,y,s){const p=t*2*Math.PI*1.5,bob=-7*Math.abs(Math.cos(p));let o=`<g transform="translate(${x},${y+bob}) scale(${s})" stroke-linecap="round" stroke-linejoin="round">`;
+ const legW=st.fill?20:st.sw, armW=st.fill?16:st.sw;
+ const L=limb(-18,-130,28*Math.sin(p),66,Math.max(0,-Math.sin(p+.6))*-38,62), R=limb(18,-130,-28*Math.sin(p),66,Math.max(0,Math.sin(p+.6))*-38,62);
+ const LA=limb(-40,-238,-24*Math.sin(p),62,-22,56), RA=limb(40,-238,24*Math.sin(p),62,-22,56);
+ const leg=(P,c)=>`<polyline points="${pl(P)}" fill="none" stroke="${c}" stroke-width="${legW}"/><path d="M${P[2][0]-4},${P[2][1]} l26,0" stroke="${st.ink}" stroke-width="${legW*.9}"/>`;
+ o+=leg(L,st.pants)+`<polyline points="${pl(LA)}" fill="none" stroke="${st.arm}" stroke-width="${armW}"/>`;
+ // torso (kurta)
+ o+=`<path d="M-40,-246 Q0,-262 40,-246 L50,-120 Q0,-108 -50,-120 Z" fill="${st.fill?st.kurta:'none'}" stroke="${st.ink}" stroke-width="${st.fill?(st.outline||0):st.sw}"/>`;
+ if(st.fill)o+=`<path d="M-10,-250 L0,-196 L10,-250" fill="none" stroke="${st.ink}" stroke-width="4"/><path d="M-36,-244 Q-6,-200 30,-128" fill="none" stroke="${st.stole}" stroke-width="12"/>`;
+ o+=leg(R,st.pants)+`<polyline points="${pl(RA)}" fill="none" stroke="${st.arm}" stroke-width="${armW}"/>`;
+ // laptop in right hand
+ const hx=RA[2][0],hy=RA[2][1];o+=`<g transform="translate(${hx+6},${hy-6}) rotate(-8)"><rect x="-6" y="-30" width="54" height="34" rx="3" fill="${st.fill?'#e8e8ee':'none'}" stroke="${st.red}" stroke-width="4"/><rect x="-10" y="4" width="62" height="6" rx="2" fill="${st.fill?'#bbb':'none'}" stroke="${st.red}" stroke-width="3"/></g>`;
+ o+=`<g transform="translate(0,-388) scale(.84)">${head(st)}</g></g>`;return o}
+
+function scene(k,t){const W=1080,H=1920,sc=t*220;let o='',key=SK[k][0];
+ const shadow=(c,a)=>`<ellipse cx="540" cy="1212" rx="170" ry="22" fill="${c}" opacity="${a}"/>`;
+ if(key=='minimal'){o+=`<rect width="${W}" height="${H}" fill="#050505"/>`;for(let i=0;i<40;i++){const x=((i*60-sc)%2400+2400)%2400-60;o+=`<circle cx="${x}" cy="1222" r="3" fill="#fff" opacity=".5"/><circle cx="${x+30}" cy="1252" r="2" fill="#fff" opacity=".3"/>`}
+  for(let i=0;i<6;i++){const x=((i*380-sc*.5)%2280+2280)%2280-300;o+=`<rect x="${x}" y="620" width="200" height="300" fill="none" stroke="#fff" stroke-width="2" opacity=".25"/><line x1="${x}" y1="770" x2="${x+200}" y2="770" stroke="#fff" opacity=".2"/>`}
+  o+=baba(t,{fill:false,ink:'#fff',face:'none',red:'#fff',sw:5,pants:'#fff',arm:'#fff'},540,1205,1.25)}
+ if(key=='glow'){o+=`<defs><filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffcf5a" stop-opacity=".45"/><stop offset="1" stop-color="#ffcf5a" stop-opacity="0"/></linearGradient></defs><rect width="${W}" height="${H}" fill="#060504"/>`;
+  o+=`<path d="M470,340 L610,340 L800,1230 L280,1230 Z" fill="url(#cone)"/><ellipse cx="540" cy="1215" rx="230" ry="34" fill="none" stroke="#ffcf5a" stroke-width="5" filter="url(#gl)"/>`;
+  for(let i=0;i<5;i++){const x=((i*420-sc*.6)%2100+2100)%2100-300;o+=`<g stroke="#8a6a20" stroke-width="3" fill="none" opacity=".7"><rect x="${x}" y="760" width="160" height="110"/><path d="M${x+20},${850} l30,-40 l30,20 l40,-50"/></g>`}
+  for(let i=0;i<14;i++){const x=((i*90-sc)%1260+1260)%1260-90;o+=`<line x1="${x}" y1="1300" x2="${x+60}" y2="1240" stroke="#3a2c0d" stroke-width="4"/>`}
+  o+=`<g filter="url(#gl)">${baba(t,{fill:false,ink:'#ffcf5a',face:'none',red:'#ff9a5a',sw:5,pants:'#ffcf5a',arm:'#ffcf5a'},540,1205,1.25)}</g>`}
+ if(key=='chalk'){o+=`<defs><filter id="ch"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter></defs><rect width="${W}" height="${H}" fill="#5b3a1c"/><rect x="40" y="200" width="1000" height="1140" fill="#2f5a3a"/><rect x="40" y="200" width="1000" height="1140" fill="none" stroke="#7a4f27" stroke-width="22"/>`;
+  o+=`<g filter="url(#ch)" opacity=".92"><text x="110" y="330" font-family="Hand" font-weight="700" font-size="88" fill="#f2f2e8">Techni Baba 101</text><text x="110" y="400" font-family="Hand" font-weight="700" font-size="52" fill="#f2f2e8">TECH = SIMPLE</text>`;
+  for(let i=0;i<4;i++){const x=((i*360-sc*.5)%1440+1440)%1440;o+=`<path d="M${x},${1000} l40,-60 l40,30 l60,-90" stroke="#f2f2e8" stroke-width="5" fill="none"/>`}
+  o+=`<line x1="80" y1="1215" x2="1000" y2="1215" stroke="#f2f2e8" stroke-width="5"/>${baba(t,{fill:false,ink:'#f2f2e8',face:'none',red:'#f6a5a5',sw:5.5,pants:'#f2f2e8',arm:'#f2f2e8'},540,1205,1.25)}</g><rect x="420" y="1330" width="240" height="14" fill="#ddd"/>`}
+ if(key=='comic'){o+=`<defs><pattern id="hd" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="3" fill="#8ac4f0"/></pattern></defs><rect width="${W}" height="${H}" fill="#fff"/><rect x="40" y="190" width="1000" height="860" fill="#bfe3ff" stroke="#111" stroke-width="10"/><rect x="40" y="190" width="1000" height="860" fill="url(#hd)" opacity=".7"/>`;
+  o+=`<rect x="40" y="190" width="420" height="64" fill="#ffe14d" stroke="#111" stroke-width="8"/><text x="60" y="236" font-family="Inter" font-weight="800" font-size="34" fill="#111">MEANWHILE...</text>`;
+  for(let i=0;i<4;i++){const x=((i*330-sc*.6)%1320+1320)%1320-100;o+=`<rect x="${x}" y="560" width="120" height="${200+i%2*80}" fill="#ffd166" stroke="#111" stroke-width="6"/>`}
+  o+=`<rect x="40" y="980" width="1000" height="70" fill="#ffb703" stroke="#111" stroke-width="8"/>`;
+  o+=`<svg x="40" y="190" width="1000" height="860" overflow="hidden"><g transform="translate(-40,-190)">${baba(t,{fill:true,ink:'#111',ink2:'#111',face:'#fff',red:RED,sw:6,pants:NAVY,arm:'#111',kurta:MINT,stole:'#ff6b6b',outline:6},540,985,1.1)}</g></svg>`;
+  o+=`<rect x="40" y="1080" width="1000" height="250" fill="#fff6d6" stroke="#111" stroke-width="10"/><path d="M560,1120 h420 a30,30 0 0 1 30,30 v90 a30,30 0 0 1 -30,30 h-330 l-50,40 l10,-40 h-50 a30,30 0 0 1 -30,-30 v-90 a30,30 0 0 1 30,-30z" fill="#fff" stroke="#111" stroke-width="6"/><text x="610" y="1215" font-family="Inter" font-weight="800" font-size="46" fill="#111">Tech ka gyaan!</text>`;
+  const bp=back(prog(t%DUR,0.2,0.6));o+=`<g transform="translate(250,1205) scale(${bp}) rotate(-8)"><path d="M0,-100 L30,-40 L95,-62 L60,-5 L110,40 L45,45 L40,105 L0,55 L-40,105 L-45,45 L-110,40 L-60,-5 L-95,-62 L-30,-40Z" fill="#ff4d4d" stroke="#111" stroke-width="7"/><text y="18" text-anchor="middle" font-family="Inter" font-weight="800" font-size="46" fill="#fff">POW!</text></g>`}
+ if(key=='flat'){o+=`<rect width="${W}" height="${H}" fill="#1b2350"/><rect x="0" y="1215" width="${W}" height="705" fill="#151b3e"/>`;
+  o+=`<rect x="640" y="380" width="340" height="420" fill="#2a3570" stroke="#3d4a8f" stroke-width="10"/><circle cx="880" cy="470" r="40" fill="#ffe9a8"/>`;for(let i=0;i<6;i++)o+=`<rect x="${660+i*52}" y="${640-(i%3)*60}" width="40" height="${160+(i%3)*60}" fill="#3c4a8a"/>`;
+  o+=`<path d="M300,200 L360,200 L420,330 L240,330Z" fill="#ffe9a8" opacity=".9"/><path d="M240,330 L420,330 L560,1215 L100,1215Z" fill="#ffe9a8" opacity=".08"/>`;
+  for(let i=0;i<3;i++){const x=((i*560-sc*.7)%1680+1680)%1680-300;o+=`<rect x="${x}" y="1010" width="260" height="22" fill="#f4a261"/><rect x="${x+20}" y="1032" width="14" height="183" fill="#c97b3a"/><rect x="${x+226}" y="1032" width="14" height="183" fill="#c97b3a"/><rect x="${x+70}" y="890" width="130" height="100" rx="8" fill="#e9eefc"/><rect x="${x+82}" y="902" width="106" height="72" fill="#3b82f6"/>`}
+  o+=shadow('#000',.3)+baba(t,{fill:true,ink:NAVY,face:'#fff',red:RED,sw:0,pants:'#0e0c38',arm:'#f2c49b',kurta:MINT,stole:'#ffffff'},540,1205,1.25)}
+ if(key=='pixel'){o+=`<defs><filter id="px" x="0" y="0" width="1080" height="1920" filterUnits="userSpaceOnUse"><feFlood x="6" y="6" height="2" width="2"/><feComposite width="12" height="12"/><feTile result="a"/><feComposite in="SourceGraphic" in2="a" operator="in"/><feMorphology operator="dilate" radius="6"/></filter></defs><g filter="url(#px)"><rect width="${W}" height="${H}" fill="#3a1f6b"/>`;
+  for(let i=0;i<9;i++)o+=`<rect x="${i*120}" y="200" width="60" height="1000" fill="#4a2a85"/>`;
+  for(let i=0;i<5;i++){const x=((i*300-sc*.6)%1500+1500)%1500-150;o+=`<rect x="${x}" y="640" width="150" height="190" fill="#ff5fa2"/><rect x="${x+15}" y="655" width="120" height="160" fill="#ffd6e8"/>`}
+  o+=`<rect x="0" y="1215" width="${W}" height="200" fill="#2b5bd7"/>`;for(let i=0;i<20;i++){const x=((i*80-sc)%1600+1600)%1600-80;o+=`<rect x="${x}" y="1235" width="70" height="30" fill="#4b7bff"/>`}
+  o+=baba(t,{fill:true,ink:NAVY,face:'#fff',red:RED,sw:0,pants:'#0e0c38',arm:'#f2c49b',kurta:MINT,stole:'#fff'},540,1205,1.25)+`</g>`;
+  o+=`<rect x="40" y="200" width="1000" height="90" fill="#000" opacity=".75"/><text x="70" y="262" font-family="Pixel" font-size="34" fill="#ffe14d">BABA QUEST</text>`;for(let i=0;i<3;i++)o+=`<path transform="translate(${860+i*56},228) scale(3)" d="M2,0h4v2h2v-2h4v2h2v6h-2v2h-2v2h-2v2h-2v-2h-2v-2h-2v-2h-2v-6h2z" fill="#ff3b5c"/>`;
+  o+=`<text x="70" y="1340" font-family="Pixel" font-size="24" fill="#fff">LV 99 · TECH GYAAN +1</text>`}
+ return o}
+function endCard(t){const p=prog(t,END,END+.6),q=eo(p);let o=`<defs><filter id="g2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="1080" height="1920" fill="#16181c"/>`;
+ const r=330;o+=`<g transform="translate(540,760) scale(${.7+.3*back(p)})"><circle r="${r}" fill="#22262b"/><circle r="${r-40}" fill="#fff"/>`;
+ [[0,90],[110,60],[200,50],[280,60]].forEach(([a,l],i)=>{const a0=rad(a+t*40),a1=rad(a+l+t*40);o+=`<path d="M${Math.cos(a0)*(r-18)},${Math.sin(a0)*(r-18)} A${r-18},${r-18} 0 0 1 ${Math.cos(a1)*(r-18)},${Math.sin(a1)*(r-18)}" stroke="${MINT}" stroke-width="16" fill="none" stroke-linecap="round" filter="url(#g2)"/>`});
+ o+=`<circle r="${r-34}" fill="none" stroke="${MINT}" stroke-width="8" filter="url(#g2)"/><g transform="translate(0,-10) scale(1.45)">${head({fill:true,ink:NAVY,face:'#fff',red:RED,sw:0})}</g></g>`;
+ o+=`<g opacity="${q}"><text x="540" y="1200" text-anchor="middle" font-family="Inter" font-weight="800" font-size="96" fill="#fff" letter-spacing="-2">TECHNI BABA</text><text x="540" y="1270" text-anchor="middle" font-family="Serif" font-style="italic" font-size="54" fill="${MINT}">tech news · funny explainers</text></g>`;return o}
+function render(t){let o='';if(t<END){const k=Math.min(SK.length-1,Math.floor(t/DUR)),lt=t-k*DUR;o+=scene(k,t);
+  const pp=back(prog(lt,0,.3));o+=`<g transform="translate(540,1300) scale(${pp})"><rect x="-300" y="-56" width="600" height="96" rx="48" fill="${MINT}"/><text y="10" text-anchor="middle" font-family="Inter" font-weight="800" font-size="44" fill="#0b0b12">${k+1}. ${SK[k][1]}</text></g>`;
+  o+=`<rect width="1080" height="1920" fill="#fff" opacity="${clamp(1-lt/.12)*.6}"/>`}
+ else o+=endCard(t);
+ document.getElementById('root').innerHTML=`<svg width="1080" height="1920" viewBox="0 0 1080 1920">${o}</svg>`}
+window.render=render;window.TOTAL=TOTAL;window.DUR=DUR;window.NSK=SK.length;
+</script></body></html>

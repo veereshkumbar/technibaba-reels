@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Inter;font-weight:500;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-900-normal.woff2)}
+@font-face{font-family:Serif;font-style:italic;src:url(file:///tmp/fonts/node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2)}
+@font-face{font-family:Mono;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+@font-face{font-family:Hand;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2)}
+html,body{margin:0;padding:0;background:#000}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:Inter,sans-serif}
+.bg{position:absolute;inset:0;opacity:0}
+#stage{position:absolute;inset:0;perspective:2200px;z-index:5}
+#cardwrap{position:absolute;left:255px;top:384px;width:570px;height:760px;transform-style:preserve-3d}
+#card{position:absolute;inset:0;border-radius:10px;overflow:hidden;box-shadow:0 34px 50px rgba(0,0,0,.24),0 8px 16px rgba(0,0,0,.15)}
+#card svg{width:570px;height:760px;display:block}
+#ped{position:absolute;left:0;top:0;width:1080px;height:1920px}
+#hdr{position:absolute;left:0;right:0;top:196px;text-align:center;z-index:6}
+.pill{display:inline-flex;align-items:center;gap:12px;background:#fff;border-radius:40px;padding:9px 24px;font:600 28px Inter;color:#222;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.pill i{width:13px;height:13px;border-radius:50%;background:#C6F135;display:inline-block}
+.title{margin-top:16px;font:800 80px/1.05 Inter;color:#141414;letter-spacing:-2px}
+.title .hl{position:relative;display:inline-block;font:italic 400 96px Serif;letter-spacing:0;padding:0 12px}
+.title .hl b{position:absolute;left:0;right:0;top:14%;bottom:6%;background:#C6F135;z-index:-1;transform-origin:left center}
+.title .hl span{position:relative}
+#cap{position:absolute;left:40px;right:40px;top:1186px;text-align:center;z-index:7}
+#capbox{display:inline-block;padding:14px 30px;border-radius:22px;font:800 54px/1.2 Inter;color:#151515;background:rgba(255,255,255,.92);box-shadow:0 6px 20px rgba(0,0,0,.12);letter-spacing:-.5px}
+#capbox.dark{background:rgba(16,16,22,.88);color:#f5f5f5}
+#capbox .k{background:#C6F135;color:#111;border-radius:8px;padding:0 8px}
+#capbox.dark .k{background:none;color:#C6F135;padding:0}
+#capbox .w{display:inline-block;margin:0 7px}
+</style></head>
+<body><div id="root">
+<div class="bg" id="bg_beige" style="background:linear-gradient(#ece8e0 0%,#e8e3da 60%,#dcd6cb 60.2%,#e4dfd6 100%)"></div>
+<div class="bg" id="bg_lime" style="background:linear-gradient(#c6f135 0%,#bfea2e 60%,#dcd6cb 60.2%,#e6e1d8 100%)"></div>
+<div class="bg" id="bg_limefull" style="background:radial-gradient(circle at 50% 40%,#d3f857,#b6e021 75%)"></div>
+<div class="bg" id="bg_dark" style="background:radial-gradient(ellipse at 50% 32%,#2b2b36 0%,#0c0c10 55%,#050506 100%)"></div>
+<div class="bg" id="bg_navy" style="background:radial-gradient(ellipse at 50% 35%,#24427a 0%,#101d3a 60%,#0a1226 100%)"></div>
+<div id="stage"><svg id="ped" viewBox="0 0 1080 1920"></svg><div id="cardwrap"><div id="card"></div></div></div>
+<div id="hdr"><div class="pill"><i></i><span id="pilltxt"></span></div><div class="title" id="title"></div></div>
+<div id="cap"><span id="capbox"></span></div>
+</div>
+<script>
+const TL=__TL__, LINES=TL.lines;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), prog=(t,a,b)=>clamp((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3), eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const back=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const pop=(t,a,d=.45)=>back(prog(t,a,a+d));
+const norm=w=>w.toLowerCase().replace(/[^a-z0-9$']/g,'');
+function words(i){return LINES[i].cap.split(/\s+/)}
+function wordStarts(i){const L=LINES[i],w=words(i),wt=w.map(x=>x.length+1.5),tot=wt.reduce((a,b)=>a+b,0);let c=0;return w.map((x,k)=>{const s=L.start+L.dur*c/tot;c+=wt[k];return s})}
+function W(i,word){const w=words(i),s=wordStarts(i);const k=w.findIndex(x=>norm(x).startsWith(word.toLowerCase()));return k<0?LINES[i].start:s[k]}
+const LS=i=>LINES[i].start, LE=i=>LINES[i].start+LINES[i].dur;
+const ORDER=['keynote','dossier','timeline','how','denial','email','stock','verdict'];
+const SC={};ORDER.forEach((n,k)=>{const ls=LINES.filter(l=>l.scene==n);SC[n]={s:k==0?0:ls[0].start-0.32}});
+ORDER.forEach((n,k)=>{SC[n].e=k<ORDER.length-1?SC[ORDER[k+1]].s:TL.total});
+function sceneAt(t){for(let k=ORDER.length-1;k>=0;k--)if(t>=SC[ORDER[k]].s)return ORDER[k];return ORDER[0]}
+const META={
+ keynote:{bg:'bg_dark',tag:'TechniBaba · Breaking',title:['The Honey ','Trap?',''],dark:1},
+ dossier:{bg:'bg_lime',tag:'Kirdaar #2',title:['Who is ','she?','']},
+ timeline:{bg:'bg_beige',tag:'Kab kya hua',title:['How it ','unfolded','']},
+ how:{bg:'bg_navy',tag:'Per US officials (NYT)',title:['The alleged ','plan',''],dark:1},
+ denial:{bg:'bg_beige',tag:'Oct 29, 2026',title:['Who says ','what','']},
+ email:{bg:'bg_limefull',tag:'Nov 8, 2026',title:['The ','confession','']},
+ stock:{bg:'bg_dark',tag:'Nov 9, 2026',title:['Market ka ','reaction',''],dark:1},
+ verdict:{bg:'bg_beige',tag:'Abhi tak',title:['Sach kya ','hai?','']},
+};
+const KEYS=new Set(['honey','trap','affair','alice','megaspeed','rishta','smuggling','car','gpu','recruit','naam','china','bebuniyaad','ceo','sorry','jaanch','leak','4','saboot','congress','technibaba','2024','2025','2','billion','secrets','gira']);
+const SFX=[];const sfx=(t,ty)=>SFX.push([+t.toFixed(3),ty]);
+function stamp(t,at,txt,x,y,rot,col='#d22',size=58){if(t<at)return'';const p=prog(t,at,at+.22),s=1+1.4*(1-eo(p)),o=clamp(p*3);return `<g transform="translate(${x},${y}) rotate(${rot}) scale(${s})" opacity="${o*.93}"><rect x="${-txt.length*size*.36-22}" y="${-size*.75}" width="${txt.length*size*.72+44}" height="${size*1.45}" fill="none" stroke="${col}" stroke-width="7" rx="8"/><text y="${size*.36}" text-anchor="middle" font-family="Inter" font-weight="900" font-size="${size}" fill="${col}" letter-spacing="3">${txt}</text></g>`}
+function typed(t,at,txt,spd=.035){if(t<at)return'';const n=Math.floor((t-at)/spd);return txt.slice(0,n)}
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+// ---------- 1 KEYNOTE ----------
+function cKeynote(t){const s=SC.keynote.s;let o=`<rect width="720" height="960" fill="#0b0b12"/>`;
+ o+=`<defs><radialGradient id="kg"><stop offset="0" stop-color="#ff4d7d" stop-opacity=".5"/><stop offset="1" stop-color="#ff4d7d" stop-opacity="0"/></radialGradient><linearGradient id="chip" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2e2e38"/><stop offset="1" stop-color="#14141b"/></linearGradient></defs>`;
+ o+=`<rect width="720" height="74" fill="#e0182d"/><text x="24" y="50" font-family="Inter" font-weight="900" font-size="34" fill="#fff" letter-spacing="2">BREAKING</text>`;
+ const tick='NVIDIA CEO  •  ALLEGED HONEY TRAP  •  BOARD PROBE  •  SHARES DOWN  •  ';o+=`<rect x="240" y="14" width="466" height="46" fill="#b0101f" rx="4"/><svg x="240" y="14" width="466" height="46"><text x="${466-((t*170)%1100)}" y="33" font-family="Mono" font-weight="700" font-size="22" fill="#fff">${tick+tick}</text></svg>`;
+ // chip
+ const cp=pop(t,s+.2,.6);o+=`<g transform="translate(360,560) scale(${cp})"><rect x="-150" y="-150" width="300" height="300" rx="26" fill="url(#chip)" stroke="#76b900" stroke-width="5"/>`;
+ for(let k=0;k<6;k++){const p=-125+k*50;o+=`<rect x="${p-8}" y="-178" width="16" height="28" fill="#9a9aa8"/><rect x="${p-8}" y="150" width="16" height="28" fill="#9a9aa8"/><rect x="-178" y="${p-8}" width="28" height="16" fill="#9a9aa8"/><rect x="150" y="${p-8}" width="28" height="16" fill="#9a9aa8"/>`}
+ o+=`<rect x="-90" y="-90" width="180" height="180" rx="12" fill="#76b900" opacity=".18"/><text y="20" text-anchor="middle" font-family="Mono" font-weight="700" font-size="56" fill="#76b900">GPU</text></g>`;
+ // heart bait on line
+ const hp=eo(prog(t,s+.5,s+1.4)),sw=10*Math.sin(t*3);const hy=90+230*hp;
+ o+=`<g transform="rotate(${sw},360,74)"><line x1="360" y1="74" x2="360" y2="${hy}" stroke="#bbb" stroke-width="3"/><circle cx="360" cy="${hy+70}" r="${120*hp}" fill="url(#kg)"/><path transform="translate(360,${hy+60}) scale(${2.6*hp})" d="M0,14 C-32,-14 -17,-38 0,-21 C17,-38 32,-14 0,14Z" fill="#ff3d6e"/><path d="M360,${hy} q0,14 -6,22" stroke="#bbb" stroke-width="3" fill="none"/></g>`;
+ const tt=W(0,'honey');const ph=pop(t,tt-.15,.45);
+ if(t>tt-.15)o+=`<g transform="translate(360,815) scale(${ph})"><text text-anchor="middle" font-family="Inter" font-weight="900" font-size="78" fill="#fff" letter-spacing="-2">HONEY TRAP?</text></g>`;
+ // countdown ring
+ const cr=clamp((t-s)/4.5);o+=`<g transform="translate(640,890)"><circle r="40" fill="none" stroke="#333" stroke-width="7"/><circle r="40" fill="none" stroke="#C6F135" stroke-width="7" stroke-dasharray="${2*Math.PI*40}" stroke-dashoffset="${2*Math.PI*40*cr}" transform="rotate(-90)"/><text y="10" text-anchor="middle" font-family="Mono" font-weight="700" font-size="26" fill="#fff">60s</text></g><text x="30" y="902" font-family="Mono" font-weight="700" font-size="24" fill="#9a9ab0">POORI KAHANI · 60 SEC</text>`;
+ o+=stamp(t,W(0,'america'),'ALLEGED',520,160,10,'#ff3b3b',40);
+ return o}
+// ---------- 2 DOSSIER ----------
+function cDossier(t){const s=SC.dossier.s;let o=`<defs><pattern id="ht" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="6.5" cy="6.5" r="4.3" fill="#1d1a16"/></pattern><pattern id="ht2" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1.3" fill="#b9a983"/></pattern><clipPath id="silf"><circle cx="0" cy="-60" r="70"/><path d="M-95,-70 Q-100,60 -120,120 L120,120 Q100,60 95,-70 Q60,-150 0,-150 Q-60,-150 -95,-70Z"/><path d="M-150,190 Q-150,60 -60,40 L60,40 Q150,60 150,190 Z"/></clipPath></defs>`;
+ o+=`<rect width="720" height="960" fill="#e9dfc6"/><rect width="720" height="960" fill="url(#ht2)" opacity=".55"/>`;
+ o+=`<text x="40" y="62" font-family="Mono" font-size="21" fill="#6e6250" letter-spacing="2">SUBJECT FILE · 02</text><circle cx="650" cy="54" r="8" fill="#d33" opacity="${.5+.5*Math.sin(t*6)}"/><text x="40" y="140" font-family="Inter" font-weight="900" font-size="66" fill="#1d1a16">WHO IS SHE?</text>`;
+ const pp=prog(t,s+.25,s+.85);o+=`<g transform="translate(40,180)"><rect width="300" height="360" fill="#d9ccaa" stroke="#1d1a16" stroke-width="3"/><g transform="translate(150,${200+30*(1-eo(pp))})" opacity="${pp}"><g clip-path="url(#silf)"><rect x="-200" y="-200" width="400" height="420" fill="url(#ht)"/></g></g><rect x="60" y="322" width="180" height="30" fill="#1d1a16"/><text x="150" y="344" text-anchor="middle" font-family="Mono" font-weight="700" font-size="17" fill="#e9dfc6">PHOTO · WITHHELD</text></g>`;
+ const F=[['NAME','ALICE HUANG',s+.5],['ALIAS','HUANG LE',W(1,'alice')+.2],['COMPANY','MEGASPEED',W(1,'megaspeed')],['BASED','SINGAPORE',W(1,'singapore')],['ROLE','EXECUTIVE',W(1,'executive')],['JENSEN?','NO RELATION',W(2,'rishta')]];
+ F.forEach(([k,v,at],i)=>{const y=600+i*50;o+=`<text x="40" y="${y}" font-family="Mono" font-weight="700" font-size="24" fill="#5a4f3e">${k}</text><text x="250" y="${y}" font-family="Mono" font-weight="700" font-size="27" fill="${i==5?'#c62d1f':'#1d1a16'}">${typed(t,at,v)}</text>`});
+ [['A','SAME SURNAME',W(2,'naam')],['B','DIFFERENT FAMILY',W(2,'par')]].forEach(([l,lab,at],k)=>{if(t<at)return;const p=pop(t,at,.45);o+=`<g transform="translate(${372+k*14},${215+k*150}) rotate(${(k?4:-3)}) scale(${p})"><rect width="300" height="120" fill="#f6f0e2" stroke="#1d1a16" stroke-width="2"/><text x="18" y="56" font-family="Inter" font-weight="900" font-size="44" fill="#1d1a16">${l}</text><text x="18" y="96" font-family="Mono" font-size="21" fill="#5a4f3e">${lab}</text></g>`});
+ o+=`<text x="40" y="932" font-family="Mono" font-size="15.5" fill="#6e6250">*Spy claims = allegations reported by NYT. China denies.</text>`;
+ o+=stamp(t,W(2,'rishta')+.1,'NO RELATION',515,520,-8,'#d22',38);
+ return o}
+// ---------- 3 TIMELINE (transit map) ----------
+const TP=[[110,180],[610,180],[610,430],[110,430],[110,680],[610,680]];
+const SEG=[];let TLEN=0;for(let k=0;k<TP.length-1;k++){const [a,b]=[TP[k],TP[k+1]];const l=Math.hypot(b[0]-a[0],b[1]-a[1]);SEG.push([a,b,TLEN,l]);TLEN+=l}
+function along(d){d=clamp(d,0,TLEN);for(const [a,b,s0,l] of SEG){if(d<=s0+l){const f=(d-s0)/l;return[a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f]}}return TP.at(-1)}
+const STA=[0,500+125,500+250+500+125,TLEN];
+function cTimeline(t){const s=SC.timeline.s;let o=`<rect width="720" height="960" fill="#f7f5f0"/>`;
+ o+=`<text x="36" y="70" font-family="Mono" font-weight="700" font-size="22" fill="#777" letter-spacing="2">LINE H · HUANG EXPRESS</text><rect x="600" y="44" width="84" height="40" rx="20" fill="#2bb673"/><text x="642" y="72" text-anchor="middle" font-family="Inter" font-weight="900" font-size="24" fill="#fff">H</text>`;
+ const d0=TP.map(p=>p.join(',')).join(' ');
+ o+=`<polyline points="${d0}" fill="none" stroke="#d8d4cc" stroke-width="22" stroke-linejoin="round" stroke-linecap="round"/>`;
+ const at=[LS(3),LS(4),LS(5),LS(6)];let d=0;at.forEach((a,k)=>{const p=eio(prog(t,a,a+.9));const from=k?STA[k-1]:0;if(t>=a)d=from+(STA[k]-from)*p});
+ // traveled path
+ let pts=[];for(let x=0;x<=d;x+=10)pts.push(along(x).join(','));pts.push(along(d).join(','));
+ o+=`<polyline points="${pts.join(' ')}" fill="none" stroke="#2bb673" stroke-width="22" stroke-linejoin="round" stroke-linecap="round"/>`;
+ const L=[['JUN 2024','Taipei party photo',150,250,'start'],['2024','US probe: Megaspeed',570,300,'end'],['MAY 2025','Taipei, same car',150,555,'start'],['2025','~$2B GPUs (reported)',570,755,'end']];
+ STA.forEach((sd,k)=>{const [x,y]=along(sd);const on=t>=at[k]+.6;o+=`<circle cx="${x}" cy="${y}" r="${on?22:18}" fill="${on?'#fff':'#f7f5f0'}" stroke="${on?'#1a1a1a':'#bbb'}" stroke-width="7"/>`;
+  if(t>=at[k]+.5){const p=pop(t,at[k]+.5,.4);const [d1,d2,lx,ly,an]=L[k];o+=`<g transform="translate(${lx},${ly}) scale(${p})"><text text-anchor="${an}" font-family="Inter" font-weight="900" font-size="36" fill="#111">${d1}</text><text y="38" text-anchor="${an}" font-family="Mono" font-weight="700" font-size="23" fill="#555">${d2}</text></g>`}});
+ const [tx,ty]=along(d);o+=`<g transform="translate(${tx},${ty})"><rect x="-34" y="-22" width="68" height="44" rx="14" fill="#1a1a1a"/><rect x="-24" y="-12" width="20" height="14" rx="3" fill="#C6F135"/><rect x="4" y="-12" width="20" height="14" rx="3" fill="#C6F135"/></g>`;
+ if(t>W(6,'gpu')){const p=pop(t,W(6,'gpu'),.45);o+=`<g transform="translate(360,880) scale(${p})"><rect x="-300" y="-40" width="600" height="72" rx="36" fill="#1a1a1a"/><text y="8" text-anchor="middle" font-family="Mono" font-weight="700" font-size="27" fill="#C6F135">NEXT STOP → OCT 2026</text></g>`}
+ return o}
+// ---------- 4 HOW (blueprint) ----------
+function bbox(x,y,w,h,t,at,l1,l2,acc){if(t<at)return'';const p=prog(t,at,at+.5),per=2*(w+h);return `<rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="10" fill="${acc?'rgba(255,90,110,.15)':'rgba(255,255,255,.06)'}" stroke="${acc||'#e8f0ff'}" stroke-width="4" stroke-dasharray="${per}" stroke-dashoffset="${per*(1-p)}"/><text x="${x}" y="${y-4}" text-anchor="middle" font-family="Inter" font-weight="900" font-size="34" fill="#fff" opacity="${clamp(p*2-0.5)}">${l1}</text><text x="${x}" y="${y+32}" text-anchor="middle" font-family="Mono" font-size="20" fill="#a9c2ee" opacity="${clamp(p*2-0.5)}">${l2}</text>`}
+function barrow(x1,y1,x2,y2,t,at,lab,dash){if(t<at)return'';const p=eo(prog(t,at,at+.4));const x=x1+(x2-x1)*p,y=y1+(y2-y1)*p;return `<line x1="${x1}" y1="${y1}" x2="${x}" y2="${y}" stroke="#C6F135" stroke-width="5" ${dash?'stroke-dasharray="12 10"':''}/>`+(p>.95?`<path d="M${x2-12},${y2-14} L${x2},${y2} L${x2+12},${y2-14}" transform="rotate(${Math.atan2(y2-y1,x2-x1)*180/Math.PI-90},${x2},${y2})" stroke="#C6F135" stroke-width="5" fill="none"/>`:'')+(lab?`<text x="${(x1+x2)/2+18}" y="${(y1+y2)/2+8}" font-family="Mono" font-weight="700" font-size="22" fill="#C6F135" opacity="${p}">${lab}</text>`:'')}
+function cHow(t){const s=SC.how.s;let o=`<rect width="720" height="960" fill="#163a78"/>`;
+ for(let k=0;k<=720;k+=40)o+=`<line x1="${k}" y1="0" x2="${k}" y2="960" stroke="#2c5aa8" stroke-width="1"/>`;for(let k=0;k<=960;k+=40)o+=`<line x1="0" y1="${k}" x2="720" y2="${k}" stroke="#2c5aa8" stroke-width="1"/>`;
+ o+=`<text x="30" y="56" font-family="Mono" font-weight="700" font-size="20" fill="#a9c2ee" letter-spacing="2">BLUEPRINT · CLAIMED BY US OFFICIALS</text>`;
+ o+=bbox(360,150,400,110,t,s+.25,'CHINA MSS','spy agency (alleged)','#ff5a6e');
+ o+=barrow(360,205,360,295,t,W(7,'recruit'),'recruits?');
+ o+=bbox(360,350,400,110,t,W(7,'alice'),'ALICE','Megaspeed executive');
+ o+=barrow(360,405,360,495,t,W(7,'kareeb'),'gets close');
+ o+=bbox(360,550,400,110,t,W(7,'jensen'),'JENSEN','Nvidia CEO');
+ // surveillance
+ o+=bbox(170,800,260,100,t,LS(8)-.1,'US AGENCIES','surveillance');
+ o+=barrow(250,750,330,412,t,LS(8)+.3,'',1);
+ if(t>W(8,'naam')){const p=pop(t,W(8,'naam'),.4);o+=`<g transform="translate(540,800) scale(${p})"><circle r="70" fill="none" stroke="#fff" stroke-width="10"/><line x1="50" y1="50" x2="100" y2="100" stroke="#fff" stroke-width="14" stroke-linecap="round"/><text y="-6" text-anchor="middle" font-family="Mono" font-weight="700" font-size="18" fill="#C6F135">NAME</text><text y="22" text-anchor="middle" font-family="Mono" font-weight="700" font-size="18" fill="#C6F135">FOUND</text></g>`}
+ o+=stamp(t,W(8,'mila')+.2,'ALLEGED',530,640,-8,'#ff5a6e',44);
+ return o}
+// ---------- 5 DENIAL ----------
+function qcard(t,at,y,who,quote,col,dx){if(t<at)return'';const p=eo(prog(t,at,at+.4));return `<g transform="translate(${(1-p)*dx},0)" opacity="${p}"><rect x="36" y="${y}" width="648" height="168" rx="14" fill="#fff" stroke="#111" stroke-width="3"/><rect x="36" y="${y}" width="16" height="168" rx="4" fill="${col}"/><text x="76" y="${y+46}" font-family="Mono" font-weight="700" font-size="22" fill="${col}" letter-spacing="1">${who}</text>${quote.map((q,i)=>`<text x="76" y="${y+92+i*42}" font-family="Inter" font-weight="800" font-size="33" fill="#111">${q}</text>`).join('')}</g>`}
+function cDenial(t){const s=SC.denial.s;let o=`<rect width="720" height="960" fill="#f4f3ef"/>`;for(let k=1;k<12;k++)o+=`<line x1="${k*60}" y1="0" x2="${k*60}" y2="960" stroke="#e3e1db" stroke-width="2"/>`;
+ const pr=eo(prog(t,s+.15,s+.6));o+=`<text x="36" y="120" font-family="Inter" font-weight="900" font-size="92" fill="#111" letter-spacing="-4">OCT 29</text><rect x="${684-140*pr}" y="44" width="${140*pr}" height="90" fill="#e3261b"/><text x="670" y="102" text-anchor="end" font-family="Mono" font-weight="700" font-size="26" fill="#fff" opacity="${pr}">NYT</text><rect x="36" y="146" width="${648*pr}" height="8" fill="#111"/>`;
+ o+=qcard(t,s+.4,190,'US OFFICIALS (VIA NYT)',['"She passed info','to Beijing" — alleged'],'#e3261b',-200);
+ o+=qcard(t,W(9,'china')-.1,390,'CHINA',['"Groundless..."','"a smear"'],'#1d4fa8',200);
+ o+=qcard(t,LS(10)-.1,590,'NVIDIA',['"Meetings with customers','are part of a CEO\'s job"'],'#2b9a3e',-200);
+ o+=`<text x="36" y="930" font-family="Mono" font-size="16" fill="#777">Quotes as reported by NYT, AFP, Reuters.</text>`;
+ return o}
+// ---------- 6 EMAIL (phone) ----------
+function cEmail(t){const s=SC.email.s;let o=`<rect width="720" height="960" fill="#e9eef5"/>`;
+ o+=`<rect x="70" y="30" width="580" height="960" rx="60" fill="#111"/><rect x="88" y="48" width="544" height="940" rx="46" fill="#fff"/><rect x="290" y="62" width="140" height="30" rx="15" fill="#111"/>`;
+ o+=`<text x="120" y="140" font-family="Inter" font-weight="900" font-size="38" fill="#111">Inbox</text><line x1="88" y1="164" x2="632" y2="164" stroke="#e5e5e5" stroke-width="2"/>`;
+ o+=`<circle cx="148" cy="214" r="30" fill="#76b900"/><text x="148" y="224" text-anchor="middle" font-family="Inter" font-weight="800" font-size="26" fill="#fff">JH</text><text x="192" y="208" font-family="Inter" font-weight="800" font-size="27" fill="#111">Jensen Huang</text><text x="192" y="240" font-family="Inter" font-weight="500" font-size="21" fill="#777">to: All NVIDIA · Nov 8</text>`;
+ const B=[['"I was unfaithful',LS(11)+.2],['to my wife."',W(11,'patni')],['"There is no excuse',W(11,'patni')+.6],['for what I did."',W(11,'bewafai')+.2],['"I am deeply sorry."',W(11,'sorry')-.3]];
+ B.forEach(([tx,at],k)=>{o+=`<text x="120" y="${320+k*56}" font-family="Serif" font-style="italic" font-size="44" fill="#111">${esc(typed(t,at,tx,.03))}</text>`});
+ o+=`<text x="120" y="640" font-family="Inter" font-weight="500" font-size="20" fill="#999">— his own words, Nov 8 letter to staff</text>`;
+ [['NVIDIA BOARD','Independent probe opened',LS(12)],['NVIDIA BOARD','"No reason to believe" secrets',W(12,'secrets')-.2]].forEach(([h,b,at],k)=>{if(t<at)return;const p=eo(prog(t,at,at+.35));const y=690+k*130;o+=`<g transform="translate(0,${(1-p)*-80})" opacity="${p}"><rect x="106" y="${y}" width="508" height="110" rx="22" fill="#f1f1f4" stroke="#ddd"/><rect x="126" y="${y+22}" width="40" height="40" rx="10" fill="#76b900"/><text x="182" y="${y+46}" font-family="Inter" font-weight="800" font-size="22" fill="#111">${h}</text><text x="182" y="${y+82}" font-family="Inter" font-weight="600" font-size="24" fill="#333">${esc(b)}</text></g>`});
+ return o}
+// ---------- 7 STOCK ----------
+function cStock(t){const s=SC.stock.s;let o=`<rect width="720" height="960" fill="#07090d"/>`;for(let k=1;k<10;k++)o+=`<line x1="40" y1="${180+k*60}" x2="680" y2="${180+k*60}" stroke="#151a22" stroke-width="2"/>`;
+ o+=`<text x="40" y="90" font-family="Mono" font-weight="700" font-size="44" fill="#fff">NVDA</text><text x="40" y="132" font-family="Mono" font-size="22" fill="#7a8494">NASDAQ · Nov 6 → Nov 9</text>`;
+ const P=[[60,420],[120,400],[180,410],[240,380],[300,395],[360,370]],D=[[360,370],[420,430],[480,520],[540,600],[600,640],[660,660]];
+ const p1=prog(t,s+.2,s+1.1),p2=prog(t,LS(13)+.2,LE(13)-.4);
+ const seg=(arr,p)=>{const n=(arr.length-1)*p;const k=Math.floor(n),f=n-k;const out=arr.slice(0,k+1).map(q=>q.join(','));if(k<arr.length-1){const a=arr[k],b=arr[k+1];out.push([a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f].join(','))}return out.join(' ')};
+ o+=`<polyline points="${seg(P,p1)}" fill="none" stroke="#2bd17e" stroke-width="7" stroke-linejoin="round"/>`;
+ if(p1>=1){o+=`<text x="360" y="345" text-anchor="middle" font-family="Mono" font-size="22" fill="#2bd17e">$186.64</text><line x1="360" y1="250" x2="360" y2="720" stroke="#555" stroke-dasharray="8 8" stroke-width="2"/><text x="372" y="270" font-family="Mono" font-size="19" fill="#aaa">weekend: confession</text>`}
+ if(p2>0)o+=`<polyline points="${seg(D,p2)}" fill="none" stroke="#ff3b4e" stroke-width="7" stroke-linejoin="round"/>`;
+ if(p2>=1)o+=`<text x="660" y="705" text-anchor="end" font-family="Mono" font-size="22" fill="#ff3b4e">$178.70</text>`;
+ const pct=(4.25*eo(p2)).toFixed(2);o+=`<g transform="translate(360,${830})"><text text-anchor="middle" font-family="Inter" font-weight="900" font-size="110" fill="#ff3b4e">−${pct}%</text></g>`;
+ o+=`<text x="40" y="932" font-family="Mono" font-size="16" fill="#5b6472">Prices per Finviz, Nov 9 trading.</text>`;
+ return o}
+// ---------- 8 VERDICT ----------
+function hand(t,at,dur,x,y,txt,size,col){if(t<at)return'';const p=prog(t,at,at+dur);const w=txt.length*size*.5;const id='h'+Math.round(at*1000)+'_'+x+'_'+y;return `<clipPath id="${id}"><rect x="${x-6}" y="${y-size}" width="${(w+20)*p}" height="${size*1.4}"/></clipPath><text clip-path="url(#${id})" x="${x}" y="${y}" font-family="Hand" font-weight="700" font-size="${size}" fill="${col}">${txt}</text>`}
+function cVerdict(t){const s=SC.verdict.s;let o=`<rect width="720" height="960" fill="#c9ccd2"/><rect x="16" y="16" width="688" height="928" fill="#fbfcfd"/>`;
+ o+=hand(t,s+.15,.5,50,100,'PROVEN?',72,'#1a1a1a');
+ const R=[['Affair','✓','admitted','#2b9a3e',s+.5],['Jensen knew?','✗','no public proof','#d22',W(14,'jensen')],['Secrets leaked?','✗','no public proof','#d22',W(14,'secret')]];
+ R.forEach(([a,m,b,c,at],k)=>{const y=190+k*110;o+=hand(t,at,.35,50,y,a,52,'#1a1a1a');if(t>at+.3){const p=pop(t,at+.3,.35);o+=`<g transform="translate(405,${y-16}) scale(${p})"><text text-anchor="middle" y="20" font-family="Inter" font-weight="900" font-size="64" fill="${c}">${m}</text></g>`}o+=hand(t,at+.4,.35,455,y,b,32,c)});
+ o+=`<line x1="40" y1="520" x2="680" y2="520" stroke="#ccc" stroke-width="3" stroke-dasharray="10 10"/>`;
+ o+=hand(t,LS(15),.4,50,600,'NEXT:',60,'#2459c9');
+ o+=hand(t,W(15,'congress')-.1,.5,60,680,'Nov 18 · Congress briefing',46,'#1a1a1a');
+ o+=hand(t,W(15,'briefing')+.2,.5,60,745,'(requested)  +  board probe',40,'#666');
+ const fp=pop(t,W(15,'follow')-.25,.45);if(t>W(15,'follow')-.25)o+=`<g transform="translate(360,860) scale(${fp})"><rect x="-290" y="-44" width="580" height="88" rx="44" fill="#C6F135" stroke="#111" stroke-width="3"/><text text-anchor="middle" y="13" font-family="Mono" font-weight="700" font-size="34" fill="#111">+ FOLLOW @technibaba</text></g>`;
+ return o}
+const CARDS={keynote:cKeynote,dossier:cDossier,timeline:cTimeline,how:cHow,denial:cDenial,email:cEmail,stock:cStock,verdict:cVerdict};
+
+function pedestal(dark){return `<defs><linearGradient id="pf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${dark?'#e9e9ee':'#fbfaf7'}"/><stop offset="1" stop-color="${dark?'#9a9aa6':'#e4e0d8'}"/></linearGradient><radialGradient id="psh"><stop offset="0" stop-color="#000" stop-opacity="${dark?.6:.22}"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+ <ellipse cx="560" cy="1460" rx="400" ry="60" fill="url(#psh)"/>
+ <path d="M290,1146 L790,1146 L826,1172 L326,1172Z" fill="${dark?'#cfcfd8':'#f3f1ec'}"/>
+ <path d="M326,1172 L826,1172 L826,1430 Q826,1446 810,1446 L342,1446 Q326,1446 326,1430Z" fill="url(#pf)"/>
+ <path d="M290,1146 L326,1172 L326,1430 L290,1404Z" fill="${dark?'#7d7d88':'#d8d3c9'}"/>
+ <path d="M242,1134 L838,1134 L852,1146 L256,1146Z" fill="#C6F135"/><rect x="256" y="1146" width="596" height="10" fill="#9cc21f"/>`}
+
+// captions: chunks of <=5 words, break on punctuation
+const CHUNKS=LINES.map(L=>{const w=words(L.i),st=wordStarts(L.i);const ch=[];let cur=[];w.forEach((x,k)=>{cur.push(k);if(cur.length>=4||(/[,.:?!]$/.test(x)&&cur.length>=2)){ch.push(cur);cur=[]}});if(cur.length)ch.push(cur);return ch.map(c=>({ks:c,s:st[c[0]]}))});
+let lastScene=null;
+function render(t){const sc=sceneAt(t),m=META[sc],S=SC[sc];
+ const prevN=ORDER[Math.max(0,ORDER.indexOf(sc)-1)];const tp=prog(t,S.s,S.s+.4);
+ ['bg_beige','bg_lime','bg_limefull','bg_dark','bg_navy'].forEach(id=>{const el=document.getElementById(id);el.style.opacity=id==m.bg?1:0;el.style.zIndex=0});
+ if(sc!=ORDER[0]&&META[prevN].bg!=m.bg){const a=document.getElementById(META[prevN].bg),b=document.getElementById(m.bg);a.style.opacity=1;b.style.opacity=tp;b.style.zIndex=1}
+ document.getElementById('ped').innerHTML=pedestal(!!m.dark);
+ document.getElementById('card').innerHTML=`<svg viewBox="0 0 720 960">${CARDS[sc](t)}</svg>`;
+ const ein=back(prog(t,S.s,S.s+.6)),eout=eio(prog(t,S.e-.28,S.e));
+ let sh=0;STAMPS.forEach(a=>{if(t>=a&&t<a+.25)sh=(1-(t-a)/.25)*12*Math.sin((t-a)*90)});
+ const ry=-6+4*Math.sin(t*.55),rx=2+1.5*Math.sin(t*.4);
+ const cw=document.getElementById('cardwrap');cw.style.transform=`translateY(${(1-ein)*480-eout*110+sh}px) translateX(${sh*.6}px) rotateY(${ry}deg) rotateX(${rx+(1-ein)*25}deg) scale(${(.86+.14*ein)*(1-.1*eout)*(1+.012*Math.sin(t*.8))})`;cw.style.opacity=clamp(ein*1.6)*(1-eout);
+ if(lastScene!=sc){document.getElementById('pilltxt').textContent=m.tag;document.getElementById('title').innerHTML=`${m.title[0]}<span class="hl"><b id="hlb"></b><span>${m.title[1]}</span></span>${m.title[2]}`;document.getElementById('title').style.color=m.dark?'#fff':'#141414';lastScene=sc}
+ const hp=eo(prog(t,S.s+.05,S.s+.45)),ho=1-prog(t,S.e-.22,S.e);const hdr=document.getElementById('hdr');hdr.style.opacity=hp*ho;hdr.style.transform=`translateY(${(1-hp)*-30}px)`;
+ document.getElementById('hlb').style.transform=`scaleX(${eo(prog(t,S.s+.25,S.s+.7))})`;
+ const box=document.getElementById('capbox');box.className=m.dark?'dark':'';
+ let L=null;for(const l of LINES)if(t>=l.start-.05&&t<l.start+l.dur+.25)L=l;
+ if(!L){box.style.opacity=0;return}
+ const ch=CHUNKS[L.i],st=wordStarts(L.i),ws=words(L.i);let ci=0;ch.forEach((c,k)=>{if(t>=c.s-.05)ci=k});
+ const c=ch[ci];let h='';c.ks.forEach(k=>{const a=k==c.ks[0]?1:prog(t,st[k]-.03,st[k]+.08);const w=ws[k];const key=KEYS.has(norm(w).replace(/'s$/,''));h+=`<span class="w${key?' k':''}" style="opacity:${a<1?.25+a*.75:1}">${esc(w)}</span>`});
+ const pin=back(prog(t,c.s-.05,c.s+.2));box.innerHTML=h;box.style.opacity=1;box.style.transform=`scale(${.9+.1*pin})`;
+}
+const STAMPS=[W(0,'america'),W(2,'rishta')+.1,W(8,'mila')+.2];
+ORDER.forEach(n=>{if(n!='keynote')sfx(SC[n].s,'whoosh')});sfx(.2,'whoosh');
+STAMPS.forEach(a=>sfx(a,'thud'));sfx(W(0,'honey')-.15,'thud');
+[W(1,'alice')+.2,W(1,'megaspeed'),W(1,'executive')].forEach(a=>sfx(a,'type'));
+[LS(3),LS(4),LS(5),LS(6)].forEach(a=>sfx(a+.6,'ding'));
+[W(7,'recruit'),W(7,'kareeb'),W(7,'jensen')].forEach(a=>sfx(a,'pop'));sfx(W(8,'naam'),'pop');
+[SC.denial.s+.4,W(9,'china')-.1,LS(10)-.1].forEach(a=>sfx(a,'pop'));
+[LS(11)+.2,W(11,'patni')+.6,W(11,'sorry')-.3].forEach(a=>sfx(a,'type'));
+[LS(12),W(12,'secrets')-.2].forEach(a=>sfx(a,'pop'));
+sfx(LS(13)+.2,'fall');sfx(W(15,'follow')-.25,'ding');
+window.render=render;window.SFX=SFX;window.SC=SC;window.ORDER=ORDER;window.TOTAL=TL.total;
+</script></body></html>

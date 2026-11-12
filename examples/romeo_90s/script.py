@@ -1,0 +1,20 @@
+LINES = [
+ # scene, tts (Devanagari), caption (Roman Hinglish)
+ ("keynote","दुनिया की सबसे बड़ी चिप कंपनी का सीईओ... और एक हनी ट्रैप?","Duniya ki sabse badi chip company ka CEO... aur ek honey trap?"),
+ ("keynote","भाई, ये तो नाइन्टीज़ की बॉलीवुड पिक्चर निकली!","Bhai, ye toh 90's ki Bollywood picture nikli!"),
+ ("dossier","एनवीडिया के सीईओ जेन्सन हुआंग ने, एक अफ़ेयर कबूल किया है।","Nvidia ke CEO Jensen Huang ne ek affair kabool kiya hai."),
+ ("dossier","और अमेरिकी अधिकारियों का शक है, कि वो लेडी चाइना की जासूस थी।","Aur US officials ka shak hai ki woh lady China ki jasoos thi."),
+ ("dossier","चाइना कहता है, सब झूठ है। और बोर्ड ने जाँच बिठा दी है।","China kehta hai sab jhooth hai. Aur board ne jaanch bitha di hai."),
+ ("popup","अब मिलो, नाइन्टीज़ के रोमियो, राजू से।","Ab milo 90's ke Romeo... Raju se."),
+ ("popup","पिंकी के लिए उसने बाइक बेची, वॉकमैन बेचा, और माँ का सोने का हार भी!","Pinky ke liye usne bike bechi, Walkman becha, aur maa ka sone ka haar bhi!"),
+ ("popup","और पिंकी? शादी करके अमेरिका चली गई।","Aur Pinky? Shaadi karke America chali gayi."),
+ ("rpg","राजू का गेम ओवर। ना बाइक, ना पैसा, ना इज़्ज़त।","Raju ka GAME OVER. Na bike, na paisa, na izzat."),
+ ("score","और जेन्सन? अभी भी सीईओ हैं।","Aur Jensen? Abhi bhi CEO hain."),
+ ("score","बोर्ड कहता है, अब तक कोई सीक्रेट लीक होने की वजह नहीं दिखी।","Board kehta hai ab tak koi secret leak hone ki wajah nahi dikhi."),
+ ("score","लेदर जैकेट भी सेफ़ है। बस, स्टाफ़ को एक ईमेल लिखना पड़ा।","Leather jacket bhi safe hai. Bas staff ko ek email likhna pada."),
+ ("lesson","तो लेसन क्या है?","Toh lesson kya hai?"),
+ ("lesson","नाइन्टीज़ में प्यार में, सब कुछ लुट जाता था।","90's mein pyaar mein sab kuch lut jaata tha."),
+ ("lesson","आजकल? बस एक प्रेस रिलीज़ आती है।","Aajkal? Bas ek press release aati hai."),
+ ("lesson","और याद रखना, अगर वो परफ़ेक्ट टेन है... तो भाई, तुम एसेट हो!","Aur yaad rakhna... agar woh perfect 10 hai, toh bhai, tum ASSET ho!"),
+ ("cta","ऐसी और कहानियों के लिए, फ़ॉलो करो।","Aisi aur kahaniyon ke liye follow karo."),
+]
