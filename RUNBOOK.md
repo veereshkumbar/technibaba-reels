@@ -5,6 +5,8 @@ Each run makes ONE reel, sends it to Veer for review, and posts to Instagram onl
 ## Quality bar (Veer, 13 Nov 2026)
 Every reel ships in the PREMIUM look (`examples/chat_premium`, see CHAT_FORMAT.md). The two-friends chat is the default format; docs at most 2 evenings a week. The old flat explainer style is retired unless upgraded with `engine/premium_patch.py`. Music: `engine/lofi.py`.
 
+Also follow `RESEARCH.md` (own outliers + comment mining + trend check every run; weekly brief on Sundays) and `CRAFT.md` (story, vertical, acting, captions, review with REVIEW.md).
+
 ## Rules for scheduled (unattended) runs
 - Nobody is watching. Never stop to ask a question before the MP4 is sent; pick the best option and say which you picked.
 - First action: SendUserMessage "Starting <slot> reel…" so Veer knows the run is alive.
