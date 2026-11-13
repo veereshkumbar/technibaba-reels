@@ -1,6 +1,9 @@
 # TechniBaba Chat — two-friends conversation format
 
-**Use v2: start from `examples/chat_v2/`** (v1 in `examples/chat_storage` is outdated).
+**Use the PREMIUM template: start from `examples/chat_premium/`** (v2/v1 are outdated).
+Premium look = depth-of-field background blur (stronger in close-ups), bloom lights + floating dust, gradient-shaded characters with soft shadows, colour grade + light leak + vignette + fine grain, glass title card (mint tag line + title + subtitle), real-phone mockup, 3D pill keyword stickers, clean Poppins captions with speaker pill, motion-blur whip transitions, glowing end card.
+Music: `python3 engine/lofi.py WORKDIR/lofi.wav <TOTAL+1> 90 <seed> warm|bright|night` then `audio.py WORKDIR OUT.mp4 WORKDIR/lofi.wav 0.22` (original synthesized lo-fi; change seed/mood per video). Rendering the premium look takes ~25 min, so start it early.
+Change the title card text in `banner()` for each topic.
 
 ## v2 standard (what Veer approved as the direction)
 - **Voices:** Kokoro (natural): `VOICES={'c':('kokoro:hm_psi',1.24,1.06),'b':('kokoro:hm_omega',1.16,0.95)}`. Fallback to Piper only if Kokoro fails.
