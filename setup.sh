@@ -14,6 +14,10 @@ fi
 which ffmpeg >/dev/null || { apt-get install -y -qq ffmpeg >/dev/null 2>&1 || pip install -q --break-system-packages imageio-ffmpeg; }
 # self-check: every tool the pipeline needs
 python3 -c "import playwright, numpy, soundfile, piper" && echo "python deps ok" || echo "ERROR: python deps missing"
+# Kokoro natural Hindi voices (hm_psi, hm_omega)
+pip install -q --break-system-packages kokoro-onnx 2>/dev/null || true
+mkdir -p /tmp/tts/kx && for f in kokoro-v1.0.onnx voices-v1.0.bin; do [ -f /tmp/tts/kx/$f ] || curl -sSL -o /tmp/tts/kx/$f https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f; done
+python3 -c "import kokoro_onnx" && echo "kokoro ok" || echo "ERROR: kokoro missing (fallback: Piper voices)"
 which google-chrome >/dev/null && echo "chrome ok" || echo "ERROR: no chrome"
 which ffmpeg >/dev/null && echo "ffmpeg ok" || echo "ERROR: no ffmpeg"
 ls /tmp/tts/vits-piper-hi_IN-rohan-medium/*.onnx >/dev/null && echo "voice ok" || echo "ERROR: voice missing"

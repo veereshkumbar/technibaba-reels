@@ -1,5 +1,17 @@
 # TechniBaba Chat — two-friends conversation format
 
+**Use v2: start from `examples/chat_v2/`** (v1 in `examples/chat_storage` is outdated).
+
+## v2 standard (what Veer approved as the direction)
+- **Voices:** Kokoro (natural): `VOICES={'c':('kokoro:hm_psi',1.24,1.06),'b':('kokoro:hm_omega',1.16,0.95)}`. Fallback to Piper only if Kokoro fails.
+- **Talking style:** write it like two friends really talk. Short lines, interjections ("Achha?", "Arre yaar", "Ruk bhai!"), reactions ("BARAH HAZAAR?!"), repeated words for comedy, a twist at the end ("Toh kisse doon?" → "Bas GM likh de"). Line = 1 breath. Never read out lists.
+- **Characters:** outlined, shaded, big expressive heads, **lip sync** from the voice (timeline `env`), blinking, breathing, head tilt, smooth pose blending. Per-line `EXPR` (neutral, shock, happy, annoyed, smug, worried, shy) and `POSE` (talk, point, shrug, up, blown, palm, thumb, wave, cross, shy, stop).
+- **Locations change every scene** (bedroom night/day, chai tapri, office, park sunset, end). Add new ones in `loc()`, with some motion (steam, clock, stars, leaves).
+- **Camera, set per line** (5th field in LINES): '' wide two-shot, `cu` close-up on the speaker, `lis` reaction close-up on the listener, `boom` dramatic zoom + white flash + shake + thud. Whip-pan transitions between locations.
+- **Phone screen** shows what's being said; it moves to the corner in close-ups.
+- Script shape, 16–18 lines, 40–45s.
+
+
 The format the channel already posted before (e.g. the "HR Didi vs Rahul" reel), upgraded. Two characters talk about a trending topic. One asks or complains, the other explains with a punchline.
 
 ## Cast

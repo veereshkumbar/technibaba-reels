@@ -11,11 +11,21 @@ for i,L in enumerate(LINES):
     sc,tt,cap=L[:3]; spk=L[3] if len(L)>3 else ''; vt=VOICES.get(spk,(voice,tempo)); v,tp=vt[0],vt[1]; pf=vt[2] if len(vt)>2 else 1.0
     m=f'/tmp/tts/vits-piper-hi_IN-{v}-medium/hi_IN-{v}-medium.onnx'
     raw=f'{W}/vo/r{i:02d}.wav'; fin=f'{W}/vo/f{i:02d}.wav'
-    subprocess.run(['python3',f'{here}/tts_piper.py',m,tt,raw,'0.84'],check=True,capture_output=True)
-    subprocess.run(['ffmpeg','-v','error','-y','-i',raw,'-af',f'silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse,asetrate={int(22050*pf)},aresample=22050,atempo={tp/pf:.4f},aresample=48000','-ac','2',fin],check=True)
+    if v.startswith('kokoro:'):
+        global KK
+        if 'KK' not in globals():
+            from kokoro_onnx import Kokoro; KK=Kokoro('/tmp/tts/kx/kokoro-v1.0.onnx','/tmp/tts/kx/voices-v1.0.bin')
+        import soundfile as _sf; smp,sr=KK.create(tt,voice=v.split(':')[1],speed=1.0,lang='hi'); _sf.write(raw,smp,sr); SR=sr
+    else:
+        subprocess.run(['python3',f'{here}/tts_piper.py',m,tt,raw,'0.84'],check=True,capture_output=True); SR=22050
+    subprocess.run(['ffmpeg','-v','error','-y','-i',raw,'-af',f'silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse,asetrate={int(SR*pf)},aresample={SR},atempo={tp/pf:.4f},aresample=48000','-ac','2',fin],check=True)
     d=float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0',fin]))
     if prev is not None: t+=GAP_SC if prev!=sc else GAP_LN
-    out.append(dict(i=i,scene=sc,cap=cap,spk=spk,file=fin,dur=d,start=round(t,3))); t+=d; prev=sc
+    import numpy as _np, soundfile as _sf2
+    _a,_r=_sf2.read(fin); _a=_a.mean(1) if _a.ndim>1 else _a; hop=_r//30
+    rms=_np.array([_np.sqrt(_np.mean(_a[k:k+hop]**2)) for k in range(0,len(_a),hop)]); rms=_np.clip(rms/(_np.percentile(rms,95)+1e-6),0,1)
+    env=''.join(str(int(x*9)) for x in rms)
+    out.append(dict(i=i,scene=sc,cap=cap,spk=spk,file=fin,dur=d,start=round(t,3),env=env,cam=(L[4] if len(L)>4 else ''))); t+=d; prev=sc
 json.dump(dict(lines=out,total=t+1.3),open(f'{W}/timeline.json','w'),indent=1)
 for x in out: print(x['i'],x['scene'],x['start'],round(x['dur'],2))
 print('TOTAL',round(t+1.3,2))
