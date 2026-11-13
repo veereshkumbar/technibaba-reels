@@ -1,0 +1,90 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+@font-face{font-family:Hand;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}
+text{font-family:Inter,'Noto Color Emoji'}
+</style></head><body><div id="root"></div><script>
+__CHARS__
+function dosa(){return ''}
+const pop=(t,a,d)=>t<a?0:back(prog(t,a,a+d));
+// extra poses for two-person chat (overrides arms() from chars.js)
+function arms(pose,t){const p=t*2*Math.PI*1.5;
+ if(pose=='walk')return[[-24*Math.sin(p),-22],[24*Math.sin(p),-22]];
+ if(pose=='wave')return[[12,-10],[160+18*Math.sin(t*9),25]];
+ if(pose=='blown')return[[-150,-20+10*Math.sin(t*10)],[150,20-10*Math.sin(t*10)]];
+ if(pose=='up')return[[-160+12*Math.sin(t*12),10],[160-12*Math.sin(t*12),-10]];
+ if(pose=='thumb')return[[12,-10],[-150,-70]];
+ if(pose=='talk')return[[10,0],[-70-20*Math.sin(t*7),-40-25*Math.abs(Math.sin(t*5))]];
+ if(pose=='point')return[[10,0],[-95,-5]];
+ if(pose=='shrug')return[[-60,-100],[60,100]];
+ if(pose=='palm')return[[10,0],[-140,-150]];
+ return[[8+3*Math.sin(t*1.7),0],[-8-3*Math.sin(t*1.7),0]]}
+const TL=__TL__,LINES=TL.lines,TOTAL=TL.total;
+const norm=w=>w.toLowerCase().replace(/[^a-z0-9%']/g,'');
+const words=i=>LINES[i].cap.split(/\s+/);
+function wordStarts(i){const L=LINES[i],w=words(i),wt=w.map(x=>x.length+1.5),tot=wt.reduce((a,b)=>a+b,0);let c=0;return w.map((x,k)=>{const s=L.start+L.dur*c/tot;c+=wt[k];return s})}
+function W(i,word){const w=words(i),s=wordStarts(i);const k=w.findIndex(x=>norm(x).startsWith(word.toLowerCase()));return k<0?LINES[i].start:s[k]}
+const LS=i=>LINES[i].start,LE=i=>LINES[i].start+LINES[i].dur;
+const ORDER=[];LINES.forEach(l=>{if(!ORDER.includes(l.scene))ORDER.push(l.scene)});
+const SCN={};ORDER.forEach((n,k)=>{const ls=LINES.filter(l=>l.scene==n);SCN[n]={s:k==0?0:ls[0].start-0.2}});ORDER.forEach((n,k)=>{SCN[n].e=k<ORDER.length-1?SCN[ORDER[k+1]].s:TOTAL});
+const SFX=[];const sfx=(t,ty)=>SFX.push([+t.toFixed(3),ty]);
+const INK='#1b1b2f',YEL='#ffd23f',GRN='#2bb673',RD='#e5383b';
+function speaking(t){for(const l of LINES)if(t>=l.start-.05&&t<l.start+l.dur+.05)return l;return null}
+// ---- room ----
+function room(){return `<rect width="1080" height="1920" fill="#d9b99b"/><path d="M0,0 L1080,0 L1080,150 L0,240Z" fill="#6b7a8f"/>
+<rect x="0" y="1160" width="1080" height="760" fill="#aebdcc"/>${[0,1,2,3,4,5].map(k=>`<line x1="${k*216}" y1="1160" x2="${k*216-120}" y2="1920" stroke="#9aaabb" stroke-width="3"/>`).join('')}<rect x="0" y="1150" width="1080" height="14" fill="#8a6f58"/>
+<g transform="translate(70,760)"><rect width="200" height="230" fill="#bfe0f5" stroke="#8fb3cc" stroke-width="10"/><line x1="100" y1="0" x2="100" y2="230" stroke="#8fb3cc" stroke-width="8"/><line x1="0" y1="115" x2="200" y2="115" stroke="#8fb3cc" stroke-width="8"/></g>
+<g transform="translate(820,780)"><rect width="190" height="250" rx="6" fill="#f2a65a"/><rect x="20" y="20" width="150" height="90" fill="#f7c58d"/><circle cx="160" cy="140" r="8" fill="#8a5a2b"/></g>
+<text x="540" y="1210" text-anchor="middle" font-weight="600" font-size="22" fill="#7f90a3">@technibaba</text>`}
+// ---- phone insert ----
+function phoneFrame(inner,sc=1,rot=0,shake=0){return `<g transform="translate(${540+shake},520) rotate(${rot}) scale(${sc*.95})"><rect x="-150" y="-185" width="300" height="370" rx="34" fill="${INK}"/><rect x="-136" y="-168" width="272" height="336" rx="22" fill="#fff"/><rect x="-40" y="-178" width="80" height="10" rx="5" fill="#333"/><g>${inner}</g></g>`}
+function bar(pct,col,label){return `<text x="-112" y="-110" font-weight="800" font-size="26" fill="${INK}">Storage</text><rect x="-112" y="-90" width="224" height="26" rx="13" fill="#e6e6ee"/><rect x="-112" y="-90" width="${224*pct}" height="26" rx="13" fill="${col}"/><text x="-112" y="-34" font-weight="800" font-size="24" fill="${col}">${label}</text>`}
+function tile(x,y,k,hl){const c=['#ffd6a5','#fdffb6','#caffbf','#ffadad','#bdb2ff'][k%5];return `<g transform="translate(${x},${y})"><rect width="76" height="76" rx="8" fill="${c}" stroke="${hl?YEL:'#fff'}" stroke-width="${hl?6:2}"/><circle cx="38" cy="30" r="14" fill="${k%2?'#ff9f1c':'#ef476f'}"/><text x="38" y="58" text-anchor="middle" font-family="Hand" font-weight="700" font-size="17" fill="#7a3e00">Good</text><text x="38" y="72" text-anchor="middle" font-family="Hand" font-weight="700" font-size="17" fill="#7a3e00">Morning</text></g>`}
+function toggle(x,y,on,lab){return `<text x="${x-112}" y="${y+8}" font-weight="600" font-size="22" fill="${INK}">${lab}</text><rect x="${x+40}" y="${y-16}" width="64" height="34" rx="17" fill="${on?GRN:'#c8c8d0'}"/><circle cx="${x+(on?87:57)}" cy="${y+1}" r="13" fill="#fff"/>`}
+function insert(t){const n=ORDER[sceneAt(t)];const S=SCN[n];const ap=pop(t,S.s,.45);let o='';
+ if(n=='full'){const sh=t>W(0,'storage')&&t<W(0,'storage')+.5?8*Math.sin(t*60):0;o=bar(.99,RD,'99% FULL');if(t>W(0,'storage')){const q=pop(t,W(0,'storage'),.35);o+=`<g transform="translate(0,60) scale(${q})"><rect x="-120" y="-50" width="240" height="100" rx="16" fill="${RD}"/><text y="-8" text-anchor="middle" font-weight="800" font-size="26" fill="#fff">⚠️ Storage full</text><text y="28" text-anchor="middle" font-weight="600" font-size="19" fill="#fff">Can't take photos</text></g>`}return phoneFrame(o,ap,0,sh)}
+ if(n=='gallery'){const hl=t>W(4,'chaar');for(let k=0;k<12;k++){const r=Math.floor(k/3),c=k%3;o+=tile(-118+c*82,-150+r*82,k,hl&&k%3!=1)}
+  const cnt=t<W(2,'barah')?0:Math.round(12000*eo(prog(t,W(2,'barah'),W(2,'barah')+.8)));o+=`<rect x="-136" y="122" width="272" height="46" fill="${INK}" opacity=".85"/><text y="154" text-anchor="middle" font-family="Mono" font-weight="700" font-size="24" fill="${hl?YEL:'#fff'}">${hl?'4,000 Good Morning 🌞':cnt.toLocaleString('en-IN')+' photos'}</text>`;return phoneFrame(o,ap,-3)}
+ if(n=='auto'){o+=`<rect x="-136" y="-168" width="272" height="56" fill="#075e54"/><text x="-110" y="-130" font-weight="800" font-size="22" fill="#fff">👪 Family Group</text>`;
+  for(let k=0;k<4;k++){const at=LS(6)+k*.6;if(t<at)continue;const p=eo(prog(t,at,at+.3)),y=-96+k*56-((t-LS(6))>2.6?(t-LS(6)-2.6)*0:0);o+=`<g transform="translate(${-120+20*(k%2)},${y}) scale(${p})"><rect width="210" height="48" rx="12" fill="#dcf8c6"/><text x="10" y="18" font-weight="600" font-size="13" fill="#777">↪ Forwarded many times</text><text x="10" y="40" font-weight="800" font-size="17" fill="${INK}">${['🌻 Good Morning','🙏 Shubh Prabhat','☀️ Good Morning','🌹 Have a nice day','🌄 Good Morning'][k]}</text></g>`}
+  if(t>W(7,'auto')){o+=`<g transform="translate(0,150) scale(${pop(t,W(7,'auto'),.35)})"><rect x="-130" y="-26" width="260" height="52" rx="26" fill="${INK}"/>${toggle(0,0,true,'')}<text x="-112" y="9" font-weight="800" font-size="20" fill="#fff">Auto-download</text></g>`}return phoneFrame(o,ap,2)}
+ if(n=='fix'){const two=t>LS(10)-.1;if(!two){const off=W(9,'band');o+=`<text x="-112" y="-118" font-weight="800" font-size="20" fill="${INK}">Media auto-download</text>`;['Photos','Audio','Videos','Documents'].forEach((l,k)=>o+=toggle(0,-60+k*62,t<off+k*.12,l));if(t>off)o+=`<text y="${190-160}" text-anchor="middle" font-weight="800" font-size="1" fill="#fff"></text>`}
+  else{o+=`<text x="-112" y="-118" font-weight="800" font-size="24" fill="${INK}">Manage storage</text>`;const it=[['📦 Larger than 5 MB','2.1 GB'],['↪ Forwarded many times','6.4 GB'],['🎥 Old videos','1.8 GB']];it.forEach(([a,b],k)=>{const del=t>W(10,'delete')+k*.18;const dx=del?400*eo(prog(t,W(10,'delete')+k*.18,W(10,'delete')+k*.18+.4)):0;const hi=(k==0&&t>W(10,'badi'))||(k==1&&t>W(10,'forwards'));o+=`<g transform="translate(${dx},${-70+k*78})" opacity="${1-dx/400}"><rect x="-120" y="-30" width="240" height="60" rx="10" fill="${hi?'#fff3c4':'#f2f2f6'}" stroke="${hi?YEL:'none'}" stroke-width="4"/><text x="-108" y="-4" font-weight="600" font-size="17" fill="${INK}">${a}</text><text x="-108" y="20" font-family="Mono" font-weight="700" font-size="17" fill="${RD}">${b}</text></g>`});
+   if(t>W(10,'delete'))o+=`<g transform="translate(0,150) scale(${pop(t,W(10,'delete'),.3)})"><circle r="30" fill="${RD}"/><text y="11" text-anchor="middle" font-size="30">🗑️</text></g>`}return phoneFrame(o,ap,-2)}
+ if(n=='free'){const p=eo(prog(t,LS(11),LS(11)+.9));const pct=.99-.6*p,col=p>.5?GRN:RD;o=bar(pct,col,p>.5?'10 GB FREE ✅':Math.round(pct*100)+'% full');
+  if(t>LS(12)){const q=pop(t,LS(12),.4);o+=`<g transform="translate(0,70) scale(${q})">${tile(-38,-38,0,false)}<path d="M-52,-52 L52,52 M52,-52 L-52,52" stroke="${RD}" stroke-width="12" stroke-linecap="round"/></g>`}
+  let cf='';if(t>LS(11)+.6&&t<LS(11)+2.6){for(let k=0;k<18;k++){const a=k*1.7,tt=t-LS(11)-.6;cf+=`<rect x="${Math.cos(a)*(120+tt*160)}" y="${-60+Math.sin(a)*90+tt*tt*260}" width="12" height="18" fill="${['#ffd23f','#2bb673','#e5383b','#3a86ff'][k%4]}" transform="rotate(${k*40+tt*300})"/>`}}
+  return phoneFrame(o,ap,0)+`<g transform="translate(540,520)">${cf}</g>`}
+ if(n=='end'){const q=pop(t,S.s,.45);return `<g transform="translate(540,520) scale(${q})"><rect x="-400" y="-130" width="800" height="260" rx="30" fill="#fff" stroke="${INK}" stroke-width="6"/><text y="-50" text-anchor="middle" font-weight="800" font-size="44" fill="${INK}">Aapke phone mein</text><text y="10" text-anchor="middle" font-weight="800" font-size="44" fill="${INK}">kitni Good Morning? 🌞</text><text y="80" text-anchor="middle" font-weight="800" font-size="34" fill="${RD}">👇 Comment karo</text></g>`}
+ return ''}
+// ---- keyword pops ----
+const KW=[[0,'storage','STORAGE FULL 😩','#e5383b'],[4,'chaar','4,000 GOOD MORNING 🌞','#ff7b00'],[5,'family','FAMILY GROUP FULL 😂','#7b2cbf'],[7,'auto','AUTO-DOWNLOAD 🤦','#e5383b'],[9,'band','BAND KARO ✋','#2b9348'],[11,'10','10 GB FREE 🎉','#2b9348'],[12,'mat','MAT DENA 🙏','#7b2cbf']];
+function kw(t){let o='';KW.forEach(([i,w,txt,c],k)=>{const a=W(i,w)-.05,b=(KW[k+1]?Math.min(W(KW[k+1][0],KW[k+1][1])-.1,a+1.8):a+1.8);if(t<a||t>b)return;const p=pop(t,a,.35),f=1-prog(t,b-.2,b);const fs=Math.min(64,420/(txt.length*.6));o+=`<g transform="translate(540,960) rotate(${k%2?3:-3}) scale(${p})" opacity="${f}"><text text-anchor="middle" font-weight="800" font-size="${fs}" fill="#fff" stroke="#fff" stroke-width="16" stroke-linejoin="round">${txt}</text><text text-anchor="middle" font-weight="800" font-size="${fs}" fill="${c}">${txt}</text></g>`});return o}
+// ---- characters ----
+const CHO=Object.assign({},CHOTU,{who:'friend',c:{pants:'#2b2d42',sleeve:'#c8553d',hand:SKIN,top:'#f4a261',shoe:'#111'}});
+function poseOf(who,t){const L=speaking(t);
+ const R=(i,w,d,pz)=>t>W(i,w)&&t<W(i,w)+d?pz:null;
+ if(who=='c'){return R(5,'family',1.6,'palm')||R(8,'naya',1.3,'shrug')||R(11,'arre',2,'up')||R(0,'baba',1.6,'blown')||(t>LS(13)?'wave':null)||(L&&L.spk=='c'?'talk':'idle')}
+ return R(9,'nahi',.9,'point')||R(13,'follow',3,'thumb')||(t>LS(13)&&t<W(13,'follow')?'wave':null)||(L&&L.spk=='b'?'talk':'idle')}
+function actor(who,t){const L=speaking(t),sp=L&&L.spk==who;const bob=sp?-6*Math.abs(Math.sin(t*9)):0;
+ const x=who=='c'?240:840,o=Object.assign({x,y:1150+bob,s:.95,pose:poseOf(who,t)},who=='c'?CHO:BABA);
+ let s=person(t,o);
+ s+=`<text x="${x}" y="1196" text-anchor="middle" font-weight="800" font-size="30" fill="${INK}" opacity="${sp?1:.55}">*${who=='c'?'Chotu':'Techni Baba'}</text>`;
+ if(sp){const k=Math.floor(t*6)%2;s+=`<g stroke="${INK}" stroke-width="5" stroke-linecap="round" opacity=".7"><line x1="${x+(who=='c'?70:-70)}" y1="${1150-440}" x2="${x+(who=='c'?95:-95)}" y2="${1150-455-k*6}"/><line x1="${x+(who=='c'?75:-75)}" y1="${1150-410}" x2="${x+(who=='c'?105:-105)}" y2="${1150-410}"/></g>`}
+ return s}
+// ---- captions (karaoke, 4-word chunks, speaker colour) ----
+const CH=LINES.map(L=>{const w=words(L.i),st=wordStarts(L.i);const ch=[];let cur=[];w.forEach((x,k)=>{cur.push(k);if(cur.length>=4||(/[,.!?]$/.test(x)&&cur.length>=2))ch.push(cur),cur=[]});if(cur.length)ch.push(cur);return ch.map(c=>({ks:c,s:st[c[0]]}))});
+function caption(t){const L=speaking(t);if(!L)return'';const ch=CH[L.i],ws=words(L.i),st=wordStarts(L.i);let ci=0;ch.forEach((c,k)=>{if(t>=c.s-.05)ci=k});const c=ch[ci];const col=L.spk=='c'?'#ffd23f':'#7df9c8';
+ const tsp=c.ks.map(k=>`<tspan fill="${t>=st[k]-.03?col:'#fff'}">${ws[k]}</tspan>`).join(' ');const a=pop(t,c.s-.05,.25);const plain=c.ks.map(k=>ws[k]).join(' '),fs=Math.min(64,960/(plain.length*.6));
+ return `<g transform="translate(540,1300) scale(${.9+.1*a})"><text text-anchor="middle" font-weight="800" font-size="${fs}" stroke="#000" stroke-width="14" stroke-linejoin="round" fill="#000">${c.ks.map(k=>ws[k]).join(' ')}</text><text text-anchor="middle" font-weight="800" font-size="${fs}">${tsp}</text></g>`}
+function banner(){return `<g transform="translate(540,262)"><rect x="-430" y="-82" width="860" height="164" rx="14" fill="${YEL}" stroke="${INK}" stroke-width="5"/><text y="-14" text-anchor="middle" font-weight="800" font-size="46" fill="${INK}">Phone: "Storage Full" 😩</text><text y="50" text-anchor="middle" font-weight="800" font-size="40" fill="${INK}">(Good Morning photos: 4,000 💀)</text></g>`}
+function sceneAt(t){for(let k=ORDER.length-1;k>=0;k--)if(t>=SCN[ORDER[k]].s)return k;return 0}
+function render(t){let o=room()+banner()+insert(t)+actor('c',t)+actor('b',t)+kw(t)+caption(t);
+ if(t>TOTAL-1.1){const p=prog(t,TOTAL-1.1,TOTAL-.2);o+=`<g opacity="${p}"><rect width="1080" height="1920" fill="#10142a"/><circle cx="540" cy="760" r="${230}" fill="none" stroke="#5de0b0" stroke-width="14"/><g transform="translate(540,800) scale(1.6)">${babaHead(1)}</g><text x="540" y="1100" text-anchor="middle" font-weight="800" font-size="56" fill="#fff">@technibaba</text></g>`}
+ document.getElementById('root').innerHTML=`<svg width="1080" height="1920" viewBox="0 0 1080 1920">${o}</svg>`}
+ORDER.forEach((n,k)=>{if(k)sfx(SCN[n].s,'whoosh')});KW.forEach(([i,w])=>sfx(W(i,w),'pop'));sfx(W(0,'storage'),'thud');
+for(let k=0;k<4;k++)sfx(LS(6)+k*.6,'blip');[0,1,2,3].forEach(k=>sfx(W(9,'band')+k*.12,'tick'));[0,1,2].forEach(k=>sfx(W(10,'delete')+k*.18,'whoosh'));sfx(LS(11)+.6,'ding');sfx(LS(12),'crack');
+window.render=render;window.SFX=SFX;window.TOTAL=TOTAL;
+</script></body></html>

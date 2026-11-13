@@ -21,7 +21,7 @@ Work folder for today: `W=/tmp/reel-$(date +%Y%m%d-%H%M)`; `mkdir -p $W`.
 - Search what's trending today (web search, several queries). Mix: ~70% tech (launches, AI tools, phone/app tricks, scams & safety, big-tech news), ~30% Bollywood / sports / gaming **through a tech lens** (AI deepfakes of stars, DRS/ball-tracking, gaming news, streaming tech).
 - Morning slot: news / trending. Evening slot: funny explainer or "how does X work".
 
-**Format choice:** evening runs may use the documentary format (`DOC_FORMAT.md`) 2–3 times a week, for history/"how X happened" topics. Check `posted.md` so docs don't run on back-to-back evenings. Mornings stay the fast funny format.
+**Format choice:** three formats: fast funny explainer (STYLE_GUIDE), two-friends chat (`CHAT_FORMAT.md`; good for relatable tech problems, office/HR/AI-job jokes, app tricks), and docs (`DOC_FORMAT.md`). Mix them; don't use the same format three runs in a row. Evening runs may use the documentary format (`DOC_FORMAT.md`) 2–3 times a week, for history/"how X happened" topics. Check `posted.md` so docs don't run on back-to-back evenings. Mornings stay the fast funny format.
 
 ## 2. Research and fact-check
 - At least 3 independent sources; dates and numbers checked.
