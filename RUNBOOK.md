@@ -2,6 +2,14 @@
 
 Each run makes ONE reel, sends it to Veer for review, and posts to Instagram only after he says "post".
 
+## Rules for scheduled (unattended) runs
+- Nobody is watching. Never stop to ask a question before the MP4 is sent; pick the best option and say which you picked.
+- First action: SendUserMessage "Starting <slot> reel…" so Veer knows the run is alive.
+- Keep going until the MP4 is delivered. A full run takes 25–45 minutes; rendering alone takes ~8.
+- If any step fails twice, do not quit silently: SendUserMessage + PushNotification with the step and the error, then try the fallback (simpler scene, fewer lines, built-in music).
+- PushNotification is a deferred tool: load it first with ToolSearch "select:PushNotification".
+- Never post without Veer's "post" reply.
+
 ## 0. Setup (every fresh session)
 ```bash
 git clone --depth 1 https://github.com/veereshkumbar/technibaba-reels /tmp/tb && cd /tmp/tb && ./setup.sh
