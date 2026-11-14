@@ -8,8 +8,8 @@
 | 2026-11-13 | morning | Satellite kill switch — Mittal vs Starlink India standoff (39s) | 18124447705937655 · github.io URL worked |
 | 2026-11-13 | evening | Why Delhi AQI apps differ (1700 vs 370) — scale/time/sensor explainer (44s, chat format) | 18108037415298010 · github.io URL worked |
 | 2026-11-13 | evening (2nd) | Phone mehenga kyun? AI ne RAM kha li — memory-chip shortage, sales -20%, sub-₹20K -47%, 3 buyer tips (46.6s, chat format) | 18030813431869373 · github.io URL worked |
-
 | 2026-11-14 | morning | GTA 6 FREE PC download = scam — game is PS5/Xbox only (Nov 19), fake 'GTA 6 PC' file is an infostealer per Cynet; real price ₹5,999 (44.2s, chat premium) | 17915544786553014 · github.io URL worked |
+
 ## Learnings
 - 2026-11-12: both test reels (59–66 s) had 55–59% 3-second skip, 7–12 s average watch, ~115 reach (34 followers). Go 35–45 s, payoff in frame 0.
 
