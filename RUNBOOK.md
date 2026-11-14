@@ -7,6 +7,8 @@ Every reel ships in the PREMIUM look (`examples/chat_premium`, see CHAT_FORMAT.m
 
 Also follow `RESEARCH.md` (own outliers + comment mining + trend check every run; weekly brief on Sundays) and `CRAFT.md` (story, vertical, acting, captions, review with REVIEW.md).
 
+**Steps format** (`STEPS_FORMAT.md`, `examples/steps_whatsapp`): for how-to / settings / checklist topics. Use it for about 2 evening reels a week, never two days in a row.
+
 ## Rules for scheduled (unattended) runs
 - Nobody is watching. Never stop to ask a question before the MP4 is sent; pick the best option and say which you picked.
 - First action: SendUserMessage "Starting <slot> reel…" so Veer knows the run is alive.

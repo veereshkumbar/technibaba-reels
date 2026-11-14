@@ -1,0 +1,153 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Jak;font-weight:500;src:url(file:///tmp/fonts/node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-500-normal.woff2)}
+@font-face{font-family:Jak;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-600-normal.woff2)}
+@font-face{font-family:Jak;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-700-normal.woff2)}
+@font-face{font-family:Jak;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-800-normal.woff2)}
+@font-face{font-family:Ser;font-style:italic;src:url(file:///tmp/fonts/node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#fff}#root{width:1080px;height:1920px;overflow:hidden}
+text{font-family:Jak,'Noto Color Emoji'}
+.cap{font:600 62px Jak,'Noto Color Emoji';text-align:center;color:#b6bac8;line-height:1.25;letter-spacing:-1px}
+.cap .on{color:#14124a}
+.cap .kw{font-family:Ser;font-style:italic;font-weight:400;font-size:76px;letter-spacing:0;padding:0 14px;border-radius:10px;border:2.5px solid transparent}
+.cap .kw.on{background:#d9f7ea;border-color:#10b981;color:#0b6b4c}
+</style></head><body><div id="root"></div><script>
+// ===== TechniBaba STEPS format: grid paper, step timeline, top captions with highlighted keywords =====
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),prog=(t,a,b)=>clamp((t-a)/(b-a)),eo=x=>1-Math.pow(1-x,3),eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,lerp=(a,b,f)=>a+(b-a)*f;
+const back=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const pop=(t,a,d=.4)=>t<a?0:back(prog(t,a,a+d));
+const TL=__TL__,LINES=TL.lines,TOTAL=TL.total;
+const OUT='#2b2140',RD='#e5383b',SKIN='url(#gSkin)',SKIN2='#e3a87e',NAVY='#14124a',MINT='#5de0b0';
+const INK='#14124a',ACC='#10b981',ACC2='#d9f7ea',MUT='#8a8fa3',LINE='#e6e8f0',RED='#e5484d',RED2='#ffe9ea';
+__FACE__
+const norm=w=>w.toLowerCase().replace(/[^a-z0-9%']/g,'');
+const words=i=>LINES[i].cap.split(/\s+/);
+function wordStarts(i){const L=LINES[i],w=words(i),wt=w.map(x=>x.length+1.5),tot=wt.reduce((a,b)=>a+b,0);let c=0;return w.map((x,k)=>{const s=L.start+L.dur*c/tot;c+=wt[k];return s})}
+function W(i,word){const w=words(i),s=wordStarts(i);const k=w.findIndex(x=>norm(x).startsWith(word.toLowerCase()));return k<0?LINES[i].start:s[k]}
+const LS=i=>LINES[i].start,LE=i=>LINES[i].start+LINES[i].dur;
+const ORDER=[];LINES.forEach(l=>{if(!ORDER.includes(l.scene))ORDER.push(l.scene)});
+const SC={};ORDER.forEach((n,k)=>{const ls=LINES.filter(l=>l.scene==n);SC[n]={s:k==0?0:+(ls[0].start-0.2).toFixed(3)}});ORDER.forEach((n,k)=>{SC[n].e=k<ORDER.length-1?SC[ORDER[k+1]].s:TOTAL});
+const SFX=[];const sfx=(t,ty)=>SFX.push([+t.toFixed(3),ty]);
+function lineAt(t){if(t<LINES[0].start)return LINES[0];for(const l of LINES)if(t>=l.start-.04&&t<l.start+l.dur+.04)return l;return null}
+function lastLine(t){let r=LINES[0];for(const l of LINES)if(t>=l.start-.04)r=l;return r}
+function sceneIdx(t){for(let k=ORDER.length-1;k>=0;k--)if(t>=SC[ORDER[k]].s)return k;return 0}
+function envAt(t){const l=lineAt(t);if(!l)return 0;const k=Math.floor((t-l.start)*30),e=l.env||'';const v=k>=0&&k<e.length?+e[k]:0,v2=k+1<e.length?+e[k+1]:v;return (v*.6+v2*.4)/9}
+// ---- per-video content -------------------------------------------------
+const STEPS=['Two-step PIN','Linked devices','Group privacy','Unknown callers','Code = secret'];
+const EXPR=['worried','smug','neutral','smug','neutral','annoyed','neutral','smug','neutral','happy','annoyed','annoyed','happy','happy','smug'];
+const HANDLE='@technibaba',KEYWORD='SAFE';
+// ---- primitives ---------------------------------------------------------
+const T=(x,y,s,sz,o={})=>`<text x="${x}" y="${y}" font-size="${sz}" font-weight="${o.w||600}" fill="${o.c||INK}" text-anchor="${o.a||'start'}" ${o.f?`font-family="${o.f}"`:''} ${o.f=='Ser'?'font-style="italic"':''} ${o.ls?`letter-spacing="${o.ls}"`:''} opacity="${o.o==null?1:o.o}">${s}</text>`;
+const card=(x,y,w,h,inner,o={})=>`<g><rect x="${x+4}" y="${y+16}" width="${w-8}" height="${h}" rx="${o.r||30}" fill="#1b1f3a" opacity=".13" filter="url(#fSh)"/><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${o.r||30}" fill="${o.fill||'#fff'}" stroke="${o.stroke||LINE}" stroke-width="${o.sw||2.5}"/>${inner||''}</g>`;
+const head=(x,y,s,t,e)=>`<g transform="translate(${x},${y}) scale(${s})">${babaHead(e||EXPR[lastLine(t).i]||'neutral',t,envAt(t),0)}</g>`;
+const tick=(x,y,r,p)=>`<g transform="translate(${x},${y}) scale(${p})"><circle r="${r}" fill="${ACC}"/><path d="M${-r*.42},${r*.02} l${r*.3},${r*.3} l${r*.52},${-r*.58}" fill="none" stroke="#fff" stroke-width="${r*.22}" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+const cross=(x,y,r,p)=>`<g transform="translate(${x},${y}) scale(${p})"><circle r="${r}" fill="${RED}"/><path d="M${-r*.36},${-r*.36} L${r*.36},${r*.36} M${r*.36},${-r*.36} L${-r*.36},${r*.36}" stroke="#fff" stroke-width="${r*.22}" stroke-linecap="round"/></g>`;
+const pill=(x,y,txt,o={})=>{const sz=o.sz||30,w=o.wd||txt.length*sz*.58+44,h=sz*1.9;return `<g transform="translate(${x},${y}) scale(${o.p==null?1:o.p})"><rect x="0" y="${-h/2}" width="${w}" height="${h}" rx="${h/2}" fill="${o.fill||ACC}" stroke="${o.stroke||'none'}" stroke-width="2.5"/>${T(w/2,sz*.36,txt,sz,{w:700,c:o.c||'#fff',a:'middle'})}</g>`};
+const stamp=(x,y,txt,p,c=RED,rot=-7)=>p<=0?'':`<g transform="translate(${x},${y}) rotate(${rot}) scale(${1+1.1*(1-eo(clamp(p)))})" opacity="${clamp(p*3)}"><rect x="${-txt.length*17-26}" y="-40" width="${txt.length*34+52}" height="78" rx="12" fill="#fff" stroke="${c}" stroke-width="6"/>${T(0,14,txt,40,{w:800,c,a:'middle',f:'Mono',ls:2})}</g>`;
+const CX=590,CW=800,CL=CX-CW/2,CY=640;   // content column (right of the timeline)
+const hdr=(title,sub)=>T(CL+44,CY+72,title,38,{w:800})+(sub?T(CL+44,CY+116,sub,26,{w:500,c:MUT}):'')+`<line x1="${CL+44}" y1="${CY+142}" x2="${CL+CW-44}" y2="${CY+142}" stroke="${LINE}" stroke-width="2.5"/>`;
+const row=(y,icon,label,o={})=>`<g transform="translate(${o.dx||0},0)" opacity="${o.op==null?1:o.op}"><rect x="${CL+32}" y="${y-40}" width="${CW-64}" height="80" rx="18" fill="${o.fill||'#f6f7fb'}" stroke="${o.stroke||'none'}" stroke-width="3"/>${T(CL+60,y+13,icon,36)}${T(CL+118,y+11,label,31,{w:o.w||600,c:o.c||INK})}${o.right||''}</g>`;
+const toggle=(x,y,on)=>{const f=eo(clamp(on));return `<rect x="${x}" y="${y-22}" width="84" height="44" rx="22" fill="${f>.5?ACC:'#cfd3df'}"/><circle cx="${x+22+40*f}" cy="${y}" r="17" fill="#fff"/>`};
+const radio=(x,y,on)=>`<circle cx="${x}" cy="${y}" r="17" fill="#fff" stroke="${on>.5?ACC:'#c3c7d4'}" stroke-width="4"/><circle cx="${x}" cy="${y}" r="${9*clamp(on)}" fill="${ACC}"/>`;
+const tap=(x,y,t,at)=>{const p=prog(t,at,at+.45);return p<=0||p>=1?'':`<circle cx="${x}" cy="${y}" r="${18+50*p}" fill="none" stroke="${ACC}" stroke-width="5" opacity="${1-p}"/>`};
+// ---- scenes (local time = global t) ------------------------------------
+function sHook(t){let o='';const mv=eio(prog(t,LS(1)-.15,LS(1)+.45));
+ // SMS card -> the one thing a thief needs
+ const sh=t>W(0,'ek')&&t<W(0,'ek')+.45?7*Math.sin(t*70):0;
+ o+=`<g opacity="${1-mv}" transform="translate(${sh},${-60*mv})">`+card(170,1040,740,190,T(206,1104,'💬',44)+T(276,1096,'WhatsApp code',28,{w:600,c:MUT})+T(276,1156,'482-913',62,{w:800,f:'Mono'})+T(600,1156,'← OTP',34,{w:700,c:RED}),{stroke:t>W(0,'ek')?RED:LINE,sw:t>W(0,'ek')?5:2.5})+stamp(700,1040,'HACKED',prog(t,W(0,'otp'),W(0,'otp')+.25))+`</g>`;
+ // title card
+ if(t>LS(1)-.1){const p=eo(prog(t,LS(1),LS(1)+.5));o+=`<g opacity="${p}" transform="translate(0,${40*(1-p)})">${T(190,700,'POORA SETUP',26,{w:700,c:MUT,ls:6})}${T(186,800,'5 settings',96,{w:800,ls:-3})}${T(190,900,'→ account lock',96,{w:400,f:'Ser',c:ACC})}`;
+  [['5 steps',W(1,'5')],['60 sec',W(1,'60')+.0],['₹0',W(1,'account')]].forEach(([s,at],k)=>{o+=pill(190+k*210,990,s,{p:pop(t,Math.max(at,LS(1)+.2+k*.12),.35),fill:'#fff',stroke:LINE,c:INK,sz:30,wd:190})});o+=`</g>`}
+ // Techni Baba: big at frame 0, then walks to the timeline marker
+ const s=lerp(1.2,.2,mv),x=lerp(540,TLX,mv),y=lerp(690,MY,mv);o+=head(x,y,s,t);
+ return o}
+function s1(t){let o=hdr('Settings','WhatsApp → ⚙️');const ys=[CY+200,CY+292,CY+384];
+ [['👤','Account',W(2,'account')],['🔐','Two-step verification',W(2,'two')]].forEach(([ic,lb,at],k)=>{const p=eo(prog(t,at-.1,at+.25));o+=row(ys[k]+20*(1-p),ic,lb,{op:p,fill:k==1&&t>at?ACC2:'#f6f7fb',stroke:k==1&&t>at?ACC:'none',w:k==1?800:600,right:T(CL+CW-78,ys[k]+12,'›',40,{c:MUT})})+tap(CL+CW-120,ys[k],t,at+.15)});
+ const pa=W(2,'pin');if(t>pa-.15){const p=eo(prog(t,pa-.15,pa+.2));o+=`<g opacity="${p}">${T(CL+44,CY+456,'PIN set karo',26,{w:600,c:MUT})}`;for(let k=0;k<6;k++){const f=pop(t,pa+.1+k*.11,.25);o+=`<rect x="${CL+250+k*84}" y="${CY+416}" width="68" height="68" rx="14" fill="#fff" stroke="${f>0?ACC:'#cfd3df'}" stroke-width="4"/><circle cx="${CL+284+k*84}" cy="${CY+450}" r="${11*f}" fill="${INK}"/>`}o+=`</g>`}
+ o=card(CL,CY,CW,520,o);
+ // thief with the OTP hits the PIN wall
+ if(t>LS(3)-.1){const a=LS(3),hit=W(3,'pin'),p=eo(prog(t,a,hit)),bounce=t>hit?-70*eo(prog(t,hit,hit+.3)):0;o+=`<g opacity="${prog(t,a-.1,a+.2)}">${card(CL+20+330*p+bounce,CY+556,330,96,T(CL+44+330*p+bounce,CY+620,'🥷',46)+T(CL+112+330*p+bounce,CY+617,'OTP 482-913',30,{w:800,f:'Mono'}),{r:22,stroke:RED,sw:3.5})}${card(CL+CW-170,CY+540,150,128,T(CL+CW-95,CY+606,'🛡️',52,{a:'middle'})+T(CL+CW-95,CY+650,'PIN?',26,{w:800,c:ACC,a:'middle'}),{r:22,stroke:ACC,sw:4})}${stamp(CL+330,CY+604,'BLOCKED',prog(t,W(3,'nahi'),W(3,'nahi')+.25))}</g>`}
+ return o}
+function s2(t){let o=hdr('Linked devices','Settings → Linked devices');const bad=W(5,'anjaan'),out=W(5,'logout');
+ o+=row(CY+210,'💻','Chrome · Windows',{right:T(CL+CW-64,CY+221,'Aapka',26,{w:700,c:ACC,a:'end'})});
+ o+=row(CY+302,'📱','Phone (this device)',{right:T(CL+CW-64,CY+313,'Aapka',26,{w:700,c:ACC,a:'end'})});
+ const pb=eo(prog(t,bad-.15,bad+.25)),po=eo(prog(t,out+.15,out+.6));
+ if(pb>0)o+=row(CY+394,'⚠️','Unknown laptop',{op:pb*(1-po),dx:500*po,fill:RED2,stroke:RED,w:800,c:RED});
+ if(t>bad+.2)o+=pill(CL+CW-250,CY+394,'Log out',{p:pop(t,bad+.3,.3)*(1-po),fill:t>out?RED:'#fff',stroke:RED,c:t>out?'#fff':RED,sz:28,wd:190})+tap(CL+CW-155,CY+394,t,out);
+ if(po>0)o+=`<g opacity="${po}">${tick(CL+70,CY+394,24,pop(t,out+.4,.3))}${T(CL+118,CY+406,'Sirf aapke devices bache',31,{w:700,c:ACC})}</g>`;
+ return card(CL,CY,CW,470,o)}
+function s3(t){let o=hdr('Groups','Privacy → Groups · Who can add me');const sel=W(6,'my');const f=eo(prog(t,sel,sel+.25));
+ [['Everyone',1-f],['My contacts',f],['My contacts except…',0]].forEach(([lb,on],k)=>{o+=row(CY+210+k*92,'',lb,{fill:on>.5?ACC2:'#f6f7fb',stroke:on>.5?ACC:'none',w:on>.5?800:600})+radio(CL+78,CY+210+k*92,on)});o+=tap(CL+78,CY+302,t,sel);
+ o=card(CL,CY,CW,470,o);
+ if(t>LS(7)-.1){const a=LS(7),rej=W(7,'nahi'),p=eo(prog(t,a,a+.4)),sh=t>rej&&t<rej+.4?9*Math.sin(t*60):0,gone=prog(t,rej+.5,rej+.9);
+  o+=`<g opacity="${p*(1-.55*gone)}" transform="translate(${260*(1-p)+sh},0)">${card(CL+30,CY+506,CW-60,112,T(CL+62,CY+578,'🎰',50)+T(CL+134,CY+556,'"Lottery Winners 2026"',30,{w:800})+T(CL+134,CY+596,'aapko add karna chahta hai',25,{w:500,c:MUT}),{r:24,stroke:t>rej?RED:LINE,sw:t>rej?4:2.5})}${cross(CL+CW-84,CY+562,28,pop(t,rej,.3))}</g>`}
+ return o}
+function s4(t){let o=hdr('Calls','Privacy → Calls');const on=W(8,'silence');
+ o+=row(CY+226,'🔕','Silence unknown callers',{w:700,fill:t>on?ACC2:'#f6f7fb',stroke:t>on?ACC:'none',right:toggle(CL+CW-150,CY+226,prog(t,on,on+.25))})+tap(CL+CW-108,CY+226,t,on);
+ o+=T(CL+44,CY+318,'Anjaan number ki call ring nahi karegi,',26,{w:500,c:MUT})+T(CL+44,CY+354,'call list mein dikh jayegi.',26,{w:500,c:MUT});
+ o=card(CL,CY,CW,400,o);
+ if(t>LS(9)-.1){const a=LS(9),mute=W(9,'bajega'),p=eo(prog(t,a,a+.35)),m=prog(t,mute,mute+.3),ring=m<=0?8*Math.sin(t*55):0;
+  o+=`<g opacity="${p}" transform="translate(${ring},${40*(1-p)})">${card(CL+60,CY+440,CW-120,150,`<circle cx="${CL+140}" cy="${CY+515}" r="44" fill="${m>0?'#cfd3df':RED}"/>`+T(CL+140,CY+531,m>0?'🔕':'📞',44,{a:'middle'})+T(CL+210,CY+500,m>0?'Silenced':'Incoming call…',34,{w:800,c:m>0?MUT:INK})+T(CL+210,CY+544,'Unknown number · "KYC update"',26,{w:500,c:MUT}),{r:28,stroke:m>0?LINE:RED,sw:m>0?2.5:4})}${m>0?'':[0,1,2].map(k=>{const q=((t*1.6+k/3)%1);return `<circle cx="${CL+140}" cy="${CY+515}" r="${44+60*q}" fill="none" stroke="${RED}" stroke-width="4" opacity="${.6*(1-q)}"/>`}).join('')}</g>`}
+ return o}
+function s5(t){const hot=W(10,'code');let o=T(CL+44,CY+78,'💬',46)+T(CL+116,CY+66,'WhatsApp',26,{w:600,c:MUT})+T(CL+116,CY+112,'Your code: 482-913',44,{w:800,f:'Mono'})+T(CL+116,CY+160,"Don't share this code with anyone",26,{w:500,c:MUT});
+ o=card(CL,CY,CW,200,o,{stroke:t>hot?RED:LINE,sw:t>hot?5:2.5})+stamp(CL+CW-190,CY+16,'SECRET',prog(t,W(10,'mat'),W(10,'mat')+.25));
+ [['🏦','"Sir, bank se bol raha hoon…"','bank'],['📦','"Courier ke liye OTP bata do"','courier'],['😅','"Bhai, galti se code aa gaya"','galti']].forEach(([ic,tx,w],k)=>{const at=W(11,w),p=eo(prog(t,at-.1,at+.25)),y=CY+250+k*116;if(p<=0)return;
+  o+=`<g opacity="${p}" transform="translate(${(k%2?-1:1)*50*(1-p)},0)">${card(CL+(k%2?70:0),y,CW-70,96,T(CL+(k%2?70:0)+30,y+62,ic,40)+T(CL+(k%2?70:0)+96,y+60,tx,29,{w:600}),{r:26,fill:'#f6f7fb'})}${cross(CL+(k%2?70:0)+CW-70,y+48,26,pop(t,at+.35,.3))}</g>`});
+ return o}
+function sRecap(t){let o=T(540,560,'CHECKLIST',26,{w:700,c:MUT,ls:6,a:'middle'});const n=STEPS.length,a=LS(12),d=LINES[12].dur;
+ let rows='';STEPS.forEach((s,k)=>{const at=a+.1+k*(d-.9)/n,y=710+k*98;rows+=`<circle cx="254" cy="${y}" r="22" fill="#fff" stroke="#cfd3df" stroke-width="4"/>${tick(254,y,24,pop(t,at,.3))}${T(306,y+12,s,36,{w:700,c:t>at?INK:MUT})}${T(826,y+11,'0'+(k+1),26,{w:700,c:'#c3c7d4',a:'end',f:'Mono'})}${k<n-1?`<line x1="254" y1="${y+24}" x2="254" y2="${y+74}" stroke="${t>at?ACC:'#cfd3df'}" stroke-width="4"/>`:''}`});
+ o+=card(190,620,700,580,rows);const sf=W(12,'safe');o+=pill(350,1262,'Account SAFE ✅',{p:pop(t,sf,.4),sz:38,wd:380});
+ return o}
+function sCta(t){let o='';const a=SC.cta.s;
+ o+=`<circle cx="540" cy="600" r="${196+6*Math.sin(t*2)}" fill="none" stroke="${ACC}" stroke-width="8"/><circle cx="540" cy="600" r="184" fill="#fff"/><clipPath id="cpH"><circle cx="540" cy="600" r="184"/></clipPath><g clip-path="url(#cpH)">${head(540,640,.92,t)}</g>`;
+ o+=T(540,880,HANDLE,60,{w:800,a:'middle',ls:-1})+T(540,930,'Tech, simple Hinglish mein',28,{w:500,c:MUT,a:'middle'});
+ // comment box: the keyword gets typed
+ const ty=W(13,'safe'),n=Math.floor(clamp((t-ty)/.4)*KEYWORD.length),typed=KEYWORD.slice(0,n),cur=t>ty-.3&&Math.floor(t*3)%2==0?'|':'';
+ o+=card(170,990,740,130,T(214,1072,'💬',46)+T(290,1050,'Comment karo',26,{w:600,c:MUT})+T(290,1096,typed+`<tspan fill="${ACC}">${cur}</tspan>`,46,{w:800,c:ACC,f:'Mono'})+pill(700,1055,'Send',{sz:28,wd:160,p:1,fill:n>=KEYWORD.length?ACC:'#cfd3df'}),{stroke:n>=KEYWORD.length?ACC:LINE,sw:n>=KEYWORD.length?4:2.5});
+ const ck=W(13,'checklist');o+=`<g transform="translate(540,${1180}) scale(${pop(t,ck,.4)})">${T(0,0,'📩 Poori checklist DM mein',34,{w:700,a:'middle'})}</g>`;
+ if(t>LS(14)-.1){const f=W(14,'family');o+=`<g transform="translate(0,${0})">${pill(250,1262,'↗ Family group mein bhejo 👪',{p:pop(t,f,.4),sz:34,wd:580,fill:INK})}</g>`}
+ return o}
+const FN={hook:sHook,s1,s2,s3,s4,s5,recap:sRecap,cta:sCta};
+// ---- timeline -----------------------------------------------------------
+const TLX=96,MY=540,GAP=430;
+function timeline(t){const k=sceneIdx(t),n=ORDER[k];const first=ORDER.indexOf('s1'),last=first+STEPS.length-1;
+ let vis=k<first?prog(t,LS(1)+.3,LS(1)+.8):k>last?1-prog(t,SC[ORDER[last+1]].s,SC[ORDER[last+1]].s+.35):1;if(vis<=0)return'';
+ const stepF=k<first?-0.0:Math.min(k-first,STEPS.length-1)-1+eio(prog(t,SC[ORDER[Math.min(k,last)]].s,SC[ORDER[Math.min(k,last)]].s+.5));const cur=k<first?-1+0*stepF:stepF;
+ let o=`<g opacity="${vis}"><line x1="${TLX}" y1="0" x2="${TLX}" y2="1920" stroke="#dfe2ec" stroke-width="8"/><line x1="${TLX}" y1="0" x2="${TLX}" y2="${MY}" stroke="${ACC}" stroke-width="8"/>`;
+ STEPS.forEach((s,j)=>{const y=MY+(j-cur)*GAP;if(y<-60||y>1980)return;const done=j<cur-.5,act=Math.abs(j-cur)<.5;
+  if(!act)o+=done?tick(TLX,y,22,1):`<circle cx="${TLX}" cy="${y}" r="20" fill="#fff" stroke="#cfd3df" stroke-width="5"/>`;
+});
+ if(k>=first){const j=Math.min(k-first,STEPS.length-1),at=SC[ORDER[first+j]].s+.3;o+=pill(TLX+52,MY,'0'+(j+1)+'  '+STEPS[j],{p:pop(t,at,.35),sz:28})}
+ // marker: Techni Baba's face rides the line
+ if(k>=first)o+=`<circle cx="${TLX}" cy="${MY}" r="46" fill="#fff" stroke="${ACC}" stroke-width="6"/>${head(TLX,MY+8,.2,t)}`;
+ else o+=`<circle cx="${TLX}" cy="${MY}" r="46" fill="#fff" stroke="${ACC}" stroke-width="6" opacity="${prog(t,LS(1)+.35,LS(1)+.5)}"/>`;
+ return o+`</g>`}
+// ---- captions (top, word-by-word, keywords boxed in serif italic) ------
+const CH=LINES.map(L=>{const w=words(L.i),st=wordStarts(L.i);const ch=[];let cur=[];w.forEach((x,k)=>{cur.push(k);if(cur.length>=3||cur.map(q=>w[q]).join(' ').length>=20||(/[,.!?]"?$/.test(x)&&cur.length>=2))ch.push(cur),cur=[]});if(cur.length){if(cur.length==1&&ch.length)ch[ch.length-1].push(cur[0]);else ch.push(cur)}return ch.map(c=>({ks:c,s:st[c[0]]}))});
+function caption(t){const L=lineAt(t);if(!L)return'';const ch=CH[L.i],ws=words(L.i),st=wordStarts(L.i);let ci=0;ch.forEach((c,k)=>{if(t>=c.s-.05)ci=k});const c=ch[ci],a=t<.2?1:eo(prog(t,c.s-.05,c.s+.16));
+ const sp=c.ks.map(k=>{const w=ws[k],core=w.replace(/[^A-Za-z0-9\-]/g,''),kw=core.length>1&&core==core.toUpperCase()&&/[A-Z]/.test(core),on=t>=st[k]-.03||(t<LINES[0].start+.1&&L.i==0&&c.ks.includes(k));return `<span class="${kw?'kw ':''}${on?'on':''}">${w.replace(/[.,]$/,m=>kw?'':m)}</span>`}).join(' ');
+ const tl=sceneIdx(t),x0=(ORDER[tl]!='hook'&&ORDER[tl]!='recap'&&ORDER[tl]!='cta')?160:60;
+ return `<foreignObject x="${x0}" y="${236+10*(1-a)}" width="${1080-x0-60}" height="220" opacity="${a}"><div xmlns="http://www.w3.org/1999/xhtml" class="cap">${sp}</div></foreignObject>`}
+
+// ---- frame --------------------------------------------------------------
+const DEFS=`<defs><pattern id="grid" width="54" height="54" patternUnits="userSpaceOnUse"><path d="M54,0 L0,0 0,54" fill="none" stroke="#eceef4" stroke-width="2"/></pattern>
+<radialGradient id="gSkin" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="#ffe0bf"/><stop offset=".7" stop-color="#f4c193"/><stop offset="1" stop-color="#df9f72"/></radialGradient>
+<radialGradient id="gFace" cx="40%" cy="35%" r="80%"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e6ddcb"/></radialGradient>
+<linearGradient id="gNavy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2e2a80"/><stop offset="1" stop-color="#0c0a30"/></linearGradient>
+<linearGradient id="gEnd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c9f5e3"/></linearGradient>
+<radialGradient id="gFade" cx="50%" cy="45%" r="75%"><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".9"/></radialGradient>
+<filter id="fSh" x="-20%" y="-20%" width="140%" height="160%"><feGaussianBlur stdDeviation="16"/></filter></defs>`;
+function render(t){const k=sceneIdx(t),n=ORDER[k],S=SC[n];let o=DEFS+`<rect width="1080" height="1920" fill="#fbfbfd"/><rect width="1080" height="1920" fill="url(#grid)"/>`;
+ if(n=='cta'||(n=='recap'&&0)){const p=prog(t,S.s,S.s+.5);o+=`<rect width="1080" height="1920" fill="url(#gEnd)" opacity="${p}"/>`}
+ o+=`<rect width="1080" height="1920" fill="url(#gFade)"/>`+timeline(t);
+ const p=k==0?1:eo(prog(t,S.s,S.s+.45));
+ if(k>0&&p<1)o+=`<g opacity="${1-p}" transform="translate(0,${-240*p})">${FN[ORDER[k-1]](t)}</g>`;
+ o+=`<g opacity="${p}" transform="translate(0,${240*(1-p)})">${FN[n](t)}</g>`;
+ o+=caption(t);
+ document.getElementById('root').innerHTML=`<svg width="1080" height="1920" viewBox="0 0 1080 1920">${o}</svg>`}
+// ---- sfx ----------------------------------------------------------------
+ORDER.forEach((n,k)=>{if(k)sfx(SC[n].s,'whoosh')});sfx(W(0,'otp'),'thud');[2,4,6,8,10].forEach(i=>sfx(LS(i)+.1,'pop'));
+sfx(W(2,'two')+.15,'tick');for(let k=0;k<6;k++)sfx(W(2,'pin')+.1+k*.11,'type');sfx(W(3,'nahi'),'thud');sfx(W(5,'logout'),'tick');sfx(W(5,'logout')+.4,'ding');sfx(W(6,'my'),'tick');sfx(W(7,'nahi'),'crack');sfx(W(8,'silence'),'tick');sfx(W(9,'bajega'),'fall');sfx(W(10,'mat'),'thud');['bank','courier','galti'].forEach(w=>sfx(W(11,w)+.35,'blip'));
+STEPS.forEach((s,k)=>sfx(LS(12)+.1+k*(LINES[12].dur-.9)/STEPS.length,'pop'));sfx(W(12,'safe'),'ding');for(let k=0;k<4;k++)sfx(W(13,'safe')+k*.1,'type');sfx(W(14,'family'),'pop');
+window.render=render;window.SFX=SFX;window.TOTAL=TOTAL;
+</script></body></html>
