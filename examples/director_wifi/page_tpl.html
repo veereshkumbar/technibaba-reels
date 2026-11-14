@@ -1,0 +1,95 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+// ================= reel-specific art: "Free airport WiFi = jaal" =================
+const RD=C.laptopRed,MINT=C.mint,YEL=C.captionKeyword,NAVY=C.navy,R=RIG.R;
+const T=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="${o.font||'Pop'}" font-weight="${o.w||900}" font-size="${s}" fill="${o.fill||INK}" ${o.extra||''}>${txt}</text>`;
+const wifi=(x,y,s,col,bars=3)=>`<g transform="translate(${x},${y}) scale(${s})">${[0,1,2].map(k=>`<path d="M${-22-k*20},${-8-k*16} Q0,${-34-k*26} ${22+k*20},${-8-k*16}" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round" opacity="${k<bars?1:.25}"/>`).join('')}<circle r="10" fill="${col}"/></g>`;
+const card=(x,y,w,h,fill,p,inner,rot=0)=>`<g transform="translate(${x},${y}) rotate(${rot+(1-p)*-8}) scale(${p})"><rect x="${-w/2+8}" y="${-h/2+12}" width="${w}" height="${h}" rx="26" fill="#000" opacity=".28"/><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="26" fill="${fill}" stroke="${INK}" stroke-width="6"/>${inner}</g>`;
+const ground=(c1,c2)=>`<rect x="-400" y="1180" width="1880" height="1100" fill="${c1}"/><rect x="-400" y="1180" width="1880" height="14" fill="${c2}"/>`;
+const F=i=>BT[i].f0;
+// prop cue frames
+const fTitle=2,fList=WF(2,'free'),fLock=WF(2,'password'),fJaal=WF(3,'jaal'),fTwin=WF(5,'same'),fPage=WF(5,'nakli'),fSteal=WF(5,'password'),fBank=WF(6,'bank'),fData=WF(7,'mobile'),fReel=WF(7,'reels'),fSafe=WF(8,'safe'),fCom=WF(9,'comment'),fP2=WF(9,'part');
+[[fTitle,'pop'],[fList,'pop'],[fLock,'blip'],[fTwin,'pop'],[fTwin+8,'pop'],[fPage,'pop'],[fSteal,'crack'],[fData,'ding'],[fReel,'pop'],[fSafe,'ding'],[fCom,'pop'],[fCom+6,'type'],[fP2,'pop']].forEach(([f,t])=>sfx(f,t));
+function bg(n,f){const t=f/FPS;let o='';
+ if(n=='airport'){
+  o+=`<defs><linearGradient id="wa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dfeaf7"/><stop offset="1" stop-color="#c4d3e6"/></linearGradient><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc4ff"/><stop offset="1" stop-color="#d9f0ff"/></linearGradient></defs><rect x="-400" y="-300" width="1880" height="1600" fill="url(#wa)"/>`;
+  o+=`<g transform="translate(-60,420)"><rect width="1200" height="520" fill="url(#sky)" stroke="#8b9bb0" stroke-width="14"/>`;
+  [[150,90,1],[620,60,.8],[930,150,1.1]].forEach(([x,y,s],k)=>{const xx=(x+t*14*(k+1))%1300-50;o+=`<g transform="translate(${xx},${y}) scale(${s})" opacity=".9"><ellipse rx="70" ry="24" fill="#fff"/><ellipse cx="-40" cy="10" rx="46" ry="18" fill="#fff"/><ellipse cx="44" cy="8" rx="50" ry="20" fill="#fff"/></g>`});
+  const pa=RIG.arc(f,0,330,[-120,330],[1320,150],110);o+=`<g transform="translate(${pa[0]},${pa[1]}) rotate(${-12+f*.02})"><path d="M-90,0 Q-60,-22 40,-20 Q96,-18 110,0 Q96,14 40,16 Q-60,18 -90,0Z" fill="#fff" stroke="${INK}" stroke-width="5"/><path d="M-10,-6 L-60,-70 L-30,-70 L40,-10Z M-10,6 L-60,64 L-30,64 L40,10Z" fill="#e9eef5" stroke="${INK}" stroke-width="5"/><path d="M-84,-4 L-112,-44 L-92,-44 L-62,-10Z" fill="${RD}" stroke="${INK}" stroke-width="5"/>${[0,1,2,3,4].map(k=>`<circle cx="${-30+k*24}" cy="-4" r="5" fill="#4cc9f0"/>`).join('')}</g>`;
+  o+=[300,600,900].map(x=>`<rect x="${x-7}" y="0" width="14" height="520" fill="#8b9bb0"/>`).join('')+`<path d="M0,430 L1200,380 L1200,520 L0,520Z" fill="#9db4c9" opacity=".6"/></g>`;
+  // departures board
+  o+=`<g transform="translate(110,250)"><rect width="400" height="150" rx="14" fill="#141a2e" stroke="${INK}" stroke-width="6"/>${T(20,40,26,'DEPARTURES',{a:'start',fill:YEL,font:'Mono',w:700})}${[['DEL','ON TIME',MINT],['BLR','BOARDING',MINT],['GOA','DELAYED',RD]].map(([a,b,c],k)=>T(20,76+k*28,22,a,{a:'start',fill:'#fff',font:'Mono',w:700})+T(380,76+k*28,22,(k==1&&Math.floor(t*2)%2)?'':b,{a:'end',fill:c,font:'Mono',w:700})).join('')}</g>`;
+  // free wifi hanging sign (swings: overlap)
+  const sw=5*Math.sin(t*1.6);o+=`<g transform="translate(790,200) rotate(${sw})"><line x1="-90" y1="0" x2="-90" y2="70" stroke="${INK}" stroke-width="6"/><line x1="90" y1="0" x2="90" y2="70" stroke="${INK}" stroke-width="6"/><rect x="-150" y="70" width="300" height="130" rx="18" fill="${MINT}" stroke="${INK}" stroke-width="6"/>${wifi(-96,160,.7,INK)}${T(40,128,38,'FREE')}${T(40,174,38,'WiFi')}</g>`;
+  // seats + suitcase
+  o+=`<g transform="translate(430,1010)">${[0,1,2].map(k=>`<rect x="${k*84}" y="0" width="76" height="90" rx="14" fill="#3d5a80" stroke="${INK}" stroke-width="5"/><rect x="${k*84}" y="84" width="76" height="26" rx="8" fill="#2b4366" stroke="${INK}" stroke-width="5"/>`).join('')}<rect x="10" y="110" width="12" height="62" fill="${INK}"/><rect x="222" y="110" width="12" height="62" fill="${INK}"/></g>`;
+  o+=`<g transform="translate(96,1060)"><rect x="-44" y="-10" width="88" height="124" rx="14" fill="${YEL}" stroke="${INK}" stroke-width="6"/><path d="M-22,-10 L-22,-64 L22,-64 L22,-10" fill="none" stroke="${INK}" stroke-width="7"/><line x1="-44" y1="34" x2="44" y2="34" stroke="${INK}" stroke-width="5"/><circle cx="-28" cy="120" r="9" fill="${INK}"/><circle cx="28" cy="120" r="9" fill="${INK}"/></g>`;
+  o+=ground('#b9c7d6','#96a6b8')+`<path d="M-400,1260 L1480,1260" stroke="#fff" stroke-width="5" opacity=".35"/>`;}
+ if(n=='trap'){
+  o+=`<defs><radialGradient id="tr" cx="50%" cy="30%" r="80%"><stop offset="0" stop-color="#2a1d52"/><stop offset="1" stop-color="#0d0b24"/></radialGradient></defs><rect x="-400" y="-300" width="1880" height="1600" fill="url(#tr)"/>`;
+  for(let k=0;k<14;k++)o+=`<line x1="${-400+k*140+((t*20)%140)}" y1="-300" x2="${-400+k*140+((t*20)%140)}" y2="1180" stroke="#5de0b0" stroke-width="2" opacity=".07"/>`;
+  for(let k=0;k<10;k++)o+=`<line x1="-400" y1="${k*140}" x2="1480" y2="${k*140}" stroke="#5de0b0" stroke-width="2" opacity=".07"/>`;
+  o+=`<circle cx="540" cy="420" r="${420+20*Math.sin(t*2)}" fill="${RD}" opacity=".08"/>`+ground('#1a1638','#e5383b');}
+ if(n=='fix'){
+  o+=`<defs><linearGradient id="fx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.bgDay[0]}"/><stop offset="1" stop-color="${C.bgDay[1]}"/></linearGradient></defs><rect x="-400" y="-300" width="1880" height="1600" fill="url(#fx)"/>`;
+  for(let k=0;k<12;k++)o+=`<path d="M540,620 L${540+Math.cos(R(k*30+t*8))*1700},${620+Math.sin(R(k*30+t*8))*1700} L${540+Math.cos(R(k*30+15+t*8))*1700},${620+Math.sin(R(k*30+15+t*8))*1700}Z" fill="#fff" opacity=".22"/>`;
+  o+=ground(C.bgDay[2],'#a0704a');}
+ if(n=='end'){
+  o+=`<rect x="-400" y="-300" width="1880" height="2600" fill="#10142a"/>`;for(let k=0;k<12;k++)o+=`<path d="M540,700 L${540+Math.cos(R(k*30+t*10))*1700},${700+Math.sin(R(k*30+t*10))*1700} L${540+Math.cos(R(k*30+15+t*10))*1700},${700+Math.sin(R(k*30+15+t*10))*1700}Z" fill="#1c2346"/>`;
+  o+=ground('#1a2040',MINT);}
+ return o}
+function props(n,f){const t=f/FPS;let o='';
+ if(n=='airport'){
+  // wifi list card arcs out of Chotu's phone (gravity arc, not a straight slide)
+  if(f>=fList&&f<F(4)+30){const u=sm(f,fList,14),a=RIG.arc(f,fList,fList+14,[250,930],[540,360],140),p=clamp(u*1.4)*(1-sn(f,fJaal-8,6));
+   const lock=pop(f,fLock,8);
+   o+=`<g transform="translate(${a[0]},${a[1]})">`+card(0,0,760,300,'#fff',.25+.75*p,
+    T(-340,-92,30,'Wi-Fi networks',{a:'start',w:800,fill:'#7a7f92'})+`<rect x="-350" y="-66" width="700" height="100" rx="18" fill="#e9fbf4" stroke="${MINT}" stroke-width="5"/>`+wifi(-296,4,.55,C.mintDark)+T(-250,-2,36,'Free_Airport_WiFi_Fast',{a:'start',font:'Mono',w:700})+
+    `<g transform="translate(300,-16) scale(${lock})"><rect x="-22" y="-6" width="44" height="36" rx="8" fill="${RD}" stroke="${INK}" stroke-width="4"/><path d="M-14,-6 L-14,-22 Q-14,-38 2,-38 Q16,-38 16,-26" fill="none" stroke="${INK}" stroke-width="6" stroke-linecap="round"/></g>`+
+    `<rect x="-350" y="50" width="700" height="72" rx="18" fill="#f3f4f8"/>`+wifi(-296,104,.5,'#9aa0b4',2)+T(-250,98,30,'Airport_Official',{a:'start',font:'Mono',w:700,fill:'#9aa0b4'})+T(330,98,26,'secured',{a:'end',w:600,fill:'#9aa0b4'})+
+    (lock>0?T(340,-92,28,'OPEN · no password',{a:'end',fill:RD,extra:`opacity="${clamp(lock)}"`}):''))+`</g>`}
+  // JAAL stamp + net lines
+  if(f>=fJaal-4&&f<F(4)+30){const p=pop(f,fJaal-4,5)*(1-sn(f,F(4)+20,8));o+=`<g transform="translate(540,350) rotate(-7) scale(${p*(1+.03*Math.sin(t*9))})"><rect x="-250" y="-90" width="500" height="180" rx="24" fill="${RD}" stroke="#fff" stroke-width="10"/>${T(0,38,120,'JAAL!',{fill:'#fff'})}</g>`}}
+ if(n=='trap'){
+  const p1=pop(f,fTwin,9),p2=pop(f,fTwin+8,9),p3=pop(f,fPage,9),st=sm(f,fSteal,16),out=1-sn(f,F(6)+10,8)*0;
+  const badge=(x,y,p,col,lab,evil)=>card(x,y,400,190,'#fff',p,wifi(-140,34,.9,col)+(evil?`<path d="M-176,-46 L-166,-84 L-146,-52Z M-104,-46 L-114,-84 L-134,-52Z" fill="${RD}" stroke="${INK}" stroke-width="4"/>`:'')+T(40,-22,26,'Free_Airport_WiFi',{font:'Mono',w:700})+`<rect x="-40" y="6" width="160" height="56" rx="28" fill="${col}"/>`+T(40,46,34,lab,{fill:evil?'#fff':INK}),evil?4:-4);
+  o+=badge(316,330,p1,C.mintDark,'ASLI',0)+badge(764,330,p2,RD,'NAKLI',1);
+  if(p2>0)o+=T(540,346,70,'=',{fill:'#fff',extra:`opacity="${clamp(p2)}"`});
+  // fake login page drops from the NAKLI badge
+  if(f>=fPage){const dots=clamp(Math.floor((f-fPage-8)/3),0,8),a=RIG.arc(f,fPage,fPage+12,[764,330],[540,620],-60);
+   o+=`<g transform="translate(${a[0]},${a[1]})">`+card(0,0,560,260,'#fff',p3*(1-sn(f,F(6)-4,8)),`<rect x="-280" y="-130" width="560" height="64" rx="26" fill="${NAVY}"/><rect x="-280" y="-92" width="560" height="26" fill="${NAVY}"/>`+T(-250,-88,28,'airport-wifi-login.com',{a:'start',font:'Mono',w:700,fill:'#fff'})+T(-240,-22,30,'Password',{a:'start',w:800,fill:'#7a7f92'})+`<rect x="-240" y="-2" width="480" height="70" rx="14" fill="#f3f4f8" stroke="${st>0?RD:INK}" stroke-width="5"/>`+Array.from({length:dots},(_,k)=>{const fly=clamp(st*1.6-k*.07),q=RIG.arc(fly*20,0,20,[-210+k*42,34],[330,-150],90);return `<circle cx="${q[0]}" cy="${q[1]}" r="12" fill="${st>0?RD:INK}" opacity="${1-fly*.9}"/>`}).join('')+`<rect x="-240" y="84" width="200" height="34" rx="17" fill="${MINT}"/>`+T(-140,109,22,'CONNECT'),2)+`</g>`;
+   // hooded figure icon catches the dots
+   if(st>0)o+=`<g transform="translate(900,540) scale(${pop(f,fSteal,9)*(1-sn(f,F(6)-4,8))})"><path d="M-70,90 Q-80,-70 0,-90 Q80,-70 70,90Z" fill="#0b0920" stroke="${RD}" stroke-width="6"/><ellipse cx="0" cy="-10" rx="40" ry="46" fill="#1a1638"/><path d="M-22,-14 L-6,-8 M22,-14 L6,-8" stroke="${RD}" stroke-width="7" stroke-linecap="round"/><path d="M-16,18 Q0,30 16,18" fill="none" stroke="${RD}" stroke-width="5" stroke-linecap="round"/></g>`}
+  if(f>=fBank){const p=pop(f,fBank,8);o+=card(540,500,330,120,YEL,p,`<path d="M-130,-8 L-90,-36 L-50,-8Z" fill="${INK}"/><rect x="-126" y="-4" width="72" height="8" fill="${INK}"/>${[0,1,2].map(k=>`<rect x="${-120+k*26}" y="8" width="10" height="26" fill="${INK}"/>`).join('')}<rect x="-130" y="36" width="80" height="8" fill="${INK}"/>`+T(46,16,44,'BANK?!'),-6)}}
+ if(n=='fix'){
+  const p1=pop(f,fData,10),p2=pop(f,fReel,10),tick=sn(f,fData+6,10);
+  o+=card(326,400,420,330,'#fff',p1,T(0,-100,44,'BANKING')+`<rect x="-150" y="-70" width="300" height="10" rx="5" fill="${MINT}"/>`+`<g transform="translate(-92,36)"><rect x="-44" y="-76" width="88" height="150" rx="16" fill="${INK}"/><rect x="-34" y="-62" width="68" height="112" rx="6" fill="#e9fbf4"/>${[0,1,2,3].map(k=>`<rect x="${-24+k*14}" y="${20-k*16}" width="9" height="${14+k*16}" rx="3" fill="${C.mintDark}"/>`).join('')}</g>`+T(70,10,40,'Mobile')+T(70,58,40,'data')+`<path d="M22,96 l22,22 l44,-50" fill="none" stroke="${C.mintDark}" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="130" stroke-dashoffset="${130*(1-tick)}"/>`,-3);
+  o+=card(754,400,420,330,'#fff',p2,T(0,-100,44,'FREE WiFi')+`<rect x="-150" y="-70" width="300" height="10" rx="5" fill="${YEL}"/>`+`<g transform="translate(-92,36)"><rect x="-52" y="-66" width="104" height="132" rx="18" fill="${RD}" stroke="${INK}" stroke-width="5"/><path d="M-16,-26 L26,0 L-16,26Z" fill="#fff"/></g>`+T(70,10,40,'sirf')+T(70,58,40,'Reels'),3);
+  if(f>=fSafe){const p=pop(f,fSafe,8);o+=`<g transform="translate(540,640) rotate(-6) scale(${p})"><rect x="-190" y="-62" width="380" height="124" rx="62" fill="${MINT}" stroke="${INK}" stroke-width="7"/>${T(0,26,72,'SAFE ✓'.replace(' ✓',''))}<path d="M112,-4 l16,16 l30,-36" fill="none" stroke="${INK}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>`.replace('x="0" y="26"','x="-24" y="26"')}}
+ if(n=='end'){
+  const p=pop(f,fCom,10),typed='WIFI'.slice(0,clamp(Math.floor((f-fCom-6)/4),0,4)),cur=Math.floor(t*3)%2?'|':'';
+  o+=card(540,340,820,240,'#fff',p,T(-370,-66,34,'Add a comment...',{a:'start',w:600,fill:'#9aa0b4'})+`<rect x="-370" y="-30" width="560" height="120" rx="24" fill="#f3f4f8" stroke="${MINT}" stroke-width="6"/>`+T(-340,56,84,typed+cur,{a:'start',font:'Mono',w:700})+`<rect x="220" y="-30" width="150" height="120" rx="24" fill="${RD}"/>`+T(295,48,40,'POST',{fill:'#fff'}),-2);
+  if(f>=fP2){const q=pop(f,fP2,9);o+=`<g transform="translate(540,522) rotate(3) scale(${q})"><rect x="-300" y="-56" width="600" height="112" rx="56" fill="${YEL}" stroke="${INK}" stroke-width="7"/>${T(0,22,54,'PART 2: Asli vs Nakli')}</g>`}
+  o+=T(540,1310,40,'@technibaba',{fill:MINT,w:800});}
+ return o}
+function overlay(f){let o='';if(f<F(2)){const p=pop(f,fTitle,9)*(1-sn(f,F(2)-8,8));o+=card(540,300,660,150,YEL,p,T(-40,24,70,'FREE WiFi?')+wifi(250,30,.62,INK),-3)}return o}
+const DEFS=`<defs>${FACE.DEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0),n=sceneAt(f),cam=camAt(f);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}<g transform="${camT(cam)}">`;
+ s+=bg(n,f);
+ s+=CAST.c.draw(f,{x:POS.c.x,y:POS.c.y,phone:n!='end'});
+ s+=CAST.b.draw(f,{x:POS.b.x,y:POS.b.y,flip:true,glow:n=='trap'?.5+.5*Math.sin(f/5):(HITS.some(h=>f>=h[0]&&f<h[0]+20)?1:0),ring:n=='end'?.6+.4*Math.sin(f/6):0});
+ s+=`</g>`+props(n,f)+RIG.impact(f0,HITS,540,800)+overlay(f)+wipe(f)+caption(f);
+ s+=`<rect x="0" y="1904" width="${1080*f0/NF}" height="16" fill="${MINT}"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
