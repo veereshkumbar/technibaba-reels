@@ -11,6 +11,9 @@ Every scheduled reel follows this file. The slot's own prompt only says which sl
 | 21:00 | Trending BOLLYWOOD / OTT / gaming through a tech angle | VFX, AI, streaming, box-office data, game tech |
 If nothing in the lane is trending and safe today, use trending tech and say so.
 
+## Target
+Veer's target: grow @technibaba from 36 followers (15 Nov 2026) to 20,000 by mid-December 2026. Every run optimises for follows: shares and saves first, then watch-through. Each Sunday's weekly brief reports followers now vs the target, the week's top 3 reels by follows/shares/saves, what they had in common, and what the next week's runs will do more and less of (written into research/topic_bank.md so every slot picks it up).
+
 ## 1. Setup
 `git clone --depth 1 https://github.com/veereshkumbar/technibaba-reels /tmp/tb && cd /tmp/tb && ./setup.sh` and fix every ERROR line.
 Read: RUNBOOK.md (all of it, especially "Rules for scheduled runs" and "Auto-post rules"), this file, RESEARCH.md, CRAFT.md, SPLIT_FORMAT.md, DIRECTOR_FORMAT.md, brand/dynamics.md, brand/tokens.json, posted.md, research/topic_bank.md. Tutorial slots also read STEPS_FORMAT.md; the evening slot reads CREATOR_GUIDES.md.
