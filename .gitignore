@@ -1,0 +1,11 @@
+__pycache__/
+examples/*/vo/
+examples/*/scenes/
+examples/*/qa/
+examples/*/page.html
+examples/*/*.wav
+examples/*/*.mp4
+examples/*/timeline.json
+examples/*/beats.json
+examples/*/sfx.json
+examples/*/render.log

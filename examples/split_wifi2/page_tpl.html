@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+// ================= reel art: "Asli vs nakli WiFi: 3 check" (split layout) =================
+const RD=C.laptopRed,MINT=C.mint,MD=C.mintDark,YEL=C.captionKeyword,NAVY=C.navy,GREY='#9aa0b4';
+const T=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="${o.font||'Pop'}" font-weight="${o.w||900}" font-size="${s}" fill="${o.fill||INK}" ${o.extra||''}>${txt}</text>`;
+const wifi=(x,y,s,col,bars=3)=>`<g transform="translate(${x},${y}) scale(${s})">${[0,1,2].map(k=>`<path d="M${-22-k*20},${-8-k*16} Q0,${-34-k*26} ${22+k*20},${-8-k*16}" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round" opacity="${k<bars?1:.25}"/>`).join('')}<circle r="10" fill="${col}"/></g>`;
+const box=(x,y,w,h,fill,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-6}) scale(${p})"><rect x="${-w/2+6}" y="${-h/2+10}" width="${w}" height="${h}" rx="${o.r||24}" fill="#000" opacity=".18"/><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${o.r||24}" fill="${fill}" stroke="${o.stroke||INK}" stroke-width="${o.sw||6}"/>${inner}</g>`;
+const tick=(x,y,s,p,col=MD)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${col}" stroke="${INK}" stroke-width="5"/><path d="M-16,2 l11,12 l22,-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+const cross=(x,y,s,p)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${RD}" stroke="${INK}" stroke-width="5"/><path d="M-14,-14 L14,14 M14,-14 L-14,14" stroke="#fff" stroke-width="9" stroke-linecap="round"/></g>`;
+const stamp=(x,y,txt,p,col,rot=-8,size=96)=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${p})"><rect x="${-txt.length*size*.36-30}" y="${-size*.72}" width="${txt.length*size*.72+60}" height="${size*1.4}" rx="22" fill="${col}" stroke="#fff" stroke-width="9"/>${T(0,size*.33,size,txt,{fill:col==YEL?INK:'#fff'})}</g>`;
+const F=i=>BT[i].f0,PW=PAN.x1-PAN.x0,PH=PAN.y1-PAN.y0;
+const head=(step,title,col,fill)=>`<rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="${PH}" fill="${fill}"/><rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="112" fill="${NAVY}"/>`+(step?`<rect x="118" y="176" width="210" height="62" rx="31" fill="${col}"/>${T(223,220,34,'CHECK '+step,{fill:INK})}`:'')+T(step?352:118,222,40,title,{a:'start',fill:'#fff'})+[1,2,3].map(k=>`<circle cx="${880+k*28}" cy="207" r="9" fill="${step&&k<=step?col:'#4b4a86'}"/>`).join('');
+// cue frames
+const q={c1:F(1),c2:F(1)+7,c3:F(1)+14,sec:WF(1,'second'),board:WF(2,'board'),staff:WF(2,'staff'),ek:WF(2,'ek'),nak:WF(2,'nakli'),same:F(3)+4,
+ lp:F(4),mob:WF(4,'mobile'),theek:WF(4,'theek'),bank:WF(4,'bank'),bhaag:WF(4,'bhaag'),br:F(6),warn:WF(6,'warning'),mat:WF(6,'mat'),galti:WF(7,'galti'),
+ forget:WF(8,'forget'),pwd:WF(8,'password'),turant:WF(8,'turant'),r1:WF(9,'naam'),r2:WF(9,'login'),r3:WF(9,'warning'),save:WF(10,'save'),com:WF(10,'comment')};
+[[q.c1,'pop'],[q.c2,'pop'],[q.c3,'pop'],[q.sec,'tick'],[q.staff,'pop'],[q.board,'ding'],[q.ek,'blip'],[q.nak,'crack'],[q.same,'pop'],[q.lp,'pop'],[q.theek,'ding'],[q.bank,'pop'],[q.br,'pop'],[q.warn,'blip'],[q.galti,'pop'],[q.forget,'blip'],[q.turant,'ding'],[q.r1,'pop'],[q.r2,'pop'],[q.r3,'pop'],[q.save,'ding'],[q.com,'pop'],[q.com+6,'type']].forEach(([f,t])=>sfx(f,t));
+function content(n,f){const t=f/FPS;let o='';
+ if(n=='q'){o+=head(0,'ASLI ya NAKLI WiFi?',YEL,'#fff7e6');
+  [['NAAM',q.c1,MINT],['LOGIN PAGE',q.c2,YEL],['WARNING',q.c3,'#ff9b9b']].forEach(([lab,fr,col],k)=>{const p=pop(f,fr,9);o+=box(540,400+k*170,760,136,'#fff',p,`<circle cx="-300" cy="0" r="46" fill="${col}" stroke="${INK}" stroke-width="5"/>`+T(-300,20,56,k+1)+T(-220,22,60,lab,{a:'start'}),{rot:k%2?1.5:-1.5})});
+  const p=pop(f,q.sec,8);o+=`<g transform="translate(880,850) rotate(8) scale(${p})"><circle r="78" fill="${NAVY}" stroke="${MINT}" stroke-width="8"/>${T(0,8,54,'3',{fill:'#fff'})}${T(0,44,26,'sec',{fill:MINT})}<path d="M0,-78 L0,-100 M-16,-100 L16,-100" stroke="${MINT}" stroke-width="8" stroke-linecap="round"/><line x1="0" y1="-40" x2="${Math.sin(t*6)*30}" y2="${-40-Math.abs(Math.cos(t*6))*14}" stroke="${RD}" stroke-width="0"/></g>`}
+ if(n=='name'){o+=head(1,'NAAM',MINT,'#eaf6ff');
+  const pb=pop(f,q.staff,9),same=f>=q.same;
+  o+=box(540,372,800,150,MINT,pb,wifi(-320,36,.8,INK)+T(-250,-18,28,'OFFICIAL WiFi  ·  airport board',{a:'start',w:800})+T(-250,38,46,'Airport_Free_WiFi',{a:'start',font:'Mono',w:700}),{rot:-1});
+  const row=(y,inner,p,stroke)=>box(540,y,800,140,'#fff',p,inner,{stroke:stroke||INK});
+  o+=row(590,wifi(-330,30,.62,MD)+T(-280,18,44,'Airport_Free_WiFi',{a:'start',font:'Mono',w:700})+tick(330,0,1,pop(f,q.board,8)),pop(f,F(2)+4,9));
+  const p2=pop(f,F(2)+10,9),ring=pop(f,q.ek,8),nk=pop(f,q.nak-2,6);
+  o+=row(770,wifi(-330,30,.62,same?MD:RD)+(same?T(-280,18,44,'Airport_Free_WiFi',{a:'start',font:'Mono',w:700}):`<text x="-280" y="18" font-family="Mono" font-weight="700" font-size="44" fill="${INK}">Airp<tspan fill="${RD}">0</tspan>rt_Free_WiFi</text>`+(ring>0?`<circle cx="${-280+4.5*26.4}" cy="2" r="${34*ring}" fill="none" stroke="${RD}" stroke-width="7"/>`:''))+(same?'':cross(330,0,1,nk)),p2,(!same&&nk>0)?RD:INK);
+  if(!same&&nk>0)o+=stamp(700,880,'NAKLI',nk,RD,-6,64);
+  if(same){const ps=pop(f,q.same,8);o+=`<g transform="translate(880,680) rotate(10) scale(${ps*(1+.05*Math.sin(t*8))})"><circle r="70" fill="${YEL}" stroke="${INK}" stroke-width="7"/>${T(0,34,96,'?')}</g>`}}
+ if(n=='login'){o+=head(2,'LOGIN PAGE',YEL,'#f3efff');
+  const form=(x,p,bad,inner)=>box(x,610,410,560,'#fff',p,`<rect x="-205" y="-280" width="410" height="84" rx="24" fill="${bad?RD:NAVY}"/><rect x="-205" y="-230" width="410" height="34" fill="${bad?RD:NAVY}"/>`+wifi(-160,-222,.4,'#fff')+T(-126,-226,30,'WiFi Login',{a:'start',fill:'#fff'})+inner,{stroke:bad?RD:INK,sw:bad?8:6});
+  const fld=(y,lab,val,col)=>T(-170,y-48,26,lab,{a:'start',w:800,fill:'#7a7f92'})+`<rect x="-170" y="${y-34}" width="340" height="70" rx="14" fill="#f3f4f8" stroke="${col}" stroke-width="5"/>`+T(-150,y+14,30,val,{a:'start',font:'Mono',w:700});
+  const th=pop(f,q.theek-2,8),bh=pop(f,q.bhaag-4,5);
+  o+=form(318,pop(f,q.lp,9),0,fld(-90,'Mobile number','+91 98XXX XXX',pop(f,q.mob,6)>0?MD:INK)+`<rect x="-170" y="0" width="340" height="70" rx="35" fill="${MINT}" stroke="${INK}" stroke-width="5"/>`+T(0,48,32,'GET OTP')+T(0,130,24,'sirf WiFi ke liye',{w:600,fill:'#7a7f92'}));
+  if(th>0)o+=stamp(318,820,'THEEK',th,MD,-5,56);
+  if(f>=q.bank){o+=form(762,pop(f,q.bank,9),1,fld(-90,'Bank password','••••••••',RD)+fld(40,'Card number','4XXX XXXX XXXX',RD)+`<rect x="-170" y="110" width="340" height="62" rx="31" fill="${RD}"/>`+T(0,152,28,'CONNECT',{fill:'#fff'}))}
+  if(bh>0)o+=stamp(700,600,'BHAAG!',bh*(1+.03*Math.sin(t*10)),RD,-9,104)}
+ if(n=='warn'){o+=head(3,'BROWSER WARNING',' #ff9b9b'.trim(),'#fff0ee');
+  const pw=pop(f,q.br,9),tri=pop(f,q.warn-2,8),no=pop(f,q.mat-3,5),pulse=f>=q.mat?1+.06*Math.sin(t*10):1;
+  o+=box(540,615,820,640,'#fff',pw,`<rect x="-410" y="-320" width="820" height="96" rx="24" fill="#e9ebf2"/><rect x="-410" y="-262" width="820" height="38" fill="#e9ebf2"/>${[0,1,2].map(k=>`<circle cx="${-370+k*34}" cy="-272" r="11" fill="${[RD,YEL,MINT][k]}"/>`).join('')}<rect x="-250" y="-302" width="630" height="60" rx="30" fill="#fff" stroke="${INK}" stroke-width="4"/><rect x="-240" y="-294" width="200" height="44" rx="22" fill="${RD}"/>${T(-140,-260,26,'Not secure',{fill:'#fff'})}${T(-24,-260,26,'airport-wifi-login.com',{a:'start',font:'Mono',w:700,fill:'#7a7f92'})}`+
+   `<g transform="translate(0,-110) scale(${tri})"><path d="M0,-84 L92,70 L-92,70Z" fill="${YEL}" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/><rect x="-8" y="-36" width="16" height="60" rx="8" fill="${INK}"/><circle cx="0" cy="46" r="10" fill="${INK}"/></g>`+T(0,40,44,'Your connection is')+T(0,96,52,'not private',{fill:RD})+
+   `<g transform="translate(-190,214) scale(${pulse})"><rect x="-170" y="-46" width="340" height="92" rx="46" fill="${MINT}" stroke="${INK}" stroke-width="6"/>${T(0,14,40,'Go back')}</g><g transform="translate(200,214)"><rect x="-150" y="-46" width="300" height="92" rx="46" fill="#e9ebf2" stroke="${GREY}" stroke-width="5"/>${T(0,14,36,'Proceed',{fill:GREY})}</g>`+cross(200,214,1.5,no));
+  if(f>=q.galti){const pg=pop(f,q.galti,8);o+=stamp(540,928,'Connect ho gaya?!',pg,YEL,-2,40)}}
+ if(n=='fix'){o+=head(0,'CONNECT HO GAYA? 2 KAAM',MINT,'#eafaf3');
+  const fg=sn(f,q.forget,8),pr=pop(f,F(8),9),np=pop(f,q.turant,9);
+  o+=box(540,440,820,230,'#fff',pr,T(-370,-56,30,'1 · WiFi settings',{a:'start',w:800,fill:'#7a7f92'})+`<g opacity="${1-.55*fg}">`+wifi(-340,50,.7,MD)+T(-280,38,42,'Airport_Free_WiFi',{a:'start',font:'Mono',w:700})+`</g>`+(fg>0?`<line x1="-290" y1="24" x2="${-290+450*fg}" y2="24" stroke="${RD}" stroke-width="8" stroke-linecap="round"/>`:'')+`<g transform="translate(280,26) scale(${1-.12*Math.sin(Math.PI*clamp((f-q.forget)/8))})"><rect x="-110" y="-42" width="220" height="84" rx="42" fill="${RD}" stroke="${INK}" stroke-width="5"/>${T(0,13,34,'FORGET',{fill:'#fff'})}</g>`,{rot:-1});
+  if(f>=q.pwd-4){const pp=pop(f,q.pwd-4,9);o+=box(540,730,820,250,'#fff',pp,T(-370,-66,30,'2 · Password badlo',{a:'start',w:800,fill:'#7a7f92'})+`<rect x="-370" y="-30" width="560" height="100" rx="20" fill="#f3f4f8" stroke="${np>0?MD:INK}" stroke-width="6"/>`+(np>0?T(-340,38,44,'NEW ••••••••',{a:'start',font:'Mono',w:700,fill:MD}):T(-340,38,44,'old ••••••',{a:'start',font:'Mono',w:700,fill:GREY}))+`<g transform="translate(290,20) rotate(${np>0?360*sm(f,q.turant,14):0})"><circle r="52" fill="${MINT}" stroke="${INK}" stroke-width="6"/><path d="M-22,-8 A24,24 0 1 1 -14,20" fill="none" stroke="${INK}" stroke-width="8" stroke-linecap="round"/><path d="M-34,-18 L-20,-4 L-6,-18" fill="none" stroke="${INK}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>`,{rot:1})}
+  if(np>0)o+=stamp(760,905,'TURANT',np,YEL,-5,48)}
+ if(n=='recap'){o+=head(0,'3 CHECK · SAVE KARO',YEL,'#fff7e6');
+  const late=f>=q.com,sh=late?sm(f,q.com-2,10):0;
+  [['Naam match hai?',q.r1],['Login kya maang raha?',q.r2],['Browser warning?',q.r3]].forEach(([lab,fr],k)=>{const p=pop(f,F(9)+k*4,9),tk=pop(f,fr,8);o+=box(540,372+k*(150-34*sh),800,126-20*sh,'#fff',p,`<rect x="-370" y="-34" width="68" height="68" rx="16" fill="${tk>0?MINT:'#f3f4f8'}" stroke="${INK}" stroke-width="5"/>`+(tk>0?`<path d="M-354,2 l14,15 l28,-32" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="70" stroke-dashoffset="${70*(1-clamp(tk))}"/>`:'')+T(-270,17,46,lab,{a:'start'}),{rot:k%2?1:-1})});
+  if(f>=q.save){const ps=pop(f,q.save,8);o+=`<g transform="translate(905,305) rotate(8) scale(${ps*(1+.04*Math.sin(t*8))})"><path d="M-40,-58 L40,-58 L40,58 L0,26 L-40,58Z" fill="${YEL}" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/></g>`}
+  if(late){const pc=pop(f,q.com,9),typed='CHECK'.slice(0,clamp(Math.floor((f-q.com-6)/3),0,5)),cur=Math.floor(t*3)%2?'|':'';o+=box(540,835,820,200,'#fff',pc,T(-370,-52,28,'Add a comment...',{a:'start',w:600,fill:GREY})+`<rect x="-370" y="-28" width="540" height="100" rx="22" fill="#f3f4f8" stroke="${MINT}" stroke-width="6"/>`+T(-340,44,64,typed+cur,{a:'start',font:'Mono',w:700})+`<rect x="200" y="-28" width="170" height="100" rx="22" fill="${RD}"/>`+T(285,38,38,'POST',{fill:'#fff'}),{rot:-1})}}
+ return o}
+// bottom strip: airport lounge wall (fills the whole frame during the full-screen hook)
+function strip(f){const t=f/FPS;let o=`<defs><linearGradient id="sw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe0f3"/><stop offset="1" stop-color="#aebfd4"/></linearGradient><linearGradient id="ssky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc4ff"/><stop offset="1" stop-color="#d9f0ff"/></linearGradient></defs><rect x="-700" y="-1500" width="2500" height="3800" fill="url(#sw)"/>`;
+ o+=`<rect x="-700" y="1090" width="2500" height="520" fill="url(#ssky)" stroke="#8b9bb0" stroke-width="14"/>`;
+ [[80,1180,1],[560,1150,.8],[930,1240,1.1]].forEach(([x,y,s],k)=>{const xx=(x+t*12*(k+1))%1500-200;o+=`<g transform="translate(${xx},${y}) scale(${s})" opacity=".9"><ellipse rx="70" ry="24" fill="#fff"/><ellipse cx="-40" cy="10" rx="46" ry="18" fill="#fff"/><ellipse cx="44" cy="8" rx="50" ry="20" fill="#fff"/></g>`});
+ o+=[-300,120,540,960,1380].map(x=>`<rect x="${x-8}" y="1090" width="16" height="520" fill="#8b9bb0"/>`).join('')+`<rect x="-700" y="1610" width="2500" height="700" fill="#b9c7d6"/>`;
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const p=pop(f,2,9)*(1-sp),p2=pop(f,10,9)*(1-sp),p3=pop(f,16,9)*(1-sp);
+ const chip=(x,p,rot)=>box(x,440,430,120,'#fff',p,wifi(-160,26,.55,MD)+T(-118,14,30,'Airport_Free_WiFi',{a:'start',font:'Mono',w:700}),{rot});
+ return stamp(540,280,'ASLI ya NAKLI?',p,YEL,-3,70)+chip(300,p2,-4)+chip(780,p3,4)}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+RIG.impact(f0,HITS,540,600)+caption(f,capY(f));
+ s+=`<rect x="0" y="1904" width="${1080*f0/NF}" height="16" fill="${MINT}"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>

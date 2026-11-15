@@ -32,8 +32,8 @@ function camRest(k) { return CAMK[k].t; }
 const camT = c => `translate(540,960) scale(${c.z}) translate(${-c.x},${-c.y})`;
 // ---- captions: short keyword lines, one highlighted keyword, inside the title-safe box ----
 const CAPS = []; BT.forEach(b => b.caps.forEach(c => CAPS.push({f: c.f, text: c.text, end: b.f1 + 10}))); CAPS.forEach((c, k) => { if (CAPS[k + 1]) c.end = Math.min(c.end, CAPS[k + 1].f); });
-function caption(f) { let c = null; for (const x of CAPS) if (f >= x.f && f < x.end) c = x; if (!c) return '';
-  const raw = c.text.replace(/\*/g, ''), size = Math.min(72, 800 / (raw.length * .6)), parts = c.text.split('*'), p = pop(f, c.f, 8), y = 1440;
+function caption(f, y = 1440) { let c = null; for (const x of CAPS) if (f >= x.f && f < x.end) c = x; if (!c) return '';
+  const raw = c.text.replace(/\*/g, ''), size = Math.min(72, 800 / (raw.length * .6)), parts = c.text.split('*'), p = pop(f, c.f, 8);
   const w = raw.length * size * .6 + 70, S = TOKENS.frame.safe, x0 = Math.max(S.x0, 540 - w / 2), ww = Math.min(w, S.x1 - S.x0);
   const tsp = parts.map((s, k) => `<tspan fill="${k % 2 ? C.captionKeyword : C.captionText}">${s.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</tspan>`).join('');
   return `<g transform="translate(540,${y}) scale(${.6 + .4 * p}) translate(-540,${-y})" opacity="${clamp(p * 2)}"><rect x="${x0}" y="${y - size * .95}" width="${ww}" height="${size * 1.5}" rx="${size * .4}" fill="${C.captionPlate}" opacity=".86" stroke="${C.mint}" stroke-width="4"/><text x="540" y="${y + size * .13}" text-anchor="middle" font-family="Pop" font-weight="900" font-size="${size}" style="white-space:pre">${tsp}</text></g>`; }

@@ -2,7 +2,7 @@
 
 Two scheduled tasks, Asia/Kolkata, push notifications on:
 - **TechniBaba morning reel** — `CRON_TZ=Asia/Kolkata 38 6 * * *`
-- **TechniBaba evening reel** — `CRON_TZ=Asia/Kolkata 38 17 * * *`
+- **TechniBaba evening reel** — `CRON_TZ=Asia/Kolkata 0 17 * * *`
 
 Create them from a chat whose only repo is `technibaba-reels` (or none). A chat that has a repo Claude has lost access to cannot create scheduled tasks.
 
@@ -15,3 +15,7 @@ Veer is NOT watching while you work. Don't ask anything until the video is deliv
 4. Script → voice → page → QA screenshots (fix overlaps, weakest scene) → render (~8 min) → audio. On a twice-failed step: SendUserMessage + PushNotification with the error, use the simpler fallback, still finish.
 5. SendUserFile MP4 (proactive) → PushNotification "SLOT reel ready: <title> — reply post or skip" → SendUserMessage with caption, hashtags, comment question, sources.
 6. Only on "post": add_repo veereshkumbar/technibaba-reels (push), publish to gh-pages, post via Windsor create_video_post (account 17841461825179329, share_to_feed true, thumb_offset on hook) per RUNBOOK step 7, log in posted.md on main. "skip" → confirm skipped. YouTube manual; post nowhere else.
+
+
+## Update 15 Nov 2026
+The live prompts differ from the text above: the evening slot is now the Creator Guides pillar (CREATOR_GUIDES.md) built in the split layout (SPLIT_FORMAT.md). The morning slot is unchanged. The live prompt text is on the scheduled tasks themselves.

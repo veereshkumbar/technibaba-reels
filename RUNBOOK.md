@@ -9,6 +9,11 @@ Also follow `RESEARCH.md` (own outliers + comment mining + trend check every run
 
 **Steps format** (`STEPS_FORMAT.md`, `examples/steps_whatsapp`): for how-to / settings / checklist topics. Use it for about 2 evening reels a week, never two days in a row.
 
+## Formats and pillars (15 Nov 2026)
+- Morning slot: trending explainer in the premium chat format (unchanged until the split layout's numbers are compared).
+- Evening slot: **Creator Guides** pillar, every day. Read `CREATOR_GUIDES.md`.
+- Layout for the evening guides: **split layout** (`SPLIT_FORMAT.md`, built on `DIRECTOR_FORMAT.md`). Fallback if the split build fails twice: `examples/chat_premium` (chat) or `examples/steps_whatsapp` (Steps).
+
 ## Rules for scheduled (unattended) runs
 - Nobody is watching. Never stop to ask a question before the MP4 is sent; pick the best option and say which you picked.
 - First action: SendUserMessage "Starting <slot> reel…" so Veer knows the run is alive.
