@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # One-time setup for a fresh session. Installs fonts, Python deps, Piper Hindi voice.
 set -e
-mkdir -p /tmp/fonts && cd /tmp/fonts && [ -d node_modules/@fontsource/playfair-display ] || { npm init -y >/dev/null; npm i -s @fontsource/instrument-serif @fontsource/press-start-2p @fontsource/jetbrains-mono @fontsource/inter @fontsource/caveat @fontsource/playfair-display @fontsource/noto-sans-devanagari >/dev/null; }
+mkdir -p /tmp/fonts && cd /tmp/fonts && [ -d node_modules/@fontsource/poppins ] || { npm init -y >/dev/null; npm i -s @fontsource/instrument-serif @fontsource/press-start-2p @fontsource/jetbrains-mono @fontsource/inter @fontsource/caveat @fontsource/playfair-display @fontsource/noto-sans-devanagari @fontsource/poppins >/dev/null; }
 pip install -q --break-system-packages playwright piper-tts soundfile numpy 2>/dev/null || true
 mkdir -p /tmp/tts && cd /tmp/tts
 for v in pratham rohan; do
