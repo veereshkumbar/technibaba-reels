@@ -1,4 +1,4 @@
-"""Mix voice + music + SFX and mux.  usage: python3 audio.py WORKDIR OUT.mp4 [music_file] [music_gain=0.30]
+"""Mix voice + music + SFX and mux.  usage: python3 audio.py WORKDIR OUT.mp4|- [music_file] [music_gain=0.30]   (OUT "-" = only write WORKDIR/mix_n.wav)
 - voice from WORKDIR/timeline.json, SFX cues from WORKDIR/sfx.json ([[t,'whoosh'|'thud'|'pop'|'ding'|'type'|'cash'|'crack'|'blip'|'gameover'|'fall'|'tick'],...])
 - music: a royalty-free file (looped, ducked under voice) or, if none, a built-in synth beat."""
 import sys, json, subprocess, numpy as np, soundfile as sf
@@ -47,6 +47,9 @@ LIB={'whoosh':whoosh()*.5,'thud':M(sine(lambda t:70+60*np.exp(-t*25),.4,.12),noi
  'gameover':np.concatenate([sq(f,.16,.12) for f in (523,392,330,262,196)])*.5,'blip':sq(220,.12,.08)*.6,
  'pop':sine(lambda t:500+900*t/.1,.1,.05)*.6,'ding':M(sine(1320,1.0,.4),.5*sine(2640,1.0,.25),.3*sine(3960,1.0,.15))*.45,
  'tick':np.diff(noise(.02,.005),prepend=0)*.5,'fall':sine(lambda t:900-700*t/1.2,1.2,.6)*.5}
+def riser():
+    n=int(.36*SR); t=np.arange(n)/SR; return (np.sin(2*np.pi*np.cumsum(220+1500*(t/.36)**2)/SR)*.5+rng.standard_normal(n)*.25)*(t/.36)**2
+LIB['riser']=riser()*.5; LIB['boom']=M(sine(lambda t:46+70*np.exp(-t*18),.7,.22)*1.3,noise(.08,.02)*.5); LIB['swish']=whoosh()[:int(.22*SR)]*.22
 fx=np.zeros(N)
 try:
     for t,typ in json.load(open(f'{W}/sfx.json')):
@@ -55,5 +58,5 @@ except FileNotFoundError: pass
 mix=np.tanh((vo+mus+fx*.8)*1.1)*.95; mix=mix[:int(total*SR)]
 sf.write(f'{W}/mix.wav',np.stack([mix,mix],1),SR)
 subprocess.run(['ffmpeg','-v','error','-y','-i',f'{W}/mix.wav','-af','loudnorm=I=-14:TP=-1.5:LRA=11','-ar','48000',f'{W}/mix_n.wav'],check=True)
-subprocess.run(['ffmpeg','-v','error','-y','-i',f'{W}/video_only.mp4','-i',f'{W}/mix_n.wav','-map','0:v','-map','1:a','-c:v','copy','-c:a','aac','-b:a','192k','-movflags','+faststart','-shortest',OUT],check=True)
+if OUT!='-': subprocess.run(['ffmpeg','-v','error','-y','-i',f'{W}/video_only.mp4','-i',f'{W}/mix_n.wav','-map','0:v','-map','1:a','-c:v','copy','-c:a','aac','-b:a','192k','-movflags','+faststart','-shortest',OUT],check=True)
 print('final',OUT)

@@ -15,7 +15,7 @@ BT.forEach(b => { b.keys.forEach(k => { CAST[k.who].pose(k.pose, k.f, {big: k.bi
   const r = CAST[b.who], V = {r: 'rest', A: 'AI', E: 'E', O: 'O', U: 'U', M: 'MBP', F: 'FV', L: 'L'}; [...b.vis].forEach((ch, k) => r.say(V[ch], b.f0 + k));
   const nx = BT[b.i + 1]; if (!nx || !nx.keys.some(k => k.who == b.who && k.f <= nx.f0)) r.pose('idle', b.f1 + 4); });
 // ---- hit-stop ----
-const HITS = BT.filter(b => b.hit).map(b => [b.hit.f, b.hit.hold]); HITS.forEach(h => sfx(h[0], 'thud'));
+const HITS = BT.filter(b => b.hit).map(b => [b.hit.f, b.hit.hold]); HITS.forEach(h => { sfx(h[0] - 10, 'riser'); sfx(h[0], 'boom'); sfx(h[0], 'thud'); });
 const warp = RIG.timeWarp(HITS);
 // ---- camera: eased keys, never linear ----
 const POS = {c: {x: 300, y: 1180}, b: {x: 780, y: 1180}}, WIDE = {x: 540, y: 890, z: 1};
@@ -31,7 +31,7 @@ function camAt(f) { let k = 0; for (let i = 0; i < CAMK.length; i++) if (CAMK[i]
 function camRest(k) { return CAMK[k].t; }
 const camT = c => `translate(540,960) scale(${c.z}) translate(${-c.x},${-c.y})`;
 // ---- captions: short keyword lines, one highlighted keyword, inside the title-safe box ----
-const CAPS = []; BT.forEach(b => b.caps.forEach(c => CAPS.push({f: c.f, text: c.text, end: b.f1 + 10}))); CAPS.forEach((c, k) => { if (CAPS[k + 1]) c.end = Math.min(c.end, CAPS[k + 1].f); });
+const CAPS = []; BT.forEach(b => b.caps.forEach(c => CAPS.push({f: c.f, text: c.text, end: b.f1 + 10}))); CAPS.forEach(c => sfx(c.f, 'swish')); CAPS.forEach((c, k) => { if (CAPS[k + 1]) c.end = Math.min(c.end, CAPS[k + 1].f); });
 function caption(f, y = 1440) { let c = null; for (const x of CAPS) if (f >= x.f && f < x.end) c = x; if (!c) return '';
   const raw = c.text.replace(/\*/g, ''), size = Math.min(72, 800 / (raw.length * .6)), parts = c.text.split('*'), p = pop(f, c.f, 8);
   const w = raw.length * size * .6 + 70, S = TOKENS.frame.safe, x0 = Math.max(S.x0, 540 - w / 2), ww = Math.min(w, S.x1 - S.x0);

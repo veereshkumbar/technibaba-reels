@@ -8,8 +8,8 @@ async def main():
         b=await p.chromium.launch(executable_path='/usr/bin/google-chrome',args=['--allow-file-access-from-files'])
         pg=await b.new_page(viewport={'width':1080,'height':1920})
         await pg.goto(f'file://{W}/page.html'); await pg.evaluate('document.fonts.ready'); await pg.wait_for_timeout(400)
-        total=await pg.evaluate('TOTAL'); sfx=await pg.evaluate('window.SFX||[]'); json.dump(sfx,open(f'{W}/sfx.json','w'))
-        order=await pg.evaluate('window.ORDER||null'); n=round(total*FPS)
+        total=await pg.evaluate('TOTAL'); sfx=await pg.evaluate("typeof SFX!=='undefined'?SFX:[]"); json.dump(sfx,open(f'{W}/sfx.json','w'))
+        order=await pg.evaluate("typeof ORDER!=='undefined'?ORDER:null"); n=round(total*FPS)
         if order:
             SC=await pg.evaluate('SC'); bounds=[round(SC[k]['s']*FPS) for k in order]+[n]
         else: order=['all']; bounds=[0,n]

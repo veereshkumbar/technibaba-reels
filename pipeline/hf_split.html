@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
+<script>__GSAP__</script>
+<style>
+@font-face{font-family:Pop;font-weight:600;src:url(assets/pop600.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(assets/pop800.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(assets/pop900.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(assets/mono700.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:Pop}
+.layer{position:absolute;left:0;top:0;width:1080px;height:1920px}
+.layer svg,.page svg{display:block}
+svg text{font-family:Pop}
+#strip{filter:blur(3px);transform:scale(1.02)}
+#panelwrap{will-change:transform}
+#pclip{position:absolute;left:72px;top:150px;width:936px;height:835px;border-radius:40px;overflow:hidden;background:__C_navy__;box-shadow:0 18px 0 rgba(0,0,0,.35),0 0 60px rgba(93,224,176,.28)}
+#pframe{position:absolute;left:72px;top:150px;width:936px;height:835px;border-radius:40px;border:7px solid __C_ink__;background:linear-gradient(125deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 32%,rgba(255,255,255,0) 100%);pointer-events:none}
+.page{position:absolute;left:0;top:0;width:936px;height:835px}
+.cap{position:absolute;left:540px;display:flex;align-items:center;justify-content:center;padding:0 35px;white-space:pre;font-weight:900;color:__C_captionText__;background:rgba(15,15,30,.9);border:4px solid __C_mint__;box-shadow:0 10px 0 rgba(0,0,0,.3),0 0 34px rgba(93,224,176,.35);z-index:60}
+.cap .kw{color:__C_captionKeyword__}
+#fx{z-index:55}
+#grade{z-index:80;background:radial-gradient(ellipse at 50% 46%,rgba(0,0,0,0) 52%,rgba(8,6,30,.42) 100%)}
+#sheen{z-index:81;background:linear-gradient(180deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,0) 22%)}
+#grain{z-index:82;opacity:.09;mix-blend-mode:overlay}
+#prog{position:absolute;left:0;top:1904px;width:1080px;height:16px;background:__C_mint__;z-index:90;transform-origin:0 50%}
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="__DUR__" data-width="1080" data-height="1920">
+  <div id="strip" class="layer"></div>
+  <div id="chars" class="layer" style="z-index:5"></div>
+  <div id="panelwrap" class="layer" style="z-index:20">
+    <div id="pbg" class="layer"></div>
+    <div id="pclip">
+__PAGES__    </div>
+    <div id="pframe"></div>
+  </div>
+  <div id="fx" class="layer"></div>
+__CAPS__  <div id="grade" class="layer"></div><div id="sheen" class="layer"></div>
+  <div id="grain" class="layer"><svg width="1080" height="1920"><filter id="gr"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1080" height="1920" filter="url(#gr)"/></svg></div>
+  <div id="prog"></div>
+  <audio id="mix" class="clip" data-start="0" data-duration="__DUR__" data-track-index="9" data-volume="1" src="assets/mix.wav"></audio>
+</div>
+<script>
+__SCRIPT__
+// ================= HyperFrames driver =================
+const DUR=NF/FPS,$=id=>document.getElementById(id),SVG=(vb,inner)=>`<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="${vb}">${inner}</svg>`;
+// static panel backdrop
+(()=>{let o=`<rect x="-40" y="-1300" width="1160" height="${SEAM+1300}" fill="${C.navy}"/>`;for(let r=0;r<9;r++)for(let q=0;q<10;q++)o+=`<circle cx="${30+q*113}" cy="${40+r*122}" r="5" fill="${C.mint}" opacity=".13"/>`;
+ o+=`<rect x="-40" y="${SEAM-7}" width="1160" height="14" fill="${C.mint}"/>`;$('pbg').innerHTML=SVG('0 0 1080 1920',o)})();
+const PAGES=[...document.querySelectorAll('.page')].map(el=>({el,n:el.dataset.scene,on:false}));
+function draw(t){const f0=Math.round(t*FPS),f=warp(f0);
+ $('strip').innerHTML=SVG('0 0 1080 1920',`<g transform="${camG(f)}">${strip(f)}</g>`);
+ $('chars').innerHTML=SVG('0 0 1080 1920',`<defs>${FACE.DEFS}</defs>`+charLayer(f,null));
+ PAGES.forEach(p=>{const on=f>=SCF[p.n].s-2&&f<=SCF[p.n].e+14;if(on)p.el.innerHTML=SVG(`${PAN.x0} ${PAN.y0} ${PAN.x1-PAN.x0} ${PAN.y1-PAN.y0}`,content(p.n,f));else if(p.on)p.el.innerHTML='';p.on=on});
+ $('fx').innerHTML=SVG('0 0 1080 1920',overlay(f)+RIG.impact(f0,HITS,540,600))}
+const driver={_t:0,get t(){return this._t},set t(v){this._t=v;draw(v)}};
+const tl=gsap.timeline({paused:true});
+tl.to(driver,{t:DUR,duration:DUR,ease:"none"},0);
+tl.fromTo("#prog",{scaleX:0},{scaleX:1,duration:DUR,ease:"none"},0);
+// panel drops in after the full-screen hook
+const hookT=HOOK_END/FPS;
+tl.set("#panelwrap",{y:-1200},0);
+tl.to("#panelwrap",{y:0,duration:.55,ease:"back.out(1.25)"},hookT);
+// page transitions: push, zoom-through, lift (rotating)
+PAGES.forEach((p,k)=>{if(!k)return;const a=PAGES[k-1].el,b=p.el,t0=SCF[p.n].s/FPS,kind=(k-1)%3;
+ if(kind==0){tl.to(a,{x:-1040,rotation:-4,duration:.34,ease:"power3.in"},t0);tl.fromTo(b,{x:1040,rotation:4},{x:0,rotation:0,duration:.46,ease:"power3.out"},t0+.08)}
+ if(kind==1){tl.to(a,{scale:1.35,opacity:0,duration:.3,ease:"power2.in"},t0);tl.fromTo(b,{scale:.78,opacity:0},{scale:1,opacity:1,duration:.42,ease:"back.out(1.5)"},t0+.1)}
+ if(kind==2){tl.to(a,{y:-900,rotation:3,duration:.34,ease:"power3.in"},t0);tl.fromTo(b,{y:900},{y:0,duration:.5,ease:"back.out(1.15)"},t0+.08)}});
+// hit-stop shake on the panel
+HITS.forEach(([h])=>{const t0=h/FPS;[[16,-11],[-13,9],[9,-6],[-6,4],[3,-2],[0,0]].forEach(([x,y],i)=>tl.to("#panelwrap",{x,y,duration:.06,ease:"power2.out"},t0+i*.06))});
+// captions pop on the seam
+for(let k=0;k<__NCAPS__;k++){const el=$('cap-'+k),t0=+el.dataset.start;gsap.set(el,{xPercent:-50});tl.fromTo(el,{scale:.55,opacity:0,y:18},{scale:1,opacity:1,y:0,duration:.26,ease:"back.out(2.2)"},t0)}
+window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;tl.seek(0);draw(0);
+</script>
+</body></html>

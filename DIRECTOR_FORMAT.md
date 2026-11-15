@@ -45,7 +45,7 @@ Scene art (`bg`, `props`) lives in the reel's `page_tpl.html`. Props are drawn i
 - Lip-sync needs no word timestamps: words are spread across the measured line by length, mapped to the 8 visemes, and closed where the loudness envelope is silent.
 
 ## Differences from the `technibaba-director` skill (as of 2026-11-15)
-- Renderer: this uses the repo's own engine (Playwright + ffmpeg). The stage is plain `render(frame)` and can be wrapped as a HyperFrames composition later; that is not done.
+- Renderer: the split layout renders through HyperFrames (`pipeline/hf_build.py`, see SPLIT_FORMAT.md). The older full-screen director example still uses the repo's own engine.
 - Voicebox runs only on Veer's Mac, so scheduled cloud runs cannot use the cloned voice. They keep Kokoro.
 - Voicebox `/transcribe` returns no word timestamps; timing comes from `beats.py` as above.
 - Music: Instagram library tracks cannot be added through Windsor. A quiet built-in lo-fi bed is mixed in, ducked under speech.

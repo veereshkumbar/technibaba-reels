@@ -1,7 +1,6 @@
 """Proof checks + contact sheet.  usage: python3 pipeline/check.py WORKDIR FINAL.mp4
 Checks: duration matches, hook by 1.5s, visual-change cadence, captions inside the title-safe box, audio peak. Writes WORKDIR/qa/contact.png."""
-import sys, json, subprocess, os, asyncio, re
-from playwright.async_api import async_playwright
+import sys, json, subprocess, os, re
 from PIL import Image, ImageDraw, ImageFont
 W,OUT=sys.argv[1],sys.argv[2]; root=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 B=json.load(open(f'{W}/beats.json')); T=json.load(open(f'{root}/brand/tokens.json')); S=T['frame']['safe']; ck=dict(B['checks'])
@@ -14,15 +13,10 @@ for c in caps:
     if 540-w/2<S['x0']-1 or 540+w/2>S['x1']+1 or c['text'].count('*')!=2: bad.append(c['text'])
 ck['captions_ok']=not bad; ck['captions_bad']=bad
 os.makedirs(f'{W}/qa',exist_ok=True)
-async def shots():
-    async with async_playwright() as p:
-        b=await p.chromium.launch(executable_path='/usr/bin/google-chrome',args=['--allow-file-access-from-files'])
-        pg=await b.new_page(viewport={'width':1080,'height':1920}); await pg.goto(f'file://{W}/page.html'); await pg.evaluate('document.fonts.ready'); await pg.wait_for_timeout(300)
-        for bt in B['beats']:
-            f=(bt['hit']['f']+2) if bt['hit'] else max(k['f'] for k in bt['keys'])+12; f=min(f,bt['f1']+8)
-            await pg.evaluate(f'render({f/30})'); await pg.screenshot(path=f"{W}/qa/beat_{bt['i']:02d}.jpg",type='jpeg',quality=85); bt['_f']=f
-        await b.close()
-asyncio.run(shots())
+# stills come from the finished video, so the sheet shows exactly what was rendered (any renderer)
+for bt in B['beats']:
+    f=(bt['hit']['f']+6) if bt['hit'] else max(k['f'] for k in bt['keys'])+12; f=min(f,bt['f1']+8,B['total_frames']-2)
+    subprocess.run(['ffmpeg','-v','error','-y','-ss',f'{f/30:.3f}','-i',OUT,'-frames:v','1','-q:v','3',f"{W}/qa/beat_{bt['i']:02d}.jpg"],check=True)
 n=len(B['beats']); cols=5; rows=(n+cols-1)//cols; tw,th=360,640; pad=16; lab=96
 sheet=Image.new('RGB',(cols*(tw+pad)+pad,rows*(th+lab+pad)+pad+70),'#10142a'); d=ImageDraw.Draw(sheet)
 def font(sz,bold=True):

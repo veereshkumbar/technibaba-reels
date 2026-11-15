@@ -21,4 +21,7 @@ python3 -c "import kokoro_onnx" && echo "kokoro ok" || echo "ERROR: kokoro missi
 which google-chrome >/dev/null && echo "chrome ok" || echo "ERROR: no chrome"
 which ffmpeg >/dev/null && echo "ffmpeg ok" || echo "ERROR: no ffmpeg"
 ls /tmp/tts/vits-piper-hi_IN-rohan-medium/*.onnx >/dev/null && echo "voice ok" || echo "ERROR: voice missing"
+# HyperFrames renderer for the split layout (GSAP is inlined into the composition)
+(cd /tmp/fonts && [ -f node_modules/gsap/dist/gsap.min.js ] || npm i -s gsap@3 >/dev/null 2>&1); [ -f /tmp/fonts/node_modules/gsap/dist/gsap.min.js ] && echo "gsap ok" || echo "ERROR: gsap missing (fallback: engine/render.py)"
+HYPERFRAMES_BROWSER_PATH=/usr/bin/google-chrome npx -y hyperframes@0.9.52 --version >/dev/null 2>&1 && echo "hyperframes ok" || echo "ERROR: hyperframes CLI missing (fallback: engine/render.py)"
 echo "setup done"

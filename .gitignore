@@ -9,3 +9,6 @@ examples/*/timeline.json
 examples/*/beats.json
 examples/*/sfx.json
 examples/*/render.log
+examples/*/hf/
+examples/*/hf_render.log
+examples/*/music.wav

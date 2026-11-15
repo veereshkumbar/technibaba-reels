@@ -8,9 +8,9 @@ const capY = f => lerp(1440, 1082, spAt(f));
 const talkAmt = (who, f) => { let a = 0; for (const b of BT) if (b.who == who) a = Math.max(a, Math.min(sm(f, b.f0 - 3, 6), 1 - sm(f, b.f1, 8))); return a; };
 const hitAmt = (who, f) => { let a = 0; BT.forEach(b => { if (b.hit && b.who == who) { const d = f - b.hit.f; if (d >= -2 && d < 30) a = Math.max(a, d < 22 ? E.bouncy((d + 2) / 7) : 1 - sm(f, b.hit.f + 22, 8)); } }); return a; };
 const shakeAt = f => { let x = 0, y = 0; for (const [h] of HITS) { const d = f - h; if (d >= 0 && d < 16) { const a = 14 * Math.exp(-d / 4); x += a * Math.sin(d * 2.4); y += a * Math.cos(d * 3.1); } } return [x, y]; };
+const camG = f => { const sp = spAt(f), who = BT[0].who, z = lerp(1.08, 1, sp), cx = lerp(SPOS[who].x, 540, sp), cy = lerp(FACE_Y + 20, 960, sp), CY = lerp(1010, 960, sp); return `translate(540,${CY}) scale(${z}) translate(${-cx},${-cy})`; };
 function charLayer(f, stripFn) {
-  const sp = spAt(f), who = BT[0].who, z = lerp(1.08, 1, sp), cx = lerp(SPOS[who].x, 540, sp), cy = lerp(FACE_Y + 20, 960, sp), CY = lerp(1010, 960, sp);
-  let o = `<g transform="translate(540,${CY}) scale(${z}) translate(${-cx},${-cy})">` + stripFn(f);
+  let o = `<g transform="${camG(f)}">` + (stripFn ? stripFn(f) : '');
   const order = ['c', 'b'].sort((a, b) => (talkAmt(a, f) + 2 * hitAmt(a, f)) - (talkAmt(b, f) + 2 * hitAmt(b, f)));
   order.forEach(w => { const s = CS * (1 + .05 * talkAmt(w, f) + .14 * hitAmt(w, f)); o += CAST[w].draw(f, {x: SPOS[w].x, y: SPOS[w].y, s, flip: w == 'b', phone: false, glow: w == 'b' ? hitAmt('b', f) : 0}); });
   return o + `</g>`; }
