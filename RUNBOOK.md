@@ -90,7 +90,7 @@ Before choosing a topic, pull the last 30 days from Windsor (`get_data`, connect
 Scheduled runs post to Instagram **without waiting for "post"**, but only when every gate below passes. If any gate fails, do not post: send the MP4 and ask Veer for "post" or "skip" as before, and say which gate failed.
 1. `pipeline/check.py` reports ALL CHECKS PASS, and the contact sheet was looked at with no overlaps, cut-off text or broken frames.
 2. The planned build was used (no fallback renderer or fallback format).
-3. Topic safety: no allegations or accusations against a named person or company, no politics or elections, no deaths, disasters or crime, no medical, legal or investment advice, no claims about a real person.
+3. Topic safety: no allegations, accusations, rumours or gossip about a named person or company; no politics or elections; no deaths, injuries, disasters or crime; no medical, legal, investment, betting or fantasy-money advice. Trending slots may name public figures, teams, films and companies only for verified public facts (≥2 reputable sources, today's date) told through a tech angle, never their private life.
 4. Facts: every factual claim and every settings path or tool detail was verified against a current source in this run (≥3 sources).
 5. Not a repeat: no topic or comment keyword from posted.md in the last 30 days.
 6. Media URL check: wait 3 minutes after the gh-pages push; if Windsor reports a media error, wait 2 more minutes and retry once; if it fails again, stop and ask.
