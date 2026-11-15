@@ -85,3 +85,13 @@ Also send the MP4 for Veer's manual YouTube Shorts upload.
 
 ## 8. Learn from the numbers (each run)
 Before choosing a topic, pull the last 30 days from Windsor (`get_data`, connector instagram, fields: timestamp, media_caption, media_reach, media_views, media_reel_skip_rate, media_reel_avg_watch_time, media_shares, media_saved). Note what worked (low skip rate, high watch time, shares) in `posted.md` and lean the next topics/hooks that way.
+
+## Auto-post rules for scheduled runs (from 15 Nov 2026, Veer's instruction)
+Scheduled runs post to Instagram **without waiting for "post"**, but only when every gate below passes. If any gate fails, do not post: send the MP4 and ask Veer for "post" or "skip" as before, and say which gate failed.
+1. `pipeline/check.py` reports ALL CHECKS PASS, and the contact sheet was looked at with no overlaps, cut-off text or broken frames.
+2. The planned build was used (no fallback renderer or fallback format).
+3. Topic safety: no allegations or accusations against a named person or company, no politics or elections, no deaths, disasters or crime, no medical, legal or investment advice, no claims about a real person.
+4. Facts: every factual claim and every settings path or tool detail was verified against a current source in this run (≥3 sources).
+5. Not a repeat: no topic or comment keyword from posted.md in the last 30 days.
+6. Media URL check: wait 3 minutes after the gh-pages push; if Windsor reports a media error, wait 2 more minutes and retry once; if it fails again, stop and ask.
+After posting: send the MP4 (for YouTube) and a message with the media id, caption and why; Veer can ask for a delete in chat. Log in posted.md with "AUTO-POSTED".
