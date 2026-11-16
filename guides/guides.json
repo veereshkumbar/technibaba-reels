@@ -2,23 +2,88 @@
  "updated": "2026-11-16",
  "guides": [
   {
+   "slug": "pehle-3-second-hook-formula",
+   "date": "2026-11-16",
+   "title": "Pehle 3 second: reel ka hook formula (hamare apne numbers)",
+   "lane": "Creator Guide",
+   "summary": "Hamari ek reel pe 75% log pehle 3 second mein skip kar gaye, doosri pe sirf 26%. Dono mein jo alag tha, wo 3 rule. Ye hamare apne Insights ke numbers hain, guarantee nahi.",
+   "steps": [
+    {
+     "title": "Frame 0 = result",
+     "body": "Reel ka pehla frame hi thumbnail hai. Usi pe payoff dikhao (number, result, before/after) + 3-5 shabdon ki headline. Logo, intro ya 'Hello dosto' se shuru mat karo."
+    },
+    {
+     "title": "1.5 second mein sawaal ya jhagda",
+     "body": "Pehli line 1.5 second ke andar ek sawaal, jhagda ya chaunkane wala number ho. Chehra bole aur wahi baat screen pe likhi ho, kyunki bahut log reel muted dekhte hain."
+    },
+    {
+     "title": "Chhota rakho: 35-45 second",
+     "body": "Hamare 60 second wale test reels pe log sirf 7-12 second ruke. Ab hum 35-45 second banate hain aur payoff 80% se pehle aa jaata hai."
+    },
+    {
+     "title": "Apna number check karo",
+     "body": "Apni reel ke Insights mein 'Skip rate' (pehle 3 second mein kitne log aage badh gaye) aur average watch time dekho. Har nayi reel ko pichhli se compare karo. End mein 'dost ko bhejo' bolo: Instagram ke Adam Mosseri ke mutabik ranking ke top 3 signal watch time, likes aur sends hain."
+    }
+   ],
+   "tip": "Ek reel = ek baat. Jo dikhana hai, wo pehle frame pe.",
+   "caution": "Ye hamare chhote channel ke numbers hain (Nov 2026). Har channel alag hota hai; views ya followers ki koi guarantee nahi.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "Social Media Today: Instagram shares algorithm insights (Mosseri: watch time, likes, sends), Jan 22 2025",
+     "url": "https://www.socialmediatoday.com/news/instagram-shares-algorithm-insights-2025/738034/"
+    },
+    {
+     "title": "Social Samosa: Instagram reveals key factors for boosting reach",
+     "url": "https://www.socialsamosa.com/news-2/instagram-reveals-key-factors-for-boosting-reach-8646916"
+    },
+    {
+     "title": "Buffer: How the Instagram algorithm works (Oct 2026)",
+     "url": "https://buffer.com/resources/instagram-algorithms/"
+    },
+    {
+     "title": "Social Samosa: Instagram adds Retention chart & Skip Rate for reels (Aug 2025)",
+     "url": "https://www.socialsamosa.com/news-2/instagram-retention-chart-skip-rate-new-performance-metrics-reels-9730992"
+    }
+   ]
+  },
+  {
    "slug": "asli-vs-nakli-wifi-3-check",
    "date": "2026-11-15",
    "title": "Asli ya nakli WiFi? 3 check, 3 second",
    "lane": "Tutorial",
    "summary": "Public jagah (airport, cafe, station) pe same naam ke do WiFi dikhein, to connect karne se pehle ye 3 check karo.",
    "steps": [
-    {"title": "Naam match karo", "body": "WiFi ka exact naam staff se poocho ya official board/receipt pe dekho. Ek letter bhi alag (jaise Airp0rt with zero) to wo nakli hai. Do same naam dikhein to staff se confirm kiye bina connect mat karo."},
-    {"title": "Login page dekho", "body": "Asli public WiFi aam taur pe sirf mobile number + OTP ya room/ticket number maangta hai. Agar login page bank password, card number, UPI PIN ya email password maange, turant band karo. Wo nakli page hai."},
-    {"title": "Browser warning ko serious lo", "body": "Agar browser 'Your connection is not private' ya 'Not secure' dikhaye, to 'Go back' dabao. 'Proceed' kabhi mat dabao."},
-    {"title": "Galti se connect ho gaya?", "body": "Phone ki WiFi settings mein us network pe tap karke 'Forget' karo. Jo bhi password daala tha, wo turant badlo, aur us account mein 2-step verification on karo."}
+    {
+     "title": "Naam match karo",
+     "body": "WiFi ka exact naam staff se poocho ya official board/receipt pe dekho. Ek letter bhi alag (jaise Airp0rt with zero) to wo nakli hai. Do same naam dikhein to staff se confirm kiye bina connect mat karo."
+    },
+    {
+     "title": "Login page dekho",
+     "body": "Asli public WiFi aam taur pe sirf mobile number + OTP ya room/ticket number maangta hai. Agar login page bank password, card number, UPI PIN ya email password maange, turant band karo. Wo nakli page hai."
+    },
+    {
+     "title": "Browser warning ko serious lo",
+     "body": "Agar browser 'Your connection is not private' ya 'Not secure' dikhaye, to 'Go back' dabao. 'Proceed' kabhi mat dabao."
+    },
+    {
+     "title": "Galti se connect ho gaya?",
+     "body": "Phone ki WiFi settings mein us network pe tap karke 'Forget' karo. Jo bhi password daala tha, wo turant badlo, aur us account mein 2-step verification on karo."
+    }
    ],
    "tip": "Bahar banking ya payments sirf mobile data pe karo. Free WiFi sirf browsing aur reels ke liye.",
    "caution": "Ye general safety guide hai. Kisi bhi fraud pe turant apne bank ko call karo aur cybercrime.gov.in ya helpline 1930 pe report karo.",
    "youtube": "",
    "sources": [
-    {"title": "CERT-In: public Wi-Fi safety tips", "url": "https://www.cert-in.org.in/"},
-    {"title": "National Cyber Crime Reporting Portal", "url": "https://cybercrime.gov.in/"}
+    {
+     "title": "CERT-In: public Wi-Fi safety tips",
+     "url": "https://www.cert-in.org.in/"
+    },
+    {
+     "title": "National Cyber Crime Reporting Portal",
+     "url": "https://cybercrime.gov.in/"
+    }
    ]
   },
   {
@@ -28,17 +93,35 @@
    "lane": "Tutorial",
    "summary": "Bina password wala free WiFi kabhi kabhi nakli hotspot hota hai jo aapke passwords chura sakta hai. Bachne ka simple rule.",
    "steps": [
-    {"title": "Samjho khatra kya hai", "body": "Koi bhi same naam ka hotspot bana sakta hai (jaise Free_Airport_WiFi_Fast). Connect hote hi wo nakli login page dikha kar aapka password le sakta hai."},
-    {"title": "Banking sirf mobile data pe", "body": "Public jagah pe UPI, net banking ya shopping payments sirf apne mobile data pe karo."},
-    {"title": "Auto-connect band karo", "body": "Phone settings mein WiFi ke andar 'Auto-join' / 'Auto reconnect' open networks ke liye band karo, taaki phone khud nakli WiFi se na jude."},
-    {"title": "Asli WiFi pehchano", "body": "Part 2 dekho: naam, login page aur browser warning, ye 3 check."}
+    {
+     "title": "Samjho khatra kya hai",
+     "body": "Koi bhi same naam ka hotspot bana sakta hai (jaise Free_Airport_WiFi_Fast). Connect hote hi wo nakli login page dikha kar aapka password le sakta hai."
+    },
+    {
+     "title": "Banking sirf mobile data pe",
+     "body": "Public jagah pe UPI, net banking ya shopping payments sirf apne mobile data pe karo."
+    },
+    {
+     "title": "Auto-connect band karo",
+     "body": "Phone settings mein WiFi ke andar 'Auto-join' / 'Auto reconnect' open networks ke liye band karo, taaki phone khud nakli WiFi se na jude."
+    },
+    {
+     "title": "Asli WiFi pehchano",
+     "body": "Part 2 dekho: naam, login page aur browser warning, ye 3 check."
+    }
    ],
    "tip": "Free WiFi = sirf reels. Paisa = mobile data.",
    "caution": "Ye general safety guide hai. Fraud ho to turant bank ko call karo aur 1930 / cybercrime.gov.in pe report karo.",
    "youtube": "",
    "sources": [
-    {"title": "CERT-In", "url": "https://www.cert-in.org.in/"},
-    {"title": "National Cyber Crime Reporting Portal", "url": "https://cybercrime.gov.in/"}
+    {
+     "title": "CERT-In",
+     "url": "https://www.cert-in.org.in/"
+    },
+    {
+     "title": "National Cyber Crime Reporting Portal",
+     "url": "https://cybercrime.gov.in/"
+    }
    ]
   }
  ]
