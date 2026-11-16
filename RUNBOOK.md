@@ -95,3 +95,8 @@ Scheduled runs post to Instagram **without waiting for "post"**, but only when e
 5. Not a repeat: no topic or comment keyword from posted.md in the last 30 days.
 6. Media URL check: wait 3 minutes after the gh-pages push; if Windsor reports a media error, wait 2 more minutes and retry once; if it fails again, stop and ask.
 After posting: send the MP4 (for YouTube) and a message with the media id, caption and why; Veer can ask for a delete in chat. Log in posted.md with "AUTO-POSTED".
+
+## Captions (all posts, from 16 Nov 2026, Veer's rule)
+- No emojis in captions, ever. Not as bullets, not as decoration. Use plain text, line breaks and simple dashes.
+- Write like a real creator: a strong first line (the hook), 2-4 short lines of value, one clear call to action (comment GUIDE / save / send to a friend), then 5-8 hashtags on the last line.
+- The same no-emoji rule applies to public comment replies.

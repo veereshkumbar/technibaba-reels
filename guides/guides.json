@@ -4,29 +4,29 @@
   {
    "slug": "pehle-3-second-hook-formula",
    "date": "2026-11-16",
-   "title": "Pehle 3 second: reel ka hook formula (hamare apne numbers)",
-   "lane": "Creator Guide",
-   "summary": "Hamari ek reel pe 75% log pehle 3 second mein skip kar gaye, doosri pe sirf 26%. Dono mein jo alag tha, wo 3 rule. Ye hamare apne Insights ke numbers hain, guarantee nahi.",
+   "title": "The first 3 seconds: our reel hook formula (with our own numbers)",
+   "lane": "Creator guide",
+   "summary": "On one of our reels 75% of viewers skipped in the first 3 seconds; on another only 26% did. Three things were different. These are our own Insights numbers, not a guarantee.",
    "steps": [
     {
-     "title": "Frame 0 = result",
-     "body": "Reel ka pehla frame hi thumbnail hai. Usi pe payoff dikhao (number, result, before/after) + 3-5 shabdon ki headline. Logo, intro ya 'Hello dosto' se shuru mat karo."
+     "title": "Show the result in frame 0",
+     "body": "The first frame is also the thumbnail. Put the payoff there (a number, a result, a before/after) with a 3-5 word headline. Do not open with a logo, an intro or a greeting."
     },
     {
-     "title": "1.5 second mein sawaal ya jhagda",
-     "body": "Pehli line 1.5 second ke andar ek sawaal, jhagda ya chaunkane wala number ho. Chehra bole aur wahi baat screen pe likhi ho, kyunki bahut log reel muted dekhte hain."
+     "title": "Ask a question or make a claim within 1.5 seconds",
+     "body": "The first line should land within 1.5 seconds: a question, a disagreement or a surprising number. Put the same words on screen, because many people watch reels muted."
     },
     {
-     "title": "Chhota rakho: 35-45 second",
-     "body": "Hamare 60 second wale test reels pe log sirf 7-12 second ruke. Ab hum 35-45 second banate hain aur payoff 80% se pehle aa jaata hai."
+     "title": "Keep it short: 35-45 seconds",
+     "body": "On our 60-second test reels, viewers stayed for only 7-12 seconds. We now make 35-45 second reels and deliver the payoff before the 80% mark."
     },
     {
-     "title": "Apna number check karo",
-     "body": "Apni reel ke Insights mein 'Skip rate' (pehle 3 second mein kitne log aage badh gaye) aur average watch time dekho. Har nayi reel ko pichhli se compare karo. End mein 'dost ko bhejo' bolo: Instagram ke Adam Mosseri ke mutabik ranking ke top 3 signal watch time, likes aur sends hain."
+     "title": "Check your own numbers",
+     "body": "In each reel's Insights, look at the skip rate (how many people swiped away in the first 3 seconds) and the average watch time, and compare every new reel with the previous one. End with a prompt to send the reel to a friend: according to Instagram head Adam Mosseri, the top three ranking signals are watch time, likes and sends."
     }
    ],
-   "tip": "Ek reel = ek baat. Jo dikhana hai, wo pehle frame pe.",
-   "caution": "Ye hamare chhote channel ke numbers hain (Nov 2026). Har channel alag hota hai; views ya followers ki koi guarantee nahi.",
+   "tip": "One reel, one idea. Whatever you want to show goes in the first frame.",
+   "caution": "These numbers come from our small channel (November 2026). Every channel is different; there is no guarantee of views or followers.",
    "youtube": "",
    "reel": "https://www.instagram.com/reel/DfzUBAYIWf2/",
    "sources": [
@@ -51,29 +51,29 @@
   {
    "slug": "asli-vs-nakli-wifi-3-check",
    "date": "2026-11-15",
-   "title": "Asli ya nakli WiFi? 3 check, 3 second",
+   "title": "Real or fake Wi-Fi? Three checks before you connect",
    "lane": "Tutorial",
-   "summary": "Public jagah (airport, cafe, station) pe same naam ke do WiFi dikhein, to connect karne se pehle ye 3 check karo.",
+   "summary": "At an airport, cafe or station, if you see two Wi-Fi networks with the same name, run these three checks before you connect.",
    "steps": [
     {
-     "title": "Naam match karo",
-     "body": "WiFi ka exact naam staff se poocho ya official board/receipt pe dekho. Ek letter bhi alag (jaise Airp0rt with zero) to wo nakli hai. Do same naam dikhein to staff se confirm kiye bina connect mat karo."
+     "title": "Match the name exactly",
+     "body": "Ask staff for the exact network name, or check the official sign, ticket or receipt. If even one character differs (for example a zero instead of the letter O in Airport), it is fake. If two networks have the same name, confirm with staff before connecting."
     },
     {
-     "title": "Login page dekho",
-     "body": "Asli public WiFi aam taur pe sirf mobile number + OTP ya room/ticket number maangta hai. Agar login page bank password, card number, UPI PIN ya email password maange, turant band karo. Wo nakli page hai."
+     "title": "Look at what the login page asks for",
+     "body": "Genuine public Wi-Fi usually asks only for a mobile number and OTP, or a room or ticket number. If the page asks for a bank password, card number, UPI PIN or email password, close it immediately. It is a fake page."
     },
     {
-     "title": "Browser warning ko serious lo",
-     "body": "Agar browser 'Your connection is not private' ya 'Not secure' dikhaye, to 'Go back' dabao. 'Proceed' kabhi mat dabao."
+     "title": "Take browser warnings seriously",
+     "body": "If the browser shows 'Your connection is not private' or 'Not secure', tap 'Go back'. Never tap 'Proceed'."
     },
     {
-     "title": "Galti se connect ho gaya?",
-     "body": "Phone ki WiFi settings mein us network pe tap karke 'Forget' karo. Jo bhi password daala tha, wo turant badlo, aur us account mein 2-step verification on karo."
+     "title": "If you already connected",
+     "body": "Open your phone's Wi-Fi settings, tap the network and choose 'Forget this network'. Change any password you entered right away and turn on two-step verification for that account."
     }
    ],
-   "tip": "Bahar banking ya payments sirf mobile data pe karo. Free WiFi sirf browsing aur reels ke liye.",
-   "caution": "Ye general safety guide hai. Kisi bhi fraud pe turant apne bank ko call karo aur cybercrime.gov.in ya helpline 1930 pe report karo.",
+   "tip": "Outside home, do banking and payments only on mobile data. Use free Wi-Fi only for browsing.",
+   "caution": "This is a general safety guide. If you lose money, call your bank immediately and report it at cybercrime.gov.in or on the 1930 helpline (India).",
    "youtube": "",
    "sources": [
     {
@@ -89,29 +89,29 @@
   {
    "slug": "free-airport-wifi-jaal",
    "date": "2026-11-15",
-   "title": "Free airport WiFi: WiFi nahi, jaal?",
+   "title": "Free airport Wi-Fi can be a trap",
    "lane": "Tutorial",
-   "summary": "Bina password wala free WiFi kabhi kabhi nakli hotspot hota hai jo aapke passwords chura sakta hai. Bachne ka simple rule.",
+   "summary": "An open Wi-Fi network without a password can be a fake hotspot set up to steal passwords. Here is the simple rule that keeps you safe.",
    "steps": [
     {
-     "title": "Samjho khatra kya hai",
-     "body": "Koi bhi same naam ka hotspot bana sakta hai (jaise Free_Airport_WiFi_Fast). Connect hote hi wo nakli login page dikha kar aapka password le sakta hai."
+     "title": "Understand the risk",
+     "body": "Anyone can create a hotspot with an official-sounding name (for example Free_Airport_WiFi_Fast). Once you connect, it can show a fake login page and capture your password."
     },
     {
-     "title": "Banking sirf mobile data pe",
-     "body": "Public jagah pe UPI, net banking ya shopping payments sirf apne mobile data pe karo."
+     "title": "Bank only on mobile data",
+     "body": "In public places, use your own mobile data for UPI, net banking and online payments."
     },
     {
-     "title": "Auto-connect band karo",
-     "body": "Phone settings mein WiFi ke andar 'Auto-join' / 'Auto reconnect' open networks ke liye band karo, taaki phone khud nakli WiFi se na jude."
+     "title": "Turn off auto-join",
+     "body": "In your phone's Wi-Fi settings, turn off auto-join for open networks so the phone does not connect to a fake network on its own."
     },
     {
-     "title": "Asli WiFi pehchano",
-     "body": "Part 2 dekho: naam, login page aur browser warning, ye 3 check."
+     "title": "Learn to spot the real network",
+     "body": "See our guide on the three checks: the network name, the login page and browser warnings."
     }
    ],
-   "tip": "Free WiFi = sirf reels. Paisa = mobile data.",
-   "caution": "Ye general safety guide hai. Fraud ho to turant bank ko call karo aur 1930 / cybercrime.gov.in pe report karo.",
+   "tip": "Free Wi-Fi is for browsing. Money goes over mobile data.",
+   "caution": "This is a general safety guide. If you are defrauded, call your bank immediately and report it at cybercrime.gov.in or on the 1930 helpline (India).",
    "youtube": "",
    "sources": [
     {
