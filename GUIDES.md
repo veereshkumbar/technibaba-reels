@@ -21,6 +21,8 @@ Link to one guide: https://technibaba.com/guides?g=<slug>
 
 ## "Check DM" public replies (every scheduled run, first thing after setup)
 1. Windsor get_data (connector instagram, account 17841461825179329, date_preset last_7d): fields comment_id, comment_text, comment_timestamp, media_id.
-2. For each comment whose text contains "guide" (any case), whose comment_id is not in `guides/replied.txt`, posted in the last 7 days: Windsor execute_action reply_to_comment {comment_id, message: "Check your DMs, the guide is on its way. technibaba.com/guides"}. Append the comment_id to guides/replied.txt. Max 30 replies per run; vary the message slightly (3 variants) so it is not spammy.
+2. For each comment whose text contains "guide" (any case), whose comment_id is not in `guides/replied.txt`, posted in the last 7 days: Windsor execute_action reply_to_comment {comment_id, message: "Check your DMs, the guide is on its way. technibaba.com/guides" only while DM_AUTOMATION=on below; otherwise "The full step-by-step guide is here: technibaba.com/guides"}. Append the comment_id to guides/replied.txt. Max 30 replies per run; vary the message slightly (3 variants) so it is not spammy.
 3. Commit replied.txt with the run's other changes.
 Never reply to other comments automatically, never DM from here.
+
+DM_AUTOMATION=off   (Veer sets this to on once the Meta Business Suite "Comment to message" automation is live and tested)
