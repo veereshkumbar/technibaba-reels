@@ -16,7 +16,10 @@ Veer's target: grow @technibaba from 36 followers (15 Nov 2026) to 20,000 by mid
 
 ## 1. Setup
 `git clone --depth 1 https://github.com/veereshkumbar/technibaba-reels /tmp/tb && cd /tmp/tb && ./setup.sh` and fix every ERROR line.
-Read: RUNBOOK.md (all of it, especially "Rules for scheduled runs" and "Auto-post rules"), this file, RESEARCH.md, CRAFT.md, SPLIT_FORMAT.md, DIRECTOR_FORMAT.md, brand/dynamics.md, brand/tokens.json, posted.md, research/topic_bank.md. Tutorial slots also read STEPS_FORMAT.md; the evening slot reads CREATOR_GUIDES.md.
+Read: GUIDES.md, LONG_FORMAT.md (tutorial slots), RUNBOOK.md (all of it, especially "Rules for scheduled runs" and "Auto-post rules"), this file, RESEARCH.md, CRAFT.md, SPLIT_FORMAT.md, DIRECTOR_FORMAT.md, brand/dynamics.md, brand/tokens.json, posted.md, research/topic_bank.md. Tutorial slots also read STEPS_FORMAT.md; the evening slot reads CREATOR_GUIDES.md.
+
+## 1b. Guide comments (every run)
+Do the "Check DM" public replies in GUIDES.md before anything else.
 
 ## 2. Skills (use every one that helps, before writing anything)
 - `technibaba-director` skill: follow its story → spec → proof stages, its reel rules and its avoid table.
@@ -38,7 +41,8 @@ No repeats from posted.md (30 days), no keyword reuse (30 days), different topic
 Exactly as SPLIT_FORMAT.md "Render with HyperFrames", starting from a copy of `examples/split_wifi2`:
 script.py (LINES + BEATS, every line has a rig key) → engine/voice.py → pipeline/beats.py (all checks true) → engine/build.py → engine/shots.py (fix overlaps, keep everything inside the title-safe box) → engine/lofi.py (new seed/mood) → pipeline/hf_build.py (≥40 sfx cues; every panel element has a cue) → in hf/: hyperframes lint (0 errors) and snapshot (look at it, fix problems) → hyperframes render -q looks (nohup, poll) → pipeline/check.py (ALL CHECKS PASS).
 Reel rules: 30–45 s, full-screen hook that shows the payoff first and lands by 1.5 s, one visual per idea in the panel, a visual change every 2–3 s, at most two hit-stops, captions with one highlighted keyword, ending with recap + comment keyword or question + "dost ko bhejo" / "save karo".
-Tutorial slots: 3–4 steps, exact menu paths verified today, a comment keyword (ALL CAPS, 4–7 letters) and a DM guide text under 900 characters.
+Tutorial slots: 3–4 steps, exact menu paths verified today. The comment keyword is ALWAYS "GUIDE" ("Comment karo GUIDE, guide DM mein bhejunga"). Before posting, add the guide to guides/guides.json per GUIDES.md (the DM automation links to technibaba.com/guides, so the guide must be live first). After posting, add the reel permalink.
+Tutorial slots also make the long YouTube version per LONG_FORMAT.md (spec.json → render), after the reel is posted. If time or usage runs short, deliver the reel first and say the long video was skipped.
 Trending slots: the news in one line, then the tech explanation; attribute every claim ("report ke hisaab se…"); no real photos, footage, logos or lookalikes of real people.
 Fallbacks: HyperFrames fails twice → engine/render.py + engine/audio.py. Split build fails twice → STEPS_FORMAT.md (tutorials) or examples/director_wifi (trending). A fallback means gate 2 fails, so the reel waits for Veer.
 
@@ -48,6 +52,6 @@ Go through RUNBOOK.md "Auto-post rules" gate by gate and write each result in yo
 - Any gate fails → do not post; hold for Veer as below.
 
 ## 6. Report
-SendUserFile the MP4 (for the manual YouTube upload) and qa/contact.png (proactive) → PushNotification "<Slot> reel posted: <title>" or "<Slot> reel needs your OK: <title> — reply post or skip" → SendUserMessage with: media id (if posted), caption, hashtags, keyword, sources, why this topic, skills used, and for tutorials the DM guide text. If held, name the failed gate; only on "post" publish as in step 5; "skip" → confirm skipped.
+SendUserFile the MP4 (for the manual YouTube upload) and qa/contact.png (proactive) → PushNotification "<Slot> reel posted: <title>" or "<Slot> reel needs your OK: <title> — reply post or skip" → SendUserMessage with: media id (if posted), caption, hashtags, keyword, sources, why this topic, skills used, and for tutorials the guide link (https://technibaba.com/guides?g=<slug>), then the long YouTube MP4 with its title, description and tags, asking Veer to reply with the YouTube link once uploaded (then add it to guides.json and push). If held, name the failed gate; only on "post" publish as in step 5; "skip" → confirm skipped.
 On a twice-failed step: SendUserMessage + PushNotification with the error, simplify, still finish premium.
 Instagram only; YouTube is manual; post nowhere else.

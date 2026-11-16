@@ -1,0 +1,45 @@
+{"guide": "asli-vs-nakli-wifi-3-check",
+ "title": "Asli ya Nakli WiFi? 3 Check jo har phone user ko pata hone chahiye | TechniBaba Guide",
+ "scenes": [
+  {"id": "intro", "type": "title", "head": "TechniBaba Guide", "title": "Asli ya Nakli WiFi? 3 Check, 3 Second", "sub": "Airport, cafe, station: connect karne se pehle", "chips": ["Airport_Free_WiFi|ASLI?", "Airport_Free_WiFi|NAKLI?"],
+   "lines": [
+    {"who": "c", "hi": "बाबा, एयरपोर्ट पे दो वाईफ़ाई हैं, दोनों का नाम एक जैसा! कौनसा जोड़ूँ?", "en": "Baba, airport pe do WiFi hain, dono ka naam ek jaisa! Kaunsa joduun?", "pose": "shrug", "expr": "confused", "big": 1, "cap": "2 WiFi, *same naam*!"},
+    {"who": "b", "hi": "बढ़िया सवाल. आज मैं तुम्हें तीन चेक सिखाऊँगा, जिनसे तीन सेकंड में असली और नकली वाईफ़ाई पहचान लोगे.", "en": "Badhiya sawaal. Aaj main tumhe teen check sikhaunga, jinse teen second mein asli aur nakli WiFi pehchaan loge.", "pose": "count", "expr": "smug", "big": 1, "cap": "*3 check*, 3 second"},
+    {"who": "b", "hi": "पूरा गाइड टेक्नीबाबा डॉट कॉम स्लैश गाइड्स पे भी है. चलो शुरू करते हैं.", "en": "Poora guide technibaba dot com slash guides pe bhi hai. Chalo shuru karte hain.", "pose": "point", "expr": "happy", "cap": "technibaba.com/*guides*"}]},
+  {"id": "danger", "type": "points", "head": "Khatra kya hai?", "color": "#ffd23f", "items": ["Koi bhi same naam ka hotspot bana sakta hai", "Connect karte hi nakli login page", "Password seedha chor ke paas"],
+   "lines": [
+    {"who": "c", "hi": "पर नकली वाईफ़ाई बनाता कौन है?", "en": "Par nakli WiFi banata kaun hai?", "pose": "leanin", "expr": "confused", "cap": "Nakli WiFi *kaun* banata?"},
+    {"who": "b", "hi": "कोई भी. एक सस्ता डिवाइस या फ़ोन का हॉटस्पॉट, और नाम रख दिया एयरपोर्ट फ़्री वाईफ़ाई.", "en": "Koi bhi. Ek sasta device ya phone ka hotspot, aur naam rakh diya Airport Free WiFi.", "pose": "explain", "expr": "explaining", "show": 1, "cap": "Koi bhi! *Same naam*"},
+    {"who": "b", "hi": "तुम कनेक्ट करते हो, तो वो तुम्हें एक नकली लॉगिन पेज दिखाता है.", "en": "Tum connect karte ho, to wo tumhe ek nakli login page dikhata hai.", "pose": "point", "expr": "smug", "show": 2, "cap": "*Nakli* login page"},
+    {"who": "b", "hi": "और जो भी पासवर्ड डालोगे, वो सीधा उसके पास.", "en": "Aur jo bhi password daaloge, wo seedha uske paas.", "pose": "stop", "expr": "angry", "big": 1, "show": 3, "hit": "seedha", "react": "shocked", "react_pose": "blown", "cap": "Password *chori*!"}]},
+  {"id": "check1", "type": "points", "chip": "CHECK 1", "head": "Naam match karo", "items": ["Staff se exact naam poocho", "Board, ticket ya receipt pe dekho", "Ek letter bhi alag = NAKLI"],
+   "lines": [
+    {"who": "b", "hi": "पहला चेक: नाम. वाईफ़ाई का सही नाम स्टाफ़ से पूछो.", "en": "Pehla check: naam. WiFi ka sahi naam staff se poocho.", "pose": "count", "expr": "explaining", "big": 1, "show": 1, "cap": "Check 1: *Naam*"},
+    {"who": "b", "hi": "या एयरपोर्ट के बोर्ड, टिकट या कैफ़े की रसीद पे देखो.", "en": "Ya airport ke board, ticket ya cafe ki raseed pe dekho.", "pose": "point", "expr": "explaining", "show": 2, "cap": "*Board* pe dekho"},
+    {"who": "c", "hi": "और अगर नाम में बस एक अक्षर अलग हो?", "en": "Aur agar naam mein bas ek akshar alag ho?", "pose": "shrug", "expr": "confused", "cap": "*Ek letter* alag?"},
+    {"who": "b", "hi": "तो वो नकली है. जैसे एयरपोर्ट में ओ की जगह ज़ीरो. ध्यान से पढ़ो.", "en": "To wo nakli hai. Jaise Airport mein O ki jagah zero. Dhyaan se padho.", "pose": "stop", "expr": "angry", "big": 1, "show": 3, "cap": "O ki jagah *0* = nakli"}]},
+  {"id": "check2", "type": "compare", "chip": "CHECK 2", "head": "Login page kya maang raha?", "left": "THEEK", "right": "BHAAGO", "items": [{"side": "L", "text": "Mobile number"}, {"side": "L", "text": "OTP"}, {"side": "L", "text": "Room / ticket no."}, {"side": "R", "text": "Bank password"}, {"side": "R", "text": "Card number"}, {"side": "R", "text": "UPI PIN"}],
+   "lines": [
+    {"who": "b", "hi": "दूसरा चेक: लॉगिन पेज. असली पब्लिक वाईफ़ाई ज़्यादातर बस मोबाइल नंबर और ओटीपी माँगता है.", "en": "Doosra check: login page. Asli public WiFi zyaadatar bas mobile number aur OTP maangta hai.", "pose": "count", "expr": "explaining", "big": 1, "show": 2, "show_new": 2, "cap": "Check 2: *Login page*"},
+    {"who": "b", "hi": "होटल में कभी कभी रूम नंबर भी. ये सब ठीक है.", "en": "Hotel mein kabhi kabhi room number bhi. Ye sab theek hai.", "pose": "thumb", "expr": "happy", "show": 3, "cap": "Ye sab *theek*"},
+    {"who": "b", "hi": "पर अगर बैंक पासवर्ड, कार्ड नंबर या यूपीआई पिन माँगे, तो भागो!", "en": "Par agar bank password, card number ya UPI PIN maange, to bhaago!", "pose": "stop", "expr": "angry", "big": 1, "show": 6, "show_new": 3, "hit": "bhaago", "react": "shocked", "react_pose": "blown", "cap": "Bank password? *BHAAGO*"},
+    {"who": "c", "hi": "वाईफ़ाई के लिए यूपीआई पिन? ये तो पक्का चोर है!", "en": "WiFi ke liye UPI PIN? Ye to pakka chor hai!", "pose": "blown", "expr": "shocked", "big": 1, "cap": "Pakka *chor*!"}]},
+  {"id": "check3", "type": "browser", "chip": "CHECK 3", "head": "Browser warning", "color": "#ff9b9b", "url": "airport-wifi-login.com", "items": ["warning", "go back", "proceed"],
+   "lines": [
+    {"who": "b", "hi": "तीसरा चेक: ब्राउज़र की वॉर्निंग. अगर स्क्रीन पे लिखा आए, योर कनेक्शन इज़ नॉट प्राइवेट...", "en": "Teesra check: browser ki warning. Agar screen pe likha aaye, your connection is not private...", "pose": "point", "expr": "explaining", "big": 1, "show": 1, "cap": "Check 3: *Warning*"},
+    {"who": "b", "hi": "तो गो बैक दबाओ. प्रोसीड कभी मत दबाना.", "en": "To go back dabao. Proceed kabhi mat dabana.", "pose": "stop", "expr": "angry", "big": 1, "show": 3, "show_new": 2, "cap": "*Go back* dabao"}]},
+  {"id": "oops", "type": "phone", "head": "Galti se connect ho gaya?", "app": "Settings", "path": ["Wi-Fi", "Airport_Free_WiFi", "Forget this network"], "items": ["Password turant badlo, 2-step ON", "Paise kate? Bank + 1930"],
+   "lines": [
+    {"who": "c", "hi": "और अगर मैं पहले ही कनेक्ट हो चुका हूँ?", "en": "Aur agar main pehle hi connect ho chuka hoon?", "pose": "blown", "expr": "shocked", "big": 1, "cap": "Already *connect*?"},
+    {"who": "b", "hi": "घबराओ मत. सेटिंग्स में वाईफ़ाई खोलो, उस नेटवर्क पे टैप करो, और फ़ॉरगेट दबाओ.", "en": "Ghabrao mat. Settings mein WiFi kholo, us network pe tap karo, aur Forget dabao.", "pose": "palm", "expr": "explaining", "show": 3, "show_new": 3, "cap": "WiFi *Forget* karo"},
+    {"who": "b", "hi": "फिर जो भी पासवर्ड डाला था, उसे तुरंत बदलो, और टू स्टेप वेरिफ़िकेशन ऑन करो.", "en": "Phir jo bhi password daala tha, use turant badlo, aur two step verification on karo.", "pose": "count", "expr": "explaining", "show": 4, "cap": "Password *turant* badlo"},
+    {"who": "b", "hi": "और अगर पैसे कटे, तो तुरंत बैंक को कॉल करो और एक नौ तीन शून्य पे रिपोर्ट करो.", "en": "Aur agar paise kate, to turant bank ko call karo aur 1930 pe report karo.", "pose": "point", "expr": "explaining", "show": 5, "cap": "Helpline *1930*"}]},
+  {"id": "recap", "type": "recap", "head": "Recap: 3 check + 1 rule", "items": ["Naam match hai?", "Login kya maang raha?", "Browser warning?", "Paisa = sirf mobile data"],
+   "lines": [
+    {"who": "c", "hi": "मतलब नाम, लॉगिन पेज, और वॉर्निंग. तीन चेक!", "en": "Matlab naam, login page, aur warning. Teen check!", "pose": "count", "expr": "happy", "big": 1, "show": 3, "show_new": 3, "cap": "Naam. Login. *Warning.*"},
+    {"who": "b", "hi": "और गोल्डन रूल: बाहर पैसे का काम सिर्फ़ मोबाइल डेटा पे. फ़्री वाईफ़ाई पे सिर्फ़ रील्स.", "en": "Aur golden rule: bahar paise ka kaam sirf mobile data pe. Free WiFi pe sirf reels.", "pose": "palm", "expr": "smug", "big": 1, "show": 4, "cap": "Paisa = *Mobile data*"}]},
+  {"id": "outro", "type": "outro", "head": "Save karo, share karo", "sub": "Us dost ko bhejo jo har jagah free WiFi dhoondhta hai", "items": ["subscribe", "instagram"],
+   "lines": [
+    {"who": "b", "hi": "ये वीडियो उस दोस्त को भेजो जो हर जगह फ़्री वाईफ़ाई ढूँढता है.", "en": "Ye video us dost ko bhejo jo har jagah free WiFi dhoondhta hai.", "pose": "thumb", "expr": "happy", "big": 1, "cap": "*Dost* ko bhejo"},
+    {"who": "b", "hi": "पूरा गाइड टेक्नीबाबा डॉट कॉम स्लैश गाइड्स पे है. चैनल सब्सक्राइब करो, मिलते हैं अगले गाइड में!", "en": "Poora guide technibaba dot com slash guides pe hai. Channel subscribe karo, milte hain agle guide mein!", "pose": "wave", "expr": "happy", "big": 1, "show": 2, "show_new": 2, "react_pose": "wave", "react": "happy", "cap": "*Subscribe* karo"}]}
+ ]}

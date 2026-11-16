@@ -10,7 +10,7 @@ One thing the viewer can do today, for free, shown in 3–4 steps, with a commen
 - 30–45 s. Hook = the result first ("Ye reel kisi editor ne nahi banayi"), then the steps.
 - Chotu asks what a beginner would ask; Baba answers in one line each.
 - End: recap + "Comment karo <KEYWORD>, guide bhejunga" + "dost ko bhejo jo reels banata hai".
-- One ALL-CAPS keyword per reel, 4–7 letters, never reused within 30 days (check `posted.md`).
+- Comment keyword is always GUIDE (see GUIDES.md); the guide goes on technibaba.com/guides.
 
 ## Honesty rules (do not break)
 - Only describe what we really do or what a current source confirms. Our real stack: Claude writes the script and the animation code; characters are code-drawn SVG rigs; frames come from a headless browser (Playwright) into ffmpeg; voices are Kokoro (free, offline) and Veer's own cloned voice (Voicebox, on his Mac); music is a synthesised lo-fi bed; posting is through Windsor.ai after Veer approves.

@@ -24,7 +24,7 @@ page=open(f'{W}/page.html').read(); js=page[page.index('<script>')+8:page.index(
 # 4. static clips: panel pages and captions
 order=[]; [order.append(b['scene']) for b in BT if b['scene'] not in order]
 scs={n:(0 if k==0 else next(b for b in BT if b['scene']==n)['f0']-5) for k,n in enumerate(order)}
-hook_end=BT[1]['f0']-3
+LONG=os.path.exists(f'{W}/layout_long'); hook_end=0 if LONG else BT[1]['f0']-3
 pages=''
 for k,n in enumerate(order):
     s=max(scs[n],hook_end) if k==0 else scs[n]; e=scs[order[k+1]] if k<len(order)-1 else NF
@@ -36,9 +36,9 @@ capsh=''
 for k,c in enumerate(caps):
     raw=c['text'].replace('*',''); size=min(72,800/(len(raw)*.6)); parts=c['text'].split('*')
     inner=''.join(f'<span class="{"kw" if i%2 else ""}">{H.escape(s)}</span>' for i,s in enumerate(parts))
-    top=1440 if c['f']<hook_end else 1082
+    top=990 if LONG else (1440 if c['f']<hook_end else 1082)
     capsh+=f'<div class="cap clip" id="cap-{k}" data-start="{c["f"]/FPS:.3f}" data-duration="{max(.2,(c["end"]-c["f"])/FPS):.3f}" data-track-index="4" style="top:{top-size*.95:.0f}px;font-size:{size:.1f}px;height:{size*1.5:.0f}px;border-radius:{size*.4:.0f}px"><span class="capt">{inner}</span></div>\n'
-tpl=open(f'{root}/pipeline/hf_split.html').read()
+tpl=open(f'{root}/pipeline/'+('hf_long.html' if LONG else 'hf_split.html')).read()
 out=tpl.replace('__GSAP__',gsap).replace('__SCRIPT__',js).replace('__PAGES__',pages).replace('__CAPS__',capsh).replace('__DUR__',f'{DUR:.3f}').replace('__NCAPS__',str(len(caps)))
 for k in ('ink','navy','mint','captionKeyword','captionText','captionPlate'): out=out.replace('__C_'+k+'__',C[k])
 open(f'{hf}/index.html','w').write(out)
