@@ -1,0 +1,45 @@
+{
+ "updated": "2026-11-16",
+ "guides": [
+  {
+   "slug": "asli-vs-nakli-wifi-3-check",
+   "date": "2026-11-15",
+   "title": "Asli ya nakli WiFi? 3 check, 3 second",
+   "lane": "Tutorial",
+   "summary": "Public jagah (airport, cafe, station) pe same naam ke do WiFi dikhein, to connect karne se pehle ye 3 check karo.",
+   "steps": [
+    {"title": "Naam match karo", "body": "WiFi ka exact naam staff se poocho ya official board/receipt pe dekho. Ek letter bhi alag (jaise Airp0rt with zero) to wo nakli hai. Do same naam dikhein to staff se confirm kiye bina connect mat karo."},
+    {"title": "Login page dekho", "body": "Asli public WiFi aam taur pe sirf mobile number + OTP ya room/ticket number maangta hai. Agar login page bank password, card number, UPI PIN ya email password maange, turant band karo. Wo nakli page hai."},
+    {"title": "Browser warning ko serious lo", "body": "Agar browser 'Your connection is not private' ya 'Not secure' dikhaye, to 'Go back' dabao. 'Proceed' kabhi mat dabao."},
+    {"title": "Galti se connect ho gaya?", "body": "Phone ki WiFi settings mein us network pe tap karke 'Forget' karo. Jo bhi password daala tha, wo turant badlo, aur us account mein 2-step verification on karo."}
+   ],
+   "tip": "Bahar banking ya payments sirf mobile data pe karo. Free WiFi sirf browsing aur reels ke liye.",
+   "caution": "Ye general safety guide hai. Kisi bhi fraud pe turant apne bank ko call karo aur cybercrime.gov.in ya helpline 1930 pe report karo.",
+   "youtube": "",
+   "sources": [
+    {"title": "CERT-In: public Wi-Fi safety tips", "url": "https://www.cert-in.org.in/"},
+    {"title": "National Cyber Crime Reporting Portal", "url": "https://cybercrime.gov.in/"}
+   ]
+  },
+  {
+   "slug": "free-airport-wifi-jaal",
+   "date": "2026-11-15",
+   "title": "Free airport WiFi: WiFi nahi, jaal?",
+   "lane": "Tutorial",
+   "summary": "Bina password wala free WiFi kabhi kabhi nakli hotspot hota hai jo aapke passwords chura sakta hai. Bachne ka simple rule.",
+   "steps": [
+    {"title": "Samjho khatra kya hai", "body": "Koi bhi same naam ka hotspot bana sakta hai (jaise Free_Airport_WiFi_Fast). Connect hote hi wo nakli login page dikha kar aapka password le sakta hai."},
+    {"title": "Banking sirf mobile data pe", "body": "Public jagah pe UPI, net banking ya shopping payments sirf apne mobile data pe karo."},
+    {"title": "Auto-connect band karo", "body": "Phone settings mein WiFi ke andar 'Auto-join' / 'Auto reconnect' open networks ke liye band karo, taaki phone khud nakli WiFi se na jude."},
+    {"title": "Asli WiFi pehchano", "body": "Part 2 dekho: naam, login page aur browser warning, ye 3 check."}
+   ],
+   "tip": "Free WiFi = sirf reels. Paisa = mobile data.",
+   "caution": "Ye general safety guide hai. Fraud ho to turant bank ko call karo aur 1930 / cybercrime.gov.in pe report karo.",
+   "youtube": "",
+   "sources": [
+    {"title": "CERT-In", "url": "https://www.cert-in.org.in/"},
+    {"title": "National Cyber Crime Reporting Portal", "url": "https://cybercrime.gov.in/"}
+   ]
+  }
+ ]
+}
