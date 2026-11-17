@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+// ================= reel art: "Ramayana: English honth" (split layout) =================
+const RD=C.laptopRed,MINT=C.mint,MD=C.mintDark,YEL=C.captionKeyword,NAVY=C.navy,GREY='#9aa0b4';
+const T=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="${o.font||'Pop'}" font-weight="${o.w||900}" font-size="${s}" fill="${o.fill||INK}" ${o.extra||''}>${txt}</text>`;
+const wifi=(x,y,s,col,bars=3)=>`<g transform="translate(${x},${y}) scale(${s})">${[0,1,2].map(k=>`<path d="M${-22-k*20},${-8-k*16} Q0,${-34-k*26} ${22+k*20},${-8-k*16}" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round" opacity="${k<bars?1:.25}"/>`).join('')}<circle r="10" fill="${col}"/></g>`;
+const box=(x,y,w,h,fill,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-6}) scale(${p})"><rect x="${-w/2+6}" y="${-h/2+10}" width="${w}" height="${h}" rx="${o.r||24}" fill="#000" opacity=".18"/><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${o.r||24}" fill="${fill}" stroke="${o.stroke||INK}" stroke-width="${o.sw||6}"/>${inner}</g>`;
+const tick=(x,y,s,p,col=MD)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${col}" stroke="${INK}" stroke-width="5"/><path d="M-16,2 l11,12 l22,-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+const cross=(x,y,s,p)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${RD}" stroke="${INK}" stroke-width="5"/><path d="M-14,-14 L14,14 M14,-14 L-14,14" stroke="#fff" stroke-width="9" stroke-linecap="round"/></g>`;
+const stamp=(x,y,txt,p,col,rot=-8,size=96)=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${p})"><rect x="${-txt.length*size*.36-30}" y="${-size*.72}" width="${txt.length*size*.72+60}" height="${size*1.4}" rx="22" fill="${col}" stroke="#fff" stroke-width="9"/>${T(0,size*.33,size,txt,{fill:col==YEL?INK:'#fff'})}</g>`;
+const F=i=>BT[i].f0,PW=PAN.x1-PAN.x0,PH=PAN.y1-PAN.y0;
+const head=(step,title,col,fill)=>`<rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="${PH}" fill="${fill}"/><rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="112" fill="${NAVY}"/>`+(step?`<rect x="118" y="176" width="210" height="62" rx="31" fill="${col}"/>${T(223,220,34,'STEP '+step,{fill:INK})}`:'')+T(step?352:118,222,40,title,{a:'start',fill:'#fff'})+[1,2,3].map(k=>`<circle cx="${880+k*28}" cy="207" r="9" fill="${step&&k<=step?col:'#4b4a86'}"/>`).join('');
+// cue frames
+const SKIN='#f4c193',PURP='#7b5cff';
+const mouth=(x,y,s,shape,col=RD)=>{const m={aa:`<ellipse rx="44" ry="34" fill="#5a1d2a" stroke="${col}" stroke-width="12"/>`,oo:`<ellipse rx="22" ry="26" fill="#5a1d2a" stroke="${col}" stroke-width="12"/>`,ee:`<rect x="-52" y="-12" width="104" height="24" rx="12" fill="#5a1d2a" stroke="${col}" stroke-width="12"/>`,mm:`<path d="M-48,0 Q0,10 48,0" fill="none" stroke="${col}" stroke-width="14" stroke-linecap="round"/>`};return `<g transform="translate(${x},${y}) scale(${s})">${m[shape]}</g>`};
+const face=(x,y,s,shape,dots,col)=>`<g transform="translate(${x},${y}) scale(${s})"><ellipse rx="150" ry="190" fill="${SKIN}" stroke="${INK}" stroke-width="8"/><path d="M-150,-40 Q-160,-200 0,-200 Q160,-200 150,-40 Q120,-150 0,-150 Q-120,-150 -150,-40Z" fill="#3b2a24"/><ellipse cx="-55" cy="-20" rx="16" ry="20" fill="${INK}"/><ellipse cx="55" cy="-20" rx="16" ry="20" fill="${INK}"/><path d="M0,10 Q-14,50 4,58" fill="none" stroke="#c98a5e" stroke-width="7" stroke-linecap="round"/>${mouth(0,110,1,shape,col)}${dots?[[-60,100],[60,100],[0,74],[0,146],[-34,82],[34,82],[-34,138],[34,138]].map(([dx,dy])=>`<circle cx="${dx}" cy="${dy}" r="9" fill="${MINT}" stroke="${INK}" stroke-width="3"/>`).join(''):''}</g>`;
+const wave=(x,y,w,amp,f,col)=>{let d='';for(let i=0;i<=40;i++){const xx=-w/2+i*w/40,h=amp*Math.abs(Math.sin(i*.9+f*.35))*(0.4+0.6*Math.abs(Math.sin(i*.37)));d+=`M${xx},${-h} L${xx},${h} `}return `<path transform="translate(${x},${y})" d="${d}" stroke="${col}" stroke-width="9" stroke-linecap="round"/>`};
+const q={c1:F(1),c2:F(1)+7,c3:F(1)+14,
+ pg:F(2),eng:WF(2,'english'),nayi:WF(2,'nayi'),tr:WF(2,'translation'),gt:WF(3,'google'),
+ mic:F(4),dub:WF(4,'dubbing'),ai:WF(4,'ai'),ins:WF(4,'insaan'),qa:F(5)+3,
+ fc:F(6),perf:WF(6,'performance'),aim:WF(6,'ai'),eng2:WF(6,'english'),naye:WF(7,'naye'),
+ vid:F(8),mil:WF(8,'mil'),sach:WF(8,'sach'),r1:WF(9,'script'),r2:WF(9,'awaaz'),r3:WF(9,'honth'),dost:WF(10,'dost'),haan:WF(10,'haan')};
+[[q.c1,'pop'],[q.c2,'pop'],[q.c3,'pop'],[q.pg,'pop'],[q.eng,'type'],[q.nayi,'ding'],[q.tr,'crack'],[q.gt,'pop'],[q.mic,'pop'],[q.dub,'blip'],[q.ai,'crack'],[q.ins,'ding'],[q.qa,'pop'],[q.fc,'pop'],[q.fc+10,'pop'],[q.perf,'blip'],[q.perf+6,'blip'],[q.aim,'pop'],[q.eng2,'ding'],[q.vid,'pop'],[q.mil,'tick'],[q.r1,'pop'],[q.r2,'pop'],[q.r3,'pop'],[q.dost,'ding'],[q.haan,'pop'],[q.haan+6,'type']].forEach(([f,t])=>sfx(f,t));
+function content(n,f){const t=f/FPS;let o='';
+ if(n=='q'){o+=head(0,'RAMAYANA: ENGLISH HONTH?',YEL,'#fff7e6');
+  [['SCRIPT',q.c1,MINT],['AWAAZ',q.c2,YEL],['HONTH',q.c3,'#ff9b9b']].forEach(([lab,fr,col],k)=>{const p=pop(f,fr,9);o+=box(540,400+k*170,760,136,'#fff',p,`<circle cx="-300" cy="0" r="46" fill="${col}" stroke="${INK}" stroke-width="5"/>`+T(-300,20,56,k+1)+T(-220,22,60,lab,{a:'start'}),{rot:k%2?1.5:-1.5})});
+  o+=T(540,915,30,'Makers ke mutabik · VFX: DNEG',{w:800,fill:'#7a7f92'})}
+ if(n=='script'){o+=head(1,'SCRIPT',MINT,'#eaf6ff');
+  const pp=pop(f,q.pg,9),lines=clamp(Math.floor((f-q.eng)/4),0,5);
+  o+=box(330,560,440,560,'#fff',pp,`<rect x="-220" y="-280" width="440" height="80" rx="24" fill="${NAVY}"/><rect x="-220" y="-230" width="440" height="30" fill="${NAVY}"/>`+T(0,-226,34,'ENGLISH SCRIPT',{fill:'#fff'})+[0,1,2,3,4].map(k=>`<rect x="-170" y="${-150+k*70}" width="${k<lines?[320,260,300,220,280][k]:0}" height="26" rx="13" fill="${k%2?MINT:'#c9cfe0'}"/>`).join('')+(pop(f,q.nayi,8)>0?T(0,250,40,'NAYA LIKHA',{fill:MD}):''),{rot:-2});
+  const pt=pop(f,q.tr-3,9);o+=box(770,470,400,230,'#fff',pt,T(0,-40,32,'Hindi → English',{font:'Mono',w:700})+T(0,30,40,'TRANSLATE',{fill:GREY})+cross(175,-105,1,pop(f,q.tr,6)),{rot:3,stroke:pt>0?RD:INK});
+  if(f>=q.gt){const pg=pop(f,q.gt,8);o+=stamp(770,780,'NAHI!',pg,RD,-8,72)}}
+ if(n=='voice'){o+=head(2,'AWAAZ',YEL,'#f3efff');
+  const pm=pop(f,q.mic,9);
+  o+=box(540,430,820,260,'#fff',pm,`<g transform="translate(-300,0)"><rect x="-40" y="-90" width="80" height="130" rx="40" fill="${NAVY}" stroke="${INK}" stroke-width="6"/><path d="M-62,10 Q-62,80 0,80 Q62,80 62,10" fill="none" stroke="${INK}" stroke-width="8"/><rect x="-6" y="80" width="12" height="40" fill="${INK}"/></g>`+wave(110,-10,460,f>=q.mic?60:0,f,MD)+T(110,100,34,'Recording · INSAAN',{w:800,fill:MD}),{rot:-1});
+  const pa=pop(f,q.dub-2,9);o+=box(330,740,380,200,'#fff',pa,T(0,-20,40,'AI VOICE',{fill:GREY})+T(0,40,30,'dubbing mein',{w:800,fill:GREY})+cross(150,-70,1.1,pop(f,q.ai,6)),{rot:-3,stroke:pa>0?RD:INK});
+  const ph=pop(f,q.ins-2,9);o+=box(760,740,380,200,MINT,ph,T(0,-10,44,'HUMAN')+T(0,46,32,'voice ✓',{w:800})+tick(150,-70,1.1,pop(f,q.ins,6),NAVY),{rot:3});
+  if(f>=q.qa){const p=pop(f,q.qa,8);o+=`<g transform="translate(880,300) rotate(10) scale(${p*(1+.05*Math.sin(t*8))})"><circle r="66" fill="${YEL}" stroke="${INK}" stroke-width="7"/>${T(0,32,90,'?')}</g>`}}
+ if(n=='lips'){o+=head(3,'HONTH',' #ff9b9b'.trim(),'#fff0ee');
+  const pf=pop(f,q.fc,9),dots=f>=q.perf,ai=f>=q.aim,en=f>=q.eng2;
+  const seq=['aa','mm','ee','oo'],shape=seq[Math.floor(f/5)%4];
+  o+=box(300,560,420,560,'#fff',pf,T(0,-232,30,'SHOOT · HINDI',{w:800,fill:'#7a7f92'})+face(0,30,.95,dots?shape:'aa',dots,INK),{rot:-2});
+  if(ai){const pa=pop(f,q.aim,9);o+=`<g transform="translate(540,560) scale(${pa})"><circle r="50" fill="${PURP}" stroke="${INK}" stroke-width="6"/>${T(0,14,38,'AI',{fill:'#fff'})}</g>`}
+  if(f>=q.fc+10){const pe=pop(f,q.fc+10,9);o+=box(790,560,400,560,'#fff',pe,T(0,-232,30,'SCREEN · ENGLISH',{w:800,fill:'#7a7f92'})+face(0,30,.9,en?seq[(Math.floor(f/5)+2)%4]:'mm',0,en?PURP:INK)+(!ai?T(0,262,40,'? ? ?',{fill:GREY}):'')+(en?T(0,250,34,'sirf honth badle',{fill:PURP}):''),{rot:2,stroke:en?PURP:INK})}
+  if(dots){o+=T(300,900,28,'performance capture dots',{w:800,fill:MD})}
+  const pn=pop(f,q.naye-2,5);if(pn>0)o+=stamp(540,300,'HONTH NAYE!',pn,YEL,-5,66)}
+ if(n=='lesson'){o+=head(0,'YAAD RAKHO',RD,'#fff0ee');
+  const pv=pop(f,q.vid,9);o+=box(540,520,780,470,NAVY,pv,`<rect x="-360" y="-200" width="720" height="400" rx="20" fill="#24226a"/>`+face(0,10,.82,['aa','mm','ee','oo'][Math.floor(f/5)%4],0,INK)+`<g transform="translate(-300,-150)"><circle r="14" fill="${RD}"/>${T(24,10,26,'VIDEO',{a:'start',fill:'#fff'})}</g>`,{rot:-1});
+  const pm=pop(f,q.mil,8);if(pm>0)o+=box(300,860,380,110,'#fff',pm,T(-20,16,40,'Honth mile')+tick(150,0,.9,pm),{rot:-2});
+  const ps=pop(f,q.sach-2,5);if(ps>0)o+=stamp(760,860,'≠ SACH',ps,RD,-6,72)}
+ if(n=='recap'){o+=head(0,'3 STEP · SEND KARO',YEL,'#fff7e6');
+  const late=f>=q.dost,sh=late?sm(f,q.dost-2,10):0;
+  [['Script: naya likha',q.r1],['Awaaz: insaan ki',q.r2],['Honth: AI ne milaaye',q.r3]].forEach(([lab,fr],k)=>{const p=pop(f,F(9)+k*4,9),tk=pop(f,fr,8);o+=box(540,372+k*(150-34*sh),800,126-20*sh,'#fff',p,`<rect x="-370" y="-34" width="68" height="68" rx="16" fill="${tk>0?MINT:'#f3f4f8'}" stroke="${INK}" stroke-width="5"/>`+(tk>0?`<path d="M-354,2 l14,15 l28,-32" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="70" stroke-dashoffset="${70*(1-clamp(tk))}"/>`:'')+T(-270,17,46,lab,{a:'start'}),{rot:k%2?1:-1})});
+  if(late){const pc=pop(f,q.dost,9);o+=box(540,835,820,200,'#fff',pc,T(-370,-52,28,'Lip-sync chalega? Comment karo',{a:'start',w:700,fill:GREY})+`<g transform="translate(-180,30) scale(${pop(f,q.haan,8)})"><rect x="-150" y="-46" width="300" height="92" rx="46" fill="${MINT}" stroke="${INK}" stroke-width="6"/>${T(0,16,46,'HAAN')}</g><g transform="translate(200,30) scale(${pop(f,q.haan+4,8)})"><rect x="-150" y="-46" width="300" height="92" rx="46" fill="#ff9b9b" stroke="${INK}" stroke-width="6"/>${T(0,16,46,'NA')}</g>`,{rot:-1})}}
+ return o}
+// bottom strip: cinema hall (screen glow + seat rows)
+function strip(f){const t=f/FPS;let o=`<defs><linearGradient id="sw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2f6e"/><stop offset="1" stop-color="#1c1846"/></linearGradient><radialGradient id="glow" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#ffe9b0" stop-opacity=".55"/><stop offset="1" stop-color="#ffe9b0" stop-opacity="0"/></radialGradient></defs><rect x="-700" y="-1500" width="2500" height="3800" fill="url(#sw)"/>`;
+ o+=`<rect x="-200" y="1060" width="1480" height="420" rx="20" fill="#f6efe0" opacity="${.85+.1*Math.sin(t*3)}"/><rect x="-700" y="1060" width="2500" height="900" fill="url(#glow)"/>`;
+ o+=[[-300,'#b4304a'],[1180,'#b4304a']].map(([x,c])=>`<rect x="${x}" y="1000" width="200" height="700" fill="${c}"/>`).join('');
+ for(let r=0;r<2;r++)for(let k=-2;k<14;k++){o+=`<rect x="${k*110-40+r*55}" y="${1640+r*90}" width="96" height="140" rx="30" fill="${r?'#8c2238':'#a42a44'}" stroke="#5c1424" stroke-width="5"/>`}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const p=pop(f,2,9)*(1-sp),p2=pop(f,10,9)*(1-sp),p3=pop(f,16,9)*(1-sp);
+ const chip=(x,p,rot,lab,sub,col)=>box(x,440,420,130,col,p,T(0,-6,46,lab)+T(0,40,28,sub,{w:800}),{rot});
+ return stamp(540,280,'ENGLISH HONTH?!',p,YEL,-3,64)+chip(300,p2,-4,'SHOOT','Hindi','#fff')+`<g transform="translate(540,440) scale(${p3})">${T(0,22,80,'→',{fill:'#fff'})}</g>`+chip(780,p3,4,'SCREEN','English',MINT)}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+RIG.impact(f0,HITS,540,600)+caption(f,capY(f));
+ s+=`<rect x="0" y="1904" width="${1080*f0/NF}" height="16" fill="${MINT}"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
