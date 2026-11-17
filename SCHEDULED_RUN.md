@@ -5,6 +5,7 @@ Every scheduled reel follows this file. The slot's own prompt only says which sl
 | Slot (IST) | Lane | Notes |
 |---|---|---|
 | 06:38 morning | Tutorial: everyday tech how-to (phone, apps, settings, safety, money apps, travel tech) | Comment keyword + DM checklist |
+| 07:00 | TechniBaba Daily news bulletin (NEWS_FORMAT.md) | Biggest story first, then 5–7 stories, mostly tech |
 | 10:00 | Trending TECH | Today's tech story, explained simply |
 | 14:00 | Trending SPORTS through a tech angle | Tech behind the sport, the stat, the app, the broadcast |
 | 17:00 evening | Tutorial: Creator Guides (CREATOR_GUIDES.md) | How we make our videos, free tools, repos, skills |

@@ -1,0 +1,32 @@
+{"dateLabel": "17 NOV 2026",
+ "scenes": [
+  {"id": "hook", "mode": "split", "story": 1, "kicker": "GAMING", "icon": "gamepad", "stat": "19 NOV", "statSub": "PS5 + Xbox", "headline": "GTA 6 launches in *2 days*. Pre-orders reportedly cross *$1 billion*", "banner": "GTA 6 bas 2 din door!", "source": "Rockstar Games, NewsBytes",
+   "lines": [
+    {"hi": "जी टी ए सिक्स आने में बस दो दिन बचे हैं, और रिपोर्ट के मुताबिक प्री ऑर्डर्स पहले ही एक बिलियन डॉलर पार!", "en": "GTA 6 aane mein bas do din bache hain, aur report ke mutabik pre orders pehle hi ek billion dollar paar!", "pose": "blown", "expr": "shocked", "big": 1, "hit": "billion", "cap": "GTA 6 in *2 din*!"},
+    {"hi": "एक कंपनी ने तो लॉन्च के दिन अपने एम्प्लॉईज़ को छुट्टी दे दी है.", "en": "Ek company ne to launch ke din apne employees ko chhutti de di hai.", "pose": "shrug", "expr": "happy", "cap": "Launch day *chhutti*"}]},
+  {"id": "intro", "mode": "anchor", "title": "Is hafte|*kya hua*?",
+   "lines": [
+    {"hi": "चलो देखते हैं, इस हफ़्ते टेक की दुनिया में और क्या क्या हुआ.", "en": "Chalo dekhte hain, is hafte tech ki duniya mein aur kya kya hua.", "pose": "wave", "expr": "happy", "big": 1, "cap": "Is hafte *kya hua*?"}]},
+  {"id": "voyager", "mode": "card", "story": 2, "kicker": "SPACE", "icon": "space", "stat": "1 day", "statSub": "for its signal to reach us", "headline": "Voyager 1 is about to be *one light-day* from Earth", "source": "NASA via NewsBytes",
+   "lines": [
+    {"hi": "नंबर दो. नासा का वॉयजर वन, अठारह नवंबर को, धरती से एक लाइट डे दूर होगा. मतलब उसका सिग्नल हम तक पहुँचने में पूरा एक दिन!", "en": "Number do. NASA ka Voyager 1, atharah November ko, dharti se ek light day door hoga. Matlab uska signal humtak pahunchne mein poora ek din!", "pose": "explain", "expr": "shocked", "big": 1, "cap": "*1 light-day* door"}]},
+  {"id": "apple", "mode": "card", "story": 3, "kicker": "APPS", "icon": "forum", "stat": "28 yrs", "statSub": "and closing", "headline": "Apple is closing its *Support Community* forums on November 20", "source": "NewsBytes",
+   "lines": [
+    {"hi": "नंबर तीन. एप्पल अपने सपोर्ट कम्युनिटी फ़ोरम्स बीस नवंबर को हमेशा के लिए बंद कर रहा है. अट्ठाईस साल बाद.", "en": "Number teen. Apple apne Support Community forums bees November ko hamesha ke liye band kar raha hai. Atthais saal baad.", "pose": "point", "expr": "explaining", "cap": "Apple forums *band*"}]},
+  {"id": "gemini", "mode": "card", "story": 4, "kicker": "AI", "icon": "car", "headline": "Google's *Gemini* app is now on *Apple CarPlay*", "source": "NewsBytes",
+   "lines": [
+    {"hi": "नंबर चार. गूगल का जेमिनाई अब एप्पल कारप्ले पे आ गया है. मतलब आईफ़ोन वाले गाड़ी में भी जेमिनाई से बात कर पाएँगे.", "en": "Number chaar. Google ka Gemini ab Apple CarPlay pe aa gaya hai. Matlab iPhone wale gaadi mein bhi Gemini se baat kar payenge.", "pose": "count", "expr": "happy", "cap": "Gemini on *CarPlay*"}]},
+  {"id": "openai", "mode": "card", "story": 5, "kicker": "INDIA", "icon": "server", "headline": "OpenAI starts *local AI processing* in India", "source": "NewsBytes",
+   "lines": [
+    {"hi": "नंबर पाँच. ओपन ए आई ने इंडिया में लोकल ए आई प्रोसेसिंग शुरू की है. रिपोर्ट के मुताबिक, बड़ी कंपनियों को ग्राहक बनाने के लिए.", "en": "Number paanch. OpenAI ne India mein local AI processing shuru ki hai. Report ke mutabik, badi companiyon ko grahak banane ke liye.", "pose": "explain", "expr": "explaining", "cap": "OpenAI *India* mein"}]},
+  {"id": "spotify", "mode": "card", "story": 6, "kicker": "APPS", "icon": "headphones", "headline": "Spotify brings *audiobooks* to India, at an *extra cost*", "source": "NewsBytes",
+   "lines": [
+    {"hi": "नंबर छह. स्पॉटिफ़ाई ने इंडिया में ऑडियोबुक्स लॉन्च किए, हज़ारों इंडियन भाषाओं के टाइटल्स के साथ. पर इसके लिए अलग से पैसे देने होंगे.", "en": "Number chhe. Spotify ne India mein audiobooks launch kiye, hazaaron Indian bhashaon ke titles ke saath. Par iske liye alag se paise dene honge.", "pose": "palm", "expr": "smug", "cap": "Audiobooks, *extra paisa*"}]},
+  {"id": "united", "mode": "card", "story": 7, "kicker": "WORLD", "icon": "plane", "headline": "United Airlines *bans AI agents* from booking flights", "source": "NewsBytes",
+   "lines": [
+    {"hi": "और नंबर सात. यूनाइटेड एयरलाइंस ने ए आई एजेंट्स से फ़्लाइट बुकिंग पे बैन लगा दिया है. यानी टिकट आपको खुद बुक करनी पड़ेगी!", "en": "Aur number saat. United Airlines ne AI agents se flight booking pe ban laga diya hai. Yaani ticket aapko khud book karni padegi!", "pose": "shrug", "expr": "smug", "big": 1, "cap": "AI agents *ban*"}]},
+  {"id": "outro", "mode": "anchor", "title": "Roz subah|*7 baje*",
+   "lines": [
+    {"hi": "इनमें से कौनसी खबर सबसे बड़ी लगी? कमेंट में बताओ.", "en": "Inmein se kaunsi khabar sabse badi lagi? Comment mein batao.", "pose": "point", "expr": "happy", "big": 1, "cap": "*Comment* karo"},
+    {"hi": "और रोज़ सुबह सात बजे की टेक खबरों के लिए टेक्नीबाबा को फ़ॉलो करो.", "en": "Aur roz subah saat baje ki tech khabron ke liye TechniBaba ko follow karo.", "pose": "wave", "expr": "happy", "big": 1, "cap": "*Follow* karo"}]}
+ ]}
