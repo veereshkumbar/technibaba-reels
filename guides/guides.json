@@ -1,6 +1,61 @@
 {
- "updated": "2026-11-16",
+ "updated": "2026-11-17",
  "guides": [
+  {
+   "slug": "check-sim-cards-in-your-name-sanchar-saathi",
+   "date": "2026-11-17",
+   "title": "How to check which SIM cards are issued in your name (Sanchar Saathi)",
+   "lane": "Tutorial",
+   "summary": "Someone can get a SIM card using your ID without you knowing. The government's Sanchar Saathi website shows every mobile number registered in your name, and lets you report the ones that are not yours. It takes about 2 minutes.",
+   "steps": [
+    {
+     "title": "Open the official Sanchar Saathi website",
+     "body": "Type sancharsaathi.gov.in in your browser yourself (do not use links from messages). Go to Citizen Centric Services, then choose Know Mobile Connections in Your Name. The same option is in the Sanchar Saathi app."
+    },
+    {
+     "title": "Log in with your mobile number and OTP",
+     "body": "Enter your 10-digit mobile number and the captcha (if shown), then enter the OTP sent to that number. Use a number that is active and in your own name."
+    },
+    {
+     "title": "Check the list of numbers",
+     "body": "The page shows every mobile number registered against your identity, across all operators. Go through it slowly. Most people can have at most 9 connections in their name (6 in Jammu and Kashmir, Assam and the North-Eastern states)."
+    },
+    {
+     "title": "Report what is not yours, or not needed",
+     "body": "For a number you never took, select Not My Number. For an old number of yours that you no longer use, select Not Required. Then press Report. You get a ticket or reference number; the operator verifies the request and disconnects the number. Check again after a few weeks."
+    }
+   ],
+   "tip": "Do the same check for your parents and grandparents, using their phone for the OTP. Older family members are often the ones whose documents get misused.",
+   "caution": "Sanchar Saathi never asks for your bank details, card number or UPI PIN. If a SIM in your name was used for fraud, report it at cybercrime.gov.in or call 1930. Screen labels can change slightly; follow the wording on the official site.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "Digit: How to check and block unauthorised SIM cards registered under your name (updated 9 Nov 2026)",
+     "url": "https://www.digit.in/how-to/general/how-to-check-and-block-unauthorised-sim-cards-registered-under-your-name.html"
+    },
+    {
+     "title": "Cashify: How to use Sanchar Saathi TAFCOP (updated 11 Nov 2026)",
+     "url": "https://www.cashify.in/how-to-use-sanchar-saathi-tafcop"
+    },
+    {
+     "title": "Digit: New SIM rules 2026, how to check mobile numbers linked to your Aadhaar (21 Aug 2026)",
+     "url": "https://www.digit.in/news/general/new-sim-rules-2026-how-to-check-mobile-numbers-linked-to-your-aadhaar.html"
+    },
+    {
+     "title": "Adda247: New SIM card rules 2026, 9-SIM limit (24 Aug 2026)",
+     "url": "https://currentaffairs.adda247.com/new-sim-card-rules-2026-9-sim-limit-dot-restrictions-and-key-changes/"
+    },
+    {
+     "title": "Business Today: Sanchar Saathi app shows SIM cards issued in your name (4 Dec 2025)",
+     "url": "https://www.businesstoday.in/technology/news/story/sanchar-saathi-app-reveals-how-many-sim-cards-have-been-issued-in-your-name-504958-2025-12-04"
+    },
+    {
+     "title": "MediaNama: Karnataka HC seeks review of SIM cards activated without consent (27 Oct 2026)",
+     "url": "https://www.medianama.com/2026/10/223-karnataka-hc-unauthorised-sim-activation/"
+    }
+   ]
+  },
   {
    "slug": "pehle-3-second-hook-formula",
    "date": "2026-11-16",

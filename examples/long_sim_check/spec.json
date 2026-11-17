@@ -1,0 +1,383 @@
+{
+ "guide": "check-sim-cards-in-your-name-sanchar-saathi",
+ "title": "Aapke Naam Pe Kitne SIM? Sanchar Saathi 4 Step Check | TechniBaba Guide",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "title",
+   "head": "TechniBaba Guide",
+   "title": "Aapke naam pe kitne SIM?",
+   "sub": "Sanchar Saathi pe 2 minute ka check",
+   "chips": [
+    "98XXX XX101|MERA",
+    "70XXX XX889|KISKA?"
+   ],
+   "lines": [
+    {
+     "who": "c",
+     "hi": "बाबा! मेरे नाम पे तीन सिम चल रहे हैं! मैंने तो एक ही लिया था!",
+     "en": "Baba! Mere naam pe teen SIM chal rahe hain! Maine toh ek hi liya tha!",
+     "pose": "blown",
+     "expr": "shocked",
+     "cap": "Mere naam pe *3 SIM*?!",
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "घबरा मत. आज सीखते हैं कि अपने नाम के सारे सिम कैसे देखें, और जो तेरा नहीं, उसे कैसे बंद करवाएँ.",
+     "en": "Ghabra mat. Aaj seekhte hain ki apne naam ke saare SIM kaise dekhein, aur jo tera nahi, use kaise band karwayein.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "Dekho, aur *band karwao*"
+    },
+    {
+     "who": "c",
+     "hi": "पर किसी और को मेरे नाम पे सिम मिल कैसे गया?",
+     "en": "Par kisi aur ko mere naam pe SIM mil kaise gaya?",
+     "pose": "shrug",
+     "expr": "confused",
+     "cap": "Mila *kaise*?"
+    }
+   ]
+  },
+  {
+   "id": "why",
+   "type": "points",
+   "head": "Ye kyun zaroori hai?",
+   "color": "#ffd23f",
+   "items": [
+    "Kisi ki ID se SIM nikal sakta hai",
+    "Wo number fraud mein use ho sakta hai",
+    "Max 9 SIM per person (J&K, Assam, NE: 6)"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "कभी कभी किसी की आईडी या फ़ोटो से, उसकी जानकारी के बिना सिम निकाल लिया जाता है.",
+     "en": "Kabhi kabhi kisi ki ID ya photo se, uski jaankari ke bina SIM nikaal liya jaata hai.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "ID se *chupke SIM*",
+     "show": 1,
+     "show_new": 1
+    },
+    {
+     "who": "b",
+     "hi": "फिर वो नंबर फ़्रॉड में इस्तेमाल हो सकता है, और नाम आपका.",
+     "en": "Phir wo number fraud mein istemaal ho sakta hai, aur naam aapka.",
+     "pose": "stop",
+     "expr": "angry",
+     "cap": "Naam *aapka*",
+     "show": 2,
+     "hit": "aapka"
+    },
+    {
+     "who": "b",
+     "hi": "और याद रखो, ज़्यादातर राज्यों में एक इंसान के नाम पे मैक्सिमम नौ सिम. जम्मू कश्मीर, असम और नॉर्थ ईस्ट में छह.",
+     "en": "Aur yaad rakho, zyaadatar rajyon mein ek insaan ke naam pe maximum nau SIM. J&K, Assam aur North East mein chhe.",
+     "pose": "count",
+     "expr": "explaining",
+     "cap": "Max *9 SIM*",
+     "show": 3
+    },
+    {
+     "who": "c",
+     "hi": "तो चेक कैसे करूँ?",
+     "en": "Toh check kaise karun?",
+     "pose": "leanin",
+     "expr": "confused",
+     "cap": "Check *kaise*?",
+     "react": "happy"
+    }
+   ]
+  },
+  {
+   "id": "step1",
+   "type": "phone",
+   "chip": "STEP 1",
+   "head": "Asli site kholo",
+   "app": "Sanchar Saathi",
+   "path": [
+    "Citizen Services",
+    "Know Mobile Conn."
+   ],
+   "items": [
+    "sancharsaathi.gov.in khud type karo"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "पहला स्टेप: ब्राउज़र में खुद टाइप करो, संचार साथी डॉट जी ओ वी डॉट इन. मैसेज वाले लिंक पे नहीं.",
+     "en": "Pehla step: browser mein khud type karo, sancharsaathi.gov.in. Message wale link pe nahi.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "*sancharsaathi.gov.in*",
+     "show": 0,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "वहाँ सिटिज़न सेंट्रिक सर्विसेज़ में जाओ, फिर नो मोबाइल कनेक्शन्स इन योर नेम.",
+     "en": "Wahan Citizen Centric Services mein jao, phir Know Mobile Connections in Your Name.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "*Know Mobile* Connections",
+     "show": 2,
+     "show_new": 2
+    },
+    {
+     "who": "b",
+     "hi": "संचार साथी ऐप में भी यही ऑप्शन है.",
+     "en": "Sanchar Saathi app mein bhi yahi option hai.",
+     "pose": "thumb",
+     "expr": "happy",
+     "cap": "App mein *bhi*",
+     "show": 3
+    }
+   ]
+  },
+  {
+   "id": "step2",
+   "type": "points",
+   "chip": "STEP 2",
+   "head": "Number + captcha + OTP",
+   "items": [
+    "Apna 10-digit number",
+    "Captcha (agar dikhe)",
+    "OTP daalo, login"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "दूसरा: अपना दस अंकों का नंबर डालो, कैप्चा दिखे तो वो भी.",
+     "en": "Doosra: apna das ankon ka number daalo, captcha dikhe toh wo bhi.",
+     "pose": "phone",
+     "expr": "explaining",
+     "cap": "Number + *captcha*",
+     "show": 2,
+     "show_new": 2
+    },
+    {
+     "who": "b",
+     "hi": "फिर उसी नंबर पे ओ टी पी आएगा. डालो, और लॉगिन.",
+     "en": "Phir usi number pe OTP aayega. Daalo, aur login.",
+     "pose": "thumb",
+     "expr": "happy",
+     "cap": "*OTP* daalo",
+     "show": 3
+    },
+    {
+     "who": "c",
+     "hi": "ओ टी पी तो किसी को बताना नहीं है ना?",
+     "en": "OTP toh kisi ko batana nahi hai na?",
+     "pose": "shrug",
+     "expr": "confused",
+     "cap": "OTP *kisi ko nahi*",
+     "react": "smug"
+    },
+    {
+     "who": "b",
+     "hi": "बिल्कुल नहीं. संचार साथी कभी बैंक डिटेल या यू पी आई पिन नहीं माँगता.",
+     "en": "Bilkul nahi. Sanchar Saathi kabhi bank detail ya UPI PIN nahi maangta.",
+     "pose": "stop",
+     "expr": "angry",
+     "cap": "*UPI PIN* kabhi nahi"
+    }
+   ]
+  },
+  {
+   "id": "step3",
+   "type": "compare",
+   "chip": "STEP 3",
+   "head": "List dekho",
+   "left": "MERA",
+   "right": "MERA NAHI",
+   "items": [
+    {
+     "side": "L",
+     "text": "98XXX XX101"
+    },
+    {
+     "side": "L",
+     "text": "98XXX XX245"
+    },
+    {
+     "side": "R",
+     "text": "70XXX XX889"
+    }
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "तीसरा: अब लिस्ट आएगी. हर कंपनी का, आपके नाम पे जितना नंबर है, सब यहाँ.",
+     "en": "Teesra: ab list aayegi. Har company ka, aapke naam pe jitna number hai, sab yahan.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "*Sab number* yahan",
+     "show": 2,
+     "show_new": 2
+    },
+    {
+     "who": "c",
+     "hi": "ये सत्तर वाला तो मेरा है ही नहीं!",
+     "en": "Ye sattar wala toh mera hai hi nahi!",
+     "pose": "blown",
+     "expr": "shocked",
+     "cap": "Ye mera *NAHI*!",
+     "show": 3,
+     "hit": "nahi"
+    }
+   ]
+  },
+  {
+   "id": "step4",
+   "type": "compare",
+   "chip": "STEP 4",
+   "head": "Report karo",
+   "left": "NOT MY NUMBER",
+   "right": "NOT REQUIRED",
+   "items": [
+    {
+     "side": "L",
+     "text": "Kabhi liya hi nahi"
+    },
+    {
+     "side": "R",
+     "text": "Mera tha, ab band"
+    }
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "चौथा: जो नंबर आपने कभी लिया ही नहीं, उस पे नॉट माय नंबर चुनो.",
+     "en": "Chautha: jo number aapne kabhi liya hi nahi, us pe Not My Number chuno.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "*Not My Number*",
+     "show": 1,
+     "show_new": 1,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "और जो पुराना नंबर आपका था पर अब नहीं चाहिए, उस पे नॉट रिक्वायर्ड. फिर रिपोर्ट दबाओ.",
+     "en": "Aur jo purana number aapka tha par ab nahi chahiye, us pe Not Required. Phir Report dabao.",
+     "pose": "count",
+     "expr": "explaining",
+     "cap": "*Not Required*",
+     "show": 2
+    },
+    {
+     "who": "c",
+     "hi": "बस? उसी वक़्त बंद हो जाएगा?",
+     "en": "Bas? Usi waqt band ho jaayega?",
+     "pose": "shrug",
+     "expr": "confused",
+     "cap": "Turant *band*?"
+    },
+    {
+     "who": "b",
+     "hi": "नहीं. टिकट नंबर मिलेगा. कंपनी जाँच करके बंद करेगी. कुछ हफ़्ते बाद फिर चेक करना.",
+     "en": "Nahi. Ticket number milega. Company jaanch karke band karegi. Kuch hafte baad phir check karna.",
+     "pose": "palm",
+     "expr": "explaining",
+     "cap": "*Ticket* milega"
+    }
+   ]
+  },
+  {
+   "id": "extra",
+   "type": "points",
+   "head": "Aur 2 baatein",
+   "color": "#5de0b0",
+   "items": [
+    "Mummy-papa ka bhi check karo",
+    "SIM se fraud hua? 1930 / cybercrime.gov.in"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "मम्मी पापा और दादा दादी का भी चेक करो. उनके फ़ोन पे ओ टी पी आएगा.",
+     "en": "Mummy papa aur dada dadi ka bhi check karo. Unke phone pe OTP aayega.",
+     "pose": "wave",
+     "expr": "happy",
+     "cap": "*Mummy-papa* ka bhi",
+     "show": 1,
+     "show_new": 1
+    },
+    {
+     "who": "b",
+     "hi": "और अगर उस सिम से फ़्रॉड हुआ हो, तो उन्नीस सौ तीस पे कॉल करो, या साइबर क्राइम डॉट जी ओ वी डॉट इन.",
+     "en": "Aur agar us SIM se fraud hua ho, toh 1930 pe call karo, ya cybercrime.gov.in.",
+     "pose": "phone",
+     "expr": "explaining",
+     "cap": "*1930* pe call",
+     "show": 2
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "type": "recap",
+   "head": "Recap: 4 step",
+   "items": [
+    "Site kholo",
+    "Number + OTP",
+    "List dekho",
+    "Report karo"
+   ],
+   "lines": [
+    {
+     "who": "c",
+     "hi": "मतलब साइट, ओ टी पी, लिस्ट, रिपोर्ट!",
+     "en": "Matlab site, OTP, list, report!",
+     "pose": "count",
+     "expr": "happy",
+     "cap": "Site. OTP. *List.* Report.",
+     "show": 4,
+     "show_new": 4,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "बिल्कुल. दो मिनट का काम.",
+     "en": "Bilkul. Do minute ka kaam.",
+     "pose": "thumb",
+     "expr": "happy",
+     "cap": "*2 minute* ka kaam"
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "outro",
+   "head": "Save karo, share karo",
+   "sub": "Family group mein bhejo",
+   "items": [
+    "subscribe",
+    "instagram"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "पूरा गाइड डिस्क्रिप्शन में है. वीडियो फ़ैमिली ग्रुप में भेजो, और सब्सक्राइब करो.",
+     "en": "Poora guide description mein hai. Video family group mein bhejo, aur subscribe karo.",
+     "pose": "wave",
+     "expr": "happy",
+     "cap": "*Family group* mein bhejo",
+     "show": 1,
+     "show_new": 1
+    },
+    {
+     "who": "c",
+     "hi": "और इंस्टाग्राम पे टेकनी बाबा!",
+     "en": "Aur Instagram pe TechniBaba!",
+     "pose": "up",
+     "expr": "happy",
+     "cap": "Insta: *@technibaba*",
+     "show": 2
+    }
+   ]
+  }
+ ]
+}
