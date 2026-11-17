@@ -11,3 +11,4 @@
 8. Airport WiFi Part 2 promised in caption ("asli vs nakli WiFi") — our own 19%-skip reel, Nov 15.
 9. Delhi Metro reel trend & people losing phones — "phone chori ho gaya, pehle 10 minute mein kya karein" (CEIR/Sanchar Saathi) — https://theprint.in/opinion/viral-spiral/delhi-metro-new-reel-trend-nikhil-kochar-influencers-losing-phones/3034405/
 10. iPhone/Apple Watch satellite features expansion — "network nahi phir bhi SOS?" — https://www.fonearena.com/blog/type/sections/news/page/72
+- 2026-11-17: Mbps vs MB/s Part 2 — audience question on GTA reel: 'mera phone max 861Mb ka speed deta he mtlb kitna speed?' (our comment, 16 Nov)
