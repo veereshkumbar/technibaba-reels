@@ -2,6 +2,73 @@
  "updated": "2026-11-17",
  "guides": [
   {
+   "slug": "reel-music-muted-3-rules",
+   "date": "2026-11-17",
+   "title": "Reel music muted (Audio unavailable)? 3 rules to keep your sound",
+   "lane": "Creator Guide",
+   "summary": "If your reel says Audio unavailable, a copyright system usually removed the song. Three habits keep your music safe: add songs inside Instagram, use the right account type, and use royalty-free music for promotions. We also show how we make our own background music.",
+   "steps": [
+    {
+     "title": "Add the song inside Instagram",
+     "body": "In the Reels editor, tap the music (audio) option and pick a song from Instagram's own library. Songs mixed into the video in another editing app, or downloaded from YouTube or Spotify, are a common reason reels get muted."
+    },
+    {
+     "title": "Check your account type",
+     "body": "Business accounts get only commercially licensed audio, a much smaller library. If you are a creator, not a shop: open your profile, tap the menu (three lines), then Account type and tools (on some versions Business tools and controls), then Switch account type, then Switch to creator account. Menu labels can differ slightly by app version."
+    },
+    {
+     "title": "Use royalty-free music for promos",
+     "body": "For a shop, brand or paid promotion, do not use popular film songs. Business accounts see Meta's royalty-free Sound Collection in the same music picker; it is cleared for Facebook and Instagram only. For YouTube videos, use YouTube Studio, then Audio library, and filter by Attribution not required (Creative Commons tracks need a credit in the description)."
+    },
+    {
+     "title": "Or make your own music",
+     "body": "We make the background music for our reels ourselves with a small script that synthesises lo-fi chords and a beat (engine/lofi.py in our public repo github.com/veereshkumbar/technibaba-reels). Music you create yourself has no other rights owner."
+    }
+   ],
+   "tip": "If a reel is already muted, edit it with a song from Instagram's library or repost it with cleared audio. If you think the mute was a mistake, you can appeal in the app.",
+   "caution": "Even songs from Instagram's library can be muted later if the rights change. Do not switch a business account just to use popular songs in ads or brand posts: commercial use needs licensed music. This is general platform guidance, not legal advice.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "Sociality.io: Instagram Business or Creator account, how to switch (updated 9 Jul 2026)",
+     "url": "https://sociality.io/blog/instagram-creator-account/"
+    },
+    {
+     "title": "Buffer: Instagram account types and music library access",
+     "url": "https://buffer.com/resources/instagram-account-type/"
+    },
+    {
+     "title": "NapoleonCat: Instagram creator vs business account",
+     "url": "https://napoleoncat.com/blog/instagram-creator-vs-business-account/"
+    },
+    {
+     "title": "Metricool: Instagram account type, how to switch",
+     "url": "https://help.metricool.com/instagram-account-type-requirements-and-how-to-switch-d2zw1"
+    },
+    {
+     "title": "Soundstripe: Instagram music library, what's in it (updated 12 Nov 2026)",
+     "url": "https://www.soundstripe.com/blogs/instagram-music-library"
+    },
+    {
+     "title": "Fox Music: Instagram Reels music copyright guide (updated 2 Oct 2026)",
+     "url": "https://www.foximusic.com/blog/instagram-reels-music-copyright-legal-guide/"
+    },
+    {
+     "title": "Hoopr: Why your reels get muted (28 Jan 2026)",
+     "url": "https://blog.hoopr.ai/why-your-reels-get-muted-common-reasons-how-to-fix-them"
+    },
+    {
+     "title": "The IP Press: Why your viral reel got muted (4 Aug 2026)",
+     "url": "https://www.theippress.com/2026/08/04/why-your-viral-reel-got-muted-the-hidden-copyright-system-of-instagram-everyday-ip/"
+    },
+    {
+     "title": "YouTube Help: Audio Library",
+     "url": "https://support.google.com/youtube/answer/3376882"
+    }
+   ]
+  },
+  {
    "slug": "check-sim-cards-in-your-name-sanchar-saathi",
    "date": "2026-11-17",
    "title": "How to check which SIM cards are issued in your name (Sanchar Saathi)",
