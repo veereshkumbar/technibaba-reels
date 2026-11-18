@@ -2,6 +2,57 @@
  "updated": "2026-11-18",
  "guides": [
   {
+   "slug": "hindi-english-bilingual-captions-edits-app",
+   "date": "2026-11-18",
+   "title": "Hindi and English captions on the same reel: Bilingual captions in Edits, 4 steps",
+   "lane": "Creator Guide",
+   "summary": "Meta's free Edits app can write your captions in a second language automatically, so a Hindi reel can show Hindi and English captions together. It takes four taps, and you should read every line before you post.",
+   "steps": [
+    {
+     "title": "Get the Edits app",
+     "body": "Install Edits by Meta from Google Play (Android) or the App Store (iPhone). The app is free. If you already have it, update it first: new features reach different app versions at different times."
+    },
+    {
+     "title": "Add your video and tap Captions",
+     "body": "Start a new project and add the clip where you speak. Tap the Captions button in the bottom toolbar."
+    },
+    {
+     "title": "Turn on Bilingual captions and pick the second language",
+     "body": "Tap Bilingual captions. Select a secondary language from the list, for example English for a Hindi reel. Meta lists 15 languages: English, Hindi, Bengali, Gujarati, Kannada, Spanish, Portuguese, Korean, Japanese, French, German, Indonesian, Russian, Italian and Thai."
+    },
+    {
+     "title": "Tap Generate captions, then check every line",
+     "body": "Tap Generate captions. The second language is a machine translation, so read every line, fix wrong words and names, and only then export and post."
+    }
+   ],
+   "tip": "Keep the captions in the middle of the screen, above the bottom area where Instagram shows your name and caption text.",
+   "caution": "Button names can differ slightly between app versions. If you do not see Bilingual captions, update Edits. Translations can be wrong, so always check them before posting.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "Edits by Meta: Bilingual Captions & Sound Effects for Video (19 Aug 2026)",
+     "url": "https://creators.instagram.com/blog/multi-language-captions/"
+    },
+    {
+     "title": "Fonearena: Instagram Edits gets bilingual captions",
+     "url": "https://www.fonearena.com/blog/486573/instagram-edits-bilingual-captions-overlay-templates-clip-lock-seasonal-sound-effects.html"
+    },
+    {
+     "title": "Indian Television: Instagram expands Edits app with bilingual captions (2 Jul 2026)",
+     "url": "https://indiantelevision.com/iworld/instagram-expands-edits-app-with-bilingual-captions-and-new-ai-tools/"
+    },
+    {
+     "title": "TechJuice: Meta Edits app gets bilingual captions in 15 languages (6 Jul 2026)",
+     "url": "https://www.techjuice.pk/meta-edits-app-bilingual-captions-15-languages-international-creators/"
+    },
+    {
+     "title": "Business Standard: Instagram Edits available on iOS and Android",
+     "url": "https://business-standard.com/amp/technology/tech-news/instagram-edits-ai-powered-video-editing-app-available-on-ios-android-125042300730_1.html"
+    }
+   ]
+  },
+  {
    "slug": "pension-life-certificate-face-app-jeevan-pramaan",
    "date": "2026-11-18",
    "title": "Pension life certificate from home: Jeevan Pramaan face scan in 4 steps",

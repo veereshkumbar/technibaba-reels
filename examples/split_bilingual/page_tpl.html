@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+// ================= reel art: "Hindi + English captions: Edits 4 step" (split layout) =================
+const RD=C.laptopRed,MINT=C.mint,MD=C.mintDark,YEL=C.captionKeyword,NAVY=C.navy,GREY='#7a7f92',BLUE='#4c7dff';
+const T=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="${o.font||'Pop'}" font-weight="${o.w||900}" font-size="${s}" fill="${o.fill||INK}" ${o.extra||''}>${txt}</text>`;
+const box=(x,y,w,h,fill,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-6}) scale(${p})"><rect x="${-w/2+6}" y="${-h/2+10}" width="${w}" height="${h}" rx="${o.r||24}" fill="#000" opacity=".18"/><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${o.r||24}" fill="${fill}" stroke="${o.stroke||INK}" stroke-width="${o.sw||6}"/>${inner}</g>`;
+const tick=(x,y,s,p,col=MD)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${col}" stroke="${INK}" stroke-width="5"/><path d="M-16,2 l11,12 l22,-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+const cross=(x,y,s,p)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${RD}" stroke="${INK}" stroke-width="5"/><path d="M-14,-14 L14,14 M14,-14 L-14,14" stroke="#fff" stroke-width="9" stroke-linecap="round"/></g>`;
+const stamp=(x,y,txt,p,col,rot=-8,size=96)=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${p})"><rect x="${-txt.length*size*.36-30}" y="${-size*.72}" width="${txt.length*size*.72+60}" height="${size*1.4}" rx="22" fill="${col}" stroke="#fff" stroke-width="9"/>${T(0,size*.33,size,txt,{fill:col==YEL?INK:'#fff'})}</g>`;
+const F=i=>BT[i].f0,PW=PAN.x1-PAN.x0,PH=PAN.y1-PAN.y0;
+const head=(step,title,col,fill)=>`<rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="${PH}" fill="${fill}"/><rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="112" fill="${NAVY}"/>`+(step?`<rect x="118" y="176" width="210" height="62" rx="31" fill="${col}"/>${T(223,220,34,'STEP '+step,{fill:INK})}`:'')+T(step?352:118,222,40,title,{a:'start',fill:'#fff'})+[1,2,3,4].map(k=>`<circle cx="${852+k*28}" cy="207" r="9" fill="${step&&k<=step?col:'#4b4a86'}"/>`).join('');
+const phone=(x,y,s,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-5}) scale(${s*p})"><rect x="-176" y="-326" width="352" height="652" rx="48" fill="#000" opacity=".18"/><rect x="-182" y="-336" width="352" height="652" rx="48" fill="${NAVY}" stroke="${INK}" stroke-width="6"/><rect x="-164" y="-300" width="316" height="584" rx="30" fill="#fff"/><rect x="-36" y="-322" width="60" height="12" rx="6" fill="#4b4a86"/>${inner}</g>`;
+// a drawn reel frame inside the phone: sky, a person silhouette, and two caption lines (HI + EN)
+const reelShot=(f,show2,y0=-300,h=440)=>`<rect x="-164" y="${y0}" width="316" height="${h}" rx="30" fill="#7fc8ff"/><rect x="-164" y="${y0+h*.62}" width="316" height="${h*.38}" fill="#6bbf7a"/><circle cx="90" cy="${y0+70}" r="34" fill="#ffd23f"/><circle cx="-6" cy="${y0+h*.42}" r="52" fill="${C.skin}" stroke="${INK}" stroke-width="5"/><path d="M-90,${y0+h} Q-90,${y0+h*.6} -6,${y0+h*.6} Q78,${y0+h*.6} 78,${y0+h}Z" fill="${C.mintDark}" stroke="${INK}" stroke-width="5"/>`+
+ `<rect x="-140" y="${y0+h-150}" width="268" height="52" rx="12" fill="#000" opacity=".72"/>${T(-6,y0+h-114,28,'Chalo shuru karein',{fill:YEL})}`+
+ (show2>0?`<g opacity="${clamp(show2)}"><rect x="-140" y="${y0+h-90}" width="268" height="52" rx="12" fill="#000" opacity=".72"/>${T(-6,y0+h-54,28,"Let's get started",{fill:'#fff'})}</g>`:'');
+const chip=(x,y,txt,col,p,o={})=>`<g transform="translate(${x},${y}) scale(${p})"><rect x="${-(o.w||200)/2}" y="-36" width="${o.w||200}" height="72" rx="36" fill="${col}" stroke="${INK}" stroke-width="5"/>${T(0,13,o.s||34,txt,{fill:o.fill||INK})}</g>`;
+const editsIcon=(s)=>`<g transform="scale(${s})"><rect x="-80" y="-80" width="160" height="160" rx="40" fill="${NAVY}" stroke="${INK}" stroke-width="6"/><rect x="-46" y="-40" width="92" height="80" rx="14" fill="none" stroke="#fff" stroke-width="9"/><path d="M-12,-18 L22,0 L-12,18Z" fill="${MINT}"/></g>`;
+const tap=(x,y,f,fr)=>f>=fr&&f<fr+24?`<circle cx="${x}" cy="${y}" r="${20+(f-fr)*2.4}" fill="none" stroke="${YEL}" stroke-width="8" opacity="${1-(f-fr)/24}"/><circle cx="${x}" cy="${y}" r="16" fill="${YEL}" opacity=".9"/>`:'';
+const LANGS=['Hindi','English','Bengali','Gujarati','Kannada','Spanish','Portuguese','Korean','Japanese','French','German','Indonesian','Russian','Italian','Thai'];
+// cue frames
+const q={bc:F(1)+3,fr:WF(1,'free'),ch:WF(1,'chaar'),
+ a0:F(2),ed:WF(2,'edits'),me:WF(2,'meta'),fe:WF(2,'free'),an:WF(2,'android'),ip:WF(2,'iphone'),
+ c0:F(3),vd:WF(3,'video'),ne:WF(3,'neeche'),cp:WF(3,'captions'),
+ b0:F(4),bl:WF(4,'bilingual'),ds:WF(4,'doosri'),en:WF(4,'english'),kt:WF(5,'kitni'),
+ l0:F(6),pd:WF(6,'pandrah'),lh:WF(6,'hindi'),le:WF(6,'english'),lb:WF(6,'bengali'),lg:WF(6,'gujarati'),lk:WF(6,'kannada'),
+ g0:F(7),gn:WF(7,'generate'),ph:WF(7,'phir'),pa:WF(7,'padh'),mc:WF(8,'machine'),gl:WF(8,'galti'),
+ r1:WF(9,'app'),r2:WF(9,'captions'),r3:WF(9,'bilingual'),r4:WF(9,'generate'),hd:WF(10,'hindi'),cm:WF(10,'comment'),gd:WF(10,'guide')};
+[[q.bc,'pop'],[q.fr,'ding'],[q.ch,'pop'],[q.ch+4,'pop'],[q.ch+8,'pop'],[q.ch+12,'pop'],
+ [q.a0,'pop'],[q.ed,'pop'],[q.me,'blip'],[q.fe,'ding'],[q.an,'pop'],[q.ip,'pop'],
+ [q.c0,'pop'],[q.vd,'blip'],[q.ne,'pop'],[q.cp,'blip'],[q.cp+6,'ding'],
+ [q.b0,'pop'],[q.bl,'blip'],[q.ds,'pop'],[q.en,'ding'],[q.kt,'pop'],
+ [q.l0,'pop'],[q.lh,'pop'],[q.le,'pop'],[q.lb,'pop'],[q.lg,'pop'],[q.lk,'pop'],
+ [q.g0,'pop'],[q.gn,'blip'],[q.gn+12,'type'],[q.ph,'pop'],[q.pa,'ding'],[q.mc,'pop'],[q.gl,'crack'],
+ [q.r1,'pop'],[q.r2,'pop'],[q.r3,'pop'],[q.r4,'pop'],[q.hd,'pop'],[q.cm,'pop'],[q.gd,'type'],[q.gd+8,'ding']].forEach(([f,t])=>sfx(f,t));
+function content(n,f){const t=f/FPS;let o='';
+ if(n=='q'){o+=head(0,'BILINGUAL CAPTIONS',YEL,'#fff7e6');
+  const pb=pop(f,q.bc-2,9);o+=box(330,370,480,160,MINT,pb,T(0,-8,50,'HINDI')+T(0,48,40,'+ ENGLISH'),{rot:-2});
+  const pf=pop(f,q.fr-2,9);o+=box(770,370,330,160,'#fff',pf,T(0,-14,30,'EDITS APP',{w:800,fill:GREY})+T(0,48,64,'FREE',{fill:MD}),{rot:3,stroke:MD});
+  [['APP',MINT],['CAPTIONS',YEL],['BILINGUAL','#bcd0ff'],['GENERATE','#ffb3b3']].forEach(([lab,col],k)=>{const p=pop(f,q.ch+k*4,9);
+   o+=box(300+(k%2)*480,620+Math.floor(k/2)*170,430,136,'#fff',p,`<circle cx="-160" cy="0" r="44" fill="${col}" stroke="${INK}" stroke-width="5"/>`+T(-160,20,54,k+1)+T(-96,18,lab.length>8?40:46,lab,{a:'start'}),{rot:k%2?1.5:-1.5})});
+  o+=T(540,960,28,'Edits by Meta · Android + iPhone',{w:800,fill:GREY})}
+ if(n=='app'){o+=head(1,'EDITS APP LO',MINT,'#eaf6ff');
+  const pc=pop(f,q.ed-2,9);o+=box(330,560,440,560,'#fff',pc,'',{rot:-2});
+  if(pc>0)o+=`<g transform="translate(330,430) scale(${pc})">${editsIcon(1.1)}</g>`+(pc>0?T(330,640,64,'Edits'):'')+(f>=q.me?T(330,700,32,'by Meta',{w:800,fill:GREY}):'');
+  const pfr=pop(f,q.fe-2,8);if(pfr>0)o+=stamp(330,790,'FREE',pfr,MD,-5,70);
+  const pa=pop(f,q.an,9),pi=pop(f,q.ip,9);
+  if(pa>0)o+=box(780,420,380,150,'#fff',pa,`<rect x="-150" y="-40" width="64" height="80" rx="14" fill="${MINT}" stroke="${INK}" stroke-width="5"/>`+T(-60,16,44,'Android',{a:'start'})+tick(160,-60,.8,pa),{rot:2});
+  if(pi>0)o+=box(780,620,380,150,'#fff',pi,`<rect x="-150" y="-40" width="64" height="80" rx="14" fill="#bcd0ff" stroke="${INK}" stroke-width="5"/>`+T(-60,16,44,'iPhone',{a:'start'})+tick(160,-60,.8,pi),{rot:-2});
+  if(f>=q.ip+6)o+=T(780,800,28,'Play Store / App Store',{w:800,fill:GREY})}
+ if(n=='cap'){o+=head(2,'CAPTIONS DABAO',YEL,'#fffbe8');
+  const ph=pop(f,q.c0,9),glow=f>=q.cp;
+  const tool=['M-14,-14 h28 v28 h-28Z','M-16,10 L0,-16 L16,10Z','','M-14,0 a14,14 0 1,0 28,0 a14,14 0 1,0 -28,0'];
+  let bar=`<rect x="-164" y="170" width="316" height="114" fill="#f3f4f8"/>`+[0,1,2,3].map(k=>{const x=-128+k*80;return k==2?`<g transform="translate(${x+6},226) scale(${glow?1.15:1})"><rect x="-36" y="-34" width="72" height="68" rx="14" fill="${glow?YEL:'#fff'}" stroke="${INK}" stroke-width="4"/><rect x="-22" y="-8" width="44" height="8" rx="4" fill="${INK}"/><rect x="-22" y="8" width="30" height="8" rx="4" fill="${INK}"/></g>`:`<g transform="translate(${x+6},226)"><rect x="-36" y="-34" width="72" height="68" rx="14" fill="#fff" stroke="#c9cfe0" stroke-width="4"/><path d="${tool[k]}" fill="#c9cfe0"/></g>`}).join('');
+  o+=phone(330,580,1,ph,(f>=q.vd?reelShot(f,0,-300,450):`<rect x="-164" y="-300" width="316" height="450" rx="30" fill="#f3f4f8"/>`+T(-6,-60,80,'+',{fill:'#c9cfe0'}))+bar+tap(-2,226,f,q.cp),{rot:-2});
+  const pn=pop(f,q.ne,9);if(pn>0)o+=box(790,470,360,150,'#fff',pn,T(0,-12,32,'Neeche toolbar',{w:800,fill:GREY})+`<path d="M-20,30 L0,60 L20,30" fill="none" stroke="${INK}" stroke-width="8" stroke-linecap="round"/>`,{rot:2});
+  const pc=pop(f,q.cp-1,7);if(pc>0)o+=stamp(790,720,'CAPTIONS',pc,YEL,5,62)}
+ if(n=='bi'){o+=head(3,'BILINGUAL CAPTIONS',BLUE,'#eef2ff');
+  const ps=pop(f,q.b0,9),on=clamp((f-q.bl)/8,0,1);
+  const rows=['English','Hindi','Bengali','Gujarati'].map((l,k)=>{const sel=l=='English'&&f>=q.en;const pr=pop(f,q.ds+k*3,8);return `<g transform="translate(0,${-20+k*76}) scale(${pr>0?Math.min(1.05,pr):0})"><rect x="-300" y="-30" width="600" height="62" rx="14" fill="${sel?'#e9fbf3':'#f3f4f8'}" stroke="${sel?MD:'#c9cfe0'}" stroke-width="4"/>${T(-270,12,32,l,{a:'start',w:800})}${sel?tick(250,0,.6,pop(f,q.en,8)):''}</g>`}).join('');
+  o+=box(540,580,760,660,'#fff',ps,`<rect x="-330" y="-290" width="660" height="96" rx="20" fill="${on>0?'#eef2ff':'#f3f4f8'}" stroke="${INK}" stroke-width="4"/>`+T(-300,-228,36,'Bilingual captions',{a:'start'})+
+   `<rect x="190" y="-266" width="104" height="52" rx="26" fill="${on>=1?MD:'#c9cfe0'}"/><circle cx="${216+52*on}" cy="-240" r="22" fill="#fff"/>`+(f>=q.ds?T(-300,-110,30,'Secondary language',{a:'start',w:800,fill:GREY}):'')+`<g transform="translate(0,0)">${rows}</g>`+tap(242,-240,f,q.bl),{rot:-1});
+  if(f>=q.kt){const pk=pop(f,q.kt,8);o+=stamp(800,320,'KITNI?',pk,'#bcd0ff',6,60)}}
+ if(n=='lang'){o+=head(0,'15 BHASHA',MINT,'#eaf6ff');
+  const hl={Hindi:q.lh,English:q.le,Bengali:q.lb,Gujarati:q.lg,Kannada:q.lk};
+  LANGS.forEach((l,k)=>{const col=k%3,row=Math.floor(k/3),fr=hl[l];const p=pop(f,q.pd+k*2,8);const lit=fr&&f>=fr;
+   o+=chip(230+col*310,330+row*120,l,lit?YEL:'#fff',p*(lit?1+.08*Math.max(0,1-(f-fr)/8):1),{w:280,s:l.length>9?28:32})});
+  const pp=pop(f,q.pd-2,5);if(pp>0)o+=stamp(540,922,'15 BHASHA!',pp,MD,-2,58)}
+ if(n=='gen'){o+=head(4,'GENERATE + CHECK',' #ff9b9b'.trim(),'#fff0ee');
+  const ph=pop(f,q.g0,9),pressed=f>=q.gn,two=clamp((f-q.gn-10)/8,0,1);
+  o+=phone(330,580,1,ph,reelShot(f,two,-300,450)+`<g transform="translate(-6,226) scale(${pressed?1-.08*Math.max(0,1-(f-q.gn)/6):1})"><rect x="-140" y="-40" width="280" height="80" rx="40" fill="${pressed?MD:NAVY}" stroke="${INK}" stroke-width="4"/>${T(0,12,28,pressed?'Generated':'Generate captions',{fill:'#fff'})}</g>`+tap(-6,226,f,q.gn),{rot:-2});
+  const pgs=pop(f,q.gn-1,6);if(pgs>0&&f<q.pa)o+=stamp(790,460,'GENERATE',pgs,MD,5,62);
+  if(f<q.mc){const pp=pop(f,q.pa,9);if(pp>0)o+=box(790,460,360,200,'#fff',pp,tick(-120,-30,.9,pp)+T(-70,-16,34,'Har shabd',{a:'start'})+T(0,50,34,'padho, check',{w:800,fill:MD}),{rot:2})}
+  else{const pm=pop(f,q.mc,9);o+=box(790,460,380,220,'#fff',pm,T(0,-40,32,'Machine',{w:800,fill:GREY})+T(0,10,40,'translation')+T(0,64,28,'= galti possible',{w:800,fill:RD}),{rot:2,stroke:RD});
+   const pg=pop(f,q.gl-1,6);if(pg>0)o+=stamp(790,760,'CHECK KARO',pg,RD,-5,52)}}
+ if(n=='recap'){o+=head(0,'4 STEP · SAVE KARO',YEL,'#fff7e6');
+  const late=f>=q.hd,sh=late?sm(f,q.hd-2,10):0;
+  [['Edits app: free',q.r1],['Captions: toolbar',q.r2],['Bilingual: English',q.r3],['Generate + check',q.r4]].forEach(([lab,fr],k)=>{const p=pop(f,F(9)+k*3,9),tk=pop(f,fr,8);o+=box(540,320+k*(130-40*sh),800,112-26*sh,'#fff',p,`<rect x="-370" y="-30" width="60" height="60" rx="14" fill="${tk>0?MINT:'#f3f4f8'}" stroke="${INK}" stroke-width="5"/>`+(tk>0?`<path d="M-356,2 l12,13 l24,-28" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="70" stroke-dashoffset="${70*(1-clamp(tk))}"/>`:'')+T(-280,15,42,lab,{a:'start'}),{rot:k%2?1:-1})});
+  if(late){const pc=pop(f,q.hd,9),typed='GUIDE'.slice(0,clamp(Math.floor((f-q.gd)/3),0,5));o+=box(540,800,820,250,'#fff',pc,T(0,-70,36,'Hindi reel wale dost ko bhejo',{fill:MD})+`<g transform="scale(${pop(f,q.cm,8)})"><rect x="-340" y="-10" width="680" height="96" rx="48" fill="#f3f4f8" stroke="${INK}" stroke-width="5"/>`+T(-300,52,30,'Comment:',{a:'start',w:800,fill:GREY})+T(-100,56,48,typed+(Math.floor(t*3)%2?'|':''),{a:'start',font:'Mono',w:700})+`</g>`,{rot:-1})}}
+ return o}
+// bottom strip: creator's room (purple wall, ring light, shelf, desk)
+function strip(f){const t=f/FPS;let o=`<defs><linearGradient id="sw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9b8ff"/><stop offset="1" stop-color="#9d86e8"/></linearGradient></defs><rect x="-700" y="-1500" width="2500" height="3800" fill="url(#sw)"/>`;
+ o+=`<circle cx="900" cy="1200" r="110" fill="none" stroke="#fff" stroke-width="22" opacity="${.85+.1*Math.sin(t*3)}"/><circle cx="900" cy="1200" r="80" fill="#fff8e0" opacity=".25"/><rect x="894" y="1310" width="12" height="260" fill="#4b4a86"/>`;
+ o+=`<rect x="40" y="1180" width="260" height="16" rx="6" fill="#6b4f9c"/><rect x="60" y="1110" width="40" height="70" rx="6" fill="${YEL}"/><rect x="110" y="1124" width="40" height="56" rx="6" fill="${MINT}"/><rect x="160" y="1100" width="50" height="80" rx="8" fill="#ff9b9b"/>`;
+ o+=`<rect x="-200" y="1560" width="1480" height="220" rx="30" fill="#5b4a8a"/><rect x="-200" y="1530" width="1480" height="60" rx="20" fill="#7a66b0"/><rect x="-700" y="1760" width="2500" height="400" fill="#3f3466"/>`;
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const p=pop(f,-9,9)*(1-sp),p2=pop(f,-9,9)*(1-sp),p3=pop(f,8,9)*(1-sp);
+ return stamp(540,210,'HINDI + ENGLISH!',p,YEL,-3,62)+phone(320,520,.78,p2,reelShot(f,clamp((f-6)/6,0,1),-300,584),{rot:-4})
+  +box(790,440,380,150,'#fff',p3,T(0,-6,44,'2 CAPTIONS')+T(0,42,28,'apne aap · free',{w:800,fill:MD})+tick(170,-60,1,p3),{rot:4,stroke:MD})}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+RIG.impact(f0,HITS,540,600)+caption(f,capY(f));
+ s+=`<rect x="0" y="1904" width="${1080*f0/NF}" height="16" fill="${MINT}"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
