@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+// ================= reel art: "1 Jan se WhatsApp band? SIM binding: 3 check" (split layout) =================
+const RD=C.laptopRed,MINT=C.mint,MD=C.mintDark,YEL=C.captionKeyword,NAVY=C.navy,GREY='#7a7f92',BLUE='#4c7dff',CHAT='#25b26b';
+const T=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="${o.font||'Pop'}" font-weight="${o.w||900}" font-size="${s}" fill="${o.fill||INK}" ${o.extra||''}>${txt}</text>`;
+const box=(x,y,w,h,fill,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-6}) scale(${p})"><rect x="${-w/2+6}" y="${-h/2+10}" width="${w}" height="${h}" rx="${o.r||24}" fill="#000" opacity=".18"/><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${o.r||24}" fill="${fill}" stroke="${o.stroke||INK}" stroke-width="${o.sw||6}"/>${inner}</g>`;
+const tick=(x,y,s,p,col=MD)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${col}" stroke="${INK}" stroke-width="5"/><path d="M-16,2 l11,12 l22,-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+const cross=(x,y,s,p)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${RD}" stroke="${INK}" stroke-width="5"/><path d="M-14,-14 L14,14 M14,-14 L-14,14" stroke="#fff" stroke-width="9" stroke-linecap="round"/></g>`;
+const stamp=(x,y,txt,p,col,rot=-8,size=96)=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${p})"><rect x="${-txt.length*size*.36-30}" y="${-size*.72}" width="${txt.length*size*.72+60}" height="${size*1.4}" rx="22" fill="${col}" stroke="#fff" stroke-width="9"/>${T(0,size*.33,size,txt,{fill:col==YEL?INK:'#fff'})}</g>`;
+const F=i=>BT[i].f0,PW=PAN.x1-PAN.x0,PH=PAN.y1-PAN.y0;
+const head=(step,title,col,fill)=>`<rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="${PH}" fill="${fill}"/><rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="112" fill="${NAVY}"/>`+(step?`<rect x="118" y="176" width="210" height="62" rx="31" fill="${col}"/>${T(223,220,34,'CHECK '+step,{fill:INK})}`:'')+T(step?352:118,222,40,title,{a:'start',fill:'#fff'})+[1,2,3].map(k=>`<circle cx="${880+k*28}" cy="207" r="9" fill="${step&&k<=step?col:'#4b4a86'}"/>`).join('');
+// generic chat app icon (no brand logo): green rounded bubble with three dots
+const chatIcon=(x,y,s,col=CHAT)=>`<g transform="translate(${x},${y}) scale(${s})"><path d="M-46,-40 h92 a18,18 0 0 1 18,18 v48 a18,18 0 0 1 -18,18 h-52 l-28,22 v-22 h-12 a18,18 0 0 1 -18,-18 v-48 a18,18 0 0 1 18,-18z" fill="${col}" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>${[-24,0,24].map(d=>`<circle cx="${d}" cy="2" r="7" fill="#fff"/>`).join('')}</g>`;
+// SIM card
+const sim=(x,y,s,col=YEL,rot=0,lab='SIM')=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${s})"><path d="M-40,-54 h56 l24,24 v84 h-80z" fill="${col}" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/><rect x="-26" y="-24" width="44" height="40" rx="6" fill="#e8c35a" stroke="${INK}" stroke-width="4"/><path d="M-26,-4 h44 M-4,-24 v40" stroke="${INK}" stroke-width="3"/>${T(0,44,18,lab)}</g>`;
+const phone=(x,y,s,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-5}) scale(${s*p})"><rect x="-176" y="-326" width="352" height="652" rx="48" fill="#000" opacity=".18"/><rect x="-182" y="-336" width="352" height="652" rx="48" fill="${NAVY}" stroke="${o.stroke||INK}" stroke-width="${o.sw||6}"/><rect x="-164" y="-300" width="316" height="584" rx="30" fill="${o.screen||'#fff'}"/><rect x="-36" y="-322" width="60" height="12" rx="6" fill="#4b4a86"/>${inner}</g>`;
+const keypad=(x,y,s,p,inner='',o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-5}) scale(${s*p})"><rect x="-118" y="-222" width="236" height="444" rx="40" fill="#5b5f73" stroke="${INK}" stroke-width="6"/><rect x="-86" y="-186" width="172" height="130" rx="10" fill="#bfe6c9" stroke="${INK}" stroke-width="4"/>${[0,1,2,3].map(r=>[0,1,2].map(c=>`<rect x="${-80+c*58}" y="${-28+r*52}" width="46" height="38" rx="10" fill="#e9ebf2" stroke="${INK}" stroke-width="3"/>`).join('')).join('')}${inner}</g>`;
+const arrow=(x1,y1,x2,y2,col,p=1)=>{const xm=(x1+x2)/2,ym=Math.min(y1,y2)-90,x=x1+(x2-x1)*p;return `<path d="M${x1},${y1} Q${xm},${ym} ${x2},${y2}" fill="none" stroke="${col}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${1000*p} 2000"/>`};
+const arcPt=(x1,y1,x2,y2,p)=>{const xm=(x1+x2)/2,ym=Math.min(y1,y2)-200,u=1-p;return [u*u*x1+2*u*p*xm+p*p*x2,u*u*y1+2*u*p*ym+p*p*y2]};
+// cue frames
+const q={r1:F(1)+6,r2:F(1)+12,r3:F(1)+18,bind:WF(1,'binding'),teen:WF(1,'teen'),
+ rep:WF(2,'reports'),d31:WF(2,'31'),apps:WF(2,'whatsapp'),lag:WF(2,'lagega'),
+ l3:F(3),usi:WF(3,'usi'),nik:WF(3,'nikala'),ruk:WF(3,'ruk'),
+ n0:F(4),num:WF(4,'number'),uska:WF(4,'uska'),isi:WF(4,'isi'),
+ kp:WF(5,'keypad'),sp:WF(5,'smartphone'),wa5:WF(5,'whatsapp'),
+ d0:F(6),daal:WF(6,'daalo'),dual:WF(6,'dual'),dono:WF(6,'dono'),
+ a0:F(7),rc:WF(7,'recharge'),kh:WF(7,'khatam'),band:WF(7,'band'),ruk2:WF(7,'ruk'),
+ t1:WF(8,'number'),t2:WF(8,'sim'),t3:WF(8,'recharge'),teen2:WF(8,'teen'),
+ papa:WF(9,'papa'),aap:WF(9,'aapka'),com:WF(9,'comment')};
+[[q.r1,'pop'],[q.r2,'pop'],[q.r3,'pop'],[q.bind,'ding'],[q.d31,'crack'],[q.apps,'pop'],[q.apps+5,'pop'],[q.apps+10,'pop'],[q.l3,'pop'],[q.usi,'ding'],[q.nik,'whoosh'],
+ [q.n0,'pop'],[q.num,'blip'],[q.uska,'pop'],[q.isi+8,'ding'],[q.kp,'pop'],[q.wa5,'pop'],[q.wa5+8,'blip'],[q.daal,'whoosh'],[q.daal+16,'ding'],[q.dual,'pop'],[q.dono,'ding'],
+ [q.a0,'pop'],[q.rc,'pop'],[q.kh,'blip'],[q.band,'pop'],[q.ruk2,'crack'],[q.t1,'pop'],[q.t2,'pop'],[q.t3,'pop'],[q.teen2,'ding'],[q.papa,'pop'],[q.aap,'pop'],[q.com,'type'],[q.com+12,'type']].forEach(([f,t])=>sfx(f,t));
+function content(n,f){const t=f/FPS;let o='';
+ if(n=='q'){o+=head(0,'SIM BINDING: 3 CHECK',YEL,'#fff7e6');
+  [['NUMBER','profile mein',q.r1,MINT],['SIM','usi phone mein',q.r2,YEL],['RECHARGE','SIM chaalu',q.r3,'#ff9b9b']].forEach(([lab,sub,fr,col],k)=>{const p=pop(f,fr,9);o+=box(540,390+k*175,780,140,'#fff',p,`<circle cx="-310" cy="0" r="46" fill="${col}" stroke="${INK}" stroke-width="5"/>`+T(-310,20,56,k+1)+T(-232,10,58,lab,{a:'start'})+T(330,14,30,sub,{a:'end',w:800,fill:GREY}),{rot:k%2?1.5:-1.5})});
+  const pb=pop(f,q.bind,8);o+=stamp(800,900,'1 JAN 2027',pb,NAVY,6,44)}
+ if(n=='rule'){const second=f>=q.l3-2;
+  if(!second){o+=head(0,'NAYA NIYAM: SIM BINDING',YEL,'#eef3ff');
+   const pd=pop(f,q.d31,8);
+   o+=box(540,420,760,250,'#fff',pop(f,F(2),9),T(0,-62,34,'Deadline (reports)',{w:800,fill:GREY})+`<g transform="scale(${pd>0?.8+.2*Math.min(1.1,pd):.8})">`+T(0,40,96,'31 DEC 2026',{fill:pd>0?RD:'#c9cfe0'})+`</g>`+T(0,100,30,'fraud rokne ke liye',{w:800,fill:GREY}),{rot:-1});
+   [['WhatsApp',0],['Telegram',5],['Signal',10]].forEach(([lab,d],k)=>{const p=pop(f,q.apps+d,8);o+=box(230+k*310,700,290,110,'#fff',p,chatIcon(-100,0,.55,[CHAT,BLUE,'#3a76f0'][k])+T(-58,13,34,lab,{a:'start'}),{rot:k%2?2:-2})});
+   const pl=pop(f,q.lag,8);o+=T(540,880,40,'+ aur messaging apps',{w:800,fill:GREY,extra:`opacity="${clamp(pl)}"`})}
+  else{o+=head(0,'NUMBER = USI PHONE KA SIM',YEL,'#eef3ff');
+   const pu=pop(f,q.usi,8),nk=sn(f,q.nik,12),rk=pop(f,q.ruk-2,6),off=f>=q.ruk-2;
+   o+=phone(540,575,.95,pop(f,q.l3,9),chatIcon(-6,-120,1.3,off?'#b9bdc9':CHAT)+T(-6,10,40,off?'APP RUKA':'CHAL RAHA',{fill:off?RD:MD})+`<rect x="-120" y="70" width="228" height="150" rx="18" fill="#f3f4f8" stroke="${pu>0?(off?RD:MD):'#c9cfe0'}" stroke-width="6" stroke-dasharray="${off?'14 10':'0'}"/>`+T(-6,250,24,'SIM slot',{w:800,fill:GREY}),{stroke:off?RD:INK,sw:off?9:6});
+   const [sx,sy]=[540-6*.95+nk*330,575+145*.95-nk*120];
+   o+=sim(sx,sy,1.05,YEL,nk*25);
+   if(pu>0&&!off)o+=tick(700,440,1.2,pu);
+   if(rk>0)o+=stamp(540,936,'RUK SAKTA HAI',rk,RD,-3,52)}}
+ if(n=='num'){o+=head(1,'NUMBER DEKHO',MINT,'#eafaf3');
+  const pn=pop(f,q.num,7),pu=pop(f,q.uska,8),pt=pop(f,q.isi+8,8);
+  o+=phone(330,600,.95,pop(f,q.n0,9),`<rect x="-164" y="-300" width="316" height="90" rx="30" fill="${CHAT}"/><rect x="-164" y="-250" width="316" height="40" fill="${CHAT}"/>`+T(-140,-240,30,'Profile',{a:'start',fill:'#fff'})+`<circle cx="-6" cy="-110" r="70" fill="${C.friendTop}" stroke="${INK}" stroke-width="5"/><circle cx="-6" cy="-128" r="28" fill="${C.skin}" stroke="${INK}" stroke-width="4"/><path d="M-50,-60 Q-6,-100 38,-60" fill="${C.skin}" stroke="${INK}" stroke-width="4"/>`+T(-6,10,36,'Chotu')+T(-140,80,24,'Phone',{a:'start',w:800,fill:GREY})+`<g transform="translate(-6,130) scale(${pn>0?1+.08*Math.sin(Math.PI*clamp((f-q.num)/10)):1})"><rect x="-146" y="-36" width="292" height="72" rx="16" fill="${pn>0?'#fff4c2':'#f3f4f8'}" stroke="${pn>0?YEL:'#c9cfe0'}" stroke-width="6"/>${T(0,14,30,'+91 98XXX XXX01',{font:'Mono',w:700})}</g>`,{rot:-2});
+  if(pu>0){o+=arrow(510,720,690,640,MD,clamp((f-q.uska)/12));
+   o+=box(790,560,300,330,'#fff',pu,sim(0,-40,1.6,YEL,0,'')+T(0,110,38,'isi phone?'),{rot:3});
+   o+=tick(905,420,1.3,pt)}}
+ if(n=='papa'){const two=f>=q.d0-2;o+=head(two?2:0,two?'SIM USI PHONE MEIN':'PAPA KA SETUP',YEL,'#fff0ee');
+  const pk=pop(f,q.kp-3,8),ps=pop(f,q.wa5-2,8),mv=two?sn(f,q.daal,16):0,done=two&&mv>=.98;
+  o+=keypad(260,600,1,pk,'',{rot:-3});
+  if(f<q.dual)o+=T(260,860,34,'KEYPAD',{w:900});
+  o+=phone(760,590,.82,ps,chatIcon(-6,-90,1.2,done?CHAT:'#b9bdc9')+T(-6,40,34,done?'CHALEGA':'SIM NAHI',{fill:done?MD:RD})+`<rect x="-100" y="100" width="188" height="120" rx="16" fill="#f3f4f8" stroke="${done?MD:'#c9cfe0'}" stroke-width="5"/>`,{rot:3,stroke:done?MD:INK});
+  if(f<q.dual)o+=T(760,880,34,'SMARTPHONE',{w:900});
+  if(pk>0){const [x,y]=arcPt(260,520,754,722,mv);o+=sim(x,y,pk*.9,YEL,mv*360)}
+  if(!two&&ps>0)o+=stamp(510,330,'ALAG ALAG!',pop(f,q.wa5+6,7),RD,-5,50);
+  if(done)o+=tick(890,380,1.3,pop(f,q.daal+16,8));
+  if(two&&f>=q.dual){const pd=pop(f,q.dual,8),pn=pop(f,q.dono,8);o+=box(540,925,560,92,'#fff',pd,sim(-220,0,.62,YEL,0,'1')+sim(-150,0,.62,MINT,0,'2')+T(30,14,36,'DUAL SIM = dono')+tick(240,0,.9,pn),{rot:-1})}}
+ if(n=='active'){o+=head(3,'SIM CHAALU RAKHO',' #ff9b9b'.trim(),'#fff0ee');
+  const steps=[['RECHARGE','khatam',q.a0+4,q.kh],['SIM','band',q.a0+10,q.band],['WhatsApp','ruk sakta',q.a0+16,q.ruk2]];
+  steps.forEach(([lab,bad,fr,bf],k)=>{const p=pop(f,fr,9),b=f>=bf,y=360+k*205;
+   const icon=k==0?`<g transform="translate(-290,0)"><rect x="-46" y="-40" width="92" height="80" rx="14" fill="${b?'#ffd6d6':'#e9fbf3'}" stroke="${INK}" stroke-width="5"/>${T(0,16,40,'Rs',{fill:b?RD:MD})}</g>`:k==1?sim(-290,0,.85,b?'#c9cfe0':YEL):chatIcon(-290,0,.85,b?'#b9bdc9':CHAT);
+   o+=box(540,y,760,150,b?'#fff4f4':'#fff',p,icon+T(-200,16,52,lab,{a:'start'})+(b?T(330,16,38,bad,{a:'end',fill:RD}):T(330,16,38,'ON',{a:'end',fill:MD})),{rot:k%2?1:-1,stroke:b?RD:INK});
+   if(k<2&&p>0)o+=`<path d="M540,${y+80} v36 m-18,-16 l18,18 l18,-18" fill="none" stroke="${b?RD:INK}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="${clamp(p)}"/>`});
+  const pr=pop(f,q.ruk2-2,6);if(pr>0)o+=stamp(800,900,'RECHARGE KARO',pr,YEL,-4,40)}
+ if(n=='recap'){o+=head(0,'3 CHECK · BHEJO',YEL,'#fff7e6');
+  const late=f>=q.papa,sh=late?sm(f,q.papa-2,10):0;
+  [['Number dekha?',q.t1],['SIM usi phone mein?',q.t2],['Recharge chaalu?',q.t3]].forEach(([lab,fr],k)=>{const p=pop(f,F(8)+k*4,9),tk=pop(f,fr,8);o+=box(540,372+k*(150-40*sh),800,126-24*sh,'#fff',p,`<rect x="-370" y="-34" width="68" height="68" rx="16" fill="${tk>0?MINT:'#f3f4f8'}" stroke="${INK}" stroke-width="5"/>`+(tk>0?`<path d="M-354,2 l14,15 l28,-32" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="70" stroke-dashoffset="${70*(1-clamp(tk))}"/>`:'')+T(-270,17,44,lab,{a:'start'}),{rot:k%2?1:-1})});
+  if(late){const pp=pop(f,q.papa,8);o+=box(540,702,800,96,MINT,pp,T(0,16,42,'Papa-mummy ko bhejo'),{rot:1})}
+  if(f>=q.aap){const pc=pop(f,q.aap,9),word='SAME / ALAG',typed=word.slice(0,clamp(Math.floor((f-q.com)/3),0,word.length)),cur=Math.floor(t*3)%2?'|':'';
+   o+=box(540,866,820,180,'#fff',pc,T(-370,-50,28,'Add a comment...',{a:'start',w:600,fill:GREY})+`<rect x="-370" y="-26" width="560" height="96" rx="22" fill="#f3f4f8" stroke="${MINT}" stroke-width="6"/>`+T(-345,42,52,typed+cur,{a:'start',font:'Mono',w:700})+`<rect x="210" y="-26" width="160" height="96" rx="22" fill="${RD}"/>`+T(290,38,36,'POST',{fill:'#fff'}),{rot:-1})}}
+ return o}
+// bottom strip: evening living room (fills the whole frame during the full-screen hook)
+function strip(f){const t=f/FPS;let o=`<defs><linearGradient id="sw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d7e4ff"/><stop offset="1" stop-color="#a9bff0"/></linearGradient></defs><rect x="-700" y="-1500" width="2500" height="3800" fill="url(#sw)"/>`;
+ o+=`<rect x="660" y="1080" width="340" height="280" rx="14" fill="#2c2f66" stroke="#5a4a7a" stroke-width="16"/><path d="M830,1080 L830,1360 M660,1220 L1000,1220" stroke="#5a4a7a" stroke-width="10"/><circle cx="950" cy="1130" r="${26+2*Math.sin(t*2)}" fill="#fff6d0" opacity=".9"/>`;
+ o+=`<rect x="40" y="1100" width="210" height="150" rx="10" fill="#fff6e6" stroke="#5a4a7a" stroke-width="8"/>`+chatIcon(145,1175,.7);
+ o+=`<rect x="-200" y="1560" width="1480" height="220" rx="60" fill="#3d5a80"/><rect x="-200" y="1500" width="1480" height="110" rx="50" fill="#4f6fa0"/><rect x="-700" y="1760" width="2500" height="400" fill="#7a5a48"/>`;
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const p=pop(f,-9,9)*(1-sp),p2=pop(f,-9,9)*(1-sp),p3=pop(f,-9,9)*(1-sp);
+ return stamp(540,200,'1 JAN SE BAND?!',p,YEL,-3,64)
+  +phone(330,470,.62,p2,chatIcon(-6,-110,1.3,'#b9bdc9')+`<rect x="-150" y="-10" width="288" height="96" rx="18" fill="${RD}"/>`+T(-6,50,34,'SIM NAHI MILA',{fill:'#fff'})+`<rect x="-100" y="130" width="188" height="110" rx="16" fill="#f3f4f8" stroke="${RD}" stroke-width="6" stroke-dasharray="14 10"/>`,{rot:-4,stroke:RD,sw:9})
+  +keypad(790,500,.6,p3,'',{rot:5})+sim(790,320,.9*p3,YEL,10)+T(790,670,32,'SIM yahan',{w:900,extra:`opacity="${clamp(p3)}"`})}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+RIG.impact(f0,HITS,540,600)+caption(f,capY(f));
+ s+=`<rect x="0" y="1904" width="${1080*f0/NF}" height="16" fill="${MINT}"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>

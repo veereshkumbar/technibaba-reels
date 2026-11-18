@@ -1,0 +1,36 @@
+# Split-layout reel, 10:00 trending tech: "1 Jan se WhatsApp band? SIM binding: 3 check"  c = Chotu, b = Techni Baba.
+LINES=[
+('q','बाबा! एक जनवरी से व्हाट्सऐप बंद?! मेरा सिम तो दूसरे फ़ोन में है!','Baba! Ek January se WhatsApp BAND?! Mera SIM toh doosre phone mein hai!','c',''),
+('q','घबरा मत. नया नियम है, सिम बाइंडिंग. तीन चेक.','Ghabra mat. Naya niyam hai, SIM binding. Teen check.','b',''),
+('rule','रिपोर्ट्स के हिसाब से, इकत्तीस दिसंबर तक व्हाट्सऐप जैसे ऐप्स पे ये लगेगा.','Reports ke hisaab se, 31 December tak WhatsApp jaise apps pe ye lagega.','b',''),
+('rule','जिस नंबर पे व्हाट्सऐप, उसका सिम उसी फ़ोन में. सिम निकाला, तो ऐप रुक सकता है.','Jis number pe WhatsApp, uska SIM usi phone mein. SIM nikala, toh app RUK sakta hai.','b',''),
+('num','पहला: व्हाट्सऐप प्रोफ़ाइल में नंबर देखो. उसका सिम इसी फ़ोन में है?','Pehla: WhatsApp profile mein number dekho. Uska SIM isi phone mein hai?','b',''),
+('papa','पापा का सिम तो कीपैड फ़ोन में है, और व्हाट्सऐप स्मार्टफ़ोन पे!','Papa ka SIM toh KEYPAD phone mein hai, aur WhatsApp smartphone pe!','c',''),
+('papa','दूसरा: वही सिम, व्हाट्सऐप वाले फ़ोन में डालो. डुअल सिम, तो दोनों साथ.','Doosra: wahi SIM, WhatsApp wale phone mein daalo. Dual SIM, toh dono saath.','b',''),
+('active','तीसरा: सिम चालू रखो. रिचार्ज ख़त्म, सिम बंद, तो व्हाट्सऐप भी रुक सकता है.','Teesra: SIM chaalu rakho. Recharge khatam, SIM band, toh WhatsApp bhi ruk sakta hai.','b',''),
+('recap','मतलब नंबर, सिम, रिचार्ज. तीन चेक!','Matlab number, SIM, recharge. Teen check!','c',''),
+('recap','पापा मम्मी को भेजो. आपका व्हाट्सऐप और सिम, सेम फ़ोन या अलग? कमेंट करो.','Papa mummy ko bhejo. Aapka WhatsApp aur SIM, same phone ya alag? Comment karo.','b',''),
+]
+VOICES={'c':('kokoro:hm_psi',1.24,1.06),'b':('file:vo_in/b_{i:02d}.wav',1.0,1.0,('kokoro:hm_omega',1.18,0.95))}
+BEATS=[
+ dict(emotion='panic',action='hands on head, then shrug',rule='hook by 1.5s, full-screen payoff before the split',
+      keys=[(None,'c','blown','shocked',1),(None,'b','idle','neutral',0),('mera','c','shrug','confused',1)],caps=[('baba','1 Jan se *BAND*?!'),('mera','SIM *doosre phone* mein')]),
+ dict(emotion='calm',action='palm, then counts three',rule='panel drops in with a bounce',
+      keys=[(None,'b','palm','smug',1),(None,'c','idle','confused',0),('teen','b','count','explaining',1)],caps=[('ghabra','*Ghabra* mat'),('naya','*SIM BINDING*'),('teen','Bas *3 check*')]),
+ dict(emotion='explaining',action='explains, points at the date',rule='one visual: deadline card + app chips',
+      keys=[(None,'b','explain','explaining',0),(None,'c','idle','neutral',0),('hisaab','b','count','explaining',0),('31','b','point','explaining',1),('whatsapp','c','leanin','confused',0)],caps=[('reports','*Reports* ke hisaab se'),('31','Deadline *31 DEC*')]),
+ dict(emotion='stern',action='point, then stop hand',rule='hit-stop on RUK',hit='ruk',
+      keys=[(None,'b','point','explaining',1),(None,'c','idle','neutral',0),('usi','b','explain','explaining',0),('usi','c','leanin','confused',0),('nikala','b','stop','angry',1),('ruk','c','blown','shocked',1)],caps=[('jis','SIM *usi phone* mein'),('nikala','SIM nikala? *RUK*')]),
+ dict(emotion='explaining',action='phone, then points up',rule='one visual: profile screen + number highlight',
+      keys=[(None,'b','phone','explaining',1),(None,'c','phone','neutral',0),('number','b','point','explaining',1),('isi','b','explain','explaining',0),('uska','c','leanin','confused',0)],caps=[('pehla','1 · *PROFILE* number'),('uska','SIM *isi phone* mein?')]),
+ dict(emotion='realising',action='hands on head',rule='hit-stop on KEYPAD',hit='keypad',
+      keys=[(None,'c','blown','shocked',1),(None,'b','idle','smug',0),('whatsapp','c','shrug','confused',1)],caps=[('papa','Papa: SIM *KEYPAD* mein'),('whatsapp','WhatsApp *smartphone* pe')]),
+ dict(emotion='calm',action='explains, points, thumbs up',rule='one visual: SIM arcs from keypad to smartphone',
+      keys=[(None,'b','explain','explaining',0),(None,'c','idle','neutral',0),('daalo','b','point','explaining',1),('dual','b','count','explaining',0),('dono','c','thumb','happy',1)],caps=[('doosra','2 · SIM *usi phone* mein'),('dual','Dual SIM: *dono saath*')]),
+ dict(emotion='serious',action='counts, then stop hand',rule='chain: recharge, SIM, app resolve in order',
+      keys=[(None,'b','count','explaining',1),(None,'c','idle','neutral',0),('recharge','b','explain','explaining',0),('ruk','b','stop','angry',1),('whatsapp','c','blown','shocked',0)],caps=[('teesra','3 · SIM *chaalu* rakho'),('recharge','Recharge khatam = *band*')]),
+ dict(emotion='proud',action='counts on fingers, jumps',rule='recap ticks land on each word',
+      keys=[(None,'c','count','happy',1),(None,'b','idle','happy',0),('teen','c','up','happy',1)],caps=[('matlab','Number. SIM. *Recharge.*')]),
+ dict(emotion='warm',action='points at the comment box, waves',rule='share prompt + comment question',
+      keys=[(None,'b','thumb','happy',1),(None,'c','idle','happy',0),('aapka','b','point','happy',1),('comment','c','wave','happy',0),('karo','b','wave','happy',1)],caps=[('papa','*Papa-mummy* ko bhejo'),('aapka','Same ya *ALAG*?')]),
+]
