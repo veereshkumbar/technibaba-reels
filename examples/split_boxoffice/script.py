@@ -1,0 +1,36 @@
+# Split-layout reel, 21:00 Bollywood x tech (box-office data): "1,483 crore ya 821? Dono sach: GROSS, NET, WORLDWIDE"  c = Chotu, b = Techni Baba.
+LINES=[
+('q','बाबा! रामायण: चौदह सौ तिरासी करोड़, या आठ सौ इक्कीस? कौन झूठा?','Baba! Ramayana: 1,483 crore, ya 821? Kaun jhootha?','c',''),
+('q','कोई नहीं. दोनों सच, बस नाप अलग. तीन चेक.','Koi nahi. Dono sach, bas naap alag. Teen check.','b',''),
+('send','रुको! ये फ़ैन वॉर वाले दोस्त को भेजो!','Ruko! Ye fan war wale dost ko bhejo!','c',''),
+('gross','पहला: ग्रॉस. टिकट का पूरा पैसा, जीएसटी समेत.','Pehla: GROSS. Ticket ka poora paisa, GST samet.','b',''),
+('net','दूसरा: नेट. अठारह परसेंट जीएसटी हटाओ, बचे दो सौ पचास.','Doosra: NET. 18 percent GST hatao, bache 250.','b',''),
+('net','तो आठ सौ इक्कीस करोड़, इंडिया का नेट!','Toh 821 crore, India ka NET!','c',''),
+('world','तीसरा: वर्ल्डवाइड. इंडिया ग्रॉस प्लस विदेश, चौदह सौ तिरासी.','Teesra: WORLDWIDE. India gross plus videsh, 1,483.','b',''),
+('world','मतलब नेट को वर्ल्डवाइड से मत लड़ाओ!','Matlab NET ko worldwide se mat ladao!','c',''),
+('kamai','याद रख, कलेक्शन कमाई नहीं. थिएटर का हिस्सा कटता है.','Yaad rakh, collection kamai nahi. Theatre ka hissa katta hai.','b',''),
+('end','अगली फ़ैन वॉर में पहले पूछो: नेट या ग्रॉस?','Agli fan war mein pehle poocho: NET ya GROSS?','b',''),
+]
+VOICES={'c':('kokoro:hm_psi',1.24,1.06),'b':('file:vo_in/b_{i:02d}.wav',1.0,1.0,('kokoro:hm_omega',1.18,0.95))}
+BEATS=[
+ dict(emotion='shocked',action='hands on head, full-screen',rule='hook by 1.5s, full-screen before the split',
+      keys=[(None,'c','blown','shocked',1),(None,'b','idle','neutral',0),('kaun','c','shrug','angry',1)],caps=[('ramayana','*1,483* crore?'),('ya','Ya sirf *821*?'),('kaun','Kaun *JHOOTHA*?')]),
+ dict(emotion='calm',action='palm, counts three',rule='panel drops in; payoff said by 6s',
+      keys=[(None,'b','palm','smug',1),(None,'c','idle','confused',0),('teen','b','count','explaining',1)],caps=[('koi','Dono *SACH*'),('bas','Bas *naap* alag')]),
+ dict(emotion='excited',action='points at viewer, phone',rule='share ask at 8-12s, big text + SFX',
+      keys=[(None,'c','point','happy',1),(None,'b','idle','happy',0),('dost','c','phone','happy',1)],caps=[('ruko','*Ruko!*'),('fan','*Fan war* wala dost')]),
+ dict(emotion='explaining',action='explains, points up at the ticket',rule='one visual: ticket with GST line',
+      keys=[(None,'b','explain','explaining',0),(None,'c','idle','neutral',0),('ticket','b','point','explaining',1),('samet','b','count','smug',0)],caps=[('pehla','1 · *GROSS*'),('ticket','Poora paisa, *GST samet*')]),
+ dict(emotion='explaining',action='stop hand, then palm',rule='GST strip tears off the ticket',
+      keys=[(None,'b','stop','explaining',1),(None,'c','leanin','confused',0),('bache','b','palm','smug',1)],caps=[('doosra','2 · *NET*'),('gst','GST *hatao*'),('bache','Bache Rs *250*')]),
+ dict(emotion='amazed',action='hands up',rule='hit-stop on NET',hit='net',
+      keys=[(None,'c','blown','shocked',1),(None,'b','idle','smug',0),('india','c','up','happy',1)],caps=[('toh','*821* crore = NET')]),
+ dict(emotion='explaining',action='points, counts',rule='one visual: India bar + videsh bar = world bar',
+      keys=[(None,'b','point','explaining',1),(None,'c','idle','neutral',0),('plus','b','count','explaining',0),('videsh','b','thumb','happy',1)],caps=[('teesra','3 · *WORLDWIDE*'),('india','India + *videsh*'),('1483','= *1,483*')]),
+ dict(emotion='stern-joke',action='stop hand',rule='hit-stop on LADAO',hit='ladao',
+      keys=[(None,'c','stop','angry',1),(None,'b','idle','smug',0),('ladao','b','thumb','happy',1)],caps=[('matlab','NET vs WORLD = *galat*')]),
+ dict(emotion='serious',action='stop hand, then explain',rule='one visual: money splits, smaller pile',
+      keys=[(None,'b','stop','explaining',1),(None,'c','idle','neutral',0),('theatre','b','explain','explaining',0),('katta','c','shrug','confused',1)],caps=[('yaad','Collection ≠ *KAMAI*'),('theatre','Theatre ka *hissa*')]),
+ dict(emotion='warm',action='points, waves',rule='one-word comment ask that loops to the hook',
+      keys=[(None,'b','point','happy',1),(None,'c','idle','happy',0),('poocho','c','wave','happy',0),('net','b','wave','happy',1)],caps=[('agli','Agli *fan war* mein'),('poocho','*NET* ya GROSS?')]),
+]

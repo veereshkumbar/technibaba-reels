@@ -1,0 +1,5 @@
+A (picked) Number fight: Chotu sees "1,483 crore" on one site and "821" on another for Ramayana -> "kaun jhootha?" -> dono sach: GROSS (ticket + GST), NET (GST hata ke), WORLDWIDE (India gross + videsh) -> collection != kamai -> loop "NET ya GROSS?".
+B Ticket journey: one Rs 295 ticket travels: Rs 45 GST to sarkar, theatre ka hissa, distributor, producer -> "1000 crore film, producer ko kitna?" (dropped: share % differ by deal/era; sources disagree).
+C Fan-war myth vs fact: "Hamari film 1,483, tumhari 821 -> hum jeete" -> myth busted with the 3 labels (folded into A as the share target).
+Hooks: 1 "Ramayana: 1,483 crore, ya 821? Kaun jhootha?" (picked: real numbers, both true, one-word conflict) · 2 "1,000 crore film = 1,000 crore kamai? NAHI" (good, used as the 4th beat) · 3 "Rs 295 ke ticket mein film ko sirf Rs 250" (strong but slower to the payoff).
+Why picked: share target = 'fan war wala dost' (every film fan has one; numbers fights are a known online pattern), save = 3-label rule usable for every future film, comment = one word NET/GROSS.
