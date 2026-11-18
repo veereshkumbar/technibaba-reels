@@ -1,0 +1,124 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+// ================= reel art: "Dhoni ka 0.08 second stumping: OUT kaise? 3 check" (split layout) =================
+const RD=C.laptopRed,MINT=C.mint,MD=C.mintDark,YEL=C.captionKeyword,NAVY=C.navy,GREY='#7a7f92',WOOD='#f2d39b',WOODD='#c99a55',GRASS='#3f9a4a',GLOW='#ff3b3b';
+const T=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="${o.font||'Pop'}" font-weight="${o.w||900}" font-size="${s}" fill="${o.fill||INK}" ${o.extra||''}>${txt}</text>`;
+const box=(x,y,w,h,fill,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-6}) scale(${p})"><rect x="${-w/2+6}" y="${-h/2+10}" width="${w}" height="${h}" rx="${o.r||24}" fill="#000" opacity=".18"/><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${o.r||24}" fill="${fill}" stroke="${o.stroke||INK}" stroke-width="${o.sw||6}"/>${inner}</g>`;
+const tick=(x,y,s,p,col=MD)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${col}" stroke="${INK}" stroke-width="5"/><path d="M-16,2 l11,12 l22,-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+const cross=(x,y,s,p)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${RD}" stroke="${INK}" stroke-width="5"/><path d="M-14,-14 L14,14 M14,-14 L-14,14" stroke="#fff" stroke-width="9" stroke-linecap="round"/></g>`;
+const stamp=(x,y,txt,p,col,rot=-8,size=96)=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${p})"><rect x="${-txt.length*size*.36-30}" y="${-size*.72}" width="${txt.length*size*.72+60}" height="${size*1.4}" rx="22" fill="${col}" stroke="#fff" stroke-width="9"/>${T(0,size*.33,size,txt,{fill:col==YEL?INK:'#fff'})}</g>`;
+const F=i=>BT[i].f0,PW=PAN.x1-PAN.x0,PH=PAN.y1-PAN.y0;
+const head=(step,title,col,fill)=>`<rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="${PH}" fill="${fill}"/><rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="112" fill="${NAVY}"/>`+(step?`<rect x="118" y="176" width="210" height="62" rx="31" fill="${col}"/>${T(223,220,34,'CHECK '+step,{fill:INK})}`:'')+T(step?352:118,222,40,title,{a:'start',fill:'#fff'})+[1,2,3].map(k=>`<circle cx="${880+k*28}" cy="207" r="9" fill="${step&&k<=step?col:'#4b4a86'}"/>`).join('');
+// stumps (3) with two bails; lit = glow red; lift 0..1 = bails fly off (bail k rises on an arc)
+const stumps=(x,y,s,lit,lift=0,o={})=>{let g=`<g transform="translate(${x},${y}) scale(${s})">`;
+ if(lit>0&&!o.noglow)g+=`<circle cx="0" cy="-250" r="${150*lit}" fill="${GLOW}" opacity="${.25*lit}"/>`;
+ [-58,0,58].forEach(dx=>{g+=`<rect x="${dx-13}" y="-240" width="26" height="250" rx="10" fill="${lit>0?'#ff6b6b':WOOD}" stroke="${INK}" stroke-width="5"/>`});
+ [[-29,-1],[29,1]].forEach(([bx,dir],k)=>{const l=clamp(lift-(k*.15)),ax=bx+dir*170*l,ay=-252-260*l*(1-l)*1.6-40*l,rot=dir*300*l;
+  g+=`<g transform="translate(${ax},${ay}) rotate(${rot})"><rect x="-34" y="-9" width="68" height="18" rx="9" fill="${lit>0?GLOW:WOOD}" stroke="${INK}" stroke-width="4"/>${lit>0?`<rect x="-34" y="-9" width="68" height="18" rx="9" fill="#fff" opacity="${.35*lit}"/>`:''}</g>`});
+ return g+`<rect x="-110" y="8" width="220" height="10" rx="5" fill="#fff" opacity=".8"/></g>`};
+// big side view of one bail on two stump tops (grooves); chip inside; up = 0..1 lift; lit glow
+const bigBail=(x,y,s,up,lit,chipP)=>{let g=`<g transform="translate(${x},${y}) scale(${s})">`;
+ g+=`<rect x="-250" y="20" width="120" height="260" rx="14" fill="${WOOD}" stroke="${INK}" stroke-width="6"/><rect x="130" y="20" width="120" height="260" rx="14" fill="${WOOD}" stroke="${INK}" stroke-width="6"/>`;
+ g+=`<path d="M-222,20 v-14 h64 v14 M158,20 v-14 h64 v14" fill="none" stroke="${INK}" stroke-width="6"/>`; // grooves
+ const dy=-up*120;
+ g+=`<g transform="translate(0,${dy}) rotate(${-8*up})">`;
+ if(lit>0)g+=`<rect x="-330" y="-90" width="660" height="150" rx="75" fill="${GLOW}" opacity="${.28*lit}"/>`;
+ g+=`<rect x="-206" y="-6" width="32" height="30" rx="8" fill="${lit>0?GLOW:WOODD}" stroke="${INK}" stroke-width="5"/><rect x="174" y="-6" width="32" height="30" rx="8" fill="${lit>0?GLOW:WOODD}" stroke="${INK}" stroke-width="5"/>`;
+ g+=`<rect x="-290" y="-60" width="580" height="64" rx="32" fill="${lit>0?GLOW:WOOD}" stroke="${INK}" stroke-width="6"/>`;
+ if(chipP>0)g+=`<g transform="scale(${chipP})"><rect x="-56" y="-54" width="112" height="52" rx="8" fill="${NAVY}" stroke="${YEL}" stroke-width="5"/>${[-36,-12,12,36].map(d=>`<rect x="${d-4}" y="-64" width="8" height="10" fill="${YEL}"/><rect x="${d-4}" y="-2" width="8" height="10" fill="${YEL}"/>`).join('')}${T(0,-14,28,'CHIP',{fill:YEL,font:'Mono',w:700})}</g>`;
+ return g+`</g></g>`};
+const watch=(x,y,s,p,txt,col=RD)=>`<g transform="translate(${x},${y}) scale(${s*p})"><rect x="-22" y="-150" width="44" height="34" rx="8" fill="${INK}"/><circle r="120" fill="#fff" stroke="${INK}" stroke-width="10"/><circle r="100" fill="none" stroke="${col}" stroke-width="12" stroke-dasharray="${2*Math.PI*100*.08} 999" transform="rotate(-90)"/>${T(0,24,64,txt,{font:'Mono',w:700,fill:col})}</g>`;
+const glove=(x,y,s,rot=0)=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${s})"><path d="M-50,60 v-80 q0,-20 14,-20 v-34 q0,-16 14,-16 q14,0 14,16 v-6 q0,-16 14,-16 q14,0 14,16 v6 q0,-14 14,-14 q14,0 14,14 v60 l18,-20 q14,-12 24,0 q8,10 -2,22 l-44,58 v20z" fill="#f4f4f4" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/><rect x="-54" y="56" width="104" height="30" rx="8" fill="${MINT}" stroke="${INK}" stroke-width="5"/></g>`;
+// cue frames
+const q={n0:F(1),kal:WF(1,'kal'),ab:WF(1,'ab'),teen:WF(1,'teen'),
+ b0:F(2),led:WF(2,'led'),chip:WF(2,'chhota'),hili:WF(2,'hili'),laal:WF(2,'laal'),jali:WF(3,'jali'),out3:WF(3,'out'),
+ z:WF(4,'zaroori'),fr:WF(4,'frame'),dek:WF(4,'dekhta'),poori:WF(4,'poori'),utri:WF(4,'utri'),te:F(5),
+ c0:F(6),usi:WF(6,'usi'),pair:WF(6,'pair'),peeche:WF(6,'peeche'),out6:WF(6,'out'),
+ t0:F(7),k0:F(8),barah:WF(8,'barah'),bas:WF(8,'bas'),itne:WF(8,'itne'),kh:WF(8,'khatam'),
+ r0:F(9),r1:WF(9,'bail'),r2:WF(9,'frame'),r3:WF(9,'crease'),rt:WF(9,'teen'),save:WF(10,'save'),dh:WF(10,'dhoni'),best:WF(10,'best'),com:WF(10,'comment')};
+[[q.n0+4,'pop'],[q.kal,'pop'],[q.kal+8,'blip'],[q.ab,'ding'],[q.teen,'pop'],[q.b0+4,'pop'],[q.led,'blip'],[q.chip,'pop'],[q.hili,'whoosh'],[q.laal,'ding'],[q.laal+6,'blip'],[q.jali,'pop'],[q.out3,'crack'],
+ [q.z,'crack'],[q.fr,'pop'],[q.fr+5,'pop'],[q.fr+10,'pop'],[q.fr+15,'pop'],[q.dek,'blip'],[q.poori,'blip'],[q.utri,'ding'],[q.te,'pop'],
+ [q.c0+4,'pop'],[q.usi,'blip'],[q.pair,'pop'],[q.peeche,'pop'],[q.out6+2,'ding'],[q.t0+3,'pop'],[q.t0+12,'blip'],[q.k0+3,'pop'],[q.barah,'type'],[q.barah+8,'type'],[q.bas,'ding'],[q.itne,'whoosh'],[q.kh,'ding'],
+ [q.r1,'pop'],[q.r2,'pop'],[q.r3,'pop'],[q.rt,'ding'],[q.dh,'pop'],[q.best,'pop'],[q.com,'type'],[q.com+12,'type']].forEach(([f,t])=>sfx(f,t));
+function content(n,f){const t=f/FPS;let o='';
+ if(n=='q'||n=='news'){const three=f>=q.teen-1;o+=head(0,three?'STUMPING: 3 CHECK':'DHONI: IPL SE RETIRE',YEL,'#fff7e6');
+  if(!three){o+=box(540,350,780,150,'#fff',pop(f,q.n0+4,9),glove(-300,6,.75,-10)+T(-200,-6,44,'IPL se retire',{a:'start'})+T(-200,44,30,'announced 17 Nov 2026',{a:'start',w:800,fill:GREY}),{rot:-1.5});
+   const pk=pop(f,q.kal+8,8);o+=box(330,560,360,170,'#fff',pk,T(0,8,76,'278',{fill:NAVY})+T(0,56,30,'IPL match',{w:800,fill:GREY}),{rot:2});
+   o+=box(750,560,360,170,'#fff',pk,T(0,8,76,'5',{fill:MD})+T(0,56,30,'IPL title',{w:800,fill:GREY}),{rot:-2});
+   const pa=pop(f,q.ab,9);o+=box(540,790,780,150,MINT,pa,T(0,-4,52,'AB: CSK MENTOR')+T(0,46,30,'IPL 2027 se',{w:800,fill:INK}),{rot:1})}
+  else{[['BAIL','chip + LED',MINT],['FRAME','kab utri',YEL],['CREASE','line ke peeche?','#ff9b9b']].forEach(([lab,sub,col],k)=>{const p=pop(f,q.teen-1+k*5,9);o+=box(540,390+k*175,780,140,'#fff',p,`<circle cx="-310" cy="0" r="46" fill="${col}" stroke="${INK}" stroke-width="5"/>`+T(-310,20,56,k+1)+T(-232,10,58,lab,{a:'start'})+T(330,14,30,sub,{a:'end',w:800,fill:GREY}),{rot:k%2?1.5:-1.5})})}}
+ if(n=='bail'){o+=head(1,'LED BAIL',MINT,'#eafaf3');
+  const pc=pop(f,q.chip,8),up=sn(f,q.hili,10),lit=f>=q.hili+5?1:0;
+  o+=bigBail(540,480,1.0*pop(f,q.b0+4,9),up*.6,lit,pc);
+  if(pc>0)o+=T(540,316,36,'andar chhota computer',{w:800,fill:GREY,extra:`opacity="${clamp(pc)}"`});
+  if(lit&&f<q.jali)o+=box(540,880,800,120,'#fff4f4',pop(f,q.hili+5,8),T(0,18,50,'1/1000 SECOND = LAAL',{fill:RD}),{rot:-1,stroke:RD});
+  if(f>=q.jali){o+=stamp(540,880,'JALI = OUT?',pop(f,q.jali,7),NAVY,-4,60)}}
+ if(n=='frame'){o+=head(2,'FRAME BY FRAME',YEL,'#fff7e6');
+  const pz=pop(f,q.z,7),cur=f<q.dek?-1:Math.min(3,Math.floor((f-q.dek)/7)),fin=f>=q.utri;
+  // film strip of 4 frames
+  o+=`<rect x="92" y="330" width="896" height="300" rx="16" fill="${INK}"/>`+[...Array(14)].map((_,k)=>`<rect x="${110+k*64}" y="342" width="34" height="18" rx="4" fill="#fff" opacity=".8"/><rect x="${110+k*64}" y="600" width="34" height="18" rx="4" fill="#fff" opacity=".8"/>`).join('');
+  [[0,0,'1'],[1,.06,'2'],[.6,.3,'3'],[1,.62,'4']].forEach(([lit,lift,lab],k)=>{const p=pop(f,q.fr+k*5,8),x=200+k*226,on=cur==k||(fin&&k==3);
+   o+=`<g opacity="${clamp(p)}"><rect x="${x-100}" y="372" width="200" height="216" rx="10" fill="#cfe9c8" stroke="${on?YEL:'#555'}" stroke-width="${on?10:4}"/>`+stumps(x,572,.62,lit?1:0,lift,{noglow:1})+T(x-80,404,30,'F'+lab,{a:'start',font:'Mono',w:700,fill:INK})+`</g>`});
+  o+=T(200+226,680,34,'F2: jali, par groove mein',{w:800,fill:RD,extra:`opacity="${clamp(pop(f,q.fr+5,8))}"`});
+  if(fin){o+=T(985,730,34,'F4: POORI UTRI',{a:'end',fill:MD});o+=tick(200+3*226+90,360,1,pop(f,q.utri,8))}
+  if(pz>0&&f<q.dek+20)o+=stamp(540,820,'JALNA ≠ OUT',pz,RD,-3,64);
+  if(f>=q.dek+20)o+=box(540,830,820,130,'#fff',pop(f,q.dek+20,9),T(0,-6,40,'Wicket = bail poori upar se hati')+T(0,42,28,'Law 29 · WPL 2025 clarification',{w:800,fill:GREY}),{rot:-1});
+  }
+ if(n=='crease'){o+=head(3,'CREASE: USI FRAME MEIN',' #ff9b9b'.trim(),'#fff0ee');
+  o+=box(540,300,520,76,NAVY,pop(f,q.c0+4,8),T(0,14,36,'FRAME 4: bail poori utri',{fill:YEL}),{rot:-1});
+  const card=(cx,p,ok)=>{let g=`<rect x="-200" y="-200" width="400" height="400" rx="20" fill="#cfe9c8" stroke="${ok?MD:RD}" stroke-width="8"/>`;
+   g+=`<rect x="-8" y="-180" width="16" height="360" fill="#fff"/>`+T(-100,-150,30,'CREASE',{w:800,fill:INK});
+   const fx=ok?-90:90,fy=ok?110:20;
+   g+=`<g transform="translate(${fx},${fy})"><path d="M-60,0 h110 q20,0 20,20 v14 h-150 z" fill="${NAVY}" stroke="${INK}" stroke-width="5"/><rect x="-40" y="-90" width="50" height="92" rx="10" fill="#fff" stroke="${INK}" stroke-width="5"/></g>`;
+   if(!ok)g+=`<path d="M40,150 h100" stroke="${INK}" stroke-width="5" stroke-dasharray="10 8"/>`+T(90,190,30,'hawa mein',{w:800,fill:RD});
+   g+=T(0,250,40,ok?'NOT OUT':'OUT',{fill:ok?MD:RD});
+   return `<g transform="translate(${cx},${560}) scale(${.95*p})">${g}</g>`};
+  const pa=pop(f,q.usi,9),pb=pop(f,q.peeche,9);
+  if(pa>0)o+=card(300,pa,1)+T(300,855,32,'peeche + zameen pe',{w:800,fill:GREY,extra:`opacity="${clamp(pa)}"`});
+  if(pb>0)o+=card(780,pb,0)+T(780,855,32,'peeche nahi',{w:800,fill:GREY,extra:`opacity="${clamp(pb)}"`});
+  if(pa>0)o+=tick(470,380,.9,pop(f,q.pair,8));
+  if(pb>0)o+=cross(950,380,.9,pop(f,q.peeche+8,8));
+  if(f>=q.out6)o+=stamp(780,560,'OUT!',pop(f,q.out6,6),RD,-8,80)}
+ if(n=='time'){const two=f>=q.k0-2;o+=head(0,two?'1 SECOND KE 12 TUKDE':'0.08 SECOND = ?',YEL,'#eef3ff');
+  if(!two){o+=watch(540,560,1.5,pop(f,q.t0+3,9),'0.08 s');o+=T(540,850,36,'kitna chhota?',{w:800,fill:GREY,extra:`opacity="${clamp(pop(f,q.t0+12,8))}"`})}
+  else{const n12=f<q.barah?0:Math.min(12,Math.floor((f-q.barah)/2)+1),one=f>=q.bas;
+   o+=T(540,340,36,'1 SECOND',{fill:NAVY});
+   for(let k=0;k<12;k++){const on=k<n12,hl=one&&k==0;o+=`<rect x="${120+k*71}" y="380" width="62" height="170" rx="10" fill="${hl?YEL:on?'#c9d6ff':'#eef1f8'}" stroke="${hl?INK:'#9aa3c0'}" stroke-width="${hl?7:3}" transform="translate(0,${hl?-14*pop(f,q.bas,8):0})"/>`}
+   if(one){o+=T(120,620,44,'1 tukda ~ 0.08 s',{a:'start',fill:INK,extra:`opacity="${clamp(pop(f,q.bas,8))}"`});o+=`<path d="M152,560 v-0" stroke="${INK}"/>`}
+   if(f>=q.itne){const pi=pop(f,q.itne,8),lift=sn(f,q.itne+4,14);o+=stumps(720,830,.75,lift>0?1:0,lift*.7,{noglow:1})+glove(470,760,.9*pi,-20)}
+   if(f>=q.kh)o+=stamp(540,925,'KAAM KHATAM',pop(f,q.kh,7),MD,-3,40)}}
+ if(n=='recap'){o+=head(0,'3 CHECK · BHEJO',YEL,'#fff7e6');
+  const late=f>=q.save,sh=late?sm(f,q.save-2,10):0;
+  [['Bail jali?',q.r1],['Frame: poori utri?',q.r2],['Crease ke peeche?',q.r3]].forEach(([lab,fr],k)=>{const p=pop(f,F(9)+k*4,9),tk=pop(f,fr,8);o+=box(540,372+k*(150-40*sh),800,126-24*sh,'#fff',p,`<rect x="-370" y="-34" width="68" height="68" rx="16" fill="${tk>0?MINT:'#f3f4f8'}" stroke="${INK}" stroke-width="5"/>`+(tk>0?`<path d="M-354,2 l14,15 l28,-32" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="70" stroke-dashoffset="${70*(1-clamp(tk))}"/>`:'')+T(-270,17,44,lab,{a:'start'}),{rot:k%2?1:-1})});
+  if(late){const pp=pop(f,q.dh,8);o+=box(540,702,800,96,MINT,pp,T(0,16,42,'Dhoni fan dost ko bhejo'),{rot:1})}
+  if(f>=q.best){const pc=pop(f,q.best,9),word='BEST STUMPING...',typed=word.slice(0,clamp(Math.floor((f-q.com)/3),0,word.length)),cur=Math.floor(t*3)%2?'|':'';
+   o+=box(540,866,820,180,'#fff',pc,T(-370,-50,28,'Add a comment...',{a:'start',w:600,fill:GREY})+`<rect x="-370" y="-26" width="560" height="96" rx="22" fill="#f3f4f8" stroke="${MINT}" stroke-width="6"/>`+T(-345,42,44,typed+cur,{a:'start',font:'Mono',w:700})+`<rect x="210" y="-26" width="160" height="96" rx="22" fill="${RD}"/>`+T(290,38,36,'POST',{fill:'#fff'}),{rot:-1})}}
+ return o}
+// bottom strip: cricket ground at night (fills the whole frame during the full-screen hook)
+function strip(f){const t=f/FPS;let o=`<defs><linearGradient id="sw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c1e48"/><stop offset="1" stop-color="#2e2a80"/></linearGradient></defs><rect x="-700" y="-1500" width="2500" height="3800" fill="url(#sw)"/>`;
+ [[120,1040],[960,1040]].forEach(([x,y])=>{o+=`<rect x="${x-6}" y="${y}" width="12" height="260" fill="#4a4a6a"/><rect x="${x-60}" y="${y-50}" width="120" height="60" rx="8" fill="#fffbe0" stroke="#4a4a6a" stroke-width="6"/><circle cx="${x}" cy="${y-20}" r="${120+6*Math.sin(t*2)}" fill="#fffbe0" opacity=".12"/>`});
+ o+=`<rect x="-700" y="1240" width="2500" height="120" fill="#3a3670"/>`+[...Array(30)].map((_,k)=>`<circle cx="${-60+k*44}" cy="${1270+(k%3)*22}" r="9" fill="${['#ffd23f','#5de0b0','#ff9b9b','#c9d6ff'][k%4]}" opacity=".55"/>`).join('');
+ o+=`<rect x="-700" y="1350" width="2500" height="900" fill="${GRASS}"/>`+[...Array(8)].map((_,k)=>`<rect x="${-700+k*320}" y="1350" width="160" height="900" fill="#479f52"/>`).join('');
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const p=pop(f,-9,9)*(1-sp),lift=clamp((f%60)/18);
+ return stamp(540,210,'0.08 SECOND?!',p,YEL,-3,66)
+  +`<g opacity="${1-sp}">`+stumps(360,620,1.15*p,1,0,{noglow:1})+glove(150,500,.95*p,-25)+`</g>`
+  +watch(790,450,1.0,p,'0.08')+stamp(790,640,'OUT KAISE?',p,RD,5,44)}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+RIG.impact(f0,HITS,540,600)+caption(f,capY(f));
+ s+=`<rect x="0" y="1904" width="${1080*f0/NF}" height="16" fill="${MINT}"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>

@@ -1,0 +1,13 @@
+Dhoni ki stumping 0.08 second mein. Third umpire ne kaise pakda ki OUT hai?
+
+17 Nov ko MS Dhoni ne IPL se retirement li. Ab woh IPL 2027 se CSK ke team mentor hain. 278 IPL match, 5 title. Unki stumping ke peeche ka tech, 3 check mein:
+- BAIL: LED bail ke andar microprocessor hai. Bail groove se nikle toh 1/1000 second mein laal
+- FRAME: sirf jalna kaafi nahi. Third umpire frame by frame dekhta hai ki bail poori tarah upar se kab hati (Law 29, WPL 2025 clarification)
+- CREASE: usi frame mein batter ka pair ya bat line ke peeche zameen pe tha? Nahi, toh OUT
+0.08 second matlab ek second ke lagbhag 12 tukdon mein se ek.
+
+Save karo, agle stumping review pe kaam aayega. Dhoni fan dost ko bhejo. Unki best stumping kaunsi thi? Comment karo.
+
+Sources: Outlook India, The Daily Pioneer, Open Magazine, Sentinel Assam (retirement, 17 Nov 2026); ESPNcricinfo and ICC (LED bails); Wisden and ESPN (Law 29, WPL 2025 clarification); 0.08 s stumping vs West Indies (2018) as reported by Cricket Times and Sportskeeda. Drawn illustration, no match footage.
+
+#technibaba #msdhoni #dhoni #csk #ipl #stumping #cricket #sportstech
