@@ -1,0 +1,143 @@
+{
+ "dateLabel": "18 NOV 2026",
+ "scenes": [
+  {
+   "id": "open",
+   "mode": "anchor",
+   "title": "Aaj ki|*TECH NEWS*",
+   "list": [
+    "Maps",
+    "5G",
+    "Arattai",
+    "Instagram"
+   ],
+   "lines": [
+    {
+     "hi": "चलो देखते हैं आज टेक की दुनिया में क्या हुआ. और आखिरी खबर, एक पैसे वाला ए आई फ़ीचर, अब फ़्री!",
+     "en": "Chalo dekhte hain aaj tech ki duniya mein kya hua. Aur aakhri khabar, ek paise wala AI feature, ab free!",
+     "pose": "wave",
+     "expr": "happy",
+     "big": 1,
+     "cap": "Aaj ki *tech news*"
+    }
+   ]
+  },
+  {
+   "id": "maps",
+   "mode": "card",
+   "story": 1,
+   "kicker": "INDIA",
+   "icon": "globe",
+   "stat": "300+",
+   "statSub": "3D landmarks",
+   "headline": "Apple rolls out an *all-new* Maps across *India*",
+   "source": "Apple Newsroom, Business Standard",
+   "lines": [
+    {
+     "hi": "नंबर एक. ऐप्पल मैप्स इंडिया में पूरा नया. तीन सौ से ज़्यादा थ्री डी लैंडमार्क!",
+     "en": "Number ek. Apple Maps India mein poora naya. Teen sau se zyada 3D landmark!",
+     "pose": "count",
+     "expr": "happy",
+     "cap": "Naya *Apple Maps*"
+    }
+   ]
+  },
+  {
+   "id": "fiveg",
+   "mode": "card",
+   "story": 2,
+   "kicker": "TECH",
+   "icon": "server",
+   "stat": "203 Mbps",
+   "statSub": "Jio 5G download speed",
+   "headline": "Opensignal: *Jio fastest* on 5G, Airtel ahead on *availability*",
+   "source": "Opensignal via TelecomLead, TelecomTalk",
+   "lines": [
+    {
+     "hi": "नंबर दो. ओपनसिग्नल: फ़ाइव जी स्पीड में जियो आगे, कवरेज में एयरटेल.",
+     "en": "Number do. Opensignal: 5G speed mein Jio aage, coverage mein Airtel.",
+     "pose": "explain",
+     "expr": "smug",
+     "cap": "Jio vs *Airtel*"
+    }
+   ]
+  },
+  {
+   "id": "arattai",
+   "mode": "card",
+   "story": 3,
+   "kicker": "INDIA",
+   "icon": "car",
+   "stat": "45M+",
+   "statSub": "Mappls downloads",
+   "headline": "Zoho's *Arattai* now opens *Mappls* navigation in chat",
+   "source": "FoneArena, Autocar Pro, NewsBytes",
+   "lines": [
+    {
+     "hi": "नंबर तीन. देसी ऐप अरट्टई में अब मैपल्स नेविगेशन. चैट में आई लोकेशन से, सीधा रास्ता!",
+     "en": "Number teen. Desi app Arattai mein ab Mappls navigation. Chat mein aayi location se, seedha raasta!",
+     "pose": "count",
+     "expr": "happy",
+     "cap": "Arattai mein *raasta*"
+    }
+   ]
+  },
+  {
+   "id": "insta",
+   "mode": "card",
+   "story": 4,
+   "kicker": "APPS",
+   "icon": "forum",
+   "stat": "COPY?",
+   "statSub": "block or label it",
+   "headline": "Instagram tool now flags *copied Reels* for creators",
+   "source": "TechCrunch, Social Media Today",
+   "lines": [
+    {
+     "hi": "नंबर चार. कोई आपकी रील कॉपी करे, तो इंस्टाग्राम का नया टूल पकड़ेगा.",
+     "en": "Number chaar. Koi aapki reel copy kare, toh Instagram ka naya tool pakdega.",
+     "pose": "point",
+     "expr": "happy",
+     "cap": "Copy reel *pakdi*"
+    }
+   ]
+  },
+  {
+   "id": "gemini",
+   "mode": "card",
+   "story": 5,
+   "kicker": "AI",
+   "icon": "ai",
+   "stat": "FREE",
+   "statSub": "was a paid feature",
+   "headline": "Gemini *Tasks* agent is now *free* in India",
+   "source": "Google, Android Central, Elets CIO",
+   "lines": [
+    {
+     "hi": "और नंबर पाँच. जेमिनाई का टास्क मोड, अब इंडिया में फ़्री! चैट से टास्क पे जाओ, और काम बताओ.",
+     "en": "Aur number paanch. Gemini ka Task mode, ab India mein free! Chat se Task pe jao, aur kaam batao.",
+     "pose": "blown",
+     "expr": "shocked",
+     "big": 1,
+     "hit": "free",
+     "cap": "Gemini Task *FREE*"
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "mode": "anchor",
+   "title": "Roz subah|*7 baje*",
+   "lines": [
+    {
+     "hi": "जेमिनाई से पहला काम क्या करवाओगे? कमेंट करो. रोज़ सुबह सात बजे!",
+     "en": "Gemini se pehla kaam kya karwaoge? Comment karo. Roz subah saat baje!",
+     "pose": "point",
+     "expr": "happy",
+     "big": 1,
+     "cap": "Pehla kaam *kya*?"
+    }
+   ]
+  }
+ ]
+}
