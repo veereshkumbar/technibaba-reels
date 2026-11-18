@@ -1,0 +1,144 @@
+{
+ "dateLabel": "18 NOV 2026",
+ "scenes": [
+  {
+   "id": "open",
+   "mode": "anchor",
+   "title": "Aaj ki|*TECH NEWS*",
+   "list": [
+    "BGMI 4.7",
+    "Xiaomi 18 Pro",
+    "XEV 9S",
+    "UPI alert"
+   ],
+   "lines": [
+    {
+     "hi": "चलो देखते हैं आज टेक की दुनिया में क्या हुआ. और आखिरी खबर सीधे आपके फ़ोन और यूपीआई से जुड़ी है.",
+     "en": "Chalo dekhte hain aaj tech ki duniya mein kya hua. Aur aakhri khabar seedhe aapke phone aur UPI se judi hai.",
+     "pose": "wave",
+     "expr": "happy",
+     "big": 1,
+     "cap": "Aaj ki *tech news*"
+    }
+   ]
+  },
+  {
+   "id": "bgmi",
+   "mode": "card",
+   "story": 1,
+   "kicker": "GAMING",
+   "icon": "gamepad",
+   "stat": "4.7",
+   "statSub": "update out today",
+   "headline": "BGMI *4.7* arrives today with *Arctic Chronicles*, a giant serpent mode",
+   "source": "KRAFTON India via FoneArena, 91mobiles",
+   "lines": [
+    {
+     "hi": "नंबर एक. बी जी एम आई का फ़ोर पॉइंट सेवन अपडेट आज आ रहा है. आर्कटिक क्रॉनिकल्स मोड में, एरेंगल पे एक बड़ा सा साँप घूमेगा!",
+     "en": "Number ek. BGMI ka 4.7 update aaj aa raha hai. Arctic Chronicles mode mein, Erangel pe ek bada sa saanp ghoomega!",
+     "pose": "count",
+     "expr": "happy",
+     "cap": "BGMI *4.7* aaj"
+    }
+   ]
+  },
+  {
+   "id": "xiaomi",
+   "mode": "card",
+   "story": 2,
+   "kicker": "TECH",
+   "icon": "phone",
+   "stat": "200MP",
+   "statSub": "main + zoom camera",
+   "headline": "Xiaomi 18 Pro goes global with a *screen on the back*, but *smaller batteries*",
+   "source": "Notebookcheck, Nokiamob",
+   "lines": [
+    {
+     "hi": "नंबर दो. शाओमी एटीन प्रो ग्लोबल लॉन्च हुआ. दो सौ मेगापिक्सल के दो कैमरे, पीछे भी स्क्रीन. पर ग्लोबल मॉडल में बैटरी चाइना से छोटी!",
+     "en": "Number do. Xiaomi 18 Pro global launch hua. Do sau megapixel ke do camere, peeche bhi screen. Par global model mein battery China se chhoti!",
+     "pose": "palm",
+     "expr": "smug",
+     "cap": "Battery *chhoti*"
+    }
+   ]
+  },
+  {
+   "id": "xev",
+   "mode": "card",
+   "story": 3,
+   "kicker": "INDIA",
+   "icon": "car",
+   "stat": "5 STAR",
+   "statSub": "adult + child safety",
+   "headline": "Mahindra's electric *XEV 9S* scores *5 stars* in Bharat NCAP",
+   "source": "CarDekho, Business Today",
+   "lines": [
+    {
+     "hi": "नंबर तीन. महिंद्रा की इलेक्ट्रिक एक्स ई वी नाइन एस को भारत एन कैप क्रैश टेस्ट में पाँच स्टार मिले, बड़ों और बच्चों, दोनों की सेफ़्टी में.",
+     "en": "Number teen. Mahindra ki electric XEV 9S ko Bharat NCAP crash test mein paanch star mile, badon aur bachchon, dono ki safety mein.",
+     "pose": "explain",
+     "expr": "happy",
+     "cap": "*5 star* safety"
+    }
+   ]
+  },
+  {
+   "id": "msphish",
+   "mode": "card",
+   "story": 4,
+   "kicker": "TECH",
+   "icon": "server",
+   "stat": "24 hrs",
+   "statSub": "the fake deadline",
+   "headline": "Microsoft warns of fake *outage emails* that say your mail will be *deleted*",
+   "source": "Microsoft via SecurityWeek, Business Today",
+   "lines": [
+    {
+     "hi": "नंबर चार. माइक्रोसॉफ्ट ने चेतावनी दी है, नकली ईमेल आ रहे हैं कि आपके मेल चौबीस घंटे में डिलीट हो जाएँगे. रिस्टोर बटन मत दबाओ!",
+     "en": "Number chaar. Microsoft ne chetavni di hai, nakli email aa rahe hain ki aapke mail chaubees ghante mein delete ho jayenge. Restore button mat dabao!",
+     "pose": "point",
+     "expr": "shocked",
+     "big": 1,
+     "cap": "Nakli *24 ghante*"
+    }
+   ]
+  },
+  {
+   "id": "hook",
+   "mode": "card",
+   "story": 5,
+   "kicker": "INDIA",
+   "icon": "rupee",
+   "stat": "APK",
+   "statSub": "fake app from a link",
+   "headline": "Report: NPCI asks Google to stop *fake apps* that steal *UPI PINs*",
+   "source": "ET via Business Today, NewsBytes",
+   "lines": [
+    {
+     "hi": "और नंबर पाँच. एक नकली ऐप, और आपका यू पी आई पिन चोरी!",
+     "en": "Aur number paanch. Ek nakli app, aur aapka UPI PIN chori!",
+     "pose": "blown",
+     "expr": "shocked",
+     "big": 1,
+     "hit": "chori",
+     "cap": "UPI PIN *chori*!"
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "mode": "anchor",
+   "title": "Roz subah|*7 baje*",
+   "lines": [
+    {
+     "hi": "ये यूपीआई वाली खबर फ़ैमिली ग्रुप में भेजो. और रोज़ सुबह सात बजे की टेक न्यूज़ के लिए फ़ॉलो करो.",
+     "en": "Ye UPI wali khabar family group mein bhejo. Aur roz subah saat baje ki tech news ke liye follow karo.",
+     "pose": "point",
+     "expr": "happy",
+     "big": 1,
+     "cap": "Family ko *bhejo*"
+    }
+   ]
+  }
+ ]
+}

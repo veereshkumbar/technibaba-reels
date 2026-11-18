@@ -2,12 +2,12 @@
 
 One reel every morning: the day's biggest story first, then "chalo dekhte hain kya kya hua", then 5–7 short stories one by one. Mostly tech; one or two from gaming, space, films/OTT, sports or business are fine. Example: `examples/news_daily` (80 s).
 
-## Structure (what the reference reel does, in our style)
-1. **Hook, 0–8 s, `split`:** the most shareable story as a card on top, Baba reacting below, a short Hinglish banner ("GTA 6 bas 2 din door!"). First words land in the first second.
-2. **Bridge, ~3 s, `anchor`:** Baba at the desk, big title ("Is hafte|*kya hua*?" or "Aaj ki|*7 khabrein*"), riser + boom.
-3. **Stories, 7–10 s each, `card`:** full-screen card (kicker, number n/N, our own icon art, an optional big stat, an English headline with 1–2 *highlighted* phrases, source line), Baba picture-in-picture bottom right, one spoken line starting "Number do..." Whoosh + ding on every card.
-4. **Outro, `anchor`:** "Kaunsi khabar sabse badi lagi? Comment karo" + "Roz subah 7 baje ke liye follow karo".
-Total 60–90 s. Story 1 is the hook story; cards count up from 2.
+## Structure (updated 18 Nov 2026 after the first two bulletins)
+Data: both bulletins stalled at ~112 reach with a ~59% 3-second skip rate and 5–7 s average watch time, while our other reels the same days got ~1,100 reach at 26–30% skip. Instagram stops pushing a reel after the first test audience when most of them swipe away, so the first 3 seconds decide everything. The old opening (a busy story card with small text, one specific story) lost people.
+1. **Open, 0–4 s, `anchor` (first scene):** Baba full-screen at the desk, talking from frame 0: "Chalo dekhte hain aaj tech ki duniya mein kya hua... aur last wali khabar aapke phone se judi hai." The title ("Aaj ki|*TECH NEWS*"), the date chip and a preview of up to 4 one-word story chips (`list`) are on screen from frame 0. The opener must promise a payoff at the end (an open loop) so people stay.
+2. **Stories, 6–8 s each, `card`:** 4–5 stories, numbered 1..N, one spoken line each, starting "Number ek..." Order: a strong, broad story first, the most shareable or useful one LAST (the payoff promised in the opener). Captions stay on in card mode (most people watch muted).
+3. **Outro, `anchor`, 4–6 s:** one comment question about the last story + "roz subah 7 baje". No second ask.
+Total 40–55 s. No `split` hook scene any more.
 
 ## Rules
 - Baba is the only speaker. Spoken lines Hinglish; card headlines plain English.
@@ -15,6 +15,7 @@ Total 60–90 s. Story 1 is the hook story; cards count up from 2.
 - Only stories from the last 48 hours, or clearly upcoming dates ("in 2 din"). Never call older news "aaj".
 - No crime, politics, elections, deaths, disasters, communal or medical stories; no allegations about people. Skip anything doubtful.
 - No real photos, footage, logos or likenesses: cards use the icon library (gamepad, space, forum, car, server, headphones, plane, phone, chip, ai, cricket, film, rupee, globe) and our colours. Company and product names appear only as text.
+- Card headlines: at most 9 words, one highlight; the big `stat` when there is a number.
 - Caption: no emojis. Hook line, then the stories as a short numbered list, then "Comment: which story is the biggest?", then 5–8 hashtags.
 
 ## Build

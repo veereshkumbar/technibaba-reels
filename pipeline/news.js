@@ -81,15 +81,16 @@ function frame16(f) { const n = sceneAt(f), s = NS[n], d = sceneD(n, f), t = f /
     const slide = s.mode == 'card' ? 1 - E.snappy(clamp(cd / 9)) : E.smooth(clamp(d / 10)) * -1;
     if (cn.mode == 'card') o += `<g transform="translate(${slide * 1100},0)">` + storyCard(cn, f, 50, 140, 980, 1100) + `</g>`; }
   o += baba(f, s.mode, k);
-  if (s.mode == 'anchor' && s.title) { const tp = pop(f, SCF[n].s + 6, 12), lines = s.title.split('|');
+  if (s.mode == 'anchor' && s.title) { const first = s.k == 0, tp = first ? 1 + .04 * Math.sin(t * 3) : pop(f, SCF[n].s + 6, 12), lines = s.title.split('|');
     o += `<g transform="translate(540,330) rotate(-3) scale(${tp})">` + lines.map((ln, i) => { const parts = ln.split('*'); let ts = ''; parts.forEach((p, j) => { if (p) ts += `<tspan fill="${j % 2 ? '#e5383b' : '#ffd23f'}">${p}</tspan>`; }); return `<text x="0" y="${i * 112}" text-anchor="middle" font-family="Pop" font-weight="900" font-size="104" stroke="#0b0b12" stroke-width="14" paint-order="stroke">${ts}</text>`; }).join('') + `</g>`; }
-  if (s.mode == 'anchor' && s.list) s.list.forEach((it, i) => { const lp = pop(f, SCF[n].s + 14 + i * 5, 9); o += `<g transform="translate(${80},${260 + i * 92}) scale(${lp})"><rect x="0" y="-44" width="${it.length * 24 + 110}" height="70" rx="35" fill="#0b0b12" stroke="${C.mint}" stroke-width="4"/>` + T9(26, 3, 32, `${i + 1}`, {fill: C.mint}) + T9(66, 3, 30, it, {w: 800}) + `</g>`; });
+  if (s.mode == 'anchor' && s.list) s.list.forEach((it, i) => { const lp = s.k == 0 ? (f < 2 ? 1 : pop(f, -6 + i * 3, 8)) : pop(f, SCF[n].s + 14 + i * 5, 9); o += `<g transform="translate(${i % 2 ? 560 : 60},${600 + Math.floor(i / 2) * 92}) scale(${lp})"><rect x="0" y="-44" width="${it.length * 24 + 110}" height="70" rx="35" fill="#0b0b12" stroke="${C.mint}" stroke-width="4"/>` + T9(26, 3, 32, `${i + 1}`, {fill: C.mint}) + T9(66, 3, 30, it, {w: 800}) + `</g>`; });
+  if (s.mode == 'anchor' && s.k == 0 && SPEC.dateLabel) o += `<g transform="translate(540,505)"><rect x="-170" y="-34" width="340" height="56" rx="28" fill="#e5383b"/>` + T9(0, 6, 30, SPEC.dateLabel, {a: 'middle'}) + `</g>`;
   // lower third (date + handle) except in split
   o += `<g><rect x="0" y="0" width="1080" height="92" fill="#0b0b12" opacity=".75"/>` + T9(40, 60, 34, 'TECHNIBABA DAILY', {fill: C.mint, extra: 'letter-spacing="2"'}) + T9(1040, 60, 30, SPEC.dateLabel || '', {a: 'end', w: 700}) + `</g>`;
   return o; }
 // sound: whoosh on card in/out, ding on each new story number, pop on title/list
 SPEC.scenes.forEach(s => { const f0 = SCF[s.id].s; if (s.mode == 'card' || s.mode == 'split') { sfx(f0, 'whoosh'); sfx(f0 + 4, 'ding'); if (s.stat) sfx(f0 + 12, 'pop'); }
-  if (s.mode == 'anchor' && s.title) { sfx(f0 + 4, 'riser'); sfx(f0 + 8, 'boom'); } if (s.list) s.list.forEach((_, i) => sfx(f0 + 14 + i * 5, 'pop')); });
+  if (s.mode == 'anchor' && s.title && s.k > 0) { sfx(f0 + 4, 'riser'); sfx(f0 + 8, 'boom'); } if (s.k == 0) sfx(0, 'boom'); if (s.list) s.list.forEach((_, i) => sfx(f0 + 14 + i * 5, 'pop')); });
 // API used by the HyperFrames page
 const PAN = {x0: 0, y0: 0, x1: 1080, y1: 1920}, SEAM = 1500;
 function strip(f) { return ''; } function overlay(f) { return ''; } function charLayer(f) { return ''; } function content(n, f) { return ''; }
