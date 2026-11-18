@@ -55,23 +55,44 @@
    "lines": [
     {
      "who": "b",
-     "hi": "इस साल कैंपेन एक से तीस नवंबर तक है. अस्सी साल से ऊपर वाले एक अक्टूबर से दे सकते थे.",
-     "en": "Is saal campaign ek se tees November tak hai. Assi saal se upar wale ek October se de sakte the.",
+     "hi": "इस साल कैंपेन एक से तीस नवंबर तक है.",
+     "en": "Is saal campaign ek se tees November tak hai.",
      "pose": "count",
      "expr": "explaining",
      "cap": "*1-30 Nov*",
-     "show": 2,
-     "show_new": 2
+     "show": 1,
+     "show_new": 1,
+     "big": 1
     },
     {
      "who": "b",
-     "hi": "चाहिए: एंड्रॉइड फ़ोन, अच्छा कैमरा, इंटरनेट. और आधार, मोबाइल, पी पी ओ नंबर, बैंक डिटेल्स.",
-     "en": "Chahiye: Android phone, achha camera, internet. Aur Aadhaar, mobile, PPO number, bank details.",
+     "hi": "अस्सी साल से ऊपर वाले, एक अक्टूबर से दे सकते थे.",
+     "en": "Assi saal se upar wale, ek October se de sakte the.",
+     "pose": "palm",
+     "expr": "explaining",
+     "cap": "*80+*: 1 Oct se",
+     "show": 2,
+     "show_new": 1
+    },
+    {
+     "who": "b",
+     "hi": "चाहिए: एंड्रॉइड फ़ोन, अच्छा कैमरा, इंटरनेट.",
+     "en": "Chahiye: Android phone, achha camera, internet.",
      "pose": "explain",
+     "expr": "explaining",
+     "cap": "*Android* + camera",
+     "show": 3,
+     "show_new": 1
+    },
+    {
+     "who": "b",
+     "hi": "और आधार, मोबाइल, पी पी ओ नंबर, बैंक डिटेल्स.",
+     "en": "Aur Aadhaar, mobile, PPO number, bank details.",
+     "pose": "count",
      "expr": "explaining",
      "cap": "*PPO* number ready",
      "show": 4,
-     "show_new": 2
+     "show_new": 1
     }
    ]
   },
@@ -257,18 +278,29 @@
   },
   {
    "id": "status",
-   "type": "browser",
+   "type": "points",
    "head": "Status check karo",
-   "url": "jeevanpramaan.gov.in",
    "lines": [
     {
      "who": "b",
-     "hi": "एक काम और. कुछ दिन बाद जीवन प्रमाण डॉट जी ओ वी डॉट इन पे सर्टिफ़िकेट डाउनलोड करो.",
-     "en": "Ek kaam aur. Kuch din baad jeevanpramaan.gov.in pe certificate download karo.",
+     "hi": "एक काम और, कुछ दिन बाद.",
+     "en": "Ek kaam aur, kuch din baad.",
      "pose": "point",
      "expr": "explaining",
+     "cap": "*Ek kaam* aur",
+     "show": 0,
+     "big": 1,
+     "show_new": 0
+    },
+    {
+     "who": "b",
+     "hi": "जीवन प्रमाण डॉट जी ओ वी डॉट इन पे सर्टिफ़िकेट डाउनलोड करो.",
+     "en": "jeevanpramaan.gov.in pe certificate download karo.",
+     "pose": "explain",
+     "expr": "explaining",
      "cap": "*jeevanpramaan.gov.in*",
-     "show": 0
+     "show": 2,
+     "show_new": 2
     },
     {
      "who": "b",
@@ -277,8 +309,16 @@
      "pose": "explain",
      "expr": "explaining",
      "cap": "Accept ya *reject*?",
-     "show": 0
+     "show": 4,
+     "show_new": 2
     }
+   ],
+   "color": "#5de0b0",
+   "items": [
+    "jeevanpramaan.gov.in kholo",
+    "Certificate download karo",
+    "Accept ya reject? Wahin dikhega",
+    "Reject? Bank / pension office"
    ]
   },
   {
