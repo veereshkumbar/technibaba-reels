@@ -1,0 +1,29 @@
+{"dateLabel": "18 NOV 2026",
+ "scenes": [
+  {"id": "hook", "mode": "split", "story": 1, "kicker": "INDIA", "icon": "rupee", "stat": "APK", "statSub": "fake app from a link", "headline": "Report: NPCI asks Google to stop *fake apps* that steal *UPI PINs*", "banner": "Nakli app = UPI PIN chori!", "source": "ET via Business Today, NewsBytes",
+   "lines": [
+    {"hi": "एक नकली ऐप, और आपका यू पी आई पिन चोरी!", "en": "Ek nakli app, aur aapka UPI PIN chori!", "pose": "blown", "expr": "shocked", "big": 1, "hit": "chori", "cap": "UPI PIN *chori*!"},
+    {"hi": "रिपोर्ट के मुताबिक, एन पी सी आई ने अब गूगल से बात की है. लिंक से आया ए पी के, कभी इंस्टॉल मत करो!", "en": "Report ke mutabik, NPCI ne ab Google se baat ki hai. Link se aaya APK, kabhi install mat karo!", "pose": "point", "expr": "explaining", "cap": "APK *mat karo*"}]},
+  {"id": "intro", "mode": "anchor", "title": "Aaj ki|*6 khabrein*",
+   "lines": [
+    {"hi": "चलो देखते हैं, आज टेक की दुनिया में और क्या क्या हुआ.", "en": "Chalo dekhte hain, aaj tech ki duniya mein aur kya kya hua.", "pose": "wave", "expr": "happy", "big": 1, "cap": "Aaj *kya hua*?"}]},
+  {"id": "msphish", "mode": "card", "story": 2, "kicker": "TECH", "icon": "server", "stat": "24 hrs", "statSub": "the fake deadline", "headline": "Microsoft warns of fake *outage emails* that say your mail will be *deleted*", "source": "Microsoft via SecurityWeek, Business Today",
+   "lines": [
+    {"hi": "नंबर दो. माइक्रोसॉफ्ट ने चेतावनी दी है, नकली ईमेल आ रहे हैं कि आपके मेल चौबीस घंटे में डिलीट हो जाएँगे. रिस्टोर बटन मत दबाओ!", "en": "Number do. Microsoft ne chetavni di hai, nakli email aa rahe hain ki aapke mail chaubees ghante mein delete ho jayenge. Restore button mat dabao!", "pose": "point", "expr": "shocked", "big": 1, "cap": "Nakli *24 ghante*"}]},
+  {"id": "bgmi", "mode": "card", "story": 3, "kicker": "GAMING", "icon": "gamepad", "stat": "4.7", "statSub": "update out today", "headline": "BGMI *4.7* arrives today with *Arctic Chronicles*, a giant serpent mode", "source": "KRAFTON India via FoneArena, 91mobiles",
+   "lines": [
+    {"hi": "नंबर तीन. बी जी एम आई का फ़ोर पॉइंट सेवन अपडेट आज आ रहा है. आर्कटिक क्रॉनिकल्स मोड में, एरेंगल पे एक बड़ा सा साँप घूमेगा!", "en": "Number teen. BGMI ka 4.7 update aaj aa raha hai. Arctic Chronicles mode mein, Erangel pe ek bada sa saanp ghoomega!", "pose": "count", "expr": "happy", "cap": "BGMI *4.7* aaj"}]},
+  {"id": "xiaomi", "mode": "card", "story": 4, "kicker": "TECH", "icon": "phone", "stat": "200MP", "statSub": "main + zoom camera", "headline": "Xiaomi 18 Pro goes global with a *screen on the back*, but *smaller batteries*", "source": "Notebookcheck, Nokiamob",
+   "lines": [
+    {"hi": "नंबर चार. शाओमी एटीन प्रो ग्लोबल लॉन्च हुआ. दो सौ मेगापिक्सल के दो कैमरे, पीछे भी स्क्रीन. पर ग्लोबल मॉडल में बैटरी चाइना से छोटी!", "en": "Number chaar. Xiaomi 18 Pro global launch hua. Do sau megapixel ke do camere, peeche bhi screen. Par global model mein battery China se chhoti!", "pose": "palm", "expr": "smug", "cap": "Battery *chhoti*"}]},
+  {"id": "xev", "mode": "card", "story": 5, "kicker": "INDIA", "icon": "car", "stat": "5 STAR", "statSub": "adult + child safety", "headline": "Mahindra's electric *XEV 9S* scores *5 stars* in Bharat NCAP", "source": "CarDekho, Business Today",
+   "lines": [
+    {"hi": "नंबर पाँच. महिंद्रा की इलेक्ट्रिक एक्स ई वी नाइन एस को भारत एन कैप क्रैश टेस्ट में पाँच स्टार मिले, बड़ों और बच्चों, दोनों की सेफ़्टी में.", "en": "Number paanch. Mahindra ki electric XEV 9S ko Bharat NCAP crash test mein paanch star mile, badon aur bachchon, dono ki safety mein.", "pose": "explain", "expr": "happy", "cap": "*5 star* safety"}]},
+  {"id": "bts", "mode": "card", "story": 6, "kicker": "AI", "icon": "ai", "stat": "Day 2", "statSub": "17 to 19 Nov, Bengaluru", "headline": "Bengaluru Tech Summit hits *day 2* with the theme *AI & Beyond*", "source": "Deccan Herald, BioSpectrum India",
+   "lines": [
+    {"hi": "और नंबर छह. बेंगलुरु टेक समिट का आज दूसरा दिन है. इस साल की थीम है, ए आई एंड बियॉन्ड.", "en": "Aur number chhe. Bengaluru Tech Summit ka aaj doosra din hai. Is saal ki theme hai, AI and Beyond.", "pose": "shrug", "expr": "happy", "big": 1, "cap": "*AI* & Beyond"}]},
+  {"id": "outro", "mode": "anchor", "title": "Roz subah|*7 baje*",
+   "lines": [
+    {"hi": "कौनसी खबर सबसे बड़ी लगी? कमेंट करो. और यू पी आई वाली खबर, फ़ैमिली ग्रुप में ज़रूर भेजो.", "en": "Kaunsi khabar sabse badi lagi? Comment karo. Aur UPI wali khabar, family group mein zaroor bhejo.", "pose": "point", "expr": "happy", "big": 1, "cap": "Family group *bhejo*"},
+    {"hi": "और रोज़ सुबह सात बजे की टेक खबरों के लिए, टेक्नीबाबा को फ़ॉलो करो.", "en": "Aur roz subah saat baje ki tech khabron ke liye, TechniBaba ko follow karo.", "pose": "wave", "expr": "happy", "big": 1, "cap": "*Follow* karo"}]}
+ ]}
