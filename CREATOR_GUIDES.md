@@ -7,7 +7,7 @@ One thing the viewer can do today, for free, shown in 3–4 steps, with a commen
 
 ## Format
 - Split layout (`SPLIT_FORMAT.md`, start from `examples/split_wifi2`) is the default: the panel shows the tool, the screen or the steps. Steps format (`STEPS_FORMAT.md`) is the alternative for pure settings walk-throughs.
-- 30–45 s. Hook = the result first ("Ye reel kisi editor ne nahi banayi"), then the steps.
+- 25–35 s. Hook = the result first ("Ye reel kisi editor ne nahi banayi"), then the steps.
 - Chotu asks what a beginner would ask; Baba answers in one line each.
 - End: recap + "Comment karo <KEYWORD>, guide bhejunga" + "dost ko bhejo jo reels banata hai".
 - Comment keyword is always GUIDE (see GUIDES.md); the guide goes on technibaba.com/guides.

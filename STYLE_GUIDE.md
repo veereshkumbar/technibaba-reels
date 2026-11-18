@@ -25,7 +25,7 @@
 | Minimal line | quick stickman gags |
 
 ## Pacing and hooks
-- Frame 0 = thumbnail + hook. New visual beat every 1–2 s. 35–45 s.
+- Frame 0 = thumbnail + hook. New visual beat every 1–2 s. 25–35 s.
 - Captions: 2–4 words per chunk, keywords highlighted lime `#C6F135`.
 - End: comment question + follow CTA. Never "like if / share if" bait.
 

@@ -42,6 +42,6 @@ for l,b in zip(tl['lines'],B):
     beats.append(bt); events+= [f0]+[k['f'] for k in bt['keys']]+[c['f'] for c in bt['caps']]+[c['f'] for c in bt['cams']]
 total=round(tl['total']*FPS); events=sorted(set(events)); gaps=[(b2-a)/FPS for a,b2 in zip(events,events[1:]+[total])]
 checks=dict(hook_frame=beats[0]['f0'],hook_ok=beats[0]['f0']/FPS<=1.5 and beats[0]['caps'][0]['f']/FPS<=1.5,max_gap_s=round(max(gaps),2),cadence_ok=max(gaps)<=(6.0 if getattr(script,'LONG',False) else 3.0),
-    hits=[b['hit']['f'] for b in beats if b['hit']],duration_s=round(tl['total'],2),duration_ok=(30<=tl['total']<=60) if getattr(script,'NEWS',False) else (60<=tl['total']<=900) if getattr(script,'LONG',False) else (25<=tl['total']<=45))
+    hits=[b['hit']['f'] for b in beats if b['hit']],duration_s=round(tl['total'],2),duration_ok=(30<=tl['total']<=60) if getattr(script,'NEWS',False) else (60<=tl['total']<=900) if getattr(script,'LONG',False) else (22<=tl['total']<=36))
 json.dump(dict(fps=FPS,total_frames=total,checks=checks,beats=beats),open(f'{W}/beats.json','w'),indent=1)
 print(json.dumps(checks))

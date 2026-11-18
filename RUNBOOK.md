@@ -41,7 +41,7 @@ Work folder for today: `W=/tmp/reel-$(date +%Y%m%d-%H%M)`; `mkdir -p $W`.
 - Never show real photos, match footage, film clips or brand logos. Real people never appear as characters; Techni Baba narrates and reacts.
 
 ## 3. Script (`$W/script.py`)
-`LINES = [(scene, devanagari_tts_text, roman_hinglish_caption), ...]` — 9–12 lines, **35–45 s total** (data, Nov 12: 60 s reels had 55–59% 3-second skip and only 7–12 s average watch).
+`LINES = [(scene, devanagari_tts_text, roman_hinglish_caption), ...]` — 7–10 lines, **25–35 s total** (data, Nov 18: every reel stalled at ~1.1k reach with 10–19 s average watch; see SCHEDULED_RUN.md "Engagement rules") (data, Nov 12: 60 s reels had 55–59% 3-second skip and only 7–12 s average watch).
 - Line 1 = hook (shocking fact / question) in the first 2 s. Frame 0 must already show the payoff visual + 3–5 word headline (no slow intros, no logo first).
 - Last lines = a comment question (A ya B? / aapka take?) + "Follow karo TechniBaba!".
 - Write TTS lines in Devanagari (Piper Hindi reads Devanagari), captions in Roman Hinglish.

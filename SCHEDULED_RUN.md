@@ -1,4 +1,4 @@
-# Scheduled run playbook (all 5 daily slots)
+# Scheduled run playbook (all 6 daily slots)
 
 Every scheduled reel follows this file. The slot's own prompt only says which slot it is and what its topic lane is.
 
@@ -19,8 +19,9 @@ Veer's target: grow @technibaba from 36 followers (15 Nov 2026) to 20,000 by mid
 `git clone --depth 1 https://github.com/veereshkumbar/technibaba-reels /tmp/tb && cd /tmp/tb && ./setup.sh` and fix every ERROR line.
 Read: GUIDES.md, LONG_FORMAT.md (tutorial slots), RUNBOOK.md (all of it, especially "Rules for scheduled runs" and "Auto-post rules"), this file, RESEARCH.md, CRAFT.md, SPLIT_FORMAT.md, DIRECTOR_FORMAT.md, brand/dynamics.md, brand/tokens.json, posted.md, research/topic_bank.md. Tutorial slots also read STEPS_FORMAT.md; the evening slot reads CREATOR_GUIDES.md.
 
-## 1b. Guide comments (every run)
-Do the "Check DM" public replies in GUIDES.md before anything else.
+## 1b. Comments (every run, before anything else)
+1. Do the "Check DM" public replies in GUIDES.md.
+2. Then reply to EVERY other new comment on our last 10 reels (Windsor instagram, last_7d, fields comment_id, comment_text, comment_timestamp, media_id, same as GUIDES.md; skip ids already in guides/replied.txt and our own comments). Reply in short Hinglish as TechniBaba: answer the question or react to their answer, and end with a small question back when it fits, so the thread continues. No emojis, no links except technibaba.com/guides, never argue, never share personal data. Hide (do not delete) spam or abuse with hide_comment. Log each replied id in guides/replied.txt and push.
 
 ## 2. Skills (use every one that helps, before writing anything)
 - `technibaba-director` skill: follow its story → spec → proof stages, its reel rules and its avoid table.
@@ -41,7 +42,14 @@ No repeats from posted.md (30 days), no keyword reuse (30 days), different topic
 ## 4. Build (premium, split layout, HyperFrames)
 Exactly as SPLIT_FORMAT.md "Render with HyperFrames", starting from a copy of `examples/split_wifi2`:
 script.py (LINES + BEATS, every line has a rig key) → engine/voice.py → pipeline/beats.py (all checks true) → engine/build.py → engine/shots.py (fix overlaps, keep everything inside the title-safe box) → engine/lofi.py (new seed/mood) → pipeline/hf_build.py (≥40 sfx cues; every panel element has a cue) → in hf/: hyperframes lint (0 errors) and snapshot (look at it, fix problems) → hyperframes render -q looks (nohup, poll) → pipeline/check.py (ALL CHECKS PASS).
-Reel rules: 30–45 s, full-screen hook that shows the payoff first and lands by 1.5 s, one visual per idea in the panel, a visual change every 2–3 s, at most two hit-stops, captions with one highlighted keyword, ending with recap + comment keyword or question + "dost ko bhejo" / "save karo".
+Reel rules: 25–35 s (hard gate in beats.py: 22–36 s), full-screen hook that shows the payoff first and lands by 1.5 s, one visual per idea in the panel, a visual change every 2–3 s, at most two hit-stops, captions with one highlighted keyword. See "Engagement rules" below; they decide the script.
+
+### Engagement rules (18 Nov 2026 data, apply to every slot)
+Data: 18 of our last 32 reels reached 1,000–1,350 people and every one stopped there, whatever the topic. That is Instagram's first test audience; a reel only goes further if those people watch, share, save and comment. Ours: about 2 shares, 4 saves, 12 likes and ~0 comments per 1,000 people reached, and 10–19 s average watch on 40–60 s reels. So most viewers never reached our end-screen "dost ko bhejo" / "comment GUIDE".
+1. **Payoff by 10 s.** The single most useful fact or result is said and shown inside the first 10 s (most people are gone by 12–15 s). The rest is support, not build-up.
+2. **Share ask in the middle, on screen, at 8–12 s,** tied to one specific person: "Papa ko bhejo jo har link dabate hain", "Us dost ko bhejo jo 140 ka daava karta hai". Big on-screen text plus Baba/Chotu pointing, with an SFX hit. Pick the topic so that a clear "who do I send this to" exists; if you cannot name that person in one line, pick another topic.
+3. **One ask only at the end:** a one-word comment question ("HAAN ya NA?", "PAPA ya DADI?") or the GUIDE keyword on tutorials. No recap list; the last line flows back into the first line so the reel loops (e.g. last line ends on the question the hook answers).
+4. **Comments:** after posting, add a first comment on the reel (Windsor `create_comment`) with the same one-word question, so the comment section is never empty. Step 1b replies to every new comment.
 Tutorial slots: 3–4 steps, exact menu paths verified today. The comment keyword is ALWAYS "GUIDE" ("Comment karo GUIDE, guide DM mein bhejunga"). Before posting, add the guide to guides/guides.json per GUIDES.md (website text in plain English, no emojis) (the DM automation links to technibaba.com/guides, so the guide must be live first). After posting, add the reel permalink.
 Tutorial slots also make the long YouTube version per LONG_FORMAT.md (spec.json → render), after the reel is posted. If time or usage runs short, deliver the reel first and say the long video was skipped.
 Trending slots: the news in one line, then the tech explanation; attribute every claim ("report ke hisaab se…"); no real photos, footage, logos or lookalikes of real people.
@@ -49,7 +57,7 @@ Fallbacks: HyperFrames fails twice → engine/render.py + engine/audio.py. Split
 
 ## 5. Post (auto) or hold
 Go through RUNBOOK.md "Auto-post rules" gate by gate and write each result in your notes.
-- All pass → add_repo veereshkumbar/technibaba-reels (push) → publish to gh-pages (orphan commit, keep the newest 6 videos) → wait 3 minutes → Windsor create_video_post (account 17841461825179329, share_to_feed true, thumb_offset on the hook frame; caption per RUNBOOK.md "Captions": NO emojis, hook line, 2–4 lines of value, one call to action, 5–8 hashtags) → on a media error wait 2 more minutes and retry once → `git pull --rebase` then log in posted.md with "AUTO-POSTED", slot, lane, format, hook, keyword, why → push.
+- All pass → add_repo veereshkumbar/technibaba-reels (push) → publish to gh-pages (orphan commit, keep the newest 6 videos) → wait 3 minutes → Windsor create_video_post (account 17841461825179329, share_to_feed true, thumb_offset on the hook frame; caption per RUNBOOK.md "Captions": NO emojis, hook line, 2–4 lines of value, one call to action, 5–8 hashtags) → on a media error wait 2 more minutes and retry once → Windsor create_comment on the new media id with the reel's one-word question (no emojis) → `git pull --rebase` then log in posted.md with "AUTO-POSTED", slot, lane, format, hook, keyword, why → push.
 - Any gate fails → do not post; hold for Veer as below.
 
 ## 6. Report
