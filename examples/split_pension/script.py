@@ -1,0 +1,37 @@
+# Split-layout reel, 06:38 morning tutorial: "Pension life certificate ghar baithe: phone pe chehra, 4 step"  c = Chotu, b = Techni Baba.
+LINES=[
+('q','बाबा! दादाजी का लाइफ़ सर्टिफ़िकेट, फ़ोन पे चेहरा दिखा के हो गया!','Baba! Dadaji ka life certificate, phone pe chehra dikha ke ho gaya!','c',''),
+('q','हाँ! जीवन प्रमाण. तीस नवंबर तक, चार स्टेप.','Haan! Jeevan Pramaan. Tees November tak, chaar step.','b',''),
+('apps','पहला: प्ले स्टोर से दो ऐप. जीवन प्रमाण, और आधार फ़ेस आर डी.','Pehla: Play Store se do app. Jeevan Pramaan, aur AadhaarFaceRD.','b',''),
+('oper','दूसरा: ऑपरेटर, यानी तुम. एक बार अपना आधार, ओ टी पी, और फ़ेस स्कैन.','Doosra: operator, yaani tum. Ek baar apna Aadhaar, OTP, aur face scan.','b',''),
+('pens','तीसरा: दादाजी का आधार, ओ टी पी, पी पी ओ नंबर, बैंक डिटेल्स, सबमिट.','Teesra: Dadaji ka Aadhaar, OTP, PPO number, bank details, submit.','b',''),
+('face','चौथा: दादाजी का चेहरा. सीधा देखो, आँखें खुली, अच्छी रोशनी.','Chautha: Dadaji ka chehra. Seedha dekho, aankhein khuli, achhi roshni.','b',''),
+('face','और एस एम एस में आ गया प्रमाण आई डी!','Aur SMS mein aa gaya Pramaan ID!','c',''),
+('warn','पर याद रख. कॉल पे कोई ओ टी पी माँगे, तो वो फ़्रॉड है. सीधा उन्नीस सौ तीस.','Par yaad rakh. Call pe koi OTP maange, toh woh FRAUD hai. Seedha 1930.','b',''),
+('recap','ऐप, ऑपरेटर, डिटेल्स, चेहरा. चार स्टेप!','App, operator, details, chehra. Chaar step!','c',''),
+('recap','जिनकी पेंशन आती है, उनको भेजो. कमेंट करो गाइड, गाइड डीएम में भेजूँगा.','Jinki pension aati hai, unko bhejo. Comment karo GUIDE, guide DM mein bhejunga.','b',''),
+]
+VOICES={'c':('kokoro:hm_psi',1.24,1.06),'b':('file:vo_in/b_{i:02d}.wav',1.0,1.0,('kokoro:hm_omega',1.18,0.95))}
+BEATS=[
+ dict(emotion='excited',action='phone up, then hands up',rule='hook by 1.5s, full-screen payoff before the split',
+      keys=[(None,'c','phone','happy',1),(None,'b','idle','neutral',0),('phone','c','up','happy',1),('ho','b','thumb','happy',0)],caps=[('baba','Bank nahi, *PHONE* se!'),('phone','Phone pe *CHEHRA*')]),
+ dict(emotion='calm',action='thumb, counts four',rule='panel drops in with a bounce',
+      keys=[(None,'b','thumb','happy',1),(None,'c','idle','happy',0),('chaar','b','count','explaining',1)],caps=[('haan','*Jeevan Pramaan*'),('tees','*30 Nov* tak · 4 step')]),
+ dict(emotion='explaining',action='points up at the panel',rule='one visual: two app cards',
+      keys=[(None,'b','point','explaining',1),(None,'c','idle','neutral',0),('jeevan','b','explain','explaining',0),('aadhaarfacerd','c','phone','confused',0)],caps=[('pehla','1 · *2 APP*'),('jeevan','Jeevan Pramaan + *RD*')]),
+ dict(emotion='explaining',action='points at Chotu, counts',rule='one visual: operator form + OTP + face circle',
+      keys=[(None,'b','point','explaining',1),(None,'c','idle','neutral',0),('yaani','c','up','shocked',1),('aadhaar','b','count','explaining',0)],caps=[('doosra','2 · *OPERATOR*'),('yaani','Operator = *TUM*'),('aadhaar','Aadhaar · *OTP* · face')]),
+ dict(emotion='explaining',action='counts on fingers',rule='form fields fill on each word',
+      keys=[(None,'b','explain','explaining',0),(None,'c','phone','neutral',0),('ppo','b','count','explaining',1),('submit','b','thumb','happy',1)],caps=[('teesra','3 · *DADAJI* details'),('ppo','*PPO* + bank'),('submit','*SUBMIT*')]),
+ dict(emotion='explaining',action='stop hand, then palm',rule='one visual: face circle with 3 tips',
+      keys=[(None,'b','explain','explaining',1),(None,'c','idle','neutral',0),('seedha','b','stop','explaining',0),('aankhein','c','leanin','happy',0)],caps=[('chautha','4 · *CHEHRA* scan'),('seedha','Seedha · *aankhein khuli*')]),
+ dict(emotion='amazed',action='phone up, then hands up',rule='hit-stop on PRAMAAN',hit='pramaan',
+      keys=[(None,'c','phone','shocked',1),(None,'b','idle','smug',0),('pramaan','c','up','happy',1)],caps=[('aur','SMS: *PRAMAAN ID*!')]),
+ dict(emotion='stern',action='stop hand',rule='hit-stop on FRAUD',hit='fraud',
+      keys=[(None,'b','stop','angry',1),(None,'c','idle','neutral',0),('otp','c','blown','shocked',1),('seedha','b','point','explaining',0)],
+      caps=[('par','*Call* aaye toh?'),('otp','OTP maange = *FRAUD*'),('seedha','Seedha *1930*')]),
+ dict(emotion='proud',action='counts on fingers',rule='recap ticks land on each word',
+      keys=[(None,'c','count','happy',1),(None,'b','idle','happy',0),('chaar','c','up','happy',1)],caps=[('app','*4 STEP* · ho gaya')]),
+ dict(emotion='warm',action='points, waves',rule='share prompt + comment keyword',
+      keys=[(None,'b','point','happy',1),(None,'c','idle','happy',0),('comment','b','thumb','happy',1),('guide','c','wave','happy',0),('dm','b','wave','happy',1)],caps=[('jinki','Pension wale ko *BHEJO*'),('comment','Comment *GUIDE*')]),
+]

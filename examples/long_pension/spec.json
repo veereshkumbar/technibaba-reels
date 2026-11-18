@@ -1,0 +1,375 @@
+{
+ "guide": "pension-life-certificate-face-app-jeevan-pramaan",
+ "title": "Pension Life Certificate Ghar Se: Jeevan Pramaan Face Scan 4 Step | TechniBaba",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "title",
+   "head": "TechniBaba Guide",
+   "title": "Life certificate ghar se",
+   "sub": "Jeevan Pramaan face scan · 4 step",
+   "chips": [
+    "30 NOV|DEADLINE",
+    "PHONE|FACE SCAN"
+   ],
+   "lines": [
+    {
+     "who": "c",
+     "hi": "बाबा! दादाजी का लाइफ़ सर्टिफ़िकेट, फ़ोन पे चेहरा दिखा के हो गया!",
+     "en": "Baba! Dadaji ka life certificate, phone pe chehra dikha ke ho gaya!",
+     "pose": "blown",
+     "expr": "happy",
+     "cap": "Phone pe *CHEHRA*",
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "हाँ. इसे जीवन प्रमाण कहते हैं. हर साल पेंशन वालों को ये देना होता है, कि वो जीवित हैं.",
+     "en": "Haan. Ise Jeevan Pramaan kehte hain. Har saal pension walon ko ye dena hota hai, ki woh jeevit hain.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "Har saal *zaroori*"
+    },
+    {
+     "who": "c",
+     "hi": "और बैंक की लंबी लाइन?",
+     "en": "Aur bank ki lambi line?",
+     "pose": "shrug",
+     "expr": "confused",
+     "cap": "Bank ki *line*?",
+     "react": "smug"
+    }
+   ]
+  },
+  {
+   "id": "why",
+   "type": "points",
+   "head": "Kab tak? Kya chahiye?",
+   "color": "#ffd23f",
+   "items": [
+    "Campaign: 1 se 30 November",
+    "80+ pensioners: 1 October se",
+    "Android 9+, 5 MP camera, internet",
+    "Aadhaar, mobile, PPO number, bank"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "इस साल कैंपेन एक से तीस नवंबर तक है. अस्सी साल से ऊपर वाले एक अक्टूबर से दे सकते थे.",
+     "en": "Is saal campaign ek se tees November tak hai. Assi saal se upar wale ek October se de sakte the.",
+     "pose": "count",
+     "expr": "explaining",
+     "cap": "*1-30 Nov*",
+     "show": 2,
+     "show_new": 2
+    },
+    {
+     "who": "b",
+     "hi": "चाहिए: एंड्रॉइड फ़ोन, अच्छा कैमरा, इंटरनेट. और आधार, मोबाइल, पी पी ओ नंबर, बैंक डिटेल्स.",
+     "en": "Chahiye: Android phone, achha camera, internet. Aur Aadhaar, mobile, PPO number, bank details.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "*PPO* number ready",
+     "show": 4,
+     "show_new": 2
+    }
+   ]
+  },
+  {
+   "id": "step1",
+   "type": "phone",
+   "chip": "STEP 1",
+   "head": "2 app install karo",
+   "app": "Google Play",
+   "path": [
+    "Jeevan Pramaan",
+    "AadhaarFaceRD"
+   ],
+   "items": [
+    "FaceRD ka icon nahi dikhta"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "पहला: गूगल प्ले से दो ऐप. जीवन प्रमाण, और आधार फ़ेस आर डी.",
+     "en": "Pehla: Google Play se do app. Jeevan Pramaan, aur AadhaarFaceRD.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "*2 APP*",
+     "show": 2,
+     "big": 1
+    },
+    {
+     "who": "c",
+     "hi": "पर दूसरे का आइकन ही नहीं दिख रहा!",
+     "en": "Par doosre ka icon hi nahi dikh raha!",
+     "pose": "leanin",
+     "expr": "confused",
+     "cap": "*Icon* hi nahi?!",
+     "react": "smug"
+    },
+    {
+     "who": "b",
+     "hi": "नॉर्मल है. वो पीछे चलता है, सेटिंग्स में ऐप्स के अंदर दिखेगा.",
+     "en": "Normal hai. Woh peeche chalta hai, Settings mein Apps ke andar dikhega.",
+     "pose": "palm",
+     "expr": "smug",
+     "cap": "*Normal* hai",
+     "show": 3,
+     "show_new": 1
+    }
+   ]
+  },
+  {
+   "id": "step2",
+   "type": "points",
+   "chip": "STEP 2",
+   "head": "Operator: ek baar",
+   "items": [
+    "Aadhaar + mobile + email",
+    "OTP daalo, naam likho",
+    "Face scan: circle mein, blink"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "दूसरा: ऑपरेटर. यानी जो फ़ोन चला रहा है. बेटा, बेटी, या पेंशनर खुद.",
+     "en": "Doosra: operator. Yaani jo phone chala raha hai. Beta, beti, ya pensioner khud.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "Operator = *TUM*",
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "अपना आधार, मोबाइल, ईमेल डालो, ओ टी पी डालो, नाम लिखो.",
+     "en": "Apna Aadhaar, mobile, email daalo, OTP daalo, naam likho.",
+     "pose": "count",
+     "expr": "explaining",
+     "cap": "Aadhaar + *OTP*",
+     "show": 2,
+     "show_new": 2
+    },
+    {
+     "who": "b",
+     "hi": "फिर फ़ेस स्कैन. चेहरा गोले के अंदर, और आँख झपकाओ. ये एक फ़ोन पे बस एक बार.",
+     "en": "Phir face scan. Chehra gole ke andar, aur aankh jhapkao. Ye ek phone pe bas ek baar.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "*Ek baar* bas",
+     "show": 3,
+     "show_new": 1
+    }
+   ]
+  },
+  {
+   "id": "step3",
+   "type": "points",
+   "chip": "STEP 3",
+   "head": "Pensioner ki details",
+   "items": [
+    "Aadhaar + mobile + OTP",
+    "PPO no., pension account, bank",
+    "Sanctioning + Disbursing authority",
+    "Preview check karo, Submit"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "तीसरा: अब दादाजी का आधार और मोबाइल. ओ टी पी उनके फ़ोन पे आएगा.",
+     "en": "Teesra: ab Dadaji ka Aadhaar aur mobile. OTP unke phone pe aayega.",
+     "pose": "phone",
+     "expr": "explaining",
+     "cap": "*Dadaji* ka OTP",
+     "show": 1,
+     "show_new": 1,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "फिर पी पी ओ नंबर, पेंशन अकाउंट, बैंक, और पेंशन ऑफ़िस की डिटेल्स.",
+     "en": "Phir PPO number, pension account, bank, aur pension office ki details.",
+     "pose": "count",
+     "expr": "explaining",
+     "cap": "*PPO* + bank",
+     "show": 3,
+     "show_new": 2
+    },
+    {
+     "who": "b",
+     "hi": "प्रीव्यू ध्यान से देखो. गलत डिटेल, तो सर्टिफ़िकेट रिजेक्ट. फिर सबमिट.",
+     "en": "Preview dhyaan se dekho. Galat detail, toh certificate reject. Phir submit.",
+     "pose": "stop",
+     "expr": "explaining",
+     "cap": "Galat = *REJECT*",
+     "show": 4,
+     "show_new": 1,
+     "hit": "reject"
+    }
+   ]
+  },
+  {
+   "id": "step4",
+   "type": "points",
+   "chip": "STEP 4",
+   "head": "Chehra scan",
+   "items": [
+    "Seedha camera mein dekho",
+    "Aankhein khuli, chehra normal",
+    "Achhi roshni, saaf chashma",
+    "Pramaan ID + SMS aayega"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "चौथा: दादाजी का फ़ेस स्कैन. सीधा कैमरे में देखो, आँखें खुली.",
+     "en": "Chautha: Dadaji ka face scan. Seedha camera mein dekho, aankhein khuli.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "*Seedha* dekho",
+     "show": 2,
+     "show_new": 2,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "अच्छी रोशनी, और चश्मा हो तो साफ़ वाला.",
+     "en": "Achhi roshni, aur chashma ho toh saaf wala.",
+     "pose": "palm",
+     "expr": "explaining",
+     "cap": "Achhi *roshni*",
+     "show": 3,
+     "show_new": 1
+    },
+    {
+     "who": "c",
+     "hi": "और एस एम एस में आ गया प्रमाण आई डी!",
+     "en": "Aur SMS mein aa gaya Pramaan ID!",
+     "pose": "up",
+     "expr": "happy",
+     "cap": "*PRAMAAN ID*!",
+     "show": 4,
+     "show_new": 1,
+     "hit": "pramaan",
+     "react": "happy"
+    }
+   ]
+  },
+  {
+   "id": "status",
+   "type": "browser",
+   "head": "Status check karo",
+   "url": "jeevanpramaan.gov.in",
+   "lines": [
+    {
+     "who": "b",
+     "hi": "एक काम और. कुछ दिन बाद जीवन प्रमाण डॉट जी ओ वी डॉट इन पे सर्टिफ़िकेट डाउनलोड करो.",
+     "en": "Ek kaam aur. Kuch din baad jeevanpramaan.gov.in pe certificate download karo.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "*jeevanpramaan.gov.in*",
+     "show": 0
+    },
+    {
+     "who": "b",
+     "hi": "वहाँ दिखेगा कि पेंशन ऑफ़िस ने ऐक्सेप्ट किया या रिजेक्ट. रिजेक्ट हो तो बैंक से बात करो.",
+     "en": "Wahan dikhega ki pension office ne accept kiya ya reject. Reject ho toh bank se baat karo.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "Accept ya *reject*?",
+     "show": 0
+    }
+   ]
+  },
+  {
+   "id": "fraud",
+   "type": "points",
+   "head": "Fraud se bacho",
+   "color": "#e5383b",
+   "items": [
+    "\"Pension band, OTP batao\" = KHATRA",
+    "Bank / sarkar OTP kabhi nahi maangte",
+    "Sirf Google Play se app",
+    "Fraud hua? 1930 / cybercrime.gov.in"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "अब ध्यान से. कोई कॉल करे, पेंशन बंद हो जाएगी, ओ टी पी बताओ, तो वो फ़्रॉड है.",
+     "en": "Ab dhyaan se. Koi call kare, pension band ho jayegi, OTP batao, toh woh fraud hai.",
+     "pose": "stop",
+     "expr": "angry",
+     "cap": "OTP maange = *FRAUD*",
+     "show": 2,
+     "show_new": 2,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "ऐप सिर्फ़ गूगल प्ले से. और पैसे गए तो तुरंत उन्नीस सौ तीस.",
+     "en": "App sirf Google Play se. Aur paise gaye toh turant 1930.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "Seedha *1930*",
+     "show": 4,
+     "show_new": 2
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "type": "recap",
+   "head": "Recap: 4 step",
+   "items": [
+    "2 app install",
+    "Operator: ek baar",
+    "Pensioner details",
+    "Chehra scan + ID"
+   ],
+   "lines": [
+    {
+     "who": "c",
+     "hi": "मतलब ऐप, ऑपरेटर, डिटेल्स, चेहरा. चार स्टेप!",
+     "en": "Matlab app, operator, details, chehra. Chaar step!",
+     "pose": "count",
+     "expr": "happy",
+     "cap": "App. Operator. *Details.* Chehra.",
+     "show": 4,
+     "show_new": 4,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "और ऐप ना चले, तो बैंक, पोस्ट ऑफ़िस, या कॉमन सर्विस सेंटर.",
+     "en": "Aur app na chale, toh bank, post office, ya Common Service Centre.",
+     "pose": "palm",
+     "expr": "explaining",
+     "cap": "*Bank / post office*",
+     "show": 4
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "outro",
+   "head": "Save karo, share karo",
+   "sub": "Pension wale ko bhejo",
+   "items": [
+    "subscribe",
+    "instagram"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "पूरा गाइड डिस्क्रिप्शन में है. जिनकी पेंशन आती है, उनको भेजो, और सब्सक्राइब करो.",
+     "en": "Poora guide description mein hai. Jinki pension aati hai, unko bhejo, aur subscribe karo.",
+     "pose": "wave",
+     "expr": "happy",
+     "cap": "*Pension wale* ko bhejo",
+     "show": 1,
+     "show_new": 1
+    }
+   ]
+  }
+ ]
+}

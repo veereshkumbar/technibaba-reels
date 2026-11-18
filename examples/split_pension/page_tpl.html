@@ -1,0 +1,97 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+// ================= reel art: "Life certificate ghar se: 4 step" (split layout) =================
+const RD=C.laptopRed,MINT=C.mint,MD=C.mintDark,YEL=C.captionKeyword,NAVY=C.navy,GREY='#7a7f92',BLUE='#4c7dff';
+const T=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="${o.font||'Pop'}" font-weight="${o.w||900}" font-size="${s}" fill="${o.fill||INK}" ${o.extra||''}>${txt}</text>`;
+const box=(x,y,w,h,fill,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-6}) scale(${p})"><rect x="${-w/2+6}" y="${-h/2+10}" width="${w}" height="${h}" rx="${o.r||24}" fill="#000" opacity=".18"/><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${o.r||24}" fill="${fill}" stroke="${o.stroke||INK}" stroke-width="${o.sw||6}"/>${inner}</g>`;
+const tick=(x,y,s,p,col=MD)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${col}" stroke="${INK}" stroke-width="5"/><path d="M-16,2 l11,12 l22,-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+const cross=(x,y,s,p)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${RD}" stroke="${INK}" stroke-width="5"/><path d="M-14,-14 L14,14 M14,-14 L-14,14" stroke="#fff" stroke-width="9" stroke-linecap="round"/></g>`;
+const stamp=(x,y,txt,p,col,rot=-8,size=96)=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${p})"><rect x="${-txt.length*size*.36-30}" y="${-size*.72}" width="${txt.length*size*.72+60}" height="${size*1.4}" rx="22" fill="${col}" stroke="#fff" stroke-width="9"/>${T(0,size*.33,size,txt,{fill:col==YEL?INK:'#fff'})}</g>`;
+const F=i=>BT[i].f0,PW=PAN.x1-PAN.x0,PH=PAN.y1-PAN.y0;
+const head=(step,title,col,fill)=>`<rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="${PH}" fill="${fill}"/><rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="112" fill="${NAVY}"/>`+(step?`<rect x="118" y="176" width="210" height="62" rx="31" fill="${col}"/>${T(223,220,34,'STEP '+step,{fill:INK})}`:'')+T(step?352:118,222,40,title,{a:'start',fill:'#fff'})+[1,2,3,4].map(k=>`<circle cx="${852+k*28}" cy="207" r="9" fill="${step&&k<=step?col:'#4b4a86'}"/>`).join('');
+// grandpa face (generic, drawn): white hair, clear glasses, moustache
+const dada=(x,y,s,blink=0)=>`<g transform="translate(${x},${y}) scale(${s})"><ellipse rx="130" ry="160" fill="${C.skin}" stroke="${INK}" stroke-width="8"/><path d="M-132,-30 Q-150,-150 -60,-160 Q0,-120 60,-160 Q150,-150 132,-30 Q128,-110 70,-118 Q0,-90 -70,-118 Q-128,-110 -132,-30Z" fill="#eef0f5" stroke="${INK}" stroke-width="6"/>`+
+ [-50,50].map(dx=>`<circle cx="${dx}" cy="-10" r="34" fill="#dff3ff" fill-opacity=".5" stroke="${INK}" stroke-width="6"/>`+(blink?`<path d="M${dx-14},-8 L${dx+14},-8" stroke="${INK}" stroke-width="7" stroke-linecap="round"/>`:`<ellipse cx="${dx}" cy="-10" rx="11" ry="14" fill="${INK}"/>`)).join('')+`<path d="M-16,-10 L16,-10" stroke="${INK}" stroke-width="6"/><path d="M0,10 Q-12,44 4,50" fill="none" stroke="${C.skinDark}" stroke-width="7" stroke-linecap="round"/><path d="M-62,78 Q-30,58 0,72 Q30,58 62,78 Q30,92 0,82 Q-30,92 -62,78Z" fill="#eef0f5" stroke="${INK}" stroke-width="5"/><path d="M-34,112 Q0,130 34,112" fill="none" stroke="${INK}" stroke-width="7" stroke-linecap="round"/></g>`;
+const scanRing=(x,y,r,f,col)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${col}" stroke-width="12" stroke-dasharray="40 22" transform="rotate(${(f*4)%360},${x},${y})"/>`;
+const phone=(x,y,s,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-5}) scale(${s*p})"><rect x="-176" y="-326" width="352" height="652" rx="48" fill="#000" opacity=".18"/><rect x="-182" y="-336" width="352" height="652" rx="48" fill="${NAVY}" stroke="${INK}" stroke-width="6"/><rect x="-164" y="-300" width="316" height="584" rx="30" fill="#fff"/><rect x="-36" y="-322" width="60" height="12" rx="6" fill="#4b4a86"/>${inner}</g>`;
+const field=(x,y,w,lab,val,p,ok)=>`<g transform="translate(${x},${y}) scale(${p>0?Math.min(1.08,.85+.15*p):1})"><rect x="${-w/2}" y="-34" width="${w}" height="68" rx="16" fill="${ok?'#e9fbf3':'#f3f4f8'}" stroke="${ok?MD:'#c9cfe0'}" stroke-width="4"/>${T(-w/2+20,-4,22,lab,{a:'start',w:800,fill:GREY})}${T(-w/2+20,24,26,val,{a:'start',font:'Mono',w:700})}</g>`;
+// cue frames
+const q={jp:WF(1,'jeevan'),tees:WF(1,'tees'),ch:WF(1,'chaar'),
+ a0:F(2),play:WF(2,'play'),a1:WF(2,'jeevan'),a2:WF(2,'aadhaarfacerd'),
+ o0:F(3),tum:WF(3,'yaani'),oa:WF(3,'aadhaar'),oo:WF(3,'otp'),of:WF(3,'face'),
+ p0:F(4),pa:WF(4,'aadhaar'),po:WF(4,'otp'),pp:WF(4,'ppo'),pb:WF(4,'bank'),ps:WF(4,'submit'),
+ f0:F(5),s1:WF(5,'seedha'),s2:WF(5,'aankhein'),s3:WF(5,'achhi'),sms:WF(6,'sms'),pid:WF(6,'pramaan'),
+ w0:F(7),wc:WF(7,'call'),wo:WF(7,'otp'),wf:WF(7,'fraud'),w19:WF(7,'seedha'),
+ r1:WF(8,'app'),r2:WF(8,'operator'),r3:WF(8,'details'),r4:WF(8,'chehra'),jk:WF(9,'jinki'),cm:WF(9,'comment'),gd:WF(9,'guide')};
+[[q.jp,'pop'],[q.tees,'ding'],[q.ch,'pop'],[q.ch+4,'pop'],[q.ch+8,'pop'],[q.ch+12,'pop'],
+ [q.a0,'pop'],[q.play,'blip'],[q.a1,'pop'],[q.a1+8,'type'],[q.a2,'pop'],[q.a2+10,'ding'],
+ [q.o0,'pop'],[q.tum,'crack'],[q.oa,'type'],[q.oo,'blip'],[q.of,'ding'],
+ [q.p0,'pop'],[q.pa,'type'],[q.po,'blip'],[q.pp,'type'],[q.pb,'type'],[q.ps,'ding'],
+ [q.f0,'pop'],[q.s1,'pop'],[q.s2,'pop'],[q.s3,'pop'],[q.sms,'blip'],
+ [q.w0,'pop'],[q.wc,'blip'],[q.wo,'type'],[q.w19,'ding'],
+ [q.r1,'pop'],[q.r2,'pop'],[q.r3,'pop'],[q.r4,'pop'],[q.jk,'pop'],[q.cm,'pop'],[q.gd,'type'],[q.gd+8,'ding']].forEach(([f,t])=>sfx(f,t));
+function content(n,f){const t=f/FPS;let o='';
+ if(n=='q'){o+=head(0,'LIFE CERTIFICATE · GHAR SE',YEL,'#fff7e6');
+  const pj=pop(f,q.jp-2,9);o+=box(330,370,480,160,MINT,pj,T(0,-8,54,'JEEVAN')+T(0,50,54,'PRAMAAN'),{rot:-2});
+  const pt=pop(f,q.tees-2,9);o+=box(770,370,330,160,'#fff',pt,T(0,-14,30,'DEADLINE',{w:800,fill:RD})+T(0,48,64,'30 NOV',{fill:RD}),{rot:3,stroke:RD});
+  [['APP',MINT],['OPERATOR',YEL],['DETAILS','#bcd0ff'],['CHEHRA','#ffb3b3']].forEach(([lab,col],k)=>{const p=pop(f,q.ch+k*4,9);
+   o+=box(300+(k%2)*480,620+Math.floor(k/2)*170,430,136,'#fff',p,`<circle cx="-160" cy="0" r="44" fill="${col}" stroke="${INK}" stroke-width="5"/>`+T(-160,20,54,k+1)+T(-96,20,48,lab,{a:'start'}),{rot:k%2?1.5:-1.5})});
+  o+=T(540,960,28,'Pensioners · Campaign 5.0 · 1-30 Nov',{w:800,fill:GREY})}
+ if(n=='apps'){o+=head(1,'2 APP · PLAY STORE',MINT,'#eaf6ff');
+  const pp=pop(f,q.play-2,9);o+=box(540,320,520,90,NAVY,pp,`<path d="M-200,-22 L-200,22 L-164,0Z" fill="${MINT}"/>`+T(20,14,40,'Play Store',{fill:'#fff'}),{r:45,rot:-1});
+  const card=(x,p,col,icon,name,sub,bar)=>box(x,640,400,440,'#fff',p,`<rect x="-80" y="-170" width="160" height="160" rx="36" fill="${col}" stroke="${INK}" stroke-width="6"/>${icon}`+T(0,60,name.length>12?38:44,name)+T(0,108,28,sub,{w:800,fill:GREY})+`<rect x="-150" y="150" width="300" height="26" rx="13" fill="#e6e8f0"/><rect x="-150" y="150" width="${300*bar}" height="26" rx="13" fill="${MD}"/>`+(bar>=1?tick(160,-170,1,1):''),{rot:x<540?-2:2});
+  const p1=pop(f,q.play+3,9),b1=clamp((f-q.a1)/20,0,1),p2=pop(f,q.play+9,9),b2=clamp((f-q.a2)/20,0,1);
+  o+=card(300,p1,MINT,`<circle cx="0" cy="-104" r="34" fill="none" stroke="${INK}" stroke-width="8"/><path d="M-50,-46 Q0,-84 50,-46" fill="none" stroke="${INK}" stroke-width="8" stroke-linecap="round"/>`,'Jeevan Pramaan','life certificate',b1);
+  if(p2>0)o+=card(780,p2,'#f3f4f8',T(0,-74,80,'?',{fill:'#c9cfe0'}),'AadhaarFaceRD','icon nahi = normal',b2);}
+ if(n=='oper'){o+=head(2,'OPERATOR · EK BAAR',YEL,'#fffbe8');
+  const ph=pop(f,q.o0,9),a=pop(f,q.oa,8),ot=pop(f,q.oo,8),fc=pop(f,q.of,8);
+  o+=phone(330,590,1,ph,T(-6,-240,26,'Operator',{w:800,fill:GREY})+field(-6,-160,280,'Aadhaar','XXXX XXXX 4821',a,a>0)+field(-6,-70,280,'OTP',f>=q.oo?'4 7 1 9 2 6':'',ot,ot>0)+`<circle cx="-6" cy="110" r="96" fill="#f3f4f8"/>`+(fc>0?`<g transform="translate(-6,110) scale(${Math.min(1.08,fc)}) translate(6,-110)">${scanRing(-6,110,104,f,MD)}${T(-6,128,46,'FACE')}</g>`:T(-6,124,32,'face',{w:800,fill:'#c9cfe0'})),{rot:-2});
+  const pt=pop(f,q.tum-1,7);if(pt>0)o+=stamp(760,420,'= TUM',pt,YEL,6,80);
+  if(f>=q.tum+10){const pn=pop(f,q.tum+10,9);o+=box(760,720,380,220,'#fff',pn,T(0,-40,34,'Beta / beti')+T(0,10,34,'ya khud pensioner')+T(0,70,28,'ek phone pe ek baar',{w:800,fill:MD}),{rot:2})}}
+ if(n=='pens'){o+=head(3,'DADAJI KI DETAILS',BLUE,'#eef2ff');
+  const pc=pop(f,q.p0,9);
+  const rows=[['Aadhaar','XXXX XXXX 1946',q.pa],['OTP','3 8 2 0 5 1',q.po],['PPO No.','PPO 0123456789',q.pp],['Bank','Pension a/c',q.pb]];
+  o+=box(540,560,760,640,'#fff',pc,T(-340,-260,32,'Pensioner',{a:'start',w:800,fill:GREY})+rows.map(([l,v,fr],k)=>field(-40,-170+k*100,580,l,f>=fr?v:'',pop(f,fr,8),f>=fr)+(f>=fr?tick(300,-170+k*100,.75,pop(f,fr,8)):'')).join('')+
+   `<g transform="translate(0,250) scale(${f>=q.ps?1-.08*Math.max(0,1-(f-q.ps)/6):1})"><rect x="-200" y="-44" width="400" height="88" rx="44" fill="${f>=q.ps?MD:'#c9cfe0'}" stroke="${INK}" stroke-width="5"/>${T(0,16,44,'SUBMIT',{fill:'#fff'})}</g>`,{rot:-1});}
+ if(n=='face'){o+=head(4,'CHEHRA SCAN',' #ff9b9b'.trim(),'#fff0ee');
+  const pf=pop(f,q.f0,9),blink=(f>q.s2&&f<q.s2+5)?1:0,done=f>=q.pid;
+  o+=box(330,560,440,600,'#fff',pf,`<circle cx="0" cy="-30" r="190" fill="#f3f4f8"/>`+dada(0,-30,1,blink)+scanRing(0,-30,200,f,done?MD:BLUE)+T(0,250,32,done?'Scan ho gaya':'Scanning...',{w:800,fill:done?MD:BLUE}),{rot:-2});
+  if(f<q.sms){[['Seedha dekho',q.s1],['Aankhein khuli',q.s2],['Achhi roshni',q.s3]].forEach(([lab,fr],k)=>{const p=pop(f,fr,8);if(p>0)o+=box(780,380+k*170,380,130,'#fff',p,tick(-145,0,.85,p)+T(-100,13,34,lab,{a:'start'}),{rot:k%2?2:-2})})}
+  else{const ps=pop(f,q.sms,9);o+=box(780,520,400,360,'#fff',ps,`<rect x="-200" y="-180" width="400" height="80" rx="24" fill="${NAVY}"/><rect x="-200" y="-130" width="400" height="30" fill="${NAVY}"/>`+T(0,-126,34,'SMS',{fill:'#fff'})+T(0,-30,32,'Pramaan ID',{w:800,fill:GREY})+T(0,30,40,'JP-8XXXX21',{font:'Mono',w:700})+T(0,100,26,'Status check:',{w:800,fill:GREY})+T(0,140,26,'jeevanpramaan.gov.in',{w:800,fill:MD}),{rot:2});
+   const ph=pop(f,q.pid-2,5);if(ph>0)o+=stamp(560,905,'HO GAYA!',ph,MD,-4,66)}}
+ if(n=='warn'){o+=head(0,'FRAUD SE BACHO',RD,'#fff0ee');
+  const pc=pop(f,q.wc-2,9);o+=box(540,430,800,280,NAVY,pc,`<circle cx="-290" cy="-40" r="56" fill="${RD}" stroke="#fff" stroke-width="5"/><path d="M-310,-60 q-6,30 20,46 l8,-10 l-14,-10 l-6,8 q-12,-8 -10,-24 l8,-4 l-6,-16Z" fill="#fff"/>`+T(-210,-56,34,'Unknown number',{a:'start',fill:'#fff'})+T(-210,-12,26,'"bank se bol raha hoon"',{a:'start',w:800,fill:'#c9cfe0'})+(f>=q.wo?box(0,80,700,100,'#fff',pop(f,q.wo,8),T(0,16,40,'"Pension band! OTP batao"',{fill:RD}),{rot:0,r:20}):''),{rot:-1});
+  const pf=pop(f,q.wf-2,5);if(pf>0)o+=stamp(540,700,'FRAUD',pf,RD,-6,90);
+  const p9=pop(f,q.w19,9);if(p9>0)o+=box(540,880,600,120,MINT,p9,T(-40,22,62,'1930')+T(150,18,30,'cybercrime.gov.in',{w:800}),{rot:1})}
+ if(n=='recap'){o+=head(0,'4 STEP · SAVE KARO',YEL,'#fff7e6');
+  const late=f>=q.jk,sh=late?sm(f,q.jk-2,10):0;
+  [['App: 2 install',q.r1],['Operator: tum, ek baar',q.r2],['Details: Aadhaar, PPO',q.r3],['Chehra: scan, ID',q.r4]].forEach(([lab,fr],k)=>{const p=pop(f,F(8)+k*3,9),tk=pop(f,fr,8);o+=box(540,320+k*(130-40*sh),800,112-26*sh,'#fff',p,`<rect x="-370" y="-30" width="60" height="60" rx="14" fill="${tk>0?MINT:'#f3f4f8'}" stroke="${INK}" stroke-width="5"/>`+(tk>0?`<path d="M-356,2 l12,13 l24,-28" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="70" stroke-dashoffset="${70*(1-clamp(tk))}"/>`:'')+T(-280,15,42,lab,{a:'start'}),{rot:k%2?1:-1})});
+  if(late){const pc=pop(f,q.jk,9),typed='GUIDE'.slice(0,clamp(Math.floor((f-q.gd)/3),0,5));o+=box(540,800,820,250,'#fff',pc,T(0,-70,36,'Pension wale ko bhejo',{fill:MD})+`<g transform="scale(${pop(f,q.cm,8)})"><rect x="-340" y="-10" width="680" height="96" rx="48" fill="#f3f4f8" stroke="${INK}" stroke-width="5"/>`+T(-300,52,30,'Comment:',{a:'start',w:800,fill:GREY})+T(-100,56,48,typed+(Math.floor(t*3)%2?'|':''),{a:'start',font:'Mono',w:700})+`</g>`,{rot:-1})}}
+ return o}
+// bottom strip: living room (sofa, window with morning light, plant)
+function strip(f){const t=f/FPS;let o=`<defs><linearGradient id="sw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe2b8"/><stop offset="1" stop-color="#f6b98a"/></linearGradient></defs><rect x="-700" y="-1500" width="2500" height="3800" fill="url(#sw)"/>`;
+ o+=`<rect x="640" y="1080" width="360" height="300" rx="14" fill="#bfe6ff" stroke="#8a5a3c" stroke-width="16"/><path d="M820,1080 L820,1380 M640,1230 L1000,1230" stroke="#8a5a3c" stroke-width="10"/><circle cx="940" cy="1140" r="${34+2*Math.sin(t*2)}" fill="#ffd23f" opacity=".9"/>`;
+ o+=`<rect x="40" y="1100" width="200" height="140" rx="10" fill="#fff6e6" stroke="#8a5a3c" stroke-width="8"/><path d="M60,1220 L110,1160 L150,1200 L180,1170 L220,1220Z" fill="${MINT}"/>`;
+ o+=`<rect x="-200" y="1560" width="1480" height="220" rx="60" fill="#c0573e"/><rect x="-200" y="1500" width="1480" height="110" rx="50" fill="#d8694d"/><rect x="-700" y="1760" width="2500" height="400" fill="#a8744f"/>`;
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const p=pop(f,-9,9)*(1-sp),p2=pop(f,-9,9)*(1-sp),p3=pop(f,8,9)*(1-sp),done=f>=14;
+ return stamp(540,210,'LIFE CERTIFICATE?!',p,YEL,-3,58)+phone(320,500,.72,p2,`<circle cx="-6" cy="-40" r="130" fill="#f3f4f8"/>`+dada(-6,-40,.7,0)+scanRing(-6,-40,140,f,done?MD:BLUE)+T(-6,190,40,done?'HO GAYA':'SCAN...',{fill:done?MD:BLUE})+(done?tick(110,-170,1.3,pop(f,14,8)):''),{rot:-4})
+  +box(790,450,380,140,'#fff',p3,T(0,-6,44,'BANK LINE')+T(0,42,28,'zaroori nahi',{w:800,fill:RD})+cross(170,-60,1,p3),{rot:4,stroke:RD})}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+RIG.impact(f0,HITS,540,600)+caption(f,capY(f));
+ s+=`<rect x="0" y="1904" width="${1080*f0/NF}" height="16" fill="${MINT}"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>

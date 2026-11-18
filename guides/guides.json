@@ -1,6 +1,61 @@
 {
- "updated": "2026-11-17",
+ "updated": "2026-11-18",
  "guides": [
+  {
+   "slug": "pension-life-certificate-face-app-jeevan-pramaan",
+   "date": "2026-11-18",
+   "title": "Pension life certificate from home: Jeevan Pramaan face scan in 4 steps",
+   "lane": "Tutorial",
+   "summary": "Pensioners can give their yearly life certificate (Jeevan Pramaan) from an Android phone with a face scan, without going to the bank. The 2026 campaign runs from 1 to 30 November. A family member can do it on their own phone with the pensioner present.",
+   "steps": [
+    {
+     "title": "Install two apps from Google Play",
+     "body": "On an Android phone, open Google Play and install Jeevan Pramaan (the face authentication app) and AadhaarFaceRD (UIDAI's face capture service). AadhaarFaceRD has no icon on the home screen; that is normal, it runs in the background (you can see it under Settings, Apps). The official manual asks for Android 9 or newer, a 5 MP or better camera and an internet connection."
+    },
+    {
+     "title": "Register the operator once",
+     "body": "Open Jeevan Pramaan. On Device Registration and Operator Identification, the person running the phone (a son, daughter, or the pensioner) enters their Aadhaar number, mobile number and email, enters the OTP, adds their name, ticks consent and taps Scan. Keep the face inside the circle and blink when asked. This is a one-time step per phone."
+    },
+    {
+     "title": "Enter the pensioner's details",
+     "body": "On Pensioner Identification, enter the pensioner's Aadhaar number and mobile number and the OTP sent to that mobile. Then fill or check the PPO number, pension account number, bank details, Pension Sanctioning Authority and Pension Disbursing Authority. Check the preview carefully (wrong details lead to rejection), tick both boxes and tap Submit."
+    },
+    {
+     "title": "Scan the pensioner's face and save the Pramaan ID",
+     "body": "Tick consent and tap Scan. The pensioner looks straight at the camera in good, even light, with eyes open, a neutral face and clear glasses only. On success the screen shows a Pramaan ID and an SMS with the ID and a download link arrives. Later, download the certificate at jeevanpramaan.gov.in to check whether the pension office accepted it."
+    }
+   ],
+   "tip": "Do it well before 30 November. Pensioners aged 80 and above could submit from 1 October. If the app does not work for you, the bank branch, post office (India Post Payments Bank) or a Common Service Centre can do it.",
+   "caution": "No bank or government office asks for an OTP or PIN on a phone call. If someone calls saying the pension will stop unless you share an OTP, it is fraud: hang up and call 1930 or report at cybercrime.gov.in. Install apps only from Google Play. Screen labels can change slightly with app versions; follow the official manual.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "Jeevan Pramaan Face App installation manual (official)",
+     "url": "https://jeevanpramaan.gov.in/newassets/jpdocs/JeevanPramaan_FaceApp_3.6_Installation.pdf"
+    },
+    {
+     "title": "Jeevan Pramaan FAQ (official, reviewed 23 Jul 2026)",
+     "url": "https://jeevanpramaan.gov.in/v2.0/misc/faq"
+    },
+    {
+     "title": "Business Standard: Jeevan Pramaan 2026 (13 Oct 2026)",
+     "url": "https://www.business-standard.com/finance/personal-finance/jeevan-pramaan-2026-how-pensioners-can-submit-life-certificate-online-126101300364_1.html"
+    },
+    {
+     "title": "Upstox: Digital Life Certificate 2026 with face authentication (2 Nov 2026)",
+     "url": "https://upstox.com/news/personal-finance/latest-updates/digital-life-certificate-2026-how-pensioners-can-submit-jeevan-pramaan-using-face-authentication/article-202783/"
+    },
+    {
+     "title": "Elets eGov: DLC Campaign 5.0 (2 Nov 2026)",
+     "url": "https://egov.eletsonline.com/2026/11/digital-life-certificate-campaign-5/"
+    },
+    {
+     "title": "The Tribune: Rewari police warn of life certificate frauds (14 Nov 2026)",
+     "url": "https://www.tribuneindia.com/news/haryana/beware-of-online-frauds-in-name-of-life-certificate-update-cautions-rewari-police"
+    }
+   ]
+  },
   {
    "slug": "reel-music-muted-3-rules",
    "date": "2026-11-17",
