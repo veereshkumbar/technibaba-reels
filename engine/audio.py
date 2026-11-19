@@ -21,7 +21,7 @@ def add(b,x,t,g=1):
 vo=np.zeros(N)
 for l in tl['lines']:
     x,_=sf.read(l['file']); x=x.mean(1) if x.ndim>1 else x; add(vo,x,l['start'])
-vo=vo/(np.abs(vo).max()+1e-9)*.92
+vo=vo/(np.abs(vo).max()+1e-9); vo=np.tanh(vo*2.2)/np.tanh(2.2)*.95   # gentle compression: voice sits louder and steadier (Veer, 16 Nov)
 if MUSIC:
     subprocess.run(['ffmpeg','-v','error','-y','-stream_loop','-1','-i',MUSIC,'-t',str(total+1),'-ac','1','-ar',str(SR),f'{W}/music.wav'],check=True)
     mus,_=sf.read(f'{W}/music.wav'); mus=np.pad(mus,(0,max(0,N-len(mus))))[:N]
@@ -37,8 +37,8 @@ else:
         if b%2==0:
             for j,f in enumerate(chords[bar]): add(mus,M(sine(f*2,.3,.09),.3*sine(f*4,.3,.05)),t+j*beat/3,.10)
 fade=np.ones(N); fi=int(.3*SR); fade[:fi]=np.linspace(0,1,fi); fo=int(1.5*SR); e=int(total*SR); fade[e-fo:e]=np.linspace(1,0,fo); fade[e:]=0
-e2=np.convolve(np.abs(vo),np.ones(int(.15*SR))/int(.15*SR),'same'); duck=1-0.55*np.clip(e2/0.08,0,1)
-mus=mus*fade/(np.abs(mus).max()+1e-9)*MG*duck
+e2=np.convolve(np.abs(vo),np.ones(int(.15*SR))/int(.15*SR),'same'); duck=1-0.72*np.clip(e2/0.06,0,1)
+mus=mus*fade/(np.abs(mus).max()+1e-9)*MG*0.65*duck   # music 35% quieter than before, ducked harder under speech
 def whoosh():
     n=int(.45*SR); x=np.convolve(rng.standard_normal(n),np.ones(16)/16,'same'); t=np.arange(n)/SR; return x*np.sin(np.pi*t/.45)**2*2.0
 LIB={'whoosh':whoosh()*.5,'thud':M(sine(lambda t:70+60*np.exp(-t*25),.4,.12),noise(.05,.01)*.4),
@@ -55,7 +55,8 @@ try:
     for t,typ in json.load(open(f'{W}/sfx.json')):
         if typ in LIB: add(fx,LIB[typ],t,.55)
 except FileNotFoundError: pass
-mix=np.tanh((vo+mus+fx*.8)*1.1)*.95; mix=mix[:int(total*SR)]
+fxduck=1-0.55*np.clip(e2/0.06,0,1)   # SFX also dip under speech
+mix=np.tanh((vo*1.4+mus+fx*.35*fxduck)*1.05)*.95   # viewer feedback 19 Nov: voices louder, SFX about half as loud; mix=mix[:int(total*SR)]
 sf.write(f'{W}/mix.wav',np.stack([mix,mix],1),SR)
 subprocess.run(['ffmpeg','-v','error','-y','-i',f'{W}/mix.wav','-af','loudnorm=I=-14:TP=-1.5:LRA=11','-ar','48000',f'{W}/mix_n.wav'],check=True)
 if OUT!='-': subprocess.run(['ffmpeg','-v','error','-y','-i',f'{W}/video_only.mp4','-i',f'{W}/mix_n.wav','-map','0:v','-map','1:a','-c:v','copy','-c:a','aac','-b:a','192k','-movflags','+faststart','-shortest',OUT],check=True)
