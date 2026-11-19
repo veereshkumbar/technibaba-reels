@@ -1,0 +1,129 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+// ================= reel art: "Awaaz aayi, phir bhi NOT OUT? Snicko ke 3 check" (split layout, 14:00 sports 19 Nov 2026) =================
+const RD=C.laptopRed,MINT=C.mint,MD=C.mintDark,YEL=C.captionKeyword,NAVY=C.navy,GREY='#7a7f92',WOOD='#f2d39b',WOODD='#c99a55',GRASS='#3f9a4a',GLOW='#ff3b3b',PINK='#ff9b9b',SCOPE='#0f1630',LINE='#5de0b0';
+const T=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="${o.font||'Pop'}" font-weight="${o.w||900}" font-size="${s}" fill="${o.fill||INK}" ${o.extra||''}>${txt}</text>`;
+const box=(x,y,w,h,fill,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-6}) scale(${p})"><rect x="${-w/2+6}" y="${-h/2+10}" width="${w}" height="${h}" rx="${o.r||24}" fill="#000" opacity=".18"/><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${o.r||24}" fill="${fill}" stroke="${o.stroke||INK}" stroke-width="${o.sw||6}"/>${inner}</g>`;
+const tick=(x,y,s,p,col=MD)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${col}" stroke="${INK}" stroke-width="5"/><path d="M-16,2 l11,12 l22,-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+const cross=(x,y,s,p)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${RD}" stroke="${INK}" stroke-width="5"/><path d="M-14,-14 L14,14 M14,-14 L-14,14" stroke="#fff" stroke-width="9" stroke-linecap="round"/></g>`;
+const stamp=(x,y,txt,p,col,rot=-8,size=96)=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${p})"><rect x="${-txt.length*size*.36-30}" y="${-size*.72}" width="${txt.length*size*.72+60}" height="${size*1.4}" rx="22" fill="${col}" stroke="#fff" stroke-width="9"/>${T(0,size*.33,size,txt,{fill:col==YEL?INK:'#fff'})}</g>`;
+const F=i=>BT[i].f0,PW=PAN.x1-PAN.x0,PH=PAN.y1-PAN.y0;
+const head=(step,title,col,fill)=>`<rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="${PH}" fill="${fill}"/><rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="112" fill="${NAVY}"/>`+(step?`<rect x="118" y="176" width="210" height="62" rx="31" fill="${col}"/>${T(223,220,34,'CHECK '+step,{fill:INK})}`:'')+T(step?352:118,222,40,title,{a:'start',fill:'#fff'})+[1,2,3].map(k=>`<circle cx="${880+k*28}" cy="207" r="9" fill="${step&&k<=step?col:'#4b4a86'}"/>`).join('');
+// stumps (3) with two bails; lit = glow red; lift 0..1 = bails fly off (bail k rises on an arc)
+const stumps=(x,y,s,lit,lift=0,o={})=>{let g=`<g transform="translate(${x},${y}) scale(${s})">`;
+ if(lit>0&&!o.noglow)g+=`<circle cx="0" cy="-250" r="${150*lit}" fill="${GLOW}" opacity="${.25*lit}"/>`;
+ [-58,0,58].forEach(dx=>{g+=`<rect x="${dx-13}" y="-240" width="26" height="250" rx="10" fill="${lit>0?'#ff6b6b':WOOD}" stroke="${INK}" stroke-width="5"/>`});
+ [[-29,-1],[29,1]].forEach(([bx,dir],k)=>{const l=clamp(lift-(k*.15)),ax=bx+dir*170*l,ay=-252-260*l*(1-l)*1.6-40*l,rot=dir*300*l;
+  g+=`<g transform="translate(${ax},${ay}) rotate(${rot})"><rect x="-34" y="-9" width="68" height="18" rx="9" fill="${lit>0?GLOW:WOOD}" stroke="${INK}" stroke-width="4"/>${lit>0?`<rect x="-34" y="-9" width="68" height="18" rx="9" fill="#fff" opacity="${.35*lit}"/>`:''}</g>`});
+ return g+`<rect x="-110" y="8" width="220" height="10" rx="5" fill="#fff" opacity=".8"/></g>`};
+
+
+
+// sound waveform card: w x h; spikes = [{at:0..1, kind:'sharp'|'fat', amp}]; prog = 0..1 reveal left to right; marker = 0..1 dashed 'ball at bat' line
+const wave=(x,y,w,h,spikes,prog=1,o={})=>{const n=120,cy=0;let d='';for(let k=0;k<=n;k++){const u=k/n;if(u>prog)break;let v=Math.sin(k*1.7)*3+Math.sin(k*.53)*2;
+  spikes.forEach(sp=>{const dd=u-sp.at;if(sp.kind=='sharp'){const g=Math.exp(-(dd*dd)/(2*.0035*.0035));v+=sp.amp*g*(k%2?1:-1)}else{const g=Math.exp(-(dd*dd)/(2*.045*.045));v+=sp.amp*.55*g*Math.sin(k*1.9)}});
+  d+=(k?'L':'M')+(-w/2+20+u*(w-40)).toFixed(1)+','+(cy-Math.max(-h/2+14,Math.min(h/2-14,v))).toFixed(1)}
+ let g=`<g transform="translate(${x},${y}) scale(${o.s||1})"><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="18" fill="${SCOPE}" stroke="${INK}" stroke-width="6"/>`;
+ for(let k=1;k<8;k++)g+=`<line x1="${-w/2+k*w/8}" y1="${-h/2+8}" x2="${-w/2+k*w/8}" y2="${h/2-8}" stroke="#fff" opacity=".07" stroke-width="2"/>`;
+ if(o.marker!=null){const mx=-w/2+20+o.marker*(w-40);g+=`<line x1="${mx}" y1="${-h/2+6}" x2="${mx}" y2="${h/2-6}" stroke="${YEL}" stroke-width="5" stroke-dasharray="14 10"/>`+(o.mlab?T(mx,-h/2-14,30,o.mlab,{fill:o.mcol||NAVY,w:800}):'')}
+ g+=`<path d="${d}" fill="none" stroke="${o.col||LINE}" stroke-width="5" stroke-linejoin="round"/>`;
+ return g+`</g>`};
+const bat=(x,y,s,rot=0)=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${s})"><rect x="-12" y="-190" width="24" height="90" rx="10" fill="#333" stroke="${INK}" stroke-width="4"/><path d="M-34,-104 h68 l4,250 q-38,22 -76,0 z" fill="${WOOD}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/><path d="M0,-90 v220" stroke="${WOODD}" stroke-width="5"/></g>`;
+const ball=(x,y,r=26)=>`<g transform="translate(${x},${y})"><circle r="${r}" fill="${RD}" stroke="${INK}" stroke-width="4"/><path d="M${-r*.75},${-r*.55} q${r*.75},${r*.6} ${r*1.5},0" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="5 4"/></g>`;
+const mic=(x,y,s)=>`<g transform="translate(${x},${y}) scale(${s})"><rect x="-22" y="-44" width="44" height="66" rx="22" fill="${NAVY}" stroke="${YEL}" stroke-width="5"/>${[-24,-12,0].map(d=>`<line x1="-12" y1="${d}" x2="12" y2="${d}" stroke="${YEL}" stroke-width="3"/>`).join('')}<path d="M-32,4 q0,34 32,34 q32,0 32,-34" fill="none" stroke="${YEL}" stroke-width="5"/><line x1="0" y1="38" x2="0" y2="56" stroke="${YEL}" stroke-width="5"/></g>`;
+const sound=(x,y,s,p)=>p<=0?'':`<g transform="translate(${x},${y}) scale(${s})" opacity="${clamp(p)}">${[0,1,2].map(k=>`<path d="M${20+k*22},-${26+k*14} q${16+k*6},${26+k*14} 0,${52+k*28}" fill="none" stroke="${YEL}" stroke-width="7" stroke-linecap="round"/>`).join('')}</g>`;
+const pad=(x,y,s)=>`<g transform="translate(${x},${y}) scale(${s})"><rect x="-46" y="-110" width="92" height="220" rx="30" fill="#fff" stroke="${INK}" stroke-width="6"/>${[-60,-20,20,60].map(d=>`<line x1="-30" y1="${d}" x2="30" y2="${d}" stroke="#c9d6ff" stroke-width="8" stroke-linecap="round"/>`).join('')}</g>`;
+const send=(x,y,s,p)=>`<g transform="translate(${x},${y}) scale(${s*p})"><circle r="60" fill="${MINT}" stroke="${INK}" stroke-width="6"/><path d="M-28,-4 L30,-26 L10,30 L2,6 z" fill="#fff" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/></g>`;
+// cue frames (line index: 0 hook, 1 news, 2-3 share, 4 spike, 5 frame, 6-7 shape, 8 end)
+const q={n0:F(1),conway:WF(1,'conway'),rev:WF(1,'review'),aw:WF(1,'awaaz'),ball1:WF(1,'ball'),pe1:WF(1,'pehle'),no1:WF(1,'not'),
+ s0:F(2),dost:WF(2,'dost'),out2:WF(2,'out'),s3:F(3),bhejo:WF(3,'bhejo'),sn:WF(3,'snicko'),teen:WF(3,'teen'),
+ k0:F(4),stump:WF(4,'stump'),mic:WF(4,'mic'),ball4:WF(4,'ball'),graph:WF(4,'graph'),tez:WF(4,'tez'),
+ f0:F(5),usi:WF(5,'usi'),paas:WF(5,'paas'),pe5:WF(5,'pehle'),baad:WF(5,'baad'),no5:WF(5,'not'),
+ p0:F(6),padq:WF(6,'pad'),h0:F(7),bat7:WF(7,'bat'),patla:WF(7,'patla'),pad7:WF(7,'pad'),mota:WF(7,'mota'),
+ e0:F(8),mat:WF(8,'mat'),sn8:WF(8,'snicko'),haan:WF(8,'haan')};
+[[q.n0+4,'pop'],[q.conway,'blip'],[q.rev,'ding'],[q.aw,'whoosh'],[q.aw+6,'blip'],[q.ball1,'pop'],[q.pe1+2,'crack'],[q.no1,'ding'],
+ [q.s0+3,'pop'],[q.dost,'blip'],[q.out2,'crack'],[q.s3+2,'whoosh'],[q.bhejo,'ding'],[q.sn,'pop'],[q.sn+5,'pop'],[q.teen,'pop'],
+ [q.k0+3,'pop'],[q.stump,'pop'],[q.mic,'blip'],[q.ball4,'type'],[q.ball4+8,'type'],[q.graph,'blip'],[q.tez,'crack'],[q.tez+6,'ding'],
+ [q.f0+3,'pop'],[q.f0+8,'pop'],[q.f0+13,'pop'],[q.f0+18,'pop'],[q.usi,'blip'],[q.paas,'ding'],[q.pe5,'whoosh'],[q.baad,'blip'],[q.no5+2,'ding'],
+ [q.p0+3,'pop'],[q.padq,'blip'],[q.h0+3,'pop'],[q.h0+9,'pop'],[q.patla,'crack'],[q.pad7,'pop'],[q.mota,'blip'],[q.mota+6,'ding'],
+ [q.e0+3,'pop'],[q.e0+7,'pop'],[q.e0+11,'pop'],[q.mat,'ding'],[q.sn8,'pop'],[q.haan,'type'],[q.haan+8,'type']].forEach(([f,t])=>sfx(f,t));
+function content(n,f){const t=f/FPS;let o='';
+ if(n=='q'||n=='news'){o+=head(0,'WELLINGTON TEST · 19 NOV',YEL,'#fff7e6');
+  o+=box(540,330,800,150,'#fff',pop(f,q.n0+4,9),bat(-310,40,.42,20)+ball(-250,-20,18)+T(-200,-4,44,'Conway: caught behind?',{a:'start'})+T(-200,46,30,'Bumrah ka 2nd over · umpire: OUT',{a:'start',w:800,fill:GREY}),{rot:-1.5});
+  const pr=pop(f,q.rev,8);if(pr>0)o+=stamp(820,450,'REVIEW',pr,NAVY,6,44);
+  const pw=pop(f,q.aw,9),rv=sm(f,q.aw+4,16);
+  if(pw>0){o+=`<g opacity="${clamp(pw)}">`+wave(540,650,820,230,[{at:.32,kind:'sharp',amp:90}],rv,{marker:f>=q.ball1?.66:null,mlab:'BALL BAT PE',mcol:NAVY})+`</g>`;
+   if(rv>.4)o+=T(540+(-410+20+.32*780),520,32,'AWAAZ',{fill:RD,extra:`opacity="${clamp((rv-.4)*3)}"`})}
+  if(f>=q.pe1)o+=stamp(310,830,'PEHLE!',pop(f,q.pe1,7),RD,-6,56);
+  if(f>=q.no1)o+=stamp(740,830,'NOT OUT',pop(f,q.no1,7),MD,4,56)}
+ if(n=='share'){o+=head(0,'IS DOST KO BHEJO',YEL,'#fff7e6');
+  const p1=pop(f,q.s0+3,9);o+=box(540,360,820,170,'#fff',p1,T(-380,-8,40,'Woh dost jo har awaaz pe',{a:'start'})+T(-380,52,62,'"OUT!" chillata hai',{a:'start',fill:RD}),{rot:-1.5});
+  if(f>=q.dost)o+=bat(210,720,.9*pop(f,q.dost,8),-15);
+  if(f>=q.out2)o+=T(330,580,96,'"OUT!"',{fill:RD,extra:`opacity="${clamp(pop(f,q.out2,8))}" transform="rotate(-8 330 580)"`});
+  o+=sound(300,720,1.4,pop(f,q.out2,8));
+  const pb=pop(f,q.bhejo,8);if(pb>0){o+=send(700,560,1.8,pb);o+=stamp(720,720,'BHEJO',pb,MD,-6,64)}
+  if(f>=q.sn)[['SPIKE',MINT],['FRAME',YEL],['SHAPE',PINK]].forEach(([lab,col],k)=>{const p=pop(f,q.sn+k*5,8);o+=box(220+k*300,860,260,110,col,p,T(0,18,48,lab),{rot:k%2?2:-2})});}
+ if(n=='spike'){o+=head(1,'STUMP MIC',MINT,'#eafaf3');
+  o+=stumps(260,560,1.05*pop(f,q.k0+3,9),0,0,{noglow:1});
+  if(f>=q.mic)o+=mic(260,430,1.25*pop(f,q.mic,8));
+  if(f>=q.stump)o+=T(260,640,30,'stump ke andar mic',{w:800,fill:GREY,extra:`opacity="${clamp(pop(f,q.stump,8))}"`});
+  const tz=f>=q.tez;
+  o+=box(720,440,480,240,'#fff',pop(f,q.ball4,9),bat(-60,40,.55,-25)+ball(tz?20:120,tz?-6:-40,22)+(tz?sound(30,-6,.9,pop(f,q.tez,8)):'')+T(120,100,30,tz?'chhua!':'ball aa rahi...',{w:800,fill:tz?RD:GREY}),{rot:1.5});
+  const rv=sm(f,q.graph,24);if(f>=q.graph)o+=wave(540,800,860,190,tz?[{at:.55,kind:'sharp',amp:85}]:[],tz?1:rv*.5,{s:pop(f,q.graph,8)});
+  if(tz)o+=stamp(540,945,'TEZ SPIKE = BAT',pop(f,q.tez+4,7),RD,-3,44)}
+ if(n=='frame'){o+=head(2,'FRAME BY FRAME',YEL,'#fff7e6');
+  o+=`<rect x="92" y="290" width="896" height="250" rx="16" fill="${INK}"/>`+[...Array(14)].map((_,k)=>`<rect x="${110+k*64}" y="300" width="34" height="16" rx="4" fill="#fff" opacity=".8"/><rect x="${110+k*64}" y="514" width="34" height="16" rx="4" fill="#fff" opacity=".8"/>`).join('');
+  const hl=f<q.usi?-1:f<q.pe5?2:0;
+  [190,120,40,-60].forEach((bx,k)=>{const p=pop(f,q.f0+3+k*5,8),x=200+k*226,on=hl==k;
+   o+=`<g opacity="${clamp(p)}"><rect x="${x-100}" y="326" width="200" height="182" rx="10" fill="#cfe9c8" stroke="${on?YEL:'#555'}" stroke-width="${on?10:4}"/>`+bat(x-20,470,.34,-12)+ball(x+bx*.5-10,420,15)+T(x-82,358,28,'F'+(k+1),{a:'start',font:'Mono',w:700})+`</g>`});
+  // first wave: spike under F3 (ball at bat) = OUT
+  const okP=pop(f,q.usi,8);
+  if(okP>0){o+=wave(440,640,680,140,[{at:.83,kind:'sharp',amp:60}],1,{s:okP,marker:.83});o+=tick(900,640,.95,pop(f,q.paas,8));o+=T(900,712,40,'OUT',{fill:MD,w:900})}
+  const bad=pop(f,q.pe5,8);
+  if(bad>0){o+=wave(440,820,680,140,[{at:.125,kind:'sharp',amp:60}],1,{s:bad,marker:.83,col:PINK});o+=cross(900,820,.95,pop(f,q.baad,8));o+=T(900,892,34,'NOT OUT',{fill:RD,w:900})}
+  if(f>=q.no5)o+=stamp(540,942,'SPIKE ≠ BALL = NOT OUT',pop(f,q.no5,6),RD,-3,40)}
+ if(n=='shape'){o+=head(3,'SHAPE',PINK,'#fff0ee');
+  if(f<q.h0-2){o+=pad(540,520,1.3*pop(f,q.p0+3,9))+ball(680,430,30)+sound(700,430,1,pop(f,q.padq,8));o+=box(540,850,620,110,'#fff',pop(f,q.padq,8),T(0,16,48,'Awaaz PAD ki?'),{rot:-1})}
+  else{const pa=pop(f,q.patla,9),pb=pop(f,q.mota,9);
+   o+=box(300,330,380,110,'#fff',pop(f,q.h0+3,9),bat(-120,30,.3,-20)+T(30,16,44,'BAT'),{rot:-2});
+   o+=box(780,330,380,110,'#fff',pop(f,q.h0+9,9),pad(-140,0,.38)+T(40,14,34,'PAD / ZAMEEN',{a:'middle'}),{rot:2});
+   if(pa>0)o+=wave(300,600,400,320,[{at:.5,kind:'sharp',amp:130}],1,{s:pa})+T(300,820,40,'PATLA · TEZ',{fill:MD,extra:`opacity="${clamp(pa)}"`});
+   if(pb>0)o+=wave(780,600,400,320,[{at:.5,kind:'fat',amp:130}],1,{s:pb,col:PINK})+T(780,820,40,'MOTA · PHAILA',{fill:RD,extra:`opacity="${clamp(pb)}"`});
+   if(pa>0)o+=tick(300,900,.9,pop(f,q.patla+6,8));if(pb>0)o+=cross(780,900,.9,pop(f,q.mota+6,8))}}
+ if(n=='end'){o+=head(0,'SNICKO: 3 CHECK',YEL,'#fff7e6');
+  [['SPIKE aaya?',MINT],['Usi FRAME mein?',YEL],['SHAPE patla?',PINK]].forEach(([lab,col],k)=>{const p=pop(f,q.e0+3+k*4,9);o+=box(540,330+k*130,800,108,'#fff',p,`<rect x="-370" y="-30" width="60" height="60" rx="14" fill="${col}" stroke="${INK}" stroke-width="5"/><path d="M-356,2 l12,13 l24,-28" fill="none" stroke="${INK}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>`+T(-280,16,44,lab,{a:'start'}),{rot:k%2?1:-1})});
+  if(f>=q.mat)o+=stamp(540,700,'SIRF AWAAZ ≠ OUT',pop(f,q.mat,7),RD,-3,44);
+  if(f>=q.sn8){const pc=pop(f,q.sn8,9),word='HAAN',typed=word.slice(0,clamp(Math.floor((f-q.haan)/3),0,word.length)),cur=Math.floor(t*3)%2?'|':'';
+   o+=box(540,870,820,170,'#fff',pc,T(-370,-46,28,'Snicko pe bharosa? HAAN ya NA',{a:'start',w:800,fill:GREY})+`<rect x="-370" y="-24" width="560" height="90" rx="22" fill="#f3f4f8" stroke="${MINT}" stroke-width="6"/>`+T(-345,38,44,typed+cur,{a:'start',font:'Mono',w:700})+`<rect x="210" y="-24" width="160" height="90" rx="22" fill="${RD}"/>`+T(290,36,36,'POST',{fill:'#fff'}),{rot:-1})}}
+ return o}
+// bottom strip: cricket ground at night (fills the whole frame during the full-screen hook)
+function strip(f){const t=f/FPS;let o=`<defs><linearGradient id="sw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c1e48"/><stop offset="1" stop-color="#2e2a80"/></linearGradient></defs><rect x="-700" y="-1500" width="2500" height="3800" fill="url(#sw)"/>`;
+ [[120,1040],[960,1040]].forEach(([x,y])=>{o+=`<rect x="${x-6}" y="${y}" width="12" height="260" fill="#4a4a6a"/><rect x="${x-60}" y="${y-50}" width="120" height="60" rx="8" fill="#fffbe0" stroke="#4a4a6a" stroke-width="6"/><circle cx="${x}" cy="${y-20}" r="${120+6*Math.sin(t*2)}" fill="#fffbe0" opacity=".12"/>`});
+ o+=`<rect x="-700" y="1240" width="2500" height="120" fill="#3a3670"/>`+[...Array(30)].map((_,k)=>`<circle cx="${-60+k*44}" cy="${1270+(k%3)*22}" r="9" fill="${['#ffd23f','#5de0b0','#ff9b9b','#c9d6ff'][k%4]}" opacity=".55"/>`).join('');
+ o+=`<rect x="-700" y="1350" width="2500" height="900" fill="${GRASS}"/>`+[...Array(8)].map((_,k)=>`<rect x="${-700+k*320}" y="1350" width="160" height="900" fill="#479f52"/>`).join('');
+ return o}
+
+
+
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const p=pop(f,-9,9)*(1-sp),out=f>=WF(0,'umpire'),nt=f>=WF(0,'phir');
+ return `<g opacity="${1-sp}">`+stamp(540,215,'AWAAZ = OUT?!',p,YEL,-3,64)
+  +box(540,450,900,300,'#fff',p,bat(-330,40,.85,-18)+ball(-200,-30,30)+sound(-185,-30,1.2,1)+wave(150,0,520,220,[{at:.35,kind:'sharp',amp:80}],1,{marker:.72}),{rot:-1})
+  +(out?stamp(nt?780:800,605,nt?'NOT OUT?!':'OUT',pop(f,nt?WF(0,'phir'):WF(0,'umpire'),7),nt?MD:RD,5,60):'')+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+RIG.impact(f0,HITS,540,600)+caption(f,capY(f));
+ s+=`<rect x="0" y="1904" width="${1080*f0/NF}" height="16" fill="${MINT}"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
