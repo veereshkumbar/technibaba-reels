@@ -11,7 +11,7 @@ LINES=[
 ('end','मतलब पैसे भेजने के लिए मेरा पिन चाहिए?','Matlab paise bhejne ke liye mera PIN chahiye?','c',''),
 ('end','वो भेज नहीं रहा, ले रहा है. आपके साथ हुआ है? कमेंट करो, हाँ या ना.','Woh bhej nahi raha, le raha hai. Aapke saath hua hai? Comment karo, HAAN ya NA.','b',''),
 ]
-VOICES={'c':('kokoro:am_puck@hi',1.2,1.04),'b':('kokoro:am_michael@hi',1.2,0.97)}
+VOICES={'c':('kokoro:hm_psi',1.2,1.03),'b':('kokoro:hm_omega',1.2,0.9)}
 BEATS=[
  dict(emotion='calm',action='full-screen, palm out',rule='hook = the common guess, killed in one line',
       keys=[(None,'b','explain','explaining',1),(None,'c','idle','neutral',0),('hacker','b','palm','smug',1)],caps=[('upi','UPI se paise *gayab*?'),('shayad','Shayad *hacker* nahi')]),
