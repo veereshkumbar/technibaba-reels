@@ -1,6 +1,73 @@
 {
- "updated": "2026-11-18",
+ "updated": "2026-11-19",
  "guides": [
+  {
+   "slug": "call-forwarding-scam-002",
+   "date": "2026-11-19",
+   "title": "Courier asked you to dial a code? Stop the call forwarding scam in 4 steps",
+   "lane": "Tutorial",
+   "summary": "Scammers posing as couriers, banks or your telecom company ask you to dial a short code. It quietly forwards your calls, including bank OTP and verification calls, to their phone. Here is how to spot it, check it and switch it off.",
+   "steps": [
+    {
+     "title": "Never dial a code a stranger gives you",
+     "body": "Do not dial any code sent by an unknown caller or SMS, especially codes that start with 21, 61 or 67 followed by a phone number (for example *21*<number>#). *21* turns on forwarding of all your calls. Common excuses: 'your parcel is stuck', 'KYC pending', 'your SIM will be blocked'."
+    },
+    {
+     "title": "Check whether call forwarding is on",
+     "body": "Android: open the Phone app > three-dot menu > Settings > Call forwarding (on some phones it is under Calls, or Calling accounts > your SIM > Call forwarding). iPhone: Settings > Phone > Call Forwarding (on newer iOS: Settings > Apps > Phone > Call Forwarding). If 'Always forward' is on to a number you do not know, something is wrong. Calls suddenly not reaching you is also a warning sign."
+    },
+    {
+     "title": "Switch all forwarding off",
+     "body": "Dial ##002# and press call. This cancels all call forwarding (the code the I4C advisory recommends). On Jio, *402 cancels forwarding of all calls. You can also turn the switch off in the settings screen from step 2. If the code does not work, call your operator's customer care."
+    },
+    {
+     "title": "Lost money? Report at once",
+     "body": "Call the national cyber helpline 1930 or file a complaint at cybercrime.gov.in, and inform your bank. Reporting within the first hours gives the best chance to freeze the money."
+    }
+   ],
+   "tip": "Send this to parents and grandparents who often get calls from couriers. A real courier never needs you to dial a code.",
+   "caution": "Codes and menu names can differ by operator, phone model and software version. Never share an OTP with anyone on a call.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "Digit: I4C alert on the USSD call forwarding scam (30 Dec 2025)",
+     "url": "https://www.digit.in/news/general/alert-this-new-ussd-scam-doesnt-need-internet-to-steal-your-money-how-to-stay-safe.html"
+    },
+    {
+     "title": "Asianet Newsable: I4C warns about call forwarding fraud (7 Jan 2026)",
+     "url": "https://newsable.asianetnews.com/india/cybercriminals-exploit-call-forwarding-for-financial-fraud-i4c-warns-articleshow-2bgh0ie"
+    },
+    {
+     "title": "Outlook Money: Missed courier calls can hide a call forwarding scam (29 Jul 2026)",
+     "url": "https://www.outlookmoney.com/news/missed-courier-calls-can-hide-a-call-forwarding-scam-what-mobile-users-should-know"
+    },
+    {
+     "title": "DT Next: Tamil Nadu Cyber Crime Wing warns about USSD dial fraud",
+     "url": "https://www.dtnext.in/amp/story/news/tamilnadu/ussd-dial-the-emerging-cyber-fraud-warn-tn-cybercrime-cops"
+    },
+    {
+     "title": "PinkCity Post: Rajasthan Police advisory (2 Jan 2026)",
+     "url": "https://www.pinkcitypost.com/rajasthan-police-issues-advisory-on-new-ussd-call-forwarding-scam/"
+    },
+    {
+     "title": "Smartprix: call forwarding codes for Jio, Airtel, Vi, BSNL",
+     "url": "https://www.smartprix.com/bytes/codes-to-activate-deactivate-call-forwarding-on-jio-airtel-vi-bsnl/"
+    },
+    {
+     "title": "TelecomTalk: how to start and stop call forwarding",
+     "url": "https://telecomtalk.info/how-to-start-and-stop-call-forwarding/493353/amp"
+    },
+    {
+     "title": "Digital Trends: how to turn off call forwarding on iPhone and Android",
+     "url": "https://www.digitaltrends.com/phones/how-to-turn-off-call-forwarding-on-iphone-and-android/"
+    },
+    {
+     "title": "AT&T: Google Pixel 9a call forwarding",
+     "url": "https://www.att.com/device-support/article/134452/google/pixel-9a/"
+    }
+   ]
+  },
   {
    "slug": "hindi-english-bilingual-captions-edits-app",
    "date": "2026-11-18",

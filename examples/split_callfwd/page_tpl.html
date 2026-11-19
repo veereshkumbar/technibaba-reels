@@ -1,0 +1,116 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+// ================= reel art: "Courier ka code? ##002#: call forwarding scam, 4 step" (split layout) =================
+const RD=C.laptopRed,MINT=C.mint,MD=C.mintDark,YEL=C.captionKeyword,NAVY=C.navy,GREY='#7a7f92';
+const T=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="${o.font||'Pop'}" font-weight="${o.w||900}" font-size="${s}" fill="${o.fill||INK}" ${o.extra||''}>${txt}</text>`;
+const box=(x,y,w,h,fill,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-6}) scale(${p})"><rect x="${-w/2+6}" y="${-h/2+10}" width="${w}" height="${h}" rx="${o.r||24}" fill="#000" opacity=".18"/><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${o.r||24}" fill="${fill}" stroke="${o.stroke||INK}" stroke-width="${o.sw||6}"/>${inner}</g>`;
+const tick=(x,y,s,p,col=MD)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${col}" stroke="${INK}" stroke-width="5"/><path d="M-16,2 l11,12 l22,-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+const cross=(x,y,s,p)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${RD}" stroke="${INK}" stroke-width="5"/><path d="M-14,-14 L14,14 M14,-14 L-14,14" stroke="#fff" stroke-width="9" stroke-linecap="round"/></g>`;
+const stamp=(x,y,txt,p,col,rot=-8,size=96)=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${p})"><rect x="${-txt.length*size*.36-30}" y="${-size*.72}" width="${txt.length*size*.72+60}" height="${size*1.4}" rx="22" fill="${col}" stroke="#fff" stroke-width="9"/>${T(0,size*.33,size,txt,{fill:col==YEL?INK:'#fff'})}</g>`;
+const F=i=>BT[i].f0,PW=PAN.x1-PAN.x0,PH=PAN.y1-PAN.y0;
+const head=(step,title,col,fill)=>`<rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="${PH}" fill="${fill}"/><rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="112" fill="${NAVY}"/>`+(step?`<rect x="118" y="176" width="200" height="62" rx="31" fill="${col}"/>${T(218,220,34,'STEP '+step,{fill:INK})}`:'')+T(step?342:118,222,40,title,{a:'start',fill:'#fff'})+[1,2,3,4].map(k=>`<circle cx="${852+k*28}" cy="207" r="9" fill="${step&&k<=step?col:'#4b4a86'}"/>`).join('');
+// a drawn phone; inner is drawn in phone-local coords (screen -130..130 x -250..250)
+const phone=(x,y,s,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-8}) scale(${s*p})"><rect x="-150" y="-290" width="300" height="580" rx="44" fill="${o.body||NAVY}" stroke="${INK}" stroke-width="8"/><rect x="-130" y="-252" width="260" height="504" rx="24" fill="${o.scr||'#eef1f8'}"/><rect x="-36" y="-276" width="72" height="12" rx="6" fill="#4b4a86"/>${inner}</g>`;
+const callIcon=(x,y,s,col)=>`<g transform="translate(${x},${y}) scale(${s})"><path d="M-22,-26 q-8,0 -8,10 q2,30 32,48 q10,4 16,-4 l6,-8 q2,-6 -4,-10 l-12,-8 q-6,-3 -10,2 l-4,5 q-14,-8 -20,-20 l5,-4 q5,-4 2,-10 l-8,-12 q-3,-5 -9,-3z" fill="${col}"/></g>`;
+const thief=(x,y,s)=>`<g transform="translate(${x},${y}) scale(${s})"><circle r="46" fill="#2b2140"/><rect x="-40" y="-12" width="80" height="24" rx="12" fill="${RD}"/><circle cx="-16" cy="0" r="6" fill="#fff"/><circle cx="16" cy="0" r="6" fill="#fff"/><path d="M-60,96 q60,-80 120,0z" fill="#2b2140"/></g>`;
+const typed=(s,f,f0,rate=3)=>s.slice(0,Math.max(0,Math.min(s.length,Math.floor((f-f0)/rate)+1)));
+const codeCard=(x,y,p,txt,col,o={})=>box(x,y,o.w||640,o.h||150,col,p,T(0,o.dy||30,o.s||92,txt,{font:'Mono',w:700,fill:o.fill||INK}),{rot:o.rot||-2,r:30});
+const arrowFly=(x0,y0,x1,y1,k,col,lab)=>{const e=clamp(k,0,1),mx=(x0+x1)/2,my=Math.min(y0,y1)-120;const bx=(1-e)*(1-e)*x0+2*(1-e)*e*mx+e*e*x1,by=(1-e)*(1-e)*y0+2*(1-e)*e*my+e*e*y1;
+ return `<path d="M${x0},${y0} Q${mx},${my} ${x1},${y1}" fill="none" stroke="${col}" stroke-width="10" stroke-dasharray="22 16" stroke-dashoffset="${-k*200}" opacity=".85"/>`+(k>0&&k<1.05?`<g transform="translate(${bx},${by})"><rect x="-62" y="-30" width="124" height="60" rx="30" fill="${col}" stroke="${INK}" stroke-width="5"/>${T(0,13,34,lab,{fill:'#fff'})}</g>`:'')};
+const q={c1:F(1),otp:WF(1,'otp'),chor:WF(1,'chor'),abhi:WF(1,'abhi'),dial:WF(1,'dial'),c002:WF(1,'002'),
+ s0:F(2),papa:WF(2,'papa'),bh:WF(2,'bhejo'),cou:WF(2,'courier'),
+ k0:F(3),anj:WF(3,'anjaan'),mat:WF(3,'mat'),st:WF(3,'star'),kh:WF(3,'khatra'),
+ h0:F(4),set:WF(4,'settings'),cf:WF(4,'call'),dek:WF(4,'dekho'),on:WF(4,'on'),gad:WF(4,'gadbad'),
+ o0:F(5),c2:WF(5,'002'),sab:WF(5,'sab'),bnd:WF(5,'band'),jio:WF(5,'jio'),j402:WF(5,'402'),
+ w0:F(6),wap:WF(6,'wapas'),
+ p0:F(7),pk:WF(7,'paise'),tur:WF(7,'turant'),n1930:WF(7,'1930'),
+ e0:F(8),r1:F(8)+2,r2:F(8)+6,r3:F(8)+10,r4:F(8)+14,gd:WF(8,'guide'),dk:WF(8,'dekho'),kah:WF(8,'kahin')};
+[[q.c1+6,'pop'],[q.c1+10,'pop'],[q.otp,'whoosh'],[q.chor,'crack'],[q.abhi,'pop'],[q.c002,'ding'],
+ [q.s0,'pop'],[q.papa,'pop'],[q.bh,'whoosh'],[q.cou,'ding'],
+ [q.k0,'pop'],[q.anj,'type'],[q.mat,'crack'],[q.st,'blip'],
+ [q.h0,'pop'],[q.set,'blip'],[q.cf,'blip'],[q.dek,'tick'],[q.on,'crack'],[q.gad,'pop'],
+ [q.o0,'pop'],[q.o0+4,'type'],[q.sab,'tick'],[q.bnd,'ding'],[q.jio,'pop'],[q.j402,'type'],
+ [q.w0,'whoosh'],[q.p0,'pop'],[q.pk,'fall'],[q.tur,'pop'],[q.n1930,'ding'],
+ [q.r1,'pop'],[q.r2,'pop'],[q.r3,'pop'],[q.r4,'pop'],[q.gd,'pop'],[q.gd+6,'type'],[q.dk,'blip'],[q.kah,'pop']].forEach(([f,t])=>sfx(f,t));
+function content(n,f){const t=f/FPS;let o='';
+ if(n=='q'){o+=head(0,'CALL KAHAN JA RAHE?',RD,'#fff0ee');
+  o+=phone(270,470,.62,pop(f,q.c1+6,9),T(0,-170,30,'AAPKA PHONE',{w:800})+callIcon(0,-30,2.2,f>=q.chor?'#c9cfe0':MD)+T(0,110,30,f>=q.chor?'call nahi aaya':'Bank calling...',{w:800,fill:f>=q.chor?RD:INK}),{rot:-3});
+  o+=phone(810,470,.62,pop(f,q.c1+10,9),thief(0,-60,1.3)+T(0,120,40,'CHOR',{fill:RD}),{rot:3,body:'#3a2f2f',scr:'#ffe1e1'});
+  [[q.otp-14,'CALL'],[q.otp,'OTP']].forEach(([fr,lab])=>{if(f>=fr)o+=arrowFly(360,330,720,330,(f-fr)/20,RD,lab)});
+  const pc=pop(f,q.abhi,9);if(pc>0)o+=codeCard(540,865,pc,'##002#',MINT,{w:700,h:170,s:110,dy:38});
+  const ps=pop(f,q.c002,7);if(ps>0)o+=stamp(845,770,'DIAL!',ps,NAVY,8,52)}
+ if(n=='send'){o+=head(0,'SEND KARO',RD,'#ffeef0');
+  const pp=pop(f,q.s0,9);o+=phone(320,560,.95,pp,`<rect x="-130" y="-252" width="260" height="70" fill="${MD}"/>`+T(-100,-205,30,'Papa',{a:'start',fill:'#fff'})+
+   `<g opacity="${f>=q.papa?1:0}"><rect x="-110" y="-150" width="220" height="110" rx="20" fill="#fff" stroke="#c9cfe0" stroke-width="4"/>${T(0,-108,24,'Courier wala code',{w:800})}${T(0,-72,24,'bole toh?',{w:800})}</g>`+
+   `<g opacity="${f>=q.bh?1:0}"><rect x="-100" y="-20" width="220" height="110" rx="20" fill="${MINT}" stroke="${INK}" stroke-width="4"/>${T(10,22,26,'MAT DIAL',{})}${T(10,60,26,'karna!',{w:800})}</g>`+
+   `<g transform="translate(0,170) scale(${pop(f,q.bh,8)})"><circle r="48" fill="${MD}" stroke="${INK}" stroke-width="5"/><path d="M-22,-4 L24,-20 L8,24 L2,4Z" fill="#fff" stroke="#fff" stroke-width="4" stroke-linejoin="round"/></g>`);
+  o+=box(770,400,380,180,YEL,pop(f,q.papa,8),T(0,10,80,'PAPA')+T(0,58,30,'ko bhejo',{w:800}),{rot:4});
+  const pd=pop(f,q.bh,8);if(pd>0)o+=stamp(770,650,'BHEJO!',pd,RD,-6,84);
+  const pc=pop(f,q.cou,8);if(pc>0)o+=T(770,830,30,'jo courier wale ki',{w:800,fill:GREY})+T(770,872,30,'har baat maante hain',{w:800,fill:GREY})}
+ if(n=='code'){o+=head(1,'MAT DIAL KARO',RD,'#fff0ee');
+  const pp=pop(f,q.k0,9),code='*21*98XXX#';
+  o+=phone(300,575,.95,pp,T(0,-190,26,'Courier wala bola:',{w:800,fill:GREY})+`<rect x="-118" y="-160" width="236" height="76" rx="14" fill="#fff" stroke="${f>=q.st?RD:'#c9cfe0'}" stroke-width="${f>=q.st?6:3}"/>`+T(0,-108,30,typed(code,f,q.anj,2),{font:'Mono',w:700,fill:f>=q.st?RD:INK})+
+   [0,1,2,3].map(r=>[0,1,2].map(c=>{const lab=['1','2','3','4','5','6','7','8','9','*','0','#'][r*3+c];return `<circle cx="${-78+c*78}" cy="${-20+r*68}" r="28" fill="#fff" stroke="#c9cfe0" stroke-width="3"/>${T(-78+c*78,-10+r*68,28,lab,{w:800})}`}).join('')).join('')+
+   `<circle cx="0" cy="${-20+4*68}" r="30" fill="${MD}"/>`+callIcon(0,-20+4*68,.8,'#fff'));
+  const pm=pop(f,q.mat,7);if(pm>0)o+=`<g transform="translate(300,575)">${cross(0,0,2.4,pm)}</g>`;
+  [['COURIER','"parcel ruka hai"',q.anj],['KYC / SIM','"band ho jayega"',q.anj+8]].forEach(([a,b,fr],k)=>{o+=box(770,360+k*170,380,140,'#fff',pop(f,fr,8),T(0,-10,40,a)+T(0,36,26,b,{w:800,fill:GREY}),{rot:k?2:-2})});
+  const pst=pop(f,q.st,8);if(pst>0)o+=box(770,700,380,130,YEL,pst,T(0,-4,40,'*21* · *61* · *67*',{font:'Mono',w:700})+T(0,40,24,'se shuru = forwarding',{w:800}),{rot:-1});
+  const pk=pop(f,q.kh-2,5);if(pk>0)o+=stamp(770,880,'KHATRA!',pk,RD,-5,62)}
+ if(n=='check'){o+=head(2,'CHECK KARO',YEL,'#fffbe8');
+  const pp=pop(f,q.h0,9);
+  const rows=[['Settings',q.set],['Calls',q.set+8],['Forwarding',q.cf]];
+  let inner=T(-110,-200,30,'Phone app',{a:'start',w:800,fill:GREY});
+  rows.forEach(([lab,fr],k)=>{const hl=f>=fr;inner+=`<rect x="-118" y="${-170+k*82}" width="236" height="66" rx="14" fill="${hl?(k==2?YEL:'#fff'):'#fff'}" stroke="${hl?INK:'#c9cfe0'}" stroke-width="${hl?5:3}"/>`+T(-100,-126+k*82,30,lab,{a:'start',w:800})+T(100,-128+k*82,28,'›',{a:'end',fill:GREY})});
+  const on=f>=q.on;inner+=`<g opacity="${f>=q.dek?1:0}"><rect x="-118" y="90" width="236" height="120" rx="16" fill="${on?'#ffe1e1':'#fff'}" stroke="${on?RD:'#c9cfe0'}" stroke-width="5"/>${T(-100,132,28,'Always',{a:'start',w:800})}${T(-100,184,28,'→98XX',{a:'start',font:'Mono',w:700,fill:RD})}<rect x="30" y="108" width="76" height="40" rx="20" fill="${on?RD:'#c9cfe0'}"/><circle cx="${on?86:50}" cy="128" r="16" fill="#fff"/></g>`;
+  o+=phone(300,575,.95,pp,inner);
+  o+=box(770,380,380,190,'#fff',pop(f,q.set,8),T(0,-44,34,'ANDROID',{fill:MD})+T(0,6,30,'Phone › Settings',{w:800})+T(0,50,30,'› Call forwarding',{w:800}),{rot:-2});
+  o+=box(770,610,380,190,'#fff',pop(f,q.cf,8),T(0,-44,34,'iPHONE',{fill:NAVY})+T(0,6,30,'Settings › Phone',{w:800})+T(0,50,30,'› Call Forwarding',{w:800}),{rot:2});
+  const pg=pop(f,q.on,7);if(pg>0)o+=stamp(770,850,'ON = GADBAD',pg,RD,-4,50)}
+ if(n=='off'){o+=head(3,'SAB BAND',MINT,'#effbf6');
+  const wap=f>=q.w0,pp=pop(f,q.o0,9),off=f>=q.bnd;
+  let inner=`<rect x="-118" y="-200" width="236" height="96" rx="16" fill="#fff" stroke="${MD}" stroke-width="5"/>`+T(0,-136,44,typed('##002#',f,q.o0+4,3),{font:'Mono',w:700});
+  inner+=`<g opacity="${f>=q.sab?1:0}"><rect x="-118" y="-70" width="236" height="120" rx="16" fill="${off?'#e6fbf2':'#ffe1e1'}" stroke="${off?MD:RD}" stroke-width="5"/>${T(-100,-26,28,'Forwarding',{a:'start',w:800})}${T(-100,28,34,off?'OFF':'ON',{a:'start',w:900,fill:off?MD:RD})}<rect x="30" y="0" width="76" height="40" rx="20" fill="${off?MD:RD}"/><circle cx="${off?50:86}" cy="20" r="16" fill="#fff"/></g>`;
+  inner+=tick(0,140,1.4,pop(f,q.bnd,8));
+  o+=phone(300,575,.95,pp,inner);
+  if(!wap){const pj=pop(f,q.jio,8);if(pj>0)o+=box(770,420,380,200,YEL,pj,T(0,-36,40,'JIO pe')+T(0,40,70,'*402',{font:'Mono',w:700}),{rot:3});
+   o+=box(770,700,380,170,'#fff',pop(f,q.sab,8),T(0,-20,30,'Sab forwarding',{w:800})+T(0,30,46,'BAND',{fill:MD}),{rot:-2})}
+  else{o+=phone(790,520,.6,1,callIcon(0,-40,2.2,MD)+T(0,100,34,'CALL',{})+T(0,145,34,'WAPAS',{fill:MD}),{rot:4});
+   const k=(f-q.w0)/14;o+=arrowFly(720,300,470,300,k,MD,'CALL');
+   const pw=pop(f,q.wap-2,5);if(pw>0)o+=stamp(770,880,'WAPAS!',pw,MD,-5,70)}}
+ if(n=='help'){o+=head(4,'PAISE KATE?',RD,'#fff0ee');
+  o+=box(540,430,700,260,'#fff',pop(f,q.pk,9),T(0,-50,40,'Turant call karo')+T(0,70,150,f>=q.tur?'1930':'....',{font:'Mono',w:700,fill:RD}),{rot:-2});
+  o+=box(540,720,700,130,MINT,pop(f,q.tur,9),T(0,18,46,'cybercrime.gov.in',{font:'Mono',w:700}),{rot:1});
+  const ps=pop(f,q.n1930,7);if(ps>0)o+=T(540,900,30,'jitna jaldi, utna achha',{w:800,fill:GREY})}
+ if(n=='end'){o+=head(0,'4 STEP · YAAD RAKHO',MINT,'#effbf6');
+  [['1','MAT DIAL','anjaan ka code',q.r1],['2','CHECK','Call forwarding',q.r2],['3','##002#','Jio: *402',q.r3],['4','1930','paise kate toh',q.r4]].forEach(([nn,a,b,fr],k)=>{const p=pop(f,fr,9);o+=box(540,330+k*118,820,100,'#fff',p,tick(-360,0,.9,p)+T(-300,14,40,a,{a:'start',font:a.includes('#')||a=='1930'?'Mono':'Pop',w:a.includes('#')||a=='1930'?700:900})+T(380,12,30,b,{a:'end',w:800,fill:GREY}),{rot:k%2?1:-1})});
+  const pc=pop(f,q.gd-4,9);if(pc>0)o+=box(540,850,820,150,'#fff',pc,T(-370,-30,26,'Comment karo',{a:'start',w:700,fill:GREY})+T(-370,40,60,typed('GUIDE',f,q.gd,3),{a:'start',fill:MD})+`<rect x="${-370+typed('GUIDE',f,q.gd,3).length*44}" y="0" width="6" height="52" fill="${INK}" opacity="${Math.sin(t*12)>0?1:0}"/>`,{rot:-1})}
+ return o}
+// bottom strip: doorstep with parcel boxes
+function strip(f){const t=f/FPS;let o=`<defs><linearGradient id="sw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9c7"/><stop offset="1" stop-color="#ffd3a1"/></linearGradient></defs><rect x="-700" y="-1500" width="2500" height="3800" fill="url(#sw)"/>`;
+ o+=`<rect x="-700" y="1700" width="2500" height="600" fill="#c58f63"/>`;
+ o+=`<rect x="420" y="1080" width="240" height="560" rx="10" fill="#8a5a3c" stroke="#5c3a24" stroke-width="8"/><circle cx="620" cy="1380" r="12" fill="#ffd23f"/>`;
+ [[60,1560,180,140],[220,1600,140,100],[880,1570,170,130]].forEach(([x,y,w,h])=>{o+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="#d9a066" stroke="#8a5a3c" stroke-width="6"/><rect x="${x+w/2-12}" y="${y}" width="24" height="${h}" fill="#f4e2c4"/>`});
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const p=pop(f,2,9)*(1-sp),p2=pop(f,5,9)*(1-sp),p3=pop(f,12,9)*(1-sp),bandP=pop(f,BT[0].caps[1].f-4,8)*(1-sp);
+ return stamp(540,270,'CALL AANA BAND?!',p,YEL,-3,58)+
+  phone(290,560,.78,p2,T(0,-180,34,'COURIER:',{w:900,fill:GREY})+T(0,-130,30,'"code dial karo"',{w:800})+`<rect x="-118" y="-90" width="236" height="80" rx="14" fill="#fff" stroke="${RD}" stroke-width="6"/>`+T(0,-36,36,'*21*98#',{font:'Mono',w:700,fill:RD})+callIcon(0,100,2.2,'#c9cfe0')+cross(60,150,1.3,bandP),{rot:-5})+
+  phone(810,560,.7,p3,thief(0,-40,1.3)+T(0,120,40,'CHOR',{fill:RD}),{rot:5,body:'#3a2f2f',scr:'#ffe1e1'})+
+  `<g opacity="${p3}">${arrowFly(430,470,690,470,clamp((f-12)/24,0,.999),RD,'OTP')}</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+RIG.impact(f0,HITS,540,600)+caption(f,capY(f));
+ s+=`<rect x="0" y="1904" width="${1080*f0/NF}" height="16" fill="${MINT}"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>

@@ -1,0 +1,5 @@
+A (picked) Moment in a day: Chotu dialled a code a "courier wala" gave him, now his calls stopped -> Baba: your calls + OTP calls are going to the thief's phone -> payoff ##002# by ~8 s -> share ask "papa ko bhejo" -> 4 steps (MAT DIAL 21/61/67 · CHECK Call forwarding in settings · BAND ##002#, Jio *402 · 1930) -> loop "aapke call kahin aur toh nahi ja rahe?".
+B Myth vs fact: "OTP kisi ko bataya hi nahi, phir bhi paise gaye?" -> forwarding explained (dropped: slower payoff, the code itself is the save-worthy thing).
+C Number lands: "Sirf 9 button daba ke chor ko aapke saare call" (dropped: digit count depends on the number dialled; illustrative only).
+Hooks: 1 "Baba! Courier wale ne ek code dial karwaya, ab mere call aana BAND!" (picked: relatable courier moment, visible symptom) · 2 "Ye code kabhi mat dial karna: *21*" (strong, used as step 1) · 3 "OTP bataya nahi, phir bhi paise gaye?" (fear-only, payoff late).
+Why picked: share target = "papa/mummy jo courier wale ki har baat maan lete hain" (parcel season), save = 1 code to cancel + where to check, both usable later; comment = GUIDE.

@@ -1,0 +1,13 @@
+Courier wale ne kaha "ye code dial karo"? Ruko. Aapke call aur OTP chor ke phone pe ja sakte hain.
+
+Call forwarding scam se bachne ke 4 step:
+1. MAT DIAL: anjaan ka diya code kabhi dial mat karo, khaaskar jo 21, 61 ya 67 se shuru ho (jaise *21*number#)
+2. CHECK: Android: Phone app > Settings > Call forwarding (kuch phones mein Calls ya Calling accounts ke andar). iPhone: Settings > Phone > Call Forwarding
+3. BAND: ##002# dial karo, saari forwarding band. Jio pe *402 bhi
+4. Paise kate? Turant 1930 ya cybercrime.gov.in
+
+Papa-mummy ko bhejo, jo courier wale ki har baat maan lete hain. Comment karo GUIDE, step-by-step guide DM mein bhejenge.
+
+Codes and menu names can differ by operator and phone; if a code does not work, call your operator's customer care. Sources: I4C advisory as reported by Digit (30 Dec 2025), Asianet Newsable (7 Jan 2026) and Outlook Money (29 Jul 2026); Tamil Nadu Cyber Crime Wing (DT Next); Rajasthan Police (PinkCity Post); Goa case (The Goan, Apr 2026); operator codes: Smartprix, TelecomTalk, India TV; settings paths: Digital Trends, AT&T device support. Drawn illustration.
+
+#technibaba #callforwarding #scamalert #cybersafety #otpfraud #1930 #techtips #hinglish
