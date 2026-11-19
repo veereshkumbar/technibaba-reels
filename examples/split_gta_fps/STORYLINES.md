@@ -1,0 +1,6 @@
+# Storylines (21:00 Bollywood/OTT/gaming x tech, 19 Nov 2026) — GTA 6 launch day: 30 FPS even on PS5 Pro, and why (CPU)
+A. Myth vs fact (picked): Chotu "GTA 6 aaya, par sirf 30 FPS?! Pro pe bhi?!" -> Baba: Rockstar: Pro pe bhi 30, wajah graphics nahi, CPU (payoff ~7.8 s) -> share ask "dost jo Pro leke 60 ka sapna dekh raha" (~8.7-13.7 s) -> 3 sach: FPS (30/s = 33 ms each), CPU (simulate the city before every frame; 60 = 16 ms), GPU (Pro = sharper, ray-traced shadows, still 30) -> "30 FPS chalega? HAAN ya NA" (loops to hook).
+B. A number lands: "6.38 million log ek saath dekh rahe the" (launch livestream record, Streams Charts preliminary). Dropped: sources disagree (2.5M Twitch vs 6.38M all platforms), and no reusable rule = no save.
+C. Before/after: NZ time-zone trick (people changed console region to play early). Dropped: launch already live in India since midnight, so stale by 21:00; encourages region tricks.
+Hooks: (1) "Baba! GTA 6 aaya, par sirf 30 FPS?! Pro pe bhi?!" (2) "PS5 Pro pe bhi 30 FPS? Galti graphics ki nahi!" (3) "60 FPS ke liye Pro liya? Ruko."
+Picked A + hook 1: launch-day argument every gamer group is having today; question in 1.5 s, payoff (CPU, not graphics) by 8 s; share target = the friend who bought/wants a Pro for 60 FPS; FPS/ms rule is reusable for every game = save.

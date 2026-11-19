@@ -1,0 +1,124 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+// ================= reel art: "GTA 6 sirf 30 FPS? PS5 Pro pe bhi? FPS ke 3 sach" (split layout, 21:00 gaming x tech 19 Nov 2026) =================
+const RD=C.laptopRed,MINT=C.mint,MD=C.mintDark,YEL=C.captionKeyword,NAVY=C.navy,GREY='#7a7f92',PINK='#ff9b9b',SCR='#0f1630',SKY='#ffb36b',SKY2='#ff6fa8',VIO='#7b5cff';
+const T=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="${o.font||'Pop'}" font-weight="${o.w||900}" font-size="${s}" fill="${o.fill||INK}" ${o.extra||''}>${txt}</text>`;
+const box=(x,y,w,h,fill,p,inner,o={})=>`<g transform="translate(${x},${y}) rotate(${(o.rot||0)+(1-p)*-6}) scale(${p})"><rect x="${-w/2+6}" y="${-h/2+10}" width="${w}" height="${h}" rx="${o.r||24}" fill="#000" opacity=".18"/><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${o.r||24}" fill="${fill}" stroke="${o.stroke||INK}" stroke-width="${o.sw||6}"/>${inner}</g>`;
+const tick=(x,y,s,p,col=MD)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${col}" stroke="${INK}" stroke-width="5"/><path d="M-16,2 l11,12 l22,-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+const cross=(x,y,s,p)=>`<g transform="translate(${x},${y}) scale(${s*(p>0?.6+.4*Math.min(1.15,p):0)})"><circle r="34" fill="${RD}" stroke="${INK}" stroke-width="5"/><path d="M-14,-14 L14,14 M14,-14 L-14,14" stroke="#fff" stroke-width="9" stroke-linecap="round"/></g>`;
+const stamp=(x,y,txt,p,col,rot=-8,size=96)=>`<g transform="translate(${x},${y}) rotate(${rot}) scale(${p})"><rect x="${-txt.length*size*.36-30}" y="${-size*.72}" width="${txt.length*size*.72+60}" height="${size*1.4}" rx="22" fill="${col}" stroke="#fff" stroke-width="9"/>${T(0,size*.33,size,txt,{fill:col==YEL?INK:'#fff'})}</g>`;
+const F=i=>BT[i].f0,PW=PAN.x1-PAN.x0,PH=PAN.y1-PAN.y0;
+const head=(step,title,col,fill)=>`<rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="${PH}" fill="${fill}"/><rect x="${PAN.x0}" y="${PAN.y0}" width="${PW}" height="112" fill="${NAVY}"/>`+(step?`<rect x="118" y="176" width="190" height="62" rx="31" fill="${col}"/>${T(213,220,34,'SACH '+step,{fill:INK})}`:'')+T(step?332:118,222,40,title,{a:'start',fill:'#fff'})+[1,2,3].map(k=>`<circle cx="${880+k*28}" cy="207" r="9" fill="${step&&k<=step?col:'#4b4a86'}"/>`).join('');
+// a mini game scene (sunset street, building, palm, car). blur = 0..1 softens it; shadows = 0..1 adds long shadows
+const scene=(x,y,w,h,t,o={})=>{const id=o.id||'sc';let g=`<g transform="translate(${x},${y})"><clipPath id="${id}"><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="14"/></clipPath><g clip-path="url(#${id})" ${o.blur?'filter="url(#blur)"':''}>`;
+ g+=`<rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" fill="url(#skyg)"/><circle cx="${w*.22}" cy="${-h*.08}" r="${h*.16}" fill="#ffe7a0"/>`;
+ g+=`<rect x="${-w*.42}" y="${-h*.18}" width="${w*.22}" height="${h*.5}" fill="#5a3f8a"/>`+[0,1,2].map(r=>[0,1].map(c=>`<rect x="${-w*.39+c*w*.09}" y="${-h*.12+r*h*.13}" width="${w*.05}" height="${h*.07}" fill="#ffd23f" opacity=".8"/>`).join('')).join('');
+ g+=`<rect x="${w*.02}" y="${-h*.06}" width="${w*.14}" height="${h*.38}" fill="#3f2f6e"/>`;
+ g+=`<path d="M${w*.3},${h*.32} q${-6},${-h*.3} ${10},${-h*.42}" stroke="#4a3020" stroke-width="${w*.018}" fill="none"/>`+[-1,-.4,.3,1].map(a=>`<path d="M${w*.31},${-h*.1} q${a*w*.06},${-h*.08} ${a*w*.12},${h*.02}" stroke="#1f6b3a" stroke-width="${w*.02}" fill="none" stroke-linecap="round"/>`).join('');
+ g+=`<rect x="${-w/2}" y="${h*.3}" width="${w}" height="${h*.2}" fill="#2b2140"/>`+[0,1,2,3].map(k=>`<rect x="${-w/2+k*w*.3+((t*120)%(w*.3))-w*.15}" y="${h*.39}" width="${w*.1}" height="${h*.02}" fill="#fff" opacity=".6"/>`).join('');
+ const cx=-w*.1+Math.sin(t*1.3)*w*.08;
+ if(o.shadows)g+=`<ellipse cx="${cx+w*.07}" cy="${h*.4}" rx="${w*.14*o.shadows}" ry="${h*.035}" fill="#000" opacity="${.45*o.shadows}"/><path d="M${-w*.42},${h*.3} l${w*.3*o.shadows},${h*.1} l${w*.2},0 l${-w*.08},${-h*.1} z" fill="#000" opacity="${.3*o.shadows}"/>`;
+ g+=`<g transform="translate(${cx},${h*.36})"><rect x="${-w*.08}" y="${-h*.06}" width="${w*.16}" height="${h*.06}" rx="8" fill="${RD}"/><rect x="${-w*.05}" y="${-h*.1}" width="${w*.09}" height="${h*.05}" rx="6" fill="#ff8a8c"/><circle cx="${-w*.05}" cy="0" r="${h*.025}" fill="#111"/><circle cx="${w*.05}" cy="0" r="${h*.025}" fill="#111"/></g>`;
+ return g+`</g><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="14" fill="none" stroke="${INK}" stroke-width="6"/></g>`};
+const counter=(x,y,s,val,col,p=1)=>`<g transform="translate(${x},${y}) scale(${s*p})"><rect x="-120" y="-62" width="240" height="124" rx="22" fill="${SCR}" stroke="${col}" stroke-width="7"/>${T(-18,30,82,val,{font:'Mono',w:700,fill:col})}${T(78,28,30,'FPS',{w:800,fill:'#fff'})}</g>`;
+const tv=(x,y,w,h,inner)=>`<g transform="translate(${x},${y})"><rect x="${-w/2-16}" y="${-h/2-16}" width="${w+32}" height="${h+32}" rx="22" fill="#1b1b2b" stroke="${INK}" stroke-width="6"/>${inner}<rect x="-40" y="${h/2+16}" width="80" height="26" fill="#1b1b2b"/><rect x="-110" y="${h/2+40}" width="220" height="14" rx="7" fill="#1b1b2b"/></g>`;
+const consoleBox=(x,y,s,lab,col=MINT)=>`<g transform="translate(${x},${y}) scale(${s})"><path d="M-46,-150 q-20,0 -24,30 l-10,240 q0,24 24,24 h112 q24,0 24,-24 l-10,-240 q-4,-30 -24,-30 z" fill="#fff" stroke="${INK}" stroke-width="6"/><rect x="-14" y="-140" width="28" height="270" rx="10" fill="#1b1b2b"/><rect x="-6" y="-120" width="12" height="40" rx="6" fill="${col}"/>${T(0,170,40,lab)}</g>`;
+const cpuChip=(x,y,s,heat=0)=>`<g transform="translate(${x},${y}) scale(${s})">${[-45,-15,15,45].map(d=>`<rect x="${d-6}" y="-100" width="12" height="22" fill="#b8b8c8"/><rect x="${d-6}" y="78" width="12" height="22" fill="#b8b8c8"/><rect x="-100" y="${d-6}" width="22" height="12" fill="#b8b8c8"/><rect x="78" y="${d-6}" width="22" height="12" fill="#b8b8c8"/>`).join('')}<rect x="-80" y="-80" width="160" height="160" rx="18" fill="${heat>0?`rgb(${Math.round(43+200*heat)},${Math.round(33+20*(1-heat))},64)`:'#2b2140'}" stroke="${INK}" stroke-width="6"/><rect x="-54" y="-54" width="108" height="108" rx="10" fill="none" stroke="${YEL}" stroke-width="4"/>${T(0,16,46,'CPU',{fill:'#fff'})}</g>`;
+const gpuCard=(x,y,s)=>`<g transform="translate(${x},${y}) scale(${s})"><rect x="-130" y="-60" width="260" height="120" rx="16" fill="#2b2140" stroke="${INK}" stroke-width="6"/>${[-82,-2].map(c=>`<circle cx="${c}" cy="0" r="40" fill="#1b1b2b" stroke="${MINT}" stroke-width="5"/><path d="M${c},-30 v60 M${c-30},0 h60" stroke="${MINT}" stroke-width="4"/>`).join('')}${T(82,12,32,'GPU',{fill:'#fff'})}<rect x="-120" y="60" width="200" height="14" fill="${YEL}"/></g>`;
+const filmStrip=(x,y,n,prog,col)=>{let g=`<g transform="translate(${x},${y})"><rect x="-430" y="-70" width="860" height="140" rx="12" fill="${INK}"/>`;const fw=860/n;
+ for(let k=0;k<n;k++){const on=k<prog*n;g+=`<rect x="${-430+k*fw+fw*.12}" y="-48" width="${fw*.76}" height="96" rx="4" fill="${on?col:'#3a3360'}"/>`}
+ for(let k=0;k<20;k++)g+=`<rect x="${-422+k*43}" y="-64" width="20" height="10" rx="3" fill="#fff" opacity=".7"/><rect x="${-422+k*43}" y="54" width="20" height="10" rx="3" fill="#fff" opacity=".7"/>`;
+ return g+`</g>`};
+// time bar: width w = 33 ms budget; fill = used fraction (0..1+), over = red
+const msBar=(x,y,w,used,lab,col)=>{const over=used>1;return `<g transform="translate(${x},${y})"><rect x="0" y="-30" width="${w}" height="60" rx="14" fill="#fff" stroke="${INK}" stroke-width="5"/><rect x="5" y="-25" width="${Math.max(0,Math.min(1,used))*(w-10)}" height="50" rx="10" fill="${over?RD:col}"/>${T(w+20,14,40,lab,{a:'start',font:'Mono',w:700,fill:over?RD:INK})}</g>`};
+// tiny city: people dots + cars moving; n scales how busy
+const city=(x,y,w,h,t,p)=>{let g=`<g transform="translate(${x},${y}) scale(${p})" ><clipPath id="cityc"><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="16"/></clipPath><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="16" fill="#2a2f66"/><g clip-path="url(#cityc)">`;
+ [[-.4,.5],[-.25,.7],[-.08,.45],[.1,.8],[.28,.55],[.42,.65]].forEach(([bx,bh],k)=>{g+=`<rect x="${bx*w-28}" y="${h/2-bh*h*.75-50}" width="56" height="${bh*h*.75}" fill="${['#5a3f8a','#3f2f6e','#6b4fa0'][k%3]}"/>`+[0,1,2].map(r=>`<rect x="${bx*w-16}" y="${h/2-bh*h*.75-34+r*30}" width="12" height="14" fill="${YEL}" opacity="${.4+.5*((k+r+Math.floor(t*3))%2)}"/>`).join('')});
+ g+=`<rect x="${-w/2+6}" y="${h/2-52}" width="${w-12}" height="46" fill="#1b1b2b"/>`;
+ [0,1,2,3].forEach(k=>{const cx=((t*(140+k*40)+k*260)%(w+120))-w/2-60;g+=`<rect x="${k%2?-cx-30:cx-30}" y="${h/2-44+(k%2)*18}" width="60" height="18" rx="6" fill="${[RD,MINT,YEL,PINK][k]}"/>`});
+ for(let k=0;k<14;k++){const px=-w/2+30+((k*67+t*(20+k*3))%(w-60)),py=h/2-64-(k%3)*4;g+=`<circle cx="${px}" cy="${py-10}" r="6" fill="${['#ffe0bf','#df9f72','#f4c193'][k%3]}"/><rect x="${px-5}" y="${py-4}" width="10" height="14" rx="4" fill="${[MINT,RD,YEL,PINK][k%4]}"/>`}
+ return g+`</g><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="16" fill="none" stroke="${INK}" stroke-width="6"/></g>`};
+const send=(x,y,s,p)=>`<g transform="translate(${x},${y}) scale(${s*p})"><circle r="60" fill="${MINT}" stroke="${INK}" stroke-width="6"/><path d="M-28,-4 L30,-26 L10,30 L2,6 z" fill="#fff" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/></g>`;
+const thought=(x,y,s,p,inner)=>p<=0?'':`<g transform="translate(${x},${y}) scale(${s*p})"><circle cx="-150" cy="120" r="14" fill="#fff" stroke="${INK}" stroke-width="4"/><circle cx="-120" cy="90" r="22" fill="#fff" stroke="${INK}" stroke-width="4"/><ellipse cx="0" cy="0" rx="170" ry="100" fill="#fff" stroke="${INK}" stroke-width="6"/>${inner}</g>`;
+// cue frames (line index: 0 hook, 1 news, 2-3 share, 4 fps, 5 cpu, 6-7 gpu, 8 end)
+const q={n0:F(1),rock:WF(1,'rockstar'),pro1:WF(1,'pro'),b30:WF(1,'30'),gr:WF(1,'graphics'),cpu1:WF(1,'cpu'),
+ s0:F(2),dost:WF(2,'dost'),s60:WF(2,'60'),sapna:WF(2,'sapna'),s3:F(3),bhejo:WF(3,'bhejo'),fps3:WF(3,'fps'),teen:WF(3,'teen'),
+ k0:F(4),ek:WF(4,'ek'),t30:WF(4,'30'),har4:WF(4,'har'),m33:WF(4,'33'),
+ c0:F(5),har5:WF(5,'har'),shehar:WF(5,'shehar'),chalao:WF(5,'chalao'),s60b:WF(5,'60'),m16:WF(5,'16'),
+ g0:F(6),fayda:WF(6,'fayda'),h0:F(7),gpu7:WF(7,'gpu'),saaf:WF(7,'saaf'),ray:WF(7,'raytraced'),shad:WF(7,'shadows'),speed:WF(7,'speed'),g30:WF(7,'30'),
+ e0:F(8),e30:WF(8,'30'),haan:WF(8,'haan')};
+[[q.n0+4,'pop'],[q.rock,'blip'],[q.pro1,'pop'],[q.pro1+5,'pop'],[q.pro1+10,'pop'],[q.b30,'ding'],[q.gr,'crack'],[q.cpu1+2,'ding'],
+ [q.s0+3,'pop'],[q.dost,'blip'],[q.s60,'pop'],[q.sapna,'crack'],[q.s3+2,'whoosh'],[q.bhejo,'ding'],[q.fps3,'pop'],[q.fps3+5,'pop'],[q.fps3+10,'pop'],
+ [q.k0+3,'pop'],[q.ek,'blip'],[q.ek+6,'type'],[q.ek+12,'type'],[q.ek+18,'type'],[q.t30,'ding'],[q.har4,'pop'],[q.m33,'blip'],[q.m33+6,'ding'],
+ [q.c0+3,'pop'],[q.har5,'blip'],[q.shehar,'pop'],[q.shehar+6,'blip'],[q.chalao,'whoosh'],[q.s60b,'pop'],[q.m16+2,'crack'],
+ [q.g0+3,'pop'],[q.fayda,'blip'],[q.h0+3,'pop'],[q.gpu7,'blip'],[q.saaf,'ding'],[q.shad,'pop'],[q.speed,'blip'],[q.g30,'ding'],
+ [q.e0+3,'pop'],[q.e0+7,'pop'],[q.e0+11,'pop'],[q.e30,'blip'],[q.haan,'type'],[q.haan+8,'type']].forEach(([f,t])=>sfx(f,t));
+function content(n,f){const t=f/FPS;let o='';
+ if(n=='q'||n=='news'){o+=head(0,'GTA 6 · AAJ LAUNCH · 19 NOV',YEL,'#fff7e6');
+  o+=box(540,330,820,140,'#fff',pop(f,q.n0+4,9),T(0,-8,44,'Rockstar: target 30 FPS')+T(0,42,30,'Rockstar Games ki official post ke mutabik',{w:800,fill:GREY}),{rot:-1.5});
+  [['PS5',q.pro1],['PS5 PRO',q.pro1+5],['XBOX X|S',q.pro1+10]].forEach(([lab,cf],k)=>{const p=pop(f,cf,8);if(p>0)o+=box(220+k*300,520,270,170,'#fff',p,T(0,-24,36,lab)+T(0,50,64,'30',{font:'Mono',w:700,fill:f>=q.b30?RD:INK}),{rot:k%2?2:-2})});
+  if(f>=q.gr)o+=gpuCard(260,790,1.15*pop(f,q.gr,8))+cross(400,740,.9,pop(f,q.gr+4,8));
+  if(f>=q.cpu1)o+=cpuChip(720,780,1.1*pop(f,q.cpu1,8),.8)+stamp(720,920,'WAJAH: CPU',pop(f,q.cpu1+3,7),RD,-4,48)}
+ if(n=='share'){o+=head(0,'IS DOST KO BHEJO',YEL,'#fff7e6');
+  o+=box(540,350,840,170,'#fff',pop(f,q.s0+3,9),T(-390,-8,40,'Woh dost jo Pro leke',{a:'start'})+T(-390,52,58,'60 FPS ka sapna dekhe',{a:'start',fill:RD}),{rot:-1.5});
+  if(f>=q.dost)o+=consoleBox(230,640,.95*pop(f,q.dost,8),'PRO');
+  o+=thought(470,560,1,pop(f,q.s60,9),counter(0,0,.95,'60',MINT));
+  if(f>=q.sapna)o+=stamp(470,690,'SAPNA!',pop(f,q.sapna,7),RD,-6,44);
+  const pb=pop(f,q.bhejo,8);if(pb>0){o+=send(810,560,1.6,pb);o+=stamp(820,700,'BHEJO',pb,MD,-6,56)}
+  if(f>=q.fps3)[['FPS',MINT],['CPU',YEL],['GPU',PINK]].forEach(([lab,col],k)=>{const p=pop(f,q.fps3+k*5,8);o+=box(220+k*300,875,260,110,col,p,T(0,18,52,lab),{rot:k%2?2:-2})});}
+ if(n=='fps'){o+=head(1,'FPS = TASVEER / SECOND',MINT,'#eafaf3');
+  o+=box(540,350,700,120,'#fff',pop(f,q.k0+3,9),T(0,18,52,'1 SECOND'),{rot:-1});
+  if(f>=q.ek){const pr=clamp((f-q.ek)/24);o+=filmStrip(540,520,30,pr,MINT);o+=T(540,640,40,Math.round(pr*30)+' tasveer',{font:'Mono',w:700,fill:MD})}
+  if(f>=q.t30)o+=counter(830,350,.8,'30',MINT,pop(f,q.t30,8));
+  if(f>=q.har4){o+=scene(300,820,330,210,t,{id:'s1'})+T(300,950,30,'1 tasveer',{w:800,fill:GREY,extra:`opacity="${clamp(pop(f,q.har4,8))}"`})}
+  if(f>=q.m33)o+=box(740,800,380,160,'#fff',pop(f,q.m33,8),T(0,-10,30,'har tasveer ko',{w:800,fill:GREY})+T(0,52,74,'33 ms',{font:'Mono',w:700,fill:MD}),{rot:2})+T(740,940,28,'1000 ÷ 30 ≈ 33',{font:'Mono',w:700,fill:GREY,extra:`opacity="${clamp(pop(f,q.m33+6,8))}"`})}
+ if(n=='cpu'){o+=head(2,'CPU = DUNIYA CHALATA',YEL,'#fff7e6');
+  o+=cpuChip(200,380,1.05*pop(f,q.c0+3,9),f>=q.m16?.9:0);
+  if(f>=q.har5)o+=box(650,370,560,150,'#fff',pop(f,q.har5,8),T(0,-12,36,'Har tasveer se PEHLE:')+T(0,42,32,'log, gaadiyan, takkar',{w:800,fill:GREY}),{rot:1.5});
+  if(f>=q.shehar)o+=city(540,640,820,270,t,pop(f,q.shehar,9));
+  if(f>=q.chalao)o+=msBar(130,840,520,clamp((f-q.chalao)/20)*.95,'30 = 33 ms',MD);
+  if(f>=q.s60b){const sq=f>=q.m16;o+=msBar(130,920,sq?260:520,sq?1.9:.95,sq?'60 = 16 ms':'60 = ?',MD)}
+  if(f>=q.m16)o+=stamp(830,920,'TIME KAM!',pop(f,q.m16,6),RD,-5,44)}
+ if(n=='gpu'){o+=head(3,'GPU = TASVEER SAAF',PINK,'#fff0ee');
+  if(f<q.h0-2){o+=consoleBox(330,560,1.2*pop(f,q.g0+3,9),'PRO',PINK);o+=thought(700,480,1,pop(f,q.fayda,9),T(0,24,80,'?',{fill:RD}))}
+  else{o+=gpuCard(540,330,1.1*pop(f,q.gpu7,9));
+   const pa=pop(f,q.h0+3,9),pb=pop(f,q.saaf,9);
+   if(pa>0)o+=`<g transform="translate(300,600) scale(${pa})">`+scene(0,0,380,240,t,{id:'s2',blur:1})+T(0,160,36,'PS5',{fill:GREY})+`</g>`;
+   if(pb>0)o+=`<g transform="translate(780,600) scale(${pb})">`+scene(0,0,380,240,t,{id:'s3',shadows:f>=q.shad?clamp(pop(f,q.shad,8)):0})+T(0,160,36,'PRO: SAAF',{fill:MD})+`</g>`;
+   if(f>=q.shad)o+=stamp(780,445,'RAY-TRACED SHADOWS',pop(f,q.shad,7),VIO,3,30);
+   if(f>=q.speed){o+=counter(300,880,.75,'30',RD,pop(f,q.speed,8))+counter(780,880,.75,'30',RD,pop(f,q.speed+4,8));o+=T(540,895,44,'=',{fill:INK})}}}
+ if(n=='end'){o+=head(0,'FPS KE 3 SACH',YEL,'#fff7e6');
+  [['FPS: 30 = 33 ms',MINT],['CPU: duniya chalata',YEL],['GPU: tasveer saaf',PINK]].forEach(([lab,col],k)=>{const p=pop(f,q.e0+3+k*4,9);o+=box(540,330+k*130,800,108,'#fff',p,`<rect x="-370" y="-30" width="60" height="60" rx="14" fill="${col}" stroke="${INK}" stroke-width="5"/><path d="M-356,2 l12,13 l24,-28" fill="none" stroke="${INK}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>`+T(-280,16,44,lab,{a:'start'}),{rot:k%2?1:-1})});
+  if(f>=q.e30){const pc=pop(f,q.e30,9),word='HAAN',typed=word.slice(0,clamp(Math.floor((f-q.haan)/3),0,word.length)),cur=Math.floor(t*3)%2?'|':'';
+   o+=box(540,820,820,190,'#fff',pc,T(-370,-50,30,'30 FPS chalega? HAAN ya NA',{a:'start',w:800,fill:GREY})+`<rect x="-370" y="-24" width="560" height="90" rx="22" fill="#f3f4f8" stroke="${MINT}" stroke-width="6"/>`+T(-345,38,44,typed+cur,{a:'start',font:'Mono',w:700})+`<rect x="210" y="-24" width="160" height="90" rx="22" fill="${RD}"/>`+T(290,36,36,'POST',{fill:'#fff'}),{rot:-1})}}
+ return o}
+// bottom strip: gamer's room at night, TV glow on the wall (fills the whole frame during the full-screen hook)
+function strip(f){const t=f/FPS;let o=`<rect x="-700" y="-1500" width="2500" height="3800" fill="#1c1e48"/>`;
+ o+=`<rect x="-700" y="900" width="2500" height="500" fill="#262a5e"/>`+[...Array(14)].map((_,k)=>`<rect x="${-700+k*180}" y="900" width="6" height="450" fill="#1c1e48" opacity=".6"/>`).join('');
+ o+=`<circle cx="540" cy="1120" r="${300+10*Math.sin(t*3)}" fill="${VIO}" opacity=".16"/><circle cx="540" cy="1120" r="${170+6*Math.sin(t*4)}" fill="${MINT}" opacity=".10"/>`;
+ [[60,1060,'#ff6fa8'],[1020,1060,'#5de0b0']].forEach(([x,y,col])=>{o+=`<rect x="${x-70}" y="${y-90}" width="140" height="180" rx="10" fill="#2b2140" stroke="${col}" stroke-width="6"/><path d="M${x-30},${y+30} l30,-60 l30,60 z" fill="${col}" opacity=".7"/>`});
+ o+=`<rect x="-700" y="1240" width="2500" height="22" fill="${VIO}" opacity=".7"/>`+[...Array(26)].map((_,k)=>`<circle cx="${-40+k*44}" cy="1251" r="6" fill="${['#ff6fa8','#5de0b0','#ffd23f','#7b5cff'][(k+Math.floor(t*4))%4]}"/>`).join('');
+ o+=`<rect x="-700" y="1350" width="2500" height="900" fill="#3a2f5e"/>`+[...Array(8)].map((_,k)=>`<rect x="${-700+k*320}" y="1350" width="160" height="900" fill="#41356a"/>`).join('');
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const p=pop(f,-9,9)*(1-sp),s30=f>=WF(0,'sirf'),pr=f>=WF(0,'pro');
+ return `<g opacity="${1-sp}">`+stamp(540,215,'SIRF 30 FPS?!',p,YEL,-3,64)
+  +box(540,460,900,320,'#fff',p,tv(-150,-10,440,250,scene(0,0,440,250,f/FPS,{id:'sh'})+T(-170,-90,36,'GTA 6',{a:'start',fill:'#fff'}))+counter(250,-30,1.05,'30',RD),{rot:-1})
+  +(pr?stamp(760,640,'PRO PE BHI?!',pop(f,WF(0,'pro'),7),RD,5,52):'')+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}<linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${SKY2}"/><stop offset="1" stop-color="${SKY}"/></linearGradient><filter id="blur"><feGaussianBlur stdDeviation="5"/></filter></defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+RIG.impact(f0,HITS,540,600)+caption(f,capY(f));
+ s+=`<rect x="0" y="1904" width="${1080*f0/NF}" height="16" fill="${MINT}"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>

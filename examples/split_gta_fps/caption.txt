@@ -1,0 +1,12 @@
+GTA 6 aaya, par sirf 30 FPS? PS5 Pro pe bhi? Galti graphics ki nahi, CPU ki hai.
+
+Rockstar ne official post mein bataya ki GTA 6 PS5, PS5 Pro aur Xbox Series X|S, sab pe 30 FPS target karta hai.
+- FPS: ek second mein kitni tasveer. 30 FPS = har tasveer ko 33 millisecond (1000 / 30)
+- CPU: har tasveer se pehle poore sheher ki simulation chalti hai. 60 FPS pe sirf 16 millisecond milte. Rockstar ke Marc Chambers ke mutabik Pro ka CPU itni complex simulation ko zyada FPS pe nahi chala sakta
+- GPU: Pro pe tasveer zyada saaf (PSSR) aur ray-traced shadows, par speed 30 hi
+
+Us dost ko bhejo jo Pro leke 60 FPS ka sapna dekh raha tha. 30 FPS chalega? HAAN ya NA, comment karo.
+
+Sources: Rockstar Games via Push Square (10 Nov 2026); Rockstar to Kotaku as reported by Engadget (18 Nov 2026) and LevelUp (18 Nov 2026); launch: GameLuster, Rockstar Report (19 Nov 2026). City scene in the reel is a simple example of what "simulation" means. Drawn illustration, no game footage or logos.
+
+#technibaba #gta6 #gtavi #ps5pro #fps #gaming #gamingtech #techhindi
