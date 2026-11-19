@@ -1,0 +1,332 @@
+{
+ "guide": "call-forwarding-scam-002",
+ "title": "##002#: Call Forwarding Scam Se Bacho, 4 Step | TechniBaba",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "title",
+   "head": "TechniBaba Guide",
+   "title": "Call forwarding scam",
+   "sub": "Courier ka code? 4 step se bacho",
+   "chips": [
+    "##002#|SAB BAND",
+    "1930|HELPLINE"
+   ],
+   "lines": [
+    {
+     "who": "c",
+     "hi": "बाबा! कूरियर वाले का कोड डायल किया, अब मेरे कॉल आना बंद!",
+     "en": "Baba! Courier wale ka code dial kiya, ab mere call aana band!",
+     "pose": "blown",
+     "expr": "shocked",
+     "cap": "Call aana *BAND*!",
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "क्योंकि वो कोड तुम्हारे सारे कॉल, ओ टी पी वाले कॉल समेत, चोर के फ़ोन पे भेज रहा है.",
+     "en": "Kyunki woh code tumhare saare call, OTP wale call samet, chor ke phone pe bhej raha hai.",
+     "pose": "stop",
+     "expr": "angry",
+     "cap": "Call → *CHOR*",
+     "big": 1,
+     "hit": "chor"
+    },
+    {
+     "who": "b",
+     "hi": "आज चार स्टेप. कोड पहचानो, चेक करो, बंद करो, और रिपोर्ट करो.",
+     "en": "Aaj chaar step. Code pehchano, check karo, band karo, aur report karo.",
+     "pose": "count",
+     "expr": "explaining",
+     "cap": "*4 STEP*",
+     "big": 1
+    }
+   ]
+  },
+  {
+   "id": "how",
+   "type": "points",
+   "head": "Scam kaise hota hai?",
+   "color": "#ffd23f",
+   "items": [
+    "\"Parcel ruka hai\" / \"KYC pending\"",
+    "\"Ye code dial karo: *21*number#\"",
+    "Aapke call + OTP call chor ke paas",
+    "Bank / WhatsApp OTP call se hack"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "कॉल आता है: आपका पार्सल रुका है, या के वाई सी बाकी है, या सिम बंद होगा.",
+     "en": "Call aata hai: aapka parcel ruka hai, ya KYC baaki hai, ya SIM band hoga.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "*Parcel* ruka hai?",
+     "show": 1,
+     "show_new": 1,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "फिर बोलते हैं, ये छोटा सा कोड डायल करो. स्टार इक्कीस स्टार, फिर एक नंबर.",
+     "en": "Phir bolte hain, ye chhota sa code dial karo. Star 21 star, phir ek number.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "*STAR 21* + number",
+     "show": 2,
+     "show_new": 1,
+     "big": 1
+    },
+    {
+     "who": "c",
+     "hi": "और डायल करते ही मेरे कॉल उनके फ़ोन पे?",
+     "en": "Aur dial karte hi mere call unke phone pe?",
+     "pose": "shrug",
+     "expr": "shocked",
+     "cap": "Mere call *unke* paas?",
+     "show": 3,
+     "show_new": 1,
+     "react": "explaining"
+    },
+    {
+     "who": "b",
+     "hi": "हाँ. बैंक का ओ टी पी कॉल, व्हाट्सऐप का वेरिफ़िकेशन कॉल, सब उनके पास.",
+     "en": "Haan. Bank ka OTP call, WhatsApp ka verification call, sab unke paas.",
+     "pose": "palm",
+     "expr": "explaining",
+     "cap": "OTP call *bhi*",
+     "show": 4,
+     "show_new": 1,
+     "big": 1
+    }
+   ]
+  },
+  {
+   "id": "step1",
+   "type": "points",
+   "chip": "STEP 1",
+   "head": "Code MAT dial karo",
+   "color": "#e5383b",
+   "items": [
+    "Anjaan ka code = KHATRA",
+    "21 / 61 / 67 se shuru? KHATRA",
+    "Asli courier code nahi maangta",
+    "Pehle courier ki site pe check"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "पहला: अनजान का दिया कोई भी कोड डायल मत करो.",
+     "en": "Pehla: anjaan ka diya koi bhi code dial mat karo.",
+     "pose": "stop",
+     "expr": "angry",
+     "cap": "*MAT DIAL*",
+     "show": 1,
+     "show_new": 1,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "खासकर जो इक्कीस, इकसठ, या सड़सठ से शुरू हो. ये कॉल फ़ॉरवर्डिंग चालू करते हैं.",
+     "en": "Khaaskar jo 21, 61, ya 67 se shuru ho. Ye call forwarding chaalu karte hain.",
+     "pose": "count",
+     "expr": "explaining",
+     "cap": "*21 · 61 · 67*",
+     "show": 2,
+     "show_new": 1,
+     "big": 1
+    },
+    {
+     "who": "c",
+     "hi": "असली कूरियर तो कोड माँगता ही नहीं!",
+     "en": "Asli courier toh code maangta hi nahi!",
+     "pose": "point",
+     "expr": "happy",
+     "cap": "Asli courier = *NO CODE*",
+     "show": 4,
+     "show_new": 2,
+     "react": "smug"
+    }
+   ]
+  },
+  {
+   "id": "step2",
+   "type": "phone",
+   "chip": "STEP 2",
+   "head": "Check karo",
+   "app": "Phone app",
+   "path": [
+    "Settings",
+    "Calls",
+    "Call forwarding",
+    "Always forward"
+   ],
+   "items": [
+    "iPhone: Settings > Phone > Call Forwarding"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "दूसरा: चेक करो. फ़ोन ऐप खोलो, सेटिंग्स, कॉल फ़ॉरवर्डिंग.",
+     "en": "Doosra: check karo. Phone app kholo, Settings, Call forwarding.",
+     "pose": "phone",
+     "expr": "explaining",
+     "cap": "*Call forwarding*",
+     "show": 3,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "कुछ फ़ोन में ये कॉल्स या कॉलिंग अकाउंट्स के अंदर होता है. ऑलवेज़ फ़ॉरवर्ड पे अनजान नंबर? गड़बड़.",
+     "en": "Kuch phone mein ye Calls ya Calling accounts ke andar hota hai. Always forward pe anjaan number? Gadbad.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "Anjaan number = *GADBAD*",
+     "show": 4,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "आईफ़ोन पे: सेटिंग्स, फ़ोन, कॉल फ़ॉरवर्डिंग.",
+     "en": "iPhone pe: Settings, Phone, Call Forwarding.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "*iPhone* bhi",
+     "show": 5,
+     "big": 0
+    }
+   ]
+  },
+  {
+   "id": "step3",
+   "type": "points",
+   "chip": "STEP 3",
+   "head": "Sab band karo",
+   "color": "#5de0b0",
+   "items": [
+    "##002# dial karo",
+    "Saari call forwarding BAND",
+    "Jio: *402",
+    "Na chale? Operator customer care"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "तीसरा: हैश हैश, ज़ीरो ज़ीरो टू, हैश. डायल करो. सारी फ़ॉरवर्डिंग बंद.",
+     "en": "Teesra: ##002#. Dial karo. Saari forwarding band.",
+     "pose": "phone",
+     "expr": "explaining",
+     "cap": "*##002#*",
+     "show": 2,
+     "show_new": 2,
+     "big": 1,
+     "hit": "band"
+    },
+    {
+     "who": "b",
+     "hi": "जियो पे, स्टार चार सौ दो भी. और कोड न चले, तो ऑपरेटर के कस्टमर केयर को कॉल करो.",
+     "en": "Jio pe, star 402 bhi. Aur code na chale, toh operator ke customer care ko call karo.",
+     "pose": "count",
+     "expr": "explaining",
+     "cap": "Jio: *STAR 402*",
+     "show": 4,
+     "show_new": 2,
+     "big": 1
+    },
+    {
+     "who": "c",
+     "hi": "और मेरे कॉल वापस!",
+     "en": "Aur mere call wapas!",
+     "pose": "up",
+     "expr": "happy",
+     "cap": "Call *WAPAS*!",
+     "show": 4,
+     "react": "happy"
+    }
+   ]
+  },
+  {
+   "id": "step4",
+   "type": "points",
+   "chip": "STEP 4",
+   "head": "Paise kate? Turant",
+   "color": "#e5383b",
+   "items": [
+    "1930 pe call karo",
+    "cybercrime.gov.in pe complaint",
+    "Bank ko turant batao",
+    "Jitna jaldi, utna achha"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "चौथा: पैसे कटे, तो तुरंत उन्नीस सौ तीस पे कॉल करो, या साइबर क्राइम डॉट जी ओ वी डॉट इन.",
+     "en": "Chautha: paise kate, toh turant 1930 pe call karo, ya cybercrime.gov.in.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "Turant *1930*",
+     "show": 2,
+     "show_new": 2,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "और बैंक को भी बताओ. पहले कुछ घंटों में रिपोर्ट करो, तो पैसा रुकने का चांस ज़्यादा.",
+     "en": "Aur bank ko bhi batao. Pehle kuch ghanton mein report karo, toh paisa rukne ka chance zyada.",
+     "pose": "count",
+     "expr": "explaining",
+     "cap": "*Jaldi* report",
+     "show": 4,
+     "show_new": 2,
+     "big": 1
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "type": "recap",
+   "head": "Recap: 4 step",
+   "items": [
+    "Code MAT dial",
+    "Call forwarding check",
+    "##002# se band",
+    "1930 pe report"
+   ],
+   "lines": [
+    {
+     "who": "c",
+     "hi": "मतलब: मत डायल, चेक, हैश हैश ज़ीरो ज़ीरो टू हैश, और उन्नीस सौ तीस.",
+     "en": "Matlab: mat dial, check, ##002#, aur 1930.",
+     "pose": "count",
+     "expr": "happy",
+     "cap": "Mat dial. Check. *##002#.* 1930.",
+     "show": 4,
+     "show_new": 4,
+     "big": 1
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "outro",
+   "head": "Save karo, share karo",
+   "sub": "Papa-mummy ko bhejo",
+   "items": [
+    "subscribe",
+    "instagram"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "पूरा गाइड डिस्क्रिप्शन में है. पापा मम्मी को भेजो, और सब्सक्राइब करो.",
+     "en": "Poora guide description mein hai. Papa mummy ko bhejo, aur subscribe karo.",
+     "pose": "wave",
+     "expr": "happy",
+     "cap": "*Papa-mummy* ko bhejo",
+     "show": 1,
+     "show_new": 1
+    }
+   ]
+  }
+ ]
+}
