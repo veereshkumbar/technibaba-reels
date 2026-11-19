@@ -36,7 +36,7 @@ Goal: followers. What earns them on Instagram: shares (DMs) and saves first, the
 2. Comment mining on the last 5 reels: questions people ask become topics.
 3. Web trend check for the slot's lane (trend-discovery): what is trending in India today, plus one global angle. ≥3 sources.
 4. Look at 2-3 top creators in the lane (competitor research, creator teardown): note hook patterns and formats only; never copy their content, footage or wording.
-5. Pick the topic and ONE of the 5 formats in FORMATS.md (rotate; no format twice on the same day, check posted.md). Write 3 storylines (CRAFT.md) in that format and 3 hooks; pick the one most likely to be SHARED ("send this to the friend who…"). Write down why in one line, with the evidence.
+5. Pick the topic and ONE of the 5 formats in FORMATS.md (rotate; no format twice on the same day, check posted.md). Write down the format number and the question the viewer will have at 6 s; the claim lands by 6–10 s, the why/how is the body and is fully answered only in the last 20%. Write 3 storylines (CRAFT.md) in that format and 3 hooks; pick the one most likely to be SHARED ("send this to the friend who…"). Write down why in one line, with the evidence.
 No repeats from posted.md (30 days), no keyword reuse (30 days), different topic from today's other slots (check posted.md and today's commits).
 
 ## 4. Build (premium, split layout, HyperFrames)
@@ -46,7 +46,7 @@ Reel rules: 25–35 s (hard gate in beats.py: 22–36 s), full-screen hook that 
 
 ### Engagement rules (18 Nov 2026 data, apply to every slot)
 Data: 18 of our last 32 reels reached 1,000–1,350 people and every one stopped there, whatever the topic. That is Instagram's first test audience; a reel only goes further if those people watch, share, save and comment. Ours: about 2 shares, 4 saves, 12 likes and ~0 comments per 1,000 people reached, and 10–19 s average watch on 40–60 s reels. So most viewers never reached our end-screen "dost ko bhejo" / "comment GUIDE".
-1. **Payoff by 10 s.** The single most useful fact or result is said and shown inside the first 10 s (most people are gone by 12–15 s). The rest is support, not build-up.
+1. **Payoff by 10 s** (the format's claim: the result, C, the contradiction, "best way exists", "unless"; the why/how stays open until the end, see FORMATS.md). The single most useful fact or result is said and shown inside the first 10 s (most people are gone by 12–15 s). The rest is support, not build-up.
 2. **Share ask in the middle, on screen, at 8–12 s,** tied to one specific person: "Papa ko bhejo jo har link dabate hain", "Us dost ko bhejo jo 140 ka daava karta hai". Big on-screen text plus Baba/Chotu pointing, with an SFX hit. Pick the topic so that a clear "who do I send this to" exists; if you cannot name that person in one line, pick another topic.
 3. **One ask only at the end:** a one-word comment question ("HAAN ya NA?", "PAPA ya DADI?") or the GUIDE keyword on tutorials. No recap list; the last line flows back into the first line so the reel loops (e.g. last line ends on the question the hook answers).
 4. **Comments:** after posting, add a first comment on the reel (Windsor `create_comment`) with the same one-word question, so the comment section is never empty. Step 1b replies to every new comment.
