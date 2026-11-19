@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
+<script>__GSAP__</script>
+<style>
+@font-face{font-family:Pop;font-weight:600;src:url(assets/pop600.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(assets/pop800.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(assets/pop900.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(assets/mono700.woff2)}
+@font-face{font-family:Inter;font-weight:400;src:url(assets/inter400.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(assets/inter600.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(assets/inter700.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(assets/inter800.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0A0A0C}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:Inter}
+.layer{position:absolute;left:0;top:0;width:1080px;height:1920px}
+.layer svg,.page svg{display:block}
+svg text{font-family:Inter}
+#strip{}
+#panelwrap{will-change:transform}
+#pclip{position:absolute;left:72px;top:150px;width:936px;height:835px;border-radius:36px;overflow:hidden;background:#0E0E11;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 2px #2A2A31}
+#pframe{position:absolute;left:72px;top:150px;width:936px;height:835px;border-radius:36px;background:linear-gradient(180deg,rgba(255,255,255,.04) 0%,rgba(255,255,255,0) 18%);pointer-events:none}
+.page{position:absolute;left:0;top:0;width:936px;height:835px}
+.cap{position:absolute;left:540px;display:flex;align-items:center;justify-content:center;gap:.27em;padding:0 .55em;white-space:pre;font-family:Inter;font-weight:700;letter-spacing:-.02em;color:#F4F4F6;background:rgba(10,10,12,.78);border:1.5px solid rgba(255,255,255,.14);box-shadow:0 18px 50px rgba(0,0,0,.55);z-index:60}
+.cap .kw{color:#0A0A0C;background:#F4F4F6;border-radius:.18em;padding:.02em .22em}
+#fx{z-index:55}
+#grade{z-index:80;background:radial-gradient(ellipse at 50% 46%,rgba(0,0,0,0) 55%,rgba(0,0,0,.45) 100%)}
+#sheen{z-index:81;background:none}
+#grain{z-index:82;opacity:.05;mix-blend-mode:overlay}
+#prog{position:absolute;left:0;top:1912px;width:1080px;height:8px;background:#F4F4F6;opacity:.85;z-index:90;transform-origin:0 50%}
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="__DUR__" data-width="1080" data-height="1920">
+  <div id="strip" class="layer"></div>
+  <div id="chars" class="layer" style="z-index:5"></div>
+  <div id="panelwrap" class="layer" style="z-index:20">
+    <div id="pbg" class="layer"></div>
+    <div id="pclip">
+__PAGES__    </div>
+    <div id="pframe"></div>
+  </div>
+  <div id="fx" class="layer"></div>
+__CAPS__  <div id="grade" class="layer"></div><div id="sheen" class="layer"></div>
+  <div id="grain" class="layer"><svg width="1080" height="1920"><filter id="gr"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1080" height="1920" filter="url(#gr)"/></svg></div>
+  <div id="prog"></div>
+  <audio id="mix" class="clip" data-start="0" data-duration="__DUR__" data-track-index="9" data-volume="1" src="assets/mix.wav"></audio>
+</div>
+<script>
+__SCRIPT__
+// ================= HyperFrames driver =================
+const DUR=NF/FPS,$=id=>document.getElementById(id),SVG=(vb,inner)=>`<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="${vb}">${inner}</svg>`;
+// static panel backdrop (premium)
+(()=>{let o=`<rect x="-40" y="-1300" width="1160" height="${SEAM+1300}" fill="${PR.bg}"/>`+PGRID(0,0,1080,SEAM-4)+`<rect x="0" y="${SEAM-1}" width="1080" height="2" fill="#fff" opacity=".12"/>`;$('pbg').innerHTML=SVG('0 0 1080 1920',o);$('pframe').innerHTML=SVG('72 150 936 835',PCORNERS(90,168,990,967))})();
+const PAGES=[...document.querySelectorAll('.page')].map(el=>({el,n:el.dataset.scene,on:false}));
+function draw(t){const f0=Math.round(t*FPS),f=warp(f0);
+ $('strip').innerHTML=SVG('0 0 1080 1920',`<defs>${PDEFS}</defs><g transform="${camG(f)}">${strip(f)}</g>`);
+ $('chars').innerHTML=SVG('0 0 1080 1920',`<defs>${FACE.DEFS}${PDEFS}</defs>`+charLayer(f,null));
+ PAGES.forEach(p=>{const on=f>=SCF[p.n].s-2&&f<=SCF[p.n].e+14;if(on)p.el.innerHTML=SVG(`${PAN.x0} ${PAN.y0} ${PAN.x1-PAN.x0} ${PAN.y1-PAN.y0}`,`<defs>${PDEFS}</defs>`+content(p.n,f));else if(p.on)p.el.innerHTML='';p.on=on});
+ $('fx').innerHTML=SVG('0 0 1080 1920',`<defs>${PDEFS}</defs>`+overlay(f))}
+const driver={_t:0,get t(){return this._t},set t(v){this._t=v;draw(v)}};
+const tl=gsap.timeline({paused:true});
+tl.to(driver,{t:DUR,duration:DUR,ease:"none"},0);
+tl.fromTo("#prog",{scaleX:0},{scaleX:1,duration:DUR,ease:"none"},0);
+// panel drops in after the full-screen hook
+const hookT=HOOK_END/FPS;
+tl.set("#panelwrap",{y:70,opacity:0},0);
+tl.to("#panelwrap",{y:0,opacity:1,duration:.5,ease:"power3.out"},hookT);
+// page transitions (premium): quiet cross-fade with a short rise
+PAGES.forEach((p,k)=>{if(!k)return;const a=PAGES[k-1].el,b=p.el,t0=SCF[p.n].s/FPS;
+ tl.to(a,{opacity:0,y:-24,scale:.985,duration:.28,ease:"power2.in"},t0);tl.fromTo(b,{opacity:0,y:34,scale:.985},{opacity:1,y:0,scale:1,duration:.45,ease:"power3.out"},t0+.12)});
+// hit: a short push-in on the panel instead of a shake
+HITS.forEach(([h])=>{const t0=h/FPS;tl.to("#panelwrap",{scale:1.025,duration:.12,ease:"power2.out"},t0);tl.to("#panelwrap",{scale:1,duration:.4,ease:"power3.out"},t0+.14)});
+// captions pop on the seam
+for(let k=0;k<__NCAPS__;k++){const el=$('cap-'+k),t0=+el.dataset.start;gsap.set(el,{xPercent:-50});tl.fromTo(el,{opacity:0,y:14},{opacity:1,y:0,duration:.22,ease:"power3.out"},t0)}
+window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;tl.seek(0);draw(0);
+</script>
+</body></html>

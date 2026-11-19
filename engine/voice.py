@@ -20,7 +20,7 @@ for i,L in enumerate(LINES):
         global KK
         if 'KK' not in globals():
             from kokoro_onnx import Kokoro; KK=Kokoro('/tmp/tts/kx/kokoro-v1.0.onnx','/tmp/tts/kx/voices-v1.0.bin')
-        import soundfile as _sf; smp,sr=KK.create(tt,voice=v.split(':')[1],speed=1.0,lang='hi'); _sf.write(raw,smp,sr); SR=sr
+        import soundfile as _sf; _vn=v.split(':')[1]; smp,sr=KK.create(tt,voice=_vn,speed=1.0,lang={'a':'en-us','b':'en-gb'}.get(_vn[0],'hi')); _sf.write(raw,smp,sr); SR=sr
     else:
         subprocess.run(['python3',f'{here}/tts_piper.py',m,tt,raw,'0.84'],check=True,capture_output=True); SR=22050
     subprocess.run(['ffmpeg','-v','error','-y','-i',raw,'-af',f'silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse,asetrate={int(SR*pf)},aresample={SR},atempo={tp/pf:.4f},aresample=48000','-ac','2',fin],check=True)

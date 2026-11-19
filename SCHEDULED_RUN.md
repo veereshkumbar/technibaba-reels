@@ -17,7 +17,7 @@ Veer's target: grow @technibaba from 36 followers (15 Nov 2026) to 20,000 by mid
 
 ## 1. Setup
 `git clone --depth 1 https://github.com/veereshkumbar/technibaba-reels /tmp/tb && cd /tmp/tb && ./setup.sh` and fix every ERROR line.
-Read: GUIDES.md, LONG_FORMAT.md (tutorial slots), RUNBOOK.md (all of it, especially "Rules for scheduled runs" and "Auto-post rules"), this file, RESEARCH.md, CRAFT.md, SPLIT_FORMAT.md, DIRECTOR_FORMAT.md, brand/dynamics.md, brand/tokens.json, posted.md, research/topic_bank.md. Tutorial slots also read STEPS_FORMAT.md; the evening slot reads CREATOR_GUIDES.md.
+Read: FORMATS.md, PREMIUM_STYLE.md, GUIDES.md, LONG_FORMAT.md (tutorial slots), RUNBOOK.md (all of it, especially "Rules for scheduled runs" and "Auto-post rules"), this file, RESEARCH.md, CRAFT.md, SPLIT_FORMAT.md, DIRECTOR_FORMAT.md, brand/dynamics.md, brand/tokens.json, posted.md, research/topic_bank.md. Tutorial slots also read STEPS_FORMAT.md; the evening slot reads CREATOR_GUIDES.md.
 
 ## 1b. Comments (every run, before anything else)
 1. Do the "Check DM" public replies in GUIDES.md.
@@ -36,12 +36,12 @@ Goal: followers. What earns them on Instagram: shares (DMs) and saves first, the
 2. Comment mining on the last 5 reels: questions people ask become topics.
 3. Web trend check for the slot's lane (trend-discovery): what is trending in India today, plus one global angle. ≥3 sources.
 4. Look at 2-3 top creators in the lane (competitor research, creator teardown): note hook patterns and formats only; never copy their content, footage or wording.
-5. Pick the topic. Write 3 storylines (CRAFT.md) and 3 hooks; pick the one most likely to be SHARED ("send this to the friend who…"). Write down why in one line, with the evidence.
+5. Pick the topic and ONE of the 5 formats in FORMATS.md (rotate; no format twice on the same day, check posted.md). Write 3 storylines (CRAFT.md) in that format and 3 hooks; pick the one most likely to be SHARED ("send this to the friend who…"). Write down why in one line, with the evidence.
 No repeats from posted.md (30 days), no keyword reuse (30 days), different topic from today's other slots (check posted.md and today's commits).
 
 ## 4. Build (premium, split layout, HyperFrames)
-Exactly as SPLIT_FORMAT.md "Render with HyperFrames", starting from a copy of `examples/split_wifi2`:
-script.py (LINES + BEATS, every line has a rig key) → engine/voice.py → pipeline/beats.py (all checks true) → engine/build.py → engine/shots.py (fix overlaps, keep everything inside the title-safe box) → engine/lofi.py (new seed/mood) → pipeline/hf_build.py (≥40 sfx cues; every panel element has a cue) → in hf/: hyperframes lint (0 errors) and snapshot (look at it, fix problems) → hyperframes render -q looks (nohup, poll) → pipeline/check.py (ALL CHECKS PASS).
+Look: PREMIUM_STYLE.md (monochrome, Inter, graphite cards, white keyword box, calm motion). Start from a copy of `examples/premium_upi_en` (keep `layout_premium`), write the script in Hinglish unless Veer says otherwise, and build the panel only with the `pipeline/premium.js` kit. Then exactly as SPLIT_FORMAT.md "Render with HyperFrames":
+script.py (LINES + BEATS, every line has a rig key) → engine/voice.py → pipeline/beats.py (all checks true) → engine/build.py → engine/shots.py (fix overlaps, keep everything inside the title-safe box) → engine/lofi.py (new seed/mood) → pipeline/hf_build.py WORKDIR bed.wav 0.16 (every panel element has a soft cue) → in hf/: hyperframes lint (0 errors) and snapshot (look at it, fix problems) → hyperframes render -q looks (run it in the foreground with a 600 s timeout; a backgrounded render gets cancelled when the shell call ends) → pipeline/check.py (ALL CHECKS PASS).
 Reel rules: 25–35 s (hard gate in beats.py: 22–36 s), full-screen hook that shows the payoff first and lands by 1.5 s, one visual per idea in the panel, a visual change every 2–3 s, at most two hit-stops, captions with one highlighted keyword. See "Engagement rules" below; they decide the script.
 
 ### Engagement rules (18 Nov 2026 data, apply to every slot)
@@ -57,7 +57,7 @@ Fallbacks: HyperFrames fails twice → engine/render.py + engine/audio.py. Split
 
 ## 5. Post (auto) or hold
 Go through RUNBOOK.md "Auto-post rules" gate by gate and write each result in your notes.
-- All pass → add_repo veereshkumbar/technibaba-reels (push) → publish to gh-pages (orphan commit, keep the newest 6 videos) → wait 3 minutes → Windsor create_video_post (account 17841461825179329, share_to_feed true, thumb_offset on the hook frame; caption per RUNBOOK.md "Captions": NO emojis, hook line, 2–4 lines of value, one call to action, 5–8 hashtags) → on a media error wait 2 more minutes and retry once → Windsor create_comment on the new media id with the reel's one-word question (no emojis) → `git pull --rebase` then log in posted.md with "AUTO-POSTED", slot, lane, format, hook, keyword, why → push.
+- All pass → add_repo veereshkumbar/technibaba-reels (push) → publish to gh-pages (orphan commit, keep the newest 6 videos) → wait 3 minutes → Windsor create_video_post (account 17841461825179329, share_to_feed true, thumb_offset on the hook frame; caption per RUNBOOK.md "Captions": NO emojis, hook line, 2–4 lines of value, one call to action, 5–8 hashtags) → on a media error wait 2 more minutes and retry once → Windsor create_comment on the new media id with the reel's one-word question (no emojis) → `git pull --rebase` then log in posted.md with "AUTO-POSTED", slot, lane, format, script format (1-5), hook, keyword, why → push.
 - Any gate fails → do not post; hold for Veer as below.
 
 ## 6. Report

@@ -12,6 +12,7 @@ if '__RIGS__' in html: html=html.replace('__RIGS__','\n'.join(rd('rigs',f) for f
 if '__STAGE__' in html: html=html.replace('__STAGE__',rd('pipeline','stage.js'))
 if '__NEWS__' in html: html=html.replace('__NEWS__',rd('pipeline','news.js'))
 if '__LONG__' in html: html=html.replace('__LONG__',rd('pipeline','long.js'))
+if '__PREMIUM__' in html: html=html.replace('__PREMIUM__',rd('pipeline','premium.js'))
 if '__SPLIT__' in html: html=html.replace('__SPLIT__',rd('pipeline','split.js'))
 if '__BEATS__' in html: html=html.replace('__BEATS__',open(f'{W}/beats.json').read())
 open(f'{W}/page.html','w').write(html)
