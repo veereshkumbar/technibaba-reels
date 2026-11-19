@@ -15,4 +15,4 @@ Example: `examples/premium_upi_en` (English test, "It wasn't a hacker", 34 s).
 - **Motion:** entrances fade + rise 26 px (`pin`), word-by-word headline reveal, cross-fade between pages. No wobble, rotation, stamps or shakes.
 - **Sound:** soft cues only: `blip`, `tick`, `ding`, one `crack` for the twist; the hit still gets riser + boom. Music gain 0.16.
 - **Words:** short, exact, calm. "Decline the request", not "BHAAG!!". No exclamation marks on screen; no emojis anywhere.
-- **Characters** (Baba and Chotu) stay as they are, on a dark studio floor with a soft spotlight (`strip()` default).
+- **Characters** (Baba and Chotu) stay as they are, at 70% of the old split size (`PCS` in premium.js), on a dark studio floor with a soft spotlight (`strip()` default). Hindi works with the same Kokoro voices: `kokoro:am_michael@hi` (Baba), `kokoro:am_puck@hi` (Chotu); see `examples/premium_upi_hi`.

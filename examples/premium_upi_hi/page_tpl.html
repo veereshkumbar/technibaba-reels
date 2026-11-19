@@ -1,0 +1,64 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "It wasn't a hacker" (premium look, Hindi) =================
+const F=i=>BT[i].f0;
+const q={b1:F(1),not:WF(2,'woh'),you:WF(2,'aapne'),pin:WF(2,'paise'),r0:F(3),rcv:WF(3,'paise'),sh:F(4),who:WF(4,'jo'),
+ msg:WF(6,'koi'),req:WF(6,'phir'),looks:WF(6,'lagta'),act:WF(6,'asal'),
+ lv:WF(7,'matlab'),dec:WF(7,'decline'),gone:WF(7,'gaye'),call:WF(7,'1930'),
+ e0:F(8),tk:WF(9,'le'),com:WF(9,'comment')};
+[[q.b1,'blip'],[q.not,'tick'],[q.you,'ding'],[q.r0,'blip'],[q.rcv,'tick'],[q.rcv+8,'tick'],[q.sh,'ding'],[q.msg,'blip'],[q.req,'pop'],[q.looks,'tick'],[q.act,'crack'],
+ [q.lv,'blip'],[q.dec,'tick'],[q.gone,'blip'],[q.call,'ding'],[q.e0,'blip'],[q.tk,'tick'],[q.com,'blip'],[q.com+8,'type']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,138,p,PBADGE(icon,-320,0,o.icol||PR.text,40)+PT(-250,-6,44,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,36,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function content(n,f){let o='';
+ if(n=='q'){o+=PLABEL(CX,236,'Where did the money go?');
+  const pa=pin(f,HOOK_END+2),sa=pin(f,HOOK_END+10,10),pb=pin(f,q.b1),sb=pin(f,q.not,10),pc=pin(f,q.you,10);
+  o+=rowCard(370,pa,'hacker','A hacker','the first guess',{tfill:PR.muted})+PSTRIKE(290,364,520,sa)+(sa>0?PICON('cross',870,370,.8,PR.bad,4):'');
+  o+=rowCard(545,pb,'app','A fake app','the second guess',{tfill:PR.muted})+PSTRIKE(290,539,560,sb)+(sb>0?PICON('cross',870,545,.8,PR.bad,4):'');
+  o+=rowCard(740,pc,'user','You.',f>=q.pin?'typing your PIN to receive money':'',{on:1,right:PPILL(285,0,'ACTUALLY',pin(f,q.you+6),{solid:1,size:26})});}
+ if(n=='rule'){o+=PHEAD(CX,300,62,'You never need a *PIN*',f,q.r0,{step:2})+PHEAD(CX,384,62,'to *receive* money.',f,q.rcv-4,{step:2});
+  const pl=pin(f,q.rcv+2),pr=pin(f,q.rcv+10);
+  o+=PCARD(315,575,380,230,pl,PBADGE('arrowIn',0,-52,PR.good,40)+PT(0,30,40,'Receive',{w:700})+PT(0,74,28,'no PIN, ever',{w:500,fill:PR.good}),{state:'good'});
+  o+=PCARD(765,575,380,230,pr,PBADGE('arrowOut',0,-52,PR.text,40)+PT(0,30,40,'Send',{w:700})+PT(0,74,28,'PIN = money leaves',{w:500,fill:PR.muted}));
+  const ps=pin(f,q.sh,10);o+=PCARD(CX,835,800,150,ps,PBADGE('chat',-320,0,PR.text,40)+PT(-250,-8,30,'SEND THIS TO',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,40,34,f>=q.who?'the one who taps Pay on everything':'the one in your family',{a:'start',w:700}),{on:1});}
+ if(n=='how'){o+=PLABEL(CX,226,'How the trick works');
+  const pp=pin(f,F(6)-4,10);o+=PCARD(CX,585,500,690,pp,`<rect x="-60" y="-325" width="120" height="10" rx="5" fill="${PR.line2}"/>`+
+   (f>=q.msg?`<g opacity="${pin(f,q.msg)}"><rect x="-210" y="-280" width="380" height="96" rx="24" fill="${PR.card2}" stroke="${PR.line}" stroke-width="2"/>${PT(-188,-240,22,'Unknown number',{a:'start',w:600,fill:PR.muted})}${PT(-188,-204,30,"I'm sending you ₹2,000",{a:'start',w:600})}</g>`:'')+
+   (f>=q.req?`<g opacity="${pin(f,q.req)}" transform="translate(0,${(1-pin(f,q.req))*40})"><rect x="-210" y="-150" width="420" height="420" rx="30" fill="${PR.panel}" stroke="${PR.line2}" stroke-width="2"/>${PLABEL(0,-100,'Payment request')}${PT(0,-10,86,'₹2,000',{w:800})}${PT(0,36,24,'from: refund.helpdesk@upi',{w:500,fill:PR.muted})}`+
+    `<g transform="translate(0,${f>=q.act?1+.0:1})"><rect x="-180" y="80" width="170" height="74" rx="37" fill="${f>=q.act?PR.bad:PR.text}"/>${PT(-95,128,32,'Pay',{w:700,fill:f>=q.act?PR.text:PR.bg})}</g><rect x="10" y="80" width="170" height="74" rx="37" fill="none" stroke="${PR.line2}" stroke-width="2"/>${PT(95,128,32,'Decline',{w:700})}`+
+    (f>=q.looks?`<g opacity="${pin(f,q.looks)}">${PT(-95,206,24,f>=q.act?'':'looks like receiving',{w:600,fill:PR.muted})}</g>`:'')+
+    (f>=q.act?PPILL(-95,214,'actually PAYING',pin(f,q.act),{size:26,col:PR.bad}):'')+`</g>`:''));}
+ if(n=='fix'){o+=PLABEL(CX,226,'The fix');
+  const p1=pin(f,F(7)),p2=pin(f,q.lv);o+=`<g opacity="${p1}">${PBADGE('pin',300,330,PR.text,52)}${PT(300,420,28,'PIN',{w:600,fill:PR.muted})}</g>`+PARROW(380,330,690,p2,PR.line2)+`<g opacity="${p2}">${PBADGE('arrowOut',780,330,PR.bad,52)}${PT(780,420,28,'money leaves',{w:600,fill:PR.muted})}</g>`;
+  o+=PCARD(CX,575,800,130,pin(f,q.dec),PICON('check',-320,0,.8,PR.good,4)+PT(-250,14,46,'Decline the request',{a:'start',w:700}),{state:'good'});
+  o+=PCARD(CX,775,800,190,pin(f,q.gone),PBADGE('call',-320,0,PR.text,44)+PT(-250,-30,28,'MONEY GONE? CALL',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,50,84,f>=q.call?'1930':'',{a:'start',w:800})+PT(330,46,24,'Cybercrime',{a:'end',w:500,fill:PR.muted})+PT(330,76,24,'helpline',{a:'end',w:500,fill:PR.muted}),{on:f>=q.call});}
+ if(n=='end'){o+=PHEAD(CX,320,60,'Needs your PIN',f,q.e0,{step:2})+PHEAD(CX,405,60,'to send you money?',f,q.e0+8,{step:2});
+  if(f>=q.tk)o+=`<g opacity="${pin(f,q.tk)}">${PHEAD(CX,530,72,'That\'s *taking.*',f,q.tk,{instant:1})}</g>`;
+  const pc=pin(f,q.com,10),yes=pin(f,q.com+14),no=pin(f,q.com+18);o+=PCARD(CX,770,800,190,pc,PT(-360,-40,26,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PPILL(-210,40,'YES',yes,{solid:1,size:40})+PPILL(10,40,'NO',no,{size:40})+PT(340,52,26,'happened to you?',{a:'end',w:500,fill:PR.muted}));}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,300,80,'Money *vanished*',f,4,{step:3})+PHEAD(540,400,80,'from your UPI?',f,12,{step:3})+(f>=WF(0,'shayad')?PT(540,480,36,"It probably wasn't a hacker.",{w:500,fill:PR.muted,op:pin(f,WF(0,'shayad'))}):'')+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#F4F4F6" opacity=".85"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>

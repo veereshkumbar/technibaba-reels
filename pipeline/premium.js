@@ -67,7 +67,14 @@ function panelLayer(f, contentFn) {
   let o = `<g transform="translate(0,${ty})" opacity="${pp}"><rect x="-40" y="-1300" width="1160" height="${SEAM + 1300}" fill="${PR.bg}"/>` + PGRID(0, 0, 1080, SEAM - 4) + `<rect x="0" y="${SEAM - 1}" width="1080" height="2" fill="#fff" opacity=".12"/>`;
   o += `<rect x="${PAN.x0}" y="${PAN.y0}" width="${PAN.x1 - PAN.x0}" height="${PAN.y1 - PAN.y0}" rx="36" fill="${PR.panel}" stroke="${PR.line}" stroke-width="2"/><g clip-path="url(#pclip)">${contentFn(n, f)}</g>` + PCORNERS(PAN.x0 + 18, PAN.y0 + 18, PAN.x1 - 18, PAN.y1 - 18);
   return o + `</g>`; }
-function caption(f, y = 1440) { let c = null; for (const x of CAPS) if (f >= x.f && f < x.end) c = x; if (!c) return '';
+function caption(f, y = 1440) { if (y > 1300) y = lerp(1780, 1082, spAt(f)); let c = null; for (const x of CAPS) if (f >= x.f && f < x.end) c = x; if (!c) return '';
   const p = pin(f, c.f, 6), raw = c.text.replace(/\*/g, ''), size = Math.min(58, 760 / Math.max(1, tw(raw, 1, 700)));
   return `<g opacity="${p}" transform="translate(0,${(1 - p) * 14})">` + PHEAD(540, y + size * .3, size, c.text, f, c.f, {instant: true}) + `</g>`; }
 function wipe() { return ''; }
+// characters at 70% of the split-layout size (Veer, 19 Nov): smaller, lower, a bit closer together
+const PCS = CS * 0.7; SPOS.c.x = 320; SPOS.b.x = 760; SPOS.c.y = SPOS.b.y = 2010;
+function charLayer(f, stripFn) {
+  let o = `<g transform="${camG(f)}">` + (stripFn ? stripFn(f) : '');
+  const order = ['c', 'b'].sort((a, b) => (talkAmt(a, f) + 2 * hitAmt(a, f)) - (talkAmt(b, f) + 2 * hitAmt(b, f)));
+  order.forEach(w => { const s = PCS * (1 + .05 * talkAmt(w, f) + .1 * hitAmt(w, f)); o += CAST[w].draw(f, {x: SPOS[w].x, y: SPOS[w].y, s, flip: w == 'b', phone: false, glow: 0}); });
+  return o + `</g>`; }

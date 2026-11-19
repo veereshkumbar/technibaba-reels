@@ -39,7 +39,7 @@ capsh=''
 for k,c in enumerate(caps):
     raw=c['text'].replace('*',''); size=min(56,780/(len(raw)*.56)) if PREM else min(72,800/(len(raw)*.6)); parts=c['text'].split('*')
     inner=''.join(f'<span class="{"kw" if i%2 else ""}">{H.escape(s)}</span>' for i,s in enumerate(parts))
-    top=(1110 if NEWSL[c['scene']]=='split' else (1290 if NEWSL[c['scene']]=='card' else 1470)) if NEWSL else (990 if LONG else (1440 if c['f']<hook_end else 1082))
+    top=(1110 if NEWSL[c['scene']]=='split' else (1290 if NEWSL[c['scene']]=='card' else 1470)) if NEWSL else (990 if LONG else ((1780 if PREM else 1440) if c['f']<hook_end else 1082))
     capsh+=f'<div class="cap clip" id="cap-{k}" data-start="{c["f"]/FPS:.3f}" data-duration="{max(.2,(c["end"]-c["f"])/FPS):.3f}" data-track-index="4" style="top:{top-size*.95:.0f}px;font-size:{size:.1f}px;height:{size*1.5:.0f}px;border-radius:{size*.4:.0f}px"><span class="capt">{inner}</span></div>\n'
 tpl=open(f'{root}/pipeline/'+('hf_news.html' if NEWSL else ('hf_long.html' if LONG else ('hf_premium.html' if PREM else 'hf_split.html')))).read()
 out=tpl.replace('__GSAP__',gsap).replace('__SCRIPT__',js).replace('__PAGES__',pages).replace('__CAPS__',capsh).replace('__DUR__',f'{DUR:.3f}').replace('__NCAPS__',str(len(caps)))
