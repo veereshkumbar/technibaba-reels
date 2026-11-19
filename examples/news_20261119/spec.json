@@ -1,0 +1,138 @@
+{
+ "dateLabel": "19 NOV 2026",
+ "scenes": [
+  {
+   "id": "open",
+   "mode": "anchor",
+   "title": "Aaj ki|*TECH NEWS*",
+   "list": ["GPT-6.2", "Play Awards", "Drones", "Gemini"],
+   "lines": [
+    {
+     "hi": "चलो देखते हैं आज टेक की दुनिया में क्या हुआ. और आखिरी खबर, आपके फ़ोन की ए आई चैट्स से जुड़ी है.",
+     "en": "Chalo dekhte hain aaj tech ki duniya mein kya hua. Aur aakhri khabar, aapke phone ki AI chats se judi hai.",
+     "pose": "wave",
+     "expr": "happy",
+     "big": 1,
+     "cap": "Aaj ki *tech news*"
+    }
+   ]
+  },
+  {
+   "id": "gpt",
+   "mode": "card",
+   "story": 1,
+   "kicker": "AI",
+   "icon": "ai",
+   "stat": "1/3",
+   "statSub": "cost per task",
+   "headline": "OpenAI launches *GPT-6.2* Astra and Sol",
+   "source": "OpenAI, 9to5Mac",
+   "lines": [
+    {
+     "hi": "नंबर एक. ओपन ए आई ने जी पी टी सिक्स पॉइंट टू लॉन्च किया. कंपनी के मुताबिक, पहले से एक तिहाई से भी कम खर्च में काम.",
+     "en": "Number ek. OpenAI ne GPT 6.2 launch kiya. Company ke mutabik, pehle se ek tihaai se bhi kam kharch mein kaam.",
+     "pose": "count",
+     "expr": "happy",
+     "cap": "GPT *6.2* aaya"
+    }
+   ]
+  },
+  {
+   "id": "play",
+   "mode": "card",
+   "story": 2,
+   "kicker": "INDIA",
+   "icon": "gamepad",
+   "stat": "2026",
+   "statSub": "Google Play Best of India",
+   "headline": "Google Play Best of 2026: *ScarFall 2.0* is Best Made in India",
+   "source": "FoneArena, Business Today",
+   "lines": [
+    {
+     "hi": "नंबर दो. गूगल प्ले बेस्ट ऑफ़ ट्वेंटी ट्वेंटी सिक्स. बेस्ट मेड इन इंडिया गेम, स्कारफ़ॉल टू पॉइंट ओ.",
+     "en": "Number do. Google Play Best of 2026. Best Made in India game, ScarFall 2.0.",
+     "pose": "palm",
+     "expr": "happy",
+     "cap": "Made in *India* jeeta"
+    }
+   ]
+  },
+  {
+   "id": "plus",
+   "mode": "card",
+   "story": 3,
+   "kicker": "INDIA",
+   "icon": "ai",
+   "stat": "12 months",
+   "statSub": "free ChatGPT Plus",
+   "headline": "Indian researchers can get *free ChatGPT Plus* for a year",
+   "source": "Careers360, NewsBytes, Analytics Insight",
+   "lines": [
+    {
+     "hi": "नंबर तीन. भारत के रिसर्चर्स को बारह महीने का चैट जी पी टी प्लस फ़्री. अप्लाई तीस नवंबर से.",
+     "en": "Number teen. Bharat ke researchers ko barah mahine ka ChatGPT Plus free. Apply tees November se.",
+     "pose": "explain",
+     "expr": "happy",
+     "cap": "*12 mahine* free"
+    }
+   ]
+  },
+  {
+   "id": "drone",
+   "mode": "card",
+   "story": 4,
+   "kicker": "WORLD",
+   "icon": "plane",
+   "stat": "70 mph",
+   "statSub": "food by drone, Texas",
+   "headline": "Uber Eats starts *drone delivery* with Zipline in Texas",
+   "source": "TechCrunch, Engadget",
+   "lines": [
+    {
+     "hi": "नंबर चार. अमेरिका के टेक्सस में ऊबर ईट्स का खाना अब ड्रोन से. रस्सी से नीचे उतरता है!",
+     "en": "Number chaar. America ke Texas mein Uber Eats ka khana ab drone se. Rassi se neeche utarta hai!",
+     "pose": "point",
+     "expr": "shocked",
+     "cap": "Khana *drone* se"
+    }
+   ]
+  },
+  {
+   "id": "gemini",
+   "mode": "card",
+   "story": 5,
+   "kicker": "TECH",
+   "icon": "phone",
+   "stat": "2 months",
+   "statSub": "was 72 hours",
+   "headline": "Gemini will keep chats *about 2 months*, even with history off",
+   "source": "Google Privacy Hub via Gizmodo, Notebookcheck",
+   "lines": [
+    {
+     "hi": "और नंबर पाँच. जेमिनाई में हिस्ट्री बंद हो, फिर भी आपकी चैट्स लगभग दो महीने सेव रहेंगी. पहले सिर्फ़ बहत्तर घंटे!",
+     "en": "Aur number paanch. Gemini mein history band ho, phir bhi aapki chats lagbhag do mahine save rahengi. Pehle sirf 72 ghante!",
+     "pose": "blown",
+     "expr": "shocked",
+     "big": 1,
+     "hit": "ghante",
+     "cap": "*2 mahine* save"
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "mode": "anchor",
+   "title": "Roz subah|*7 baje*",
+   "lines": [
+    {
+     "hi": "ये जेमिनाई वाली खबर फ़ैमिली ग्रुप में भेजो. और रोज़ सुबह सात बजे की टेक न्यूज़ के लिए फ़ॉलो करो.",
+     "en": "Ye Gemini wali khabar family group mein bhejo. Aur roz subah saat baje ki tech news ke liye follow karo.",
+     "pose": "point",
+     "expr": "happy",
+     "big": 1,
+     "cap": "Family ko *bhejo*"
+    }
+   ]
+  }
+ ]
+}
