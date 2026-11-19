@@ -1,5 +1,8 @@
 # Premium style (default look from 20 Nov 2026)
 
+**Update 19 Nov night (Veer): brand colours, not monochrome.** The kit now uses our navy + mint the premium way: deep navy studio with a spotlight and slow bokeh, glass panel with a mint hairline and dotted grid, cards in navy with hairlines, ONE mint keyword box (navy text), yellow only for numbers, red only for danger. Characters get a soft shadow + mint rim glow (`charfx`). Motion graphics (adapted from the HyperFrames registry, CSS/GSAP only, no WebGL): brand light-leak sweep on every page change and hit, blur-through page transitions, captions that build word by word with the keyword popping in, and an animated Instagram follow card ("Follow" → tap → "Following") in the last 2.4 s. The monochrome notes below are kept for history; where they say white highlight / grey cards, read mint highlight / navy cards.
+More registry items to try (`npx hyperframes catalog`): badge-pop, mk-callout-highlight, notification-cascade, message-thread-reveal, apple-money-count, camcorder-hud, news-ticker. Avoid the WebGL "shader transition" blocks (they stall in our headless render).
+
 Reference: the left-hand explainer panel in anshmehra.in's AI inference reel (24 Oct 2026): near-black background, hairline grid, viewfinder corner marks, graphite cards with thin borders, white line icons, one highlight style (a white box behind the keyword, black text), words revealed one by one. No rainbow colours, no thick outlines, no bouncy stickers.
 Example: `examples/premium_upi_en` (English test, "It wasn't a hacker", 34 s).
 

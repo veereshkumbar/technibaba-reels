@@ -58,7 +58,7 @@ const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
 function render(t){const f0=Math.round(t*FPS),f=warp(f0);
  let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
  s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
- s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#F4F4F6" opacity=".85"/></svg>`;
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
  document.getElementById('root').innerHTML=s}
 render(0);
 </script></body></html>

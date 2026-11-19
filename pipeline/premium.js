@@ -1,7 +1,8 @@
 // Premium look (PREMIUM_STYLE.md). Include after split.js in page_tpl.html as __PREMIUM__ and put an empty file `layout_premium` in WORKDIR.
 // Monochrome: near-black, graphite cards, hairline borders, white type. One highlight style: a white pill with black text.
 // Colour is a signal, not decoration: mint only for "safe/right", red only for "danger/wrong", never both large on one page.
-const PR = {bg: '#0A0A0C', panel: '#0E0E11', card: '#17171B', card2: '#1E1E23', line: '#2A2A31', line2: '#3B3B44', text: '#F4F4F6', muted: '#8C8C96', dim: '#55555E', good: '#6EE7B7', bad: '#FF6B6B', font: 'Inter'};
+// Brand-premium palette (Veer, 19 Nov): our navy + mint, used the premium way: deep navy depth, glass cards, hairlines, one mint highlight.
+const PR = {bg: '#0B0A2E', bg2: '#1B1866', panel: 'rgba(20,18,74,.72)', card: '#1C1962', card2: '#262273', line: 'rgba(255,255,255,.10)', line2: 'rgba(255,255,255,.22)', text: '#FFFFFF', muted: '#A9A6D9', dim: '#5E5A9A', good: '#5DE0B0', bad: '#FF5A6A', num: '#FFD23F', hl: '#5DE0B0', hlText: '#0B0A2E', font: 'Inter'};
 const pin = (f, a, d = 9) => f < a ? 0 : E.snappy(Math.min(1, (f - a) / d));     // entrance 0..1, no overshoot
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 // text. o: a (anchor), w (weight), fill, ls (letter-spacing), op
@@ -15,19 +16,19 @@ function PHEAD(x, y, size, text, f, a, o = {}) {
   const gap = size * .27, widths = words.map(z => tw(z.w, size, 700) + (z.kw ? size * .5 : 0)), W = widths.reduce((s, v) => s + v, 0) + gap * (words.length - 1);
   let cx = o.a == 'start' ? x : x - W / 2, out = ''; const step = o.step ?? 3;
   words.forEach((z, k) => { const p = o.instant ? 1 : pin(f, a + k * step, 6), wv = widths[k];
-    if (z.kw) out += `<g opacity="${.25 + .75 * p}"><rect x="${cx}" y="${y - size * .86}" width="${wv}" height="${size * 1.14}" rx="${size * .18}" fill="${PR.text}" opacity="${p}"/>${PT(cx + wv / 2, y, size, z.w, {w: 700, fill: p > .5 ? PR.bg : PR.dim})}</g>`;
+    if (z.kw) out += `<g opacity="${.25 + .75 * p}"><rect x="${cx}" y="${y - size * .86}" width="${wv}" height="${size * 1.14}" rx="${size * .18}" fill="${PR.hl}" opacity="${p}"/>${PT(cx + wv / 2, y, size, z.w, {w: 700, fill: p > .5 ? PR.hlText : PR.dim})}</g>`;
     else out += PT(cx + wv / 2, y, size, z.w, {w: 700, fill: p > .5 ? PR.text : PR.dim, op: .35 + .65 * p});
     cx += wv + gap; });
   return out; }
 // card: centre x,y. o.on = highlighted (white hairline + soft glow), o.state = 'good'|'bad' for a coloured hairline
 function PCARD(x, y, w, h, p, inner, o = {}) {
   if (p <= 0) return '';
-  const st = o.state == 'good' ? PR.good : o.state == 'bad' ? PR.bad : o.on ? PR.text : PR.line, sw = o.on || o.state ? 2.5 : 2;
+  const st = o.state == 'good' ? PR.good : o.state == 'bad' ? PR.bad : o.on ? PR.hl : PR.line, sw = o.on || o.state ? 2.5 : 2;
   return `<g transform="translate(${x},${y + (1 - p) * 26}) scale(${.965 + .035 * p})" opacity="${p}">` +
-    (o.on ? `<rect x="${-w / 2 - 6}" y="${-h / 2 - 6}" width="${w + 12}" height="${h + 12}" rx="${(o.r || 26) + 6}" fill="${PR.text}" opacity=".07" filter="url(#pglow)"/>` : '') +
+    (o.on ? `<rect x="${-w / 2 - 6}" y="${-h / 2 - 6}" width="${w + 12}" height="${h + 12}" rx="${(o.r || 26) + 6}" fill="${PR.hl}" opacity=".16" filter="url(#pglow)"/>` : '') +
     `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="${o.r || 26}" fill="${o.fill || PR.card}" stroke="${st}" stroke-width="${sw}"/>` +
     `<rect x="${-w / 2 + 2}" y="${-h / 2 + 2}" width="${w - 4}" height="${Math.min(60, h / 3)}" rx="${(o.r || 26) - 2}" fill="url(#psheen)"/>` + inner + `</g>`; }
-const PPILL = (x, y, txt, p = 1, o = {}) => { const s = o.size || 30, w = tw(txt, s, 700) + s * 1.1; return `<g opacity="${p}" transform="translate(${x},${y})"><rect x="${-w / 2}" y="${-s * .95}" width="${w}" height="${s * 1.5}" rx="${s * .75}" fill="${o.solid ? PR.text : 'none'}" stroke="${o.col || PR.line2}" stroke-width="2"/>${PT(0, s * .08, s, txt, {w: 700, fill: o.solid ? PR.bg : (o.col || PR.text)})}</g>`; };
+const PPILL = (x, y, txt, p = 1, o = {}) => { const s = o.size || 30, w = tw(txt, s, 700) + s * 1.1; return `<g opacity="${p}" transform="translate(${x},${y})"><rect x="${-w / 2}" y="${-s * .95}" width="${w}" height="${s * 1.5}" rx="${s * .75}" fill="${o.solid ? PR.hl : 'none'}" stroke="${o.col || PR.line2}" stroke-width="2"/>${PT(0, s * .08, s, txt, {w: 700, fill: o.solid ? PR.hlText : (o.col || PR.text)})}</g>`; };
 const PARROW = (x1, y, x2, p = 1, col = PR.dim) => p <= 0 ? '' : `<g opacity="${p}"><line x1="${x1}" y1="${y}" x2="${x1 + (x2 - x1) * p}" y2="${y}" stroke="${col}" stroke-width="3"/><path d="M${x1 + (x2 - x1) * p - 12},${y - 9} l12,9 l-12,9" fill="none" stroke="${col}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>`;
 const PSTRIKE = (x1, y, x2, p, col = PR.bad) => p <= 0 ? '' : `<line x1="${x1}" y1="${y}" x2="${x1 + (x2 - x1) * p}" y2="${y}" stroke="${col}" stroke-width="5" stroke-linecap="round"/>`;
 // thin line icons, 100-unit box centred on 0,0; s = scale (1 = 100 px)
@@ -56,15 +57,18 @@ const PICON = (name, x, y, s = 1, col = PR.text, sw = 4) => `<g transform="trans
 const PBADGE = (name, x, y, col = PR.text, r = 40) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${PR.card2}" stroke="${PR.line2}" stroke-width="2"/>` + PICON(name, x, y, r / 62, col, 3.5);
 // panel backdrop: hairline grid + viewfinder corners (drawn in full-frame coordinates)
 function PGRID(x0, y0, x1, y1, op = .045) { let o = ''; for (let x = x0; x <= x1; x += 54) o += `<line x1="${x}" y1="${y0}" x2="${x}" y2="${y1}" stroke="#fff" stroke-width="1" opacity="${op}"/>`; for (let y = y0; y <= y1; y += 54) o += `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="#fff" stroke-width="1" opacity="${op}"/>`; return o; }
-function PCORNERS(x0, y0, x1, y1, L = 34, op = .55) { const c = (x, y, dx, dy) => `<path d="M${x},${y + dy * L} V${y} H${x + dx * L}" fill="none" stroke="#fff" stroke-width="3" opacity="${op}"/>`; return c(x0, y0, 1, 1) + c(x1, y0, -1, 1) + c(x0, y1, 1, -1) + c(x1, y1, -1, -1); }
-const PDEFS = `<filter id="pglow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter><linearGradient id="psheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><radialGradient id="pspot" cx=".5" cy=".55" r=".6"><stop offset="0" stop-color="#26262E"/><stop offset="1" stop-color="${PR.bg}"/></radialGradient>`;
+function PDOTS(x0, y0, x1, y1, op = .10) { let o = ''; for (let x = x0 + 27; x < x1; x += 54) for (let y = y0 + 27; y < y1; y += 54) o += `<circle cx="${x}" cy="${y}" r="2.2" fill="#5DE0B0" opacity="${op}"/>`; return o; }
+function PCORNERS(x0, y0, x1, y1, L = 34, op = .55) { const c = (x, y, dx, dy) => `<path d="M${x},${y + dy * L} V${y} H${x + dx * L}" fill="none" stroke="#5DE0B0" stroke-width="3" opacity="${op}"/>`; return c(x0, y0, 1, 1) + c(x1, y0, -1, 1) + c(x0, y1, 1, -1) + c(x1, y1, -1, -1); }
+const PDEFS = `<filter id="pglow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter><linearGradient id="psheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><radialGradient id="pspot" cx=".5" cy=".5" r=".6"><stop offset="0" stop-color="#2E2A80"/><stop offset=".55" stop-color="#16135A"/><stop offset="1" stop-color="${PR.bg}"/></radialGradient><radialGradient id="pbok" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><filter id="charfx" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#04031A" flood-opacity=".6"/><feDropShadow dx="0" dy="0" stdDeviation="9" flood-color="#5DE0B0" flood-opacity=".22"/></filter>`;
 // default bottom stage: dark studio with a soft spotlight (reels may override strip())
-function strip(f) { return `<rect x="-700" y="-1500" width="2500" height="4000" fill="${PR.bg}"/><ellipse cx="540" cy="1520" rx="760" ry="560" fill="url(#pspot)"/>` + PGRID(-700, 1060, 1800, 2600, .03); }
+function strip(f) { const t = f / FPS; let o = `<rect x="-700" y="-1500" width="2500" height="4000" fill="${PR.bg}"/><ellipse cx="540" cy="1480" rx="820" ry="620" fill="url(#pspot)"/>`;
+  [[150, 1250, 60, '#5DE0B0'], [930, 1180, 80, '#7A6CFF'], [260, 1700, 40, '#5DE0B0'], [860, 1650, 55, '#FFD23F'], [540, 1150, 34, '#7A6CFF'], [70, 1500, 28, '#fff'], [1010, 1450, 30, '#fff']].forEach(([x, y, r, c], k) => { const dx = 22 * Math.sin(t * .35 + k * 1.7), dy = 16 * Math.cos(t * .28 + k); o += `<circle cx="${x + dx}" cy="${y + dy}" r="${r}" fill="${c}" opacity=".10"/>`; });
+  return o; }
 // old-engine (page.html) versions of the panel and caption, matching hf_premium.html
 function panelLayer(f, contentFn) {
   if (f < HOOK_END) return '';
   const pp = E.smooth(Math.min(1, (f - HOOK_END) / 12)), ty = (1 - pp) * 60, n = sceneAt(f);
-  let o = `<g transform="translate(0,${ty})" opacity="${pp}"><rect x="-40" y="-1300" width="1160" height="${SEAM + 1300}" fill="${PR.bg}"/>` + PGRID(0, 0, 1080, SEAM - 4) + `<rect x="0" y="${SEAM - 1}" width="1080" height="2" fill="#fff" opacity=".12"/>`;
+  let o = `<g transform="translate(0,${ty})" opacity="${pp}"><rect x="-40" y="-1300" width="1160" height="${SEAM + 1300}" fill="url(#pspot)"/>` + PDOTS(0, 0, 1080, SEAM - 4) + `<rect x="0" y="${SEAM - 1}" width="1080" height="2" fill="${PR.hl}" opacity=".35"/>`;
   o += `<rect x="${PAN.x0}" y="${PAN.y0}" width="${PAN.x1 - PAN.x0}" height="${PAN.y1 - PAN.y0}" rx="36" fill="${PR.panel}" stroke="${PR.line}" stroke-width="2"/><g clip-path="url(#pclip)">${contentFn(n, f)}</g>` + PCORNERS(PAN.x0 + 18, PAN.y0 + 18, PAN.x1 - 18, PAN.y1 - 18);
   return o + `</g>`; }
 function caption(f, y = 1440) { if (y > 1300) y = lerp(1780, 1082, spAt(f)); let c = null; for (const x of CAPS) if (f >= x.f && f < x.end) c = x; if (!c) return '';
@@ -76,5 +80,7 @@ const PCS = CS * 0.7; SPOS.c.x = 320; SPOS.b.x = 760; SPOS.c.y = SPOS.b.y = 2010
 function charLayer(f, stripFn) {
   let o = `<g transform="${camG(f)}">` + (stripFn ? stripFn(f) : '');
   const order = ['c', 'b'].sort((a, b) => (talkAmt(a, f) + 2 * hitAmt(a, f)) - (talkAmt(b, f) + 2 * hitAmt(b, f)));
-  order.forEach(w => { const s = PCS * (1 + .05 * talkAmt(w, f) + .1 * hitAmt(w, f)); o += CAST[w].draw(f, {x: SPOS[w].x, y: SPOS[w].y, s, flip: w == 'b', phone: false, glow: 0}); });
+  order.forEach(w => { const s = PCS * (1 + .05 * talkAmt(w, f) + .1 * hitAmt(w, f)); o += `<g filter="url(#charfx)">` + CAST[w].draw(f, {x: SPOS[w].x, y: SPOS[w].y, s, flip: w == 'b', phone: false, glow: 0}) + `</g>`; });
   return o + `</g>`; }
+// follow card at the end (hf_premium.html): entrance + tap sounds
+sfx(Math.max(0, NF - 72), 'blip'); sfx(Math.max(0, NF - 72) + 33, 'tick'); sfx(Math.max(0, NF - 72) + 36, 'ding');
