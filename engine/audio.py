@@ -22,6 +22,12 @@ vo=np.zeros(N)
 for l in tl['lines']:
     x,_=sf.read(l['file']); x=x.mean(1) if x.ndim>1 else x; add(vo,x,l['start'])
 vo=vo/(np.abs(vo).max()+1e-9); vo=np.tanh(vo*2.2)/np.tanh(2.2)*.95   # gentle compression: voice sits louder and steadier (Veer, 16 Nov)
+# studio voice chain (20 Nov, matched to a premium reference voice: less low-end mud, +presence 3.6 kHz, air shelf,
+# compression, de-ess, a touch of room). Measured on the reference: 2-5 kHz at -13 dB of total, < 150 Hz at -9 dB.
+VCHAIN='highpass=f=100:poles=2,lowshelf=f=160:g=-4,equalizer=f=260:t=o:w=1.2:g=-3,equalizer=f=3600:t=o:w=1.6:g=5.5,highshelf=f=8500:g=4.5,acompressor=threshold=-22dB:ratio=3.2:attack=4:release=90:makeup=4,deesser=i=0.45,aecho=0.8:0.6:18:0.05,alimiter=limit=0.89'
+sf.write(f'{W}/vo_raw.wav',vo,SR)
+subprocess.run(['ffmpeg','-v','error','-y','-i',f'{W}/vo_raw.wav','-af',VCHAIN,'-ar',str(SR),'-ac','1',f'{W}/vo_chain.wav'],check=True)
+_v,_=sf.read(f'{W}/vo_chain.wav'); _v=_v[:N] if len(_v)>=N else np.pad(_v,(0,N-len(_v))); vo=_v/(np.abs(_v).max()+1e-9)*.95
 if MUSIC:
     subprocess.run(['ffmpeg','-v','error','-y','-stream_loop','-1','-i',MUSIC,'-t',str(total+1),'-ac','1','-ar',str(SR),f'{W}/music.wav'],check=True)
     mus,_=sf.read(f'{W}/music.wav'); mus=np.pad(mus,(0,max(0,N-len(mus))))[:N]
