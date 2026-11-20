@@ -1,0 +1,342 @@
+{
+ "guide": "lock-aadhaar-biometrics-myaadhaar",
+ "title": "Aadhaar Biometric Lock: Nakli Angoothe Se Bacho, 4 Step | TechniBaba",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "title",
+   "head": "TechniBaba Guide",
+   "title": "Aadhaar Biometric Lock",
+   "sub": "Nakli angoothe se paise bachao",
+   "chips": [
+    "2 MIN|LOCK",
+    "1930|HELPLINE"
+   ],
+   "lines": [
+    {
+     "who": "c",
+     "hi": "बाबा! सुना है आधार का नकली अंगूठा बना के, बिना ओटीपी के पैसे निकाल लेते हैं!",
+     "en": "Baba! Suna hai Aadhaar ka nakli angootha bana ke, bina OTP ke paise nikaal lete hain!",
+     "pose": "blown",
+     "expr": "shocked",
+     "cap": "Bina OTP *paise gaye*?",
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "सही सुना. पर एक लॉक है, जो ये पूरा खेल बंद कर देता है. बायोमेट्रिक लॉक.",
+     "en": "Sahi suna. Par ek lock hai, jo ye poora khel band kar deta hai. Biometric lock.",
+     "pose": "stop",
+     "expr": "explaining",
+     "cap": "Biometric *LOCK*",
+     "big": 1,
+     "hit": "lock"
+    },
+    {
+     "who": "b",
+     "hi": "आज चार स्टेप. लॉगिन, लॉक, ज़रूरत पे अनलॉक, और रिपोर्ट.",
+     "en": "Aaj chaar step. Login, lock, zaroorat pe unlock, aur report.",
+     "pose": "count",
+     "expr": "explaining",
+     "cap": "*4 STEP*",
+     "big": 1
+    }
+   ]
+  },
+  {
+   "id": "how",
+   "type": "points",
+   "head": "Fraud kaise hota hai?",
+   "color": "#ffd23f",
+   "items": [
+    "AePS: Aadhaar + bank + angootha",
+    "Angootha document se copy",
+    "Silicone / rubber ka nakli angootha",
+    "Na OTP, na call"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "ए ई पी एस से पैसे निकालने के लिए बस आधार नंबर, बैंक, और अंगूठा चाहिए.",
+     "en": "AePS se paise nikaalne ke liye bas Aadhaar number, bank, aur angootha chahiye.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "Aadhaar + *angootha*",
+     "show": 1,
+     "show_new": 1,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "चोर किसी कागज़ से अंगूठे का निशान उठाते हैं, और सिलिकॉन से नकली बना लेते हैं.",
+     "en": "Chor kisi kaagaz se angoothe ka nishaan uthaate hain, aur silicone se nakli bana lete hain.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "*Nakli* angootha",
+     "show": 3,
+     "show_new": 2,
+     "big": 1
+    },
+    {
+     "who": "c",
+     "hi": "और मेरे फ़ोन पे ओटीपी भी नहीं आता?",
+     "en": "Aur mere phone pe OTP bhi nahi aata?",
+     "pose": "shrug",
+     "expr": "shocked",
+     "cap": "OTP *bhi nahi*?",
+     "show": 4,
+     "show_new": 1,
+     "react": "explaining"
+    },
+    {
+     "who": "b",
+     "hi": "नहीं. इसलिए लॉक ज़रूरी है. लॉक है, तो नकली अंगूठा फेल.",
+     "en": "Nahi. Isliye lock zaroori hai. Lock hai, toh nakli angootha fail.",
+     "pose": "palm",
+     "expr": "smug",
+     "cap": "Lock = *FAIL*",
+     "show": 4,
+     "big": 1
+    }
+   ]
+  },
+  {
+   "id": "step1",
+   "type": "points",
+   "chip": "STEP 1",
+   "head": "myAadhaar pe login",
+   "color": "#5de0b0",
+   "items": [
+    "myaadhaar.uidai.gov.in khud type karo",
+    "Aadhaar number + captcha",
+    "OTP Aadhaar wale mobile pe",
+    "Link pe click NAHI"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "पहला: माय आधार साइट खुद टाइप करो. किसी मैसेज का लिंक नहीं.",
+     "en": "Pehla: myAadhaar site khud type karo. Kisi message ka link nahi.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "*Khud* type karo",
+     "show": 1,
+     "show_new": 1,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "आधार नंबर डालो, कैप्चा, फिर ओटीपी. ओटीपी उस मोबाइल पे आएगा जो आधार से जुड़ा है.",
+     "en": "Aadhaar number daalo, captcha, phir OTP. OTP us mobile pe aayega jo Aadhaar se juda hai.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "Captcha, *OTP*",
+     "show": 3,
+     "show_new": 2,
+     "big": 1
+    },
+    {
+     "who": "c",
+     "hi": "और किसी ने कॉल पे ओटीपी माँगा तो?",
+     "en": "Aur kisi ne call pe OTP maanga toh?",
+     "pose": "leanin",
+     "expr": "confused",
+     "cap": "Call pe *OTP*?",
+     "show": 3,
+     "react": "explaining"
+    },
+    {
+     "who": "b",
+     "hi": "तो वो फ़्रॉड है. ये ओटीपी सिर्फ़ तुम खुद डालोगे.",
+     "en": "Toh woh fraud hai. Ye OTP sirf tum khud daaloge.",
+     "pose": "stop",
+     "expr": "angry",
+     "cap": "Woh *FRAUD* hai",
+     "show": 4,
+     "show_new": 1,
+     "big": 1
+    }
+   ]
+  },
+  {
+   "id": "step2",
+   "type": "phone",
+   "chip": "STEP 2",
+   "head": "Lock karo",
+   "app": "myAadhaar",
+   "path": [
+    "Aadhaar Services",
+    "Lock/Unlock Biometrics",
+    "Tick the box",
+    "Lock"
+   ],
+   "items": [
+    "Labels thode alag ho sakte hain"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "दूसरा: आधार सर्विसेज़ में, लॉक अनलॉक बायोमेट्रिक्स खोलो.",
+     "en": "Doosra: Aadhaar Services mein, Lock Unlock Biometrics kholo.",
+     "pose": "phone",
+     "expr": "explaining",
+     "cap": "*Lock/Unlock* Biometrics",
+     "show": 2,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "बॉक्स पे टिक करो, और लॉक दबाओ. बस, बायोमेट्रिक्स लॉक.",
+     "en": "Box pe tick karo, aur Lock dabao. Bas, biometrics lock.",
+     "pose": "thumb",
+     "expr": "happy",
+     "cap": "Tick + *LOCK*",
+     "show": 4,
+     "big": 1,
+     "hit": "lock"
+    },
+    {
+     "who": "c",
+     "hi": "इतना ही? दो मिनट भी नहीं लगे!",
+     "en": "Itna hi? Do minute bhi nahi lage!",
+     "pose": "thumb",
+     "expr": "happy",
+     "cap": "*2 minute*",
+     "show": 5,
+     "show_new": 1,
+     "react": "smug"
+    }
+   ]
+  },
+  {
+   "id": "step3",
+   "type": "points",
+   "chip": "STEP 3",
+   "head": "Zaroorat pe unlock",
+   "color": "#ffd23f",
+   "items": [
+    "Bank / ration / KYC pe angootha?",
+    "Same page > Unlock",
+    "~10 minute ke liye khulega",
+    "Phir apne aap LOCK"
+   ],
+   "lines": [
+    {
+     "who": "c",
+     "hi": "पर बैंक या राशन की दुकान पे अंगूठा लगाना हो तो?",
+     "en": "Par bank ya ration ki dukaan pe angootha lagaana ho toh?",
+     "pose": "shrug",
+     "expr": "confused",
+     "cap": "Ration pe *angootha*?",
+     "show": 1,
+     "show_new": 1,
+     "react": "explaining"
+    },
+    {
+     "who": "b",
+     "hi": "तीसरा: उसी पेज पे, ओटीपी से लॉगिन, और अनलॉक. करीब दस मिनट के लिए खुलेगा.",
+     "en": "Teesra: usi page pe, OTP se login, aur Unlock. Kareeb das minute ke liye khulega.",
+     "pose": "count",
+     "expr": "explaining",
+     "cap": "*10 minute* unlock",
+     "show": 3,
+     "show_new": 2,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "फिर अपने आप लॉक. तुम्हें कुछ नहीं करना.",
+     "en": "Phir apne aap lock. Tumhe kuch nahi karna.",
+     "pose": "palm",
+     "expr": "smug",
+     "cap": "Apne aap *LOCK*",
+     "show": 4,
+     "show_new": 1,
+     "big": 1
+    }
+   ]
+  },
+  {
+   "id": "step4",
+   "type": "points",
+   "chip": "STEP 4",
+   "head": "Paise kate? Turant",
+   "color": "#e5383b",
+   "items": [
+    "1930 pe call karo",
+    "cybercrime.gov.in pe complaint",
+    "Bank ko turant batao",
+    "Jitna jaldi, utna achha"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "चौथा: पैसे कटे, तो तुरंत उन्नीस सौ तीस पे कॉल करो, या साइबर क्राइम डॉट जी ओ वी डॉट इन.",
+     "en": "Chautha: paise kate, toh turant 1930 pe call karo, ya cybercrime.gov.in.",
+     "pose": "point",
+     "expr": "explaining",
+     "cap": "Turant *1930*",
+     "show": 2,
+     "show_new": 2,
+     "big": 1
+    },
+    {
+     "who": "b",
+     "hi": "और बैंक को भी उसी दिन बताओ.",
+     "en": "Aur bank ko bhi usi din batao.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "Bank ko *batao*",
+     "show": 4,
+     "show_new": 2
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "type": "recap",
+   "head": "Recap: 4 step",
+   "items": [
+    "myAadhaar login",
+    "Lock/Unlock Biometrics > Lock",
+    "Zaroorat pe 10 min unlock",
+    "1930 pe report"
+   ],
+   "lines": [
+    {
+     "who": "c",
+     "hi": "मतलब: लॉगिन, लॉक, ज़रूरत पे दस मिनट का अनलॉक, और उन्नीस सौ तीस.",
+     "en": "Matlab: login, lock, zaroorat pe das minute ka unlock, aur 1930.",
+     "pose": "count",
+     "expr": "happy",
+     "cap": "Login. Lock. *Unlock.* 1930.",
+     "show": 4,
+     "show_new": 4,
+     "big": 1
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "outro",
+   "head": "Save karo, share karo",
+   "sub": "Papa-mummy ka bhi lock karo",
+   "items": [
+    "subscribe",
+    "instagram"
+   ],
+   "lines": [
+    {
+     "who": "b",
+     "hi": "पूरा गाइड डिस्क्रिप्शन में है. पापा मम्मी का आधार भी लॉक करो, और सब्सक्राइब करो.",
+     "en": "Poora guide description mein hai. Papa mummy ka Aadhaar bhi lock karo, aur subscribe karo.",
+     "pose": "wave",
+     "expr": "happy",
+     "cap": "*Papa-mummy* ka bhi",
+     "show": 1,
+     "show_new": 1
+    }
+   ]
+  }
+ ]
+}
