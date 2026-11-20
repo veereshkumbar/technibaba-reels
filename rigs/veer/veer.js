@@ -2,7 +2,7 @@
 // VEER.draw({x, y, s, outfit:'tee'|'hoodie', cap:false|true, expr, mouth, blink, look, tilt}) -> SVG string, origin = chin.
 // expr: neutral | happy | surprised | smug | explaining ; mouth: rest | smile | A | E | O | M
 const VEER = (() => {
-  const C = {
+  const FLAT = {
     line: '#2A1A12', skin: '#C88A5C', skinSh: '#A66C44', skinHi: '#DDA172', blush: '#D9785F',
     hair: '#24170F', hairHi: '#4B3424', beard: '#22160F', beardHi: '#3D2A1D', brow: '#1E130C',
     iris: '#3A2414', irisHi: '#7A5236', white: '#FBF7F2', frame: '#141218', lens: '#8F7BFF', teeth: '#FFFFFF', mouth: '#5A2320', tongue: '#C9524A',
@@ -10,7 +10,32 @@ const VEER = (() => {
     hood: '#211E66', hoodSh: '#16134A', hoodHi: '#2E2A80', mint: '#5DE0B0', mintSh: '#3FB88E',
     cap: '#14132B', capSh: '#0B0A1C', capHi: '#26244A'
   };
-  const L = (w = 5) => `stroke="${C.line}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
+  // 3D-render style: gradient materials (ids are global per page; defs are emitted by draw)
+  const D3 = Object.assign({}, FLAT, {
+    line: 'rgba(40,20,10,.35)', skin: 'url(#v3skin)', skinSh: '#9C6440', skinHi: '#E9B48A', blush: '#E07D63',
+    hair: 'url(#v3hair)', beard: 'url(#v3beard)', iris: 'url(#v3iris)', tee: 'url(#v3tee)', teeSh: '#9B9BA4',
+    hood: 'url(#v3hood)', hoodSh: '#120F3E', hoodHi: 'url(#v3hoodHi)', cap: 'url(#v3cap)', capSh: '#08071A', frame: 'url(#v3frame)',
+    mouth: '#4A1C1A'
+  });
+  let C = FLAT, S3 = false;
+  const DEFS3 = `<defs>
+    <radialGradient id="v3skin" cx=".42" cy=".32" r=".75"><stop offset="0" stop-color="#E9B288"/><stop offset=".45" stop-color="#CF8F62"/><stop offset=".8" stop-color="#AC6F47"/><stop offset="1" stop-color="#8A5233"/></radialGradient>
+    <linearGradient id="v3hair" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#4A3122"/><stop offset=".5" stop-color="#25170E"/><stop offset="1" stop-color="#120A05"/></linearGradient>
+    <radialGradient id="v3beard" cx=".5" cy=".35" r=".8"><stop offset="0" stop-color="#3C2a1E"/><stop offset=".6" stop-color="#22160E"/><stop offset="1" stop-color="#110A06"/></radialGradient>
+    <radialGradient id="v3iris" cx=".45" cy=".35" r=".7"><stop offset="0" stop-color="#9A6A44"/><stop offset=".55" stop-color="#4A2C18"/><stop offset="1" stop-color="#1C0F07"/></radialGradient>
+    <linearGradient id="v3tee" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#E4E4E8"/><stop offset=".55" stop-color="#C3C3C9"/><stop offset="1" stop-color="#8F8F99"/></linearGradient>
+    <linearGradient id="v3hood" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#3B36A8"/><stop offset=".5" stop-color="#25217A"/><stop offset="1" stop-color="#110E40"/></linearGradient>
+    <linearGradient id="v3hoodHi" x1=".5" y1="0" x2=".5" y2="1"><stop offset="0" stop-color="#2A2690"/><stop offset="1" stop-color="#3D38AE"/></linearGradient>
+    <linearGradient id="v3cap" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#34306E"/><stop offset=".45" stop-color="#1A1840"/><stop offset="1" stop-color="#0A0920"/></linearGradient>
+    <linearGradient id="v3frame" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A3640"/><stop offset=".35" stop-color="#121016"/><stop offset="1" stop-color="#050407"/></linearGradient>
+    <linearGradient id="v3lens" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B9AEFF" stop-opacity=".38"/><stop offset=".5" stop-color="#8F7BFF" stop-opacity=".10"/><stop offset="1" stop-color="#6E5BE8" stop-opacity=".28"/></linearGradient>
+    <radialGradient id="v3spec" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="v3ao" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3A1A0C" stop-opacity=".45"/><stop offset="1" stop-color="#3A1A0C" stop-opacity="0"/></radialGradient>
+    <filter id="v3soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="v3blur3" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="v3drop" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#05041A" flood-opacity=".55"/></filter>
+  </defs>`;
+  const L = (w = 5) => S3 ? `stroke="${C.line}" stroke-width="${Math.max(1.2, w * .3)}" stroke-linejoin="round"` : `stroke="${C.line}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
 
   function shoulders(o) {
     if (o.outfit == 'hoodie') {
@@ -121,7 +146,7 @@ const VEER = (() => {
   }
 
   function glasses() {
-    const lens = cx => `<rect x="${cx - 52}" y="-338" width="104" height="70" rx="14" fill="${C.lens}" fill-opacity=".16" stroke="${C.frame}" stroke-width="11"/>
+    const lens = cx => `<rect x="${cx - 52}" y="-338" width="104" height="70" rx="14" fill="${S3 ? 'url(#v3lens)' : C.lens}" fill-opacity="${S3 ? 1 : .16}" stroke="${C.frame}" stroke-width="11"/>
        <path d="M${cx - 34},-326 L${cx - 2},-326 L${cx - 26},-280 L${cx - 44},-280 Z" fill="#fff" opacity=".22"/>
        <circle cx="${cx < 0 ? cx - 40 : cx + 40}" cy="-330" r="2.6" fill="#C9CCD6"/><circle cx="${cx < 0 ? cx - 32 : cx + 32}" cy="-330" r="2.6" fill="#C9CCD6"/>`;
     return lens(-58) + lens(58) + `<path d="M-6,-312 C-2,-318 2,-318 6,-312" fill="none" stroke="${C.frame}" stroke-width="9"/>
@@ -165,11 +190,42 @@ const VEER = (() => {
     </g>`;
   }
 
-  function draw(o = {}) {
-    const x = o.x || 0, y = o.y || 0, s = o.s || 1, tilt = o.tilt || 0;
-    const head = `<g transform="rotate(${tilt} 0 -150)">${hairBack(o)}${ears()}${face()}${beard(o)}${mouth(o)}${nose()}${eyes(o)}${brows(o)}${glasses()}${hairFront(o)}${cap(o)}</g>`;
-    return `<g transform="translate(${x},${y}) scale(${s})">${shoulders(o)}${neck()}${head}</g>`;
+  function light3d(o) {
+    if (!S3) return '';
+    return `<g pointer-events="none">
+      <ellipse cx="-30" cy="-405" rx="70" ry="26" fill="url(#v3spec)" opacity="${o.cap ? 0 : .5}"/>
+      <ellipse cx="2" cy="-262" rx="8" ry="26" fill="url(#v3spec)" opacity=".7"/>
+      <ellipse cx="-78" cy="-246" rx="26" ry="16" fill="url(#v3spec)" opacity=".45"/>
+      <ellipse cx="78" cy="-246" rx="22" ry="14" fill="url(#v3spec)" opacity=".3"/>
+      <ellipse cx="0" cy="-358" rx="120" ry="20" fill="url(#v3ao)" opacity=".8"/>
+      <path d="M120,-330 C126,-270 116,-200 84,-150" fill="none" stroke="#9FE9FF" stroke-width="5" opacity=".35" filter="url(#v3blur3)"/>
+    </g>`;
   }
-  return {draw, C};
+  function hairGloss(o) {
+    if (!S3) return '';
+    if (o.cap) return `<path d="M-90,-480 C-40,-500 40,-500 90,-480" fill="none" stroke="#fff" stroke-width="10" opacity=".14" filter="url(#v3blur3)"/>
+      <path d="M-150,-350 C-90,-362 90,-362 150,-350" fill="none" stroke="#fff" stroke-width="4" opacity=".18"/>`;
+    return `<path d="M-80,-436 C-30,-456 30,-458 84,-440" fill="none" stroke="#fff" stroke-width="12" opacity=".18" filter="url(#v3blur3)"/>
+      <path d="M-50,-414 C0,-426 40,-424 86,-410" fill="none" stroke="#C9A285" stroke-width="4" opacity=".35"/>`;
+  }
+  function glassesGloss() {
+    if (!S3) return '';
+    return `<path d="M-100,-332 L-72,-332 L-96,-282 L-108,-282 Z M16,-332 L44,-332 L22,-282 L10,-282 Z" fill="#fff" opacity=".22"/>
+      <path d="M-108,-336 C-80,-342 -40,-342 -8,-336 M8,-336 C40,-342 80,-342 108,-336" fill="none" stroke="#fff" stroke-width="2.5" opacity=".45"/>`;
+  }
+  function shirtLight(o) {
+    if (!S3) return '';
+    return `<ellipse cx="0" cy="-10" rx="150" ry="40" fill="#000" opacity=".28" filter="url(#v3soft)"/>
+      <path d="M-280,70 C-220,30 -160,20 -110,20" fill="none" stroke="#fff" stroke-width="6" opacity=".25" filter="url(#v3blur3)"/>
+      <path d="M300,80 C320,140 326,200 330,250" fill="none" stroke="#8FE7FF" stroke-width="8" opacity=".25" filter="url(#v3blur3)"/>`;
+  }
+
+  function draw(o = {}) {
+    S3 = o.style == '3d'; C = S3 ? D3 : FLAT;
+    const x = o.x || 0, y = o.y || 0, s = o.s || 1, tilt = o.tilt || 0;
+    const head = `<g transform="rotate(${tilt} 0 -150)">${hairBack(o)}${ears()}${face()}${light3d(o)}${beard(o)}${mouth(o)}${nose()}${eyes(o)}${brows(o)}${glasses()}${glassesGloss()}${hairFront(o)}${hairGloss(o)}${cap(o)}${o.cap ? hairGloss(o) : ''}</g>`;
+    return `<g transform="translate(${x},${y}) scale(${s})"${S3 ? ' filter="url(#v3drop)"' : ''}>${shoulders(o)}${shirtLight(o)}${neck()}${head}</g>`;
+  }
+  return {draw, C: FLAT, DEFS3};
 })();
 if (typeof module !== 'undefined') module.exports = VEER;
