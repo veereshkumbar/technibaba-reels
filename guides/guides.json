@@ -2,6 +2,73 @@
  "updated": "2026-11-20",
  "guides": [
   {
+   "slug": "capcut-banned-india-free-editor-vn-edits",
+   "date": "2026-11-20",
+   "title": "CapCut is banned in India: which free editor to use for Reels",
+   "lane": "Creator Guide",
+   "summary": "CapCut has been blocked in India since June 2020. Skip the APK. VN is a good free option, and for Reels the best free pick is Edits, Instagram's own editor.",
+   "steps": [
+    {
+     "title": "Do not download a CapCut APK",
+     "body": "CapCut is not on the Play Store or App Store in India. Fake CapCut sites and installers have been used to steal passwords and logins. Install apps only from the Play Store or App Store."
+    },
+    {
+     "title": "Good option: VN Video Editor",
+     "body": "Free, and exports without a watermark. A paid Pro tier exists but is optional."
+    },
+    {
+     "title": "Best for Reels: install Edits",
+     "body": "Open the Play Store or App Store, search Edits (by Instagram) and install it. It is free and available on Android and iPhone."
+    },
+    {
+     "title": "Log in and add your video",
+     "body": "Sign in with your Instagram account, start a new project and import your clips (or record in the app)."
+    },
+    {
+     "title": "Captions, music, export",
+     "body": "Add auto captions, pick music from Instagram's library, then export without a watermark: save to your phone or share straight to Instagram."
+    }
+   ],
+   "tip": "Edits also has a free Mac app (Apple Silicon, M1 or later) since November 2026. There is no Windows version yet.",
+   "caution": "Never install a video editor from a link or an APK file. Menu names in Edits can change with app updates, and Edits needs an Instagram account.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "Videowizardtools: Why is CapCut banned in India (Jul 2026)",
+     "url": "https://videowizardtools.com/why-is-capcut-banned-in-india/"
+    },
+    {
+     "title": "FluxNote: CapCut alternative for India (Nov 2026)",
+     "url": "https://fluxnote.io/guides/capcut-alternative-india"
+    },
+    {
+     "title": "ESET WeLiveSecurity: fake CapCut app installs malware (May 2025)",
+     "url": "https://www.welivesecurity.com/es/estafas-enganos/aplicacion-falsa-capcut-instala-malware/"
+    },
+    {
+     "title": "TechRadar: CapCut used in phishing scam (Jul 2025)",
+     "url": "https://www.techradar.com/pro/security/popular-tiktok-video-editor-capcut-used-to-trick-victims-in-phishing-scam"
+    },
+    {
+     "title": "VN Video Editor review 2026",
+     "url": "https://videoeditorguide.blogspot.com/2026/03/vn-video-editor-review-2026-best-free.html"
+    },
+    {
+     "title": "Business Standard: Edits available on iOS and Android",
+     "url": "https://www.business-standard.com/technology/tech-news/instagram-edits-ai-powered-video-editing-app-available-on-ios-android-125042300730_1.html"
+    },
+    {
+     "title": "Later: Instagram Edits app",
+     "url": "https://later.com/blog/instagram-edits-app/"
+    },
+    {
+     "title": "The Next Web: Edits for Mac (5 Nov 2026)",
+     "url": "https://thenextweb.com/news/instagram-launches-free-edits-video-editor-for-mac-with-4k-exports"
+    }
+   ]
+  },
+  {
    "slug": "lock-aadhaar-biometrics-myaadhaar",
    "date": "2026-11-20",
    "title": "Lock your Aadhaar fingerprint in 2 minutes (Biometric Lock)",
