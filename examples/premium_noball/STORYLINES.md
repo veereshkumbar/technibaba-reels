@@ -1,0 +1,9 @@
+Format 2 (not A, not B, actually C). A = "pair line pe = no-ball" (the gully belief), B = "edi hawa mein = no-ball", C = "no-ball only when NO part of the front foot (grounded or raised) is behind the popping crease" (ICC clause 21.5.2; "the line belongs to the umpire").
+Question at 6 s: "Itna chhota farak umpire dekhta kaise hai?" (answered in the last 40%: TV umpire, every ball, replay freezes on the landing frame, wicket on a no-ball is cancelled).
+News hook: 20 Nov, Wellington Test day 2: NZ bowled no-balls after tea, Duffy overstepped repeatedly, Rahul hit a boundary off a no-ball (IANS via Telangana Today; myKhel: six no-balls in the post-tea session).
+
+A (picked) Not A / not B / C: Chotu "Duffy ne baar baar no-ball daale, pair line pe tha na?" -> Baba kills A and B in one line each (LEGAL, LEGAL) -> C with hit on PEECHE (~7 s) -> share ask "gully ka dost jo har wicket pe no-ball chillata hai" (~10 s) -> how: TV umpire, every ball -> landing frame freeze -> wicket on no-ball = batter wapas (hit) -> "line pe pair, no-ball? HAAN ya NA" loops to the hook.
+B Moment in a day: gully match, last-ball wicket, "no-ball tha!" fight, Baba settles it with the Law (dropped: invented story, slower payoff, no link to today's match).
+C Number lands: "4,717 ball, 13 no-ball, sab sahi" (ICC 2020 trial) (dropped: an old stat as the hook, weak share target).
+Hooks: 1 "Baba! Aaj Duffy ne baar baar no-ball daale. Pair line pe tha na?" (picked: today's match + the belief everyone shouts in gully) · 2 "Line pe pair = no-ball? Galat." (strong but no news peg) · 3 "Ek frame mein faisla: no-ball ya nahi" (tech-first, no conflict).
+Why picked: our sports share leader is the DRS "argument everyone has" reel (9 shares) with a named share target; tribute/news-only sports reels (Dhoni, Snicko) got 0 shares. No-ball arguments are the most common gully-cricket fight, so "send to the friend who shouts no-ball" is a one-line share target, and the rule is save-able.

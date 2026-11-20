@@ -1,0 +1,99 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "Line pe pair = no-ball?" (premium look, Hindi, 14:00 sports 20 Nov 2026) =================
+ICONS.tv='<rect x="-40" y="-30" width="80" height="54" rx="8"/><path d="M-14,36 H14 M0,24 V36"/>';
+ICONS.stumps='<path d="M-18,-34 V40 M0,-34 V40 M18,-34 V40"/><path d="M-22,-38 H-2 M2,-38 H22"/>';
+ICONS.ump='<circle cx="0" cy="-20" r="15"/><path d="M-20,-30 H20"/><path d="M-30,40 C-30,14 -16,4 0,4 C16,4 30,14 30,40"/>';
+const F=i=>BT[i].f0;
+const q={a1:F(1),an:WF(1,'nahi'),ae:WF(1,'edi'),ab:WF(1,'bhi'),c0:F(2),ek:WF(2,'ek'),pe:WF(2,'peeche'),
+ sh:F(3),dost:WF(3,'dost'),har:WF(3,'har'),ch:WF(3,'chillata'),
+ h0:F(4),h1:F(5),mn:WF(5,'nahi'),fr:WF(5,'front'),tv:WF(5,'tv'),hb:WF(5,'har'),
+ f0:F(6),zm:WF(6,'zameen'),rk:WF(6,'rukta'),us:WF(6,'usi'),fs:WF(6,'faisla'),
+ w0:F(7),wg:WF(7,'gira'),nb:WF(7,'noball'),wp:WF(7,'wapas'),
+ e0:F(8),hn:WF(8,'haan'),na:WF(8,'na')};
+[[HOOK_END+2,'blip'],[HOOK_END+8,'tick'],[HOOK_END+14,'tick'],[q.an,'ding'],[q.ae,'tick'],[q.ab,'ding'],[q.c0,'blip'],[q.ek,'tick'],[q.pe,'crack'],
+ [q.sh,'blip'],[q.dost,'ding'],[q.har,'tick'],[q.ch,'pop'],
+ [q.h0,'blip'],[q.h0+8,'tick'],[q.h1,'blip'],[q.mn,'tick'],[q.fr,'pop'],[q.tv,'ding'],[q.hb,'tick'],[q.hb+6,'tick'],[q.hb+12,'tick'],
+ [q.f0,'blip'],[q.f0+6,'tick'],[q.f0+12,'tick'],[q.zm,'tick'],[q.rk,'pop'],[q.us,'blip'],[q.fs,'ding'],
+ [q.w0,'blip'],[q.wg,'pop'],[q.nb,'crack'],[q.e0,'blip'],[q.hn,'tick'],[q.na,'tick']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+// side-view front foot at the popping crease. Guide line (the crease) at x=0, ground at y=40. Shoe drawn toe at origin, extending left.
+const SHOE='M0,0 C10,0 10,-20 -8,-26 L-70,-40 L-104,-66 L-138,-66 C-150,-66 -152,-50 -152,-34 L-152,-4 C-152,0 -148,0 -144,0 Z';
+function foot(mode,s=1,col=PR.text){
+ const T=mode=='A'?'translate(92,40)':mode=='B'?'translate(112,40) rotate(22)':'translate(214,40)';
+ return `<g transform="scale(${s})"><line x1="-200" y1="40" x2="240" y2="40" stroke="${PR.line2}" stroke-width="3"/>`+
+  `<rect x="-200" y="40" width="200" height="10" fill="${PR.good}" opacity=".10"/>`+
+  `<rect x="-7" y="36" width="14" height="10" rx="2" fill="#fff"/><line x1="0" y1="-96" x2="0" y2="36" stroke="#fff" stroke-width="3" stroke-dasharray="8 8" opacity=".75"/>`+
+  `<text x="-14" y="80" text-anchor="end" font-family="Inter" font-weight="600" font-size="20" fill="${PR.muted}" letter-spacing="2">PEECHE</text><text x="14" y="80" text-anchor="start" font-family="Inter" font-weight="600" font-size="20" fill="${PR.muted}" letter-spacing="2">AAGE</text>`+
+  `<g transform="${T}"><path d="${SHOE}" fill="${PR.card2}" stroke="${col}" stroke-width="4" stroke-linejoin="round"/><path d="M-60,-36 L-48,-52 M-80,-46 L-68,-60" stroke="${col}" stroke-width="3" stroke-linecap="round"/></g></g>`}
+function footRow(y,p,mode,title,sub,res,rp,o={}){
+ return PCARD(CX,y,820,176,p,PT(-380,-30,40,title,{a:'start',w:700})+PT(-380,10,24,sub,{a:'start',w:500,fill:PR.muted})+
+  `<g transform="translate(160,-8)">${foot(mode,.8,o.col||PR.text)}</g>`+(rp>0?PPILL(-310,62,res,rp,{solid:o.solid,size:24,col:o.pc}):''),o)}
+function content(n,f){let o='';
+ if(n=='q'){o+=PLABEL(CX,226,'Front foot · popping crease');
+  o+=footRow(350,pin(f,HOOK_END+2),'A','Pair line pe','edi peeche, panja aage','LEGAL',pin(f,q.an),{state:f>=q.an?'good':'',solid:1});
+  o+=footRow(550,pin(f,HOOK_END+8),'B','Edi hawa mein','line ke upar, zameen pe nahi','LEGAL',pin(f,q.ab),{state:f>=q.ab?'good':'',solid:1});
+  o+=footRow(750,pin(f,Math.min(HOOK_END+14,q.c0)),'C','Koi hissa peeche nahi',f>=q.ek?'na zameen pe, na hawa mein':'poora pair aage','NO-BALL',pin(f,q.pe),{state:f>=q.pe?'bad':'',col:f>=q.pe?PR.bad:PR.text,pc:PR.bad});
+  o+=PT(CX,905,26,'Rule: ek hissa peeche = legal',{w:600,fill:PR.good,op:pin(f,q.pe+12)});}
+ if(n=='rule'){o+=PLABEL(CX,226,'Send this to');
+  const pc=pin(f,q.sh,10);
+  o+=PCARD(CX,420,820,280,pc,PBADGE('user',-330,-50,PR.text,48)+PT(-260,-60,46,'Gully ka woh dost',{a:'start',w:700})+PT(-260,-12,28,'jo har wicket pe chillata hai',{a:'start',w:500,fill:PR.muted,op:pin(f,q.har)})+
+   PPILL(0,90,'"NO-BALL"',pin(f,q.ch),{size:54,col:PR.bad}),{on:f>=q.dost});
+  o+=PCARD(CX,730,820,230,pin(f,q.sh+10),PT(-380,-62,24,'RULE',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-380,-14,34,'Ek hissa peeche',{a:'start',w:700})+PT(-380,30,34,'= legal',{a:'start',w:700,fill:PR.good})+`<g transform="translate(170,-10)">${foot('A',.6)}</g>`,{state:'good'});}
+ if(n=='how'){
+  if(f<q.h1){o+=PHEAD(CX,330,72,'Umpire *dekhta* kaise?',f,q.h0,{step:3});
+   o+=PT(CX,420,30,'farak sirf kuch millimetre ka',{w:500,fill:PR.muted,op:pin(f,q.h0+12)});
+   o+=PCARD(CX,640,560,250,pin(f,q.h0+8),`<g transform="translate(0,-10)">${foot('A',.85)}</g>`);}
+  else {o+=PLABEL(CX,226,'Front-foot no-ball kaun pakadta hai');
+   o+=PCARD(315,450,380,300,pin(f,q.h1),PBADGE('ump',0,-70,f>=q.mn?PR.bad:PR.text,46)+PT(0,20,36,'Maidan umpire',{w:700})+PT(0,66,26,f>=q.mn?'front foot nahi':'',{w:500,fill:PR.bad})+(f>=q.mn?PICON('cross',130,-90,.6,PR.bad,4):''),{state:f>=q.mn?'bad':''});
+   o+=PCARD(765,450,380,300,pin(f,q.fr-4),PBADGE('tv',0,-70,PR.good,46)+PT(0,20,36,'TV umpire',{w:700})+PT(0,66,26,f>=q.tv?'har ball ka replay':'',{w:500,fill:PR.good})+(f>=q.tv?PICON('check',130,-90,.6,PR.good,4):''),{state:f>=q.tv?'good':''});
+   const lit=f>=q.hb?Math.min(6,1+Math.floor((f-q.hb)/6)):0;
+   o+=PCARD(CX,770,820,180,pin(f,q.tv),PT(-380,-36,24,'EK OVER = 6 BALL, 6 CHECK',{a:'start',w:600,fill:PR.muted,ls:3})+[...Array(6)].map((_,k)=>`<circle cx="${-340+k*84}" cy="30" r="26" fill="${k<lit?PR.good:PR.card2}" stroke="${PR.line2}" stroke-width="2"/>`+(k<lit?PICON('check',-340+k*84,30,.4,PR.hlText||'#0B0A2E',4):'')).join(''),{on:lit>=6});}}
+ if(n=='frame'){o+=PLABEL(CX,226,'TV umpire · slow motion');
+  // film strip: shoe approaching the line, frame by frame; frame 4 = landing, then freeze
+  const roll=f<q.rk?Math.min(3,Math.floor(Math.max(0,f-q.f0)/7)):3;
+  const xs=[-288,-96,96,288];const pos=[[260,-70],[200,-40],[146,-14],[92,0]];
+  o+=(f>=q.rk?PPILL(CX+330,236,'FREEZE',pin(f,q.rk),{solid:1,size:24}):PPILL(CX+330,236,'SLO-MO',pin(f,q.f0+4),{size:24}));
+  o+=PCARD(CX,420,820,300,pin(f,q.f0,8),xs.map((x,k)=>{const on=k==roll,sh=k<=roll;const [tx,ty]=pos[k];
+    return `<g transform="translate(${x},0)"><rect x="-86" y="-120" width="172" height="240" rx="14" fill="${on?PR.card2:PR.card}" stroke="${on?(f>=q.rk?PR.good:PR.hl):PR.line}" stroke-width="${on?3:2}"/>`+
+     (sh?`<g transform="translate(-36,10) scale(.5)"><line x1="-90" y1="40" x2="250" y2="40" stroke="${PR.line2}" stroke-width="5"/><line x1="0" y1="-150" x2="0" y2="44" stroke="#fff" stroke-width="5" stroke-dasharray="12 10" opacity=".8"/><g transform="translate(${tx},${40+ty})"><path d="${SHOE}" fill="${PR.card2}" stroke="#fff" stroke-width="6"/></g></g>`:'')+
+     PT(0,100,22,'F'+(k+1),{w:600,fill:on?PR.text:PR.dim})+`</g>`}).join(''),{on:f>=q.rk});
+  const pz=pin(f,q.rk+6,10);
+  o+=PCARD(CX,750,820,300,pz,PT(-380,-104,24,'LANDING FRAME · ZOOM',{a:'start',w:600,fill:PR.muted,ls:3})+`<g transform="translate(-10,0)">${foot('A',1.05)}</g>`+PPILL(300,110,'LEGAL',pin(f,q.fs),{solid:1,size:28}),{on:f>=q.fs});}
+ if(n=='wkt'){o+=PLABEL(CX,226,'Wicket on a no-ball');
+  const pa=pin(f,q.w0),pb=pin(f,q.nb,8),pc=pin(f,q.wp,10);
+  o+=PCARD(CX,360,820,170,pa,PBADGE('stumps',-330,0,PR.text,46)+PT(-260,-6,48,'OUT',{a:'start',w:700,fill:f>=q.nb?PR.muted:PR.text})+PT(-260,36,24,'umpire ki ungli upar',{a:'start',w:500,fill:PR.muted})+PSTRIKE(-270,-20,-120,pb));
+  o+=PCARD(CX,560,820,170,pb,PBADGE('tv',-330,0,PR.bad,46)+PT(-260,-6,44,'Replay: no-ball',{a:'start',w:700})+PT(-260,36,24,'TV umpire batata hai',{a:'start',w:500,fill:PR.muted}),{state:'bad'});
+  o+=PCARD(CX,770,820,200,pc,PBADGE('user',-330,0,PR.good,46)+PT(-260,-8,52,'Batter wapas',{a:'start',w:700})+PT(-260,40,26,'wicket cancel',{a:'start',w:500,fill:PR.good})+PPILL(280,0,'NOT OUT',pc,{solid:1,size:30}),{on:1});}
+ if(n=='end'){o+=PLABEL(CX,226,'Aapka jawab');
+  o+=PCARD(CX,430,820,320,pin(f,q.e0),PT(0,-110,40,'Line pe pair, no-ball?',{w:700})+`<g transform="translate(-10,20)">${foot('A',.9)}</g>`);
+  o+=PCARD(CX,720,820,180,pin(f,q.e0+8),PT(-380,-36,24,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PPILL(-170,36,'HAAN',pin(f,q.hn),{size:36})+PPILL(170,36,'NA',pin(f,q.na),{solid:1,size:36}),{on:1});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,290,80,'Line pe pair =',f,1,{step:2})+PHEAD(540,390,80,'*no-ball?*',f,10,{step:3})+
+  PPILL(540,490,'RULE: EK HISSA PEECHE = LEGAL',pin(f,5),{solid:1,size:34})+
+  `<g opacity="${pin(f,2)}" transform="translate(540,640)">${foot('A',1.25)}</g>`+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
