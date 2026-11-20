@@ -51,12 +51,36 @@ def riser():
     n=int(.36*SR); t=np.arange(n)/SR; return (np.sin(2*np.pi*np.cumsum(220+1500*(t/.36)**2)/SR)*.5+rng.standard_normal(n)*.25)*(t/.36)**2
 LIB['riser']=riser()*.5; LIB['boom']=M(sine(lambda t:46+70*np.exp(-t*18),.7,.22)*1.3,noise(.08,.02)*.5); LIB['swish']=whoosh()[:int(.22*SR)]*.22
 fx=np.zeros(N)
-try:
-    for t,typ in json.load(open(f'{W}/sfx.json')):
-        if typ in LIB: add(fx,LIB[typ],t,.55)
-except FileNotFoundError: pass
+# SFX v2 (SOUND_DESIGN.md): pro-spec recipes from engine/sfx_lib.py, each placed by its anchor (attack / peak / end)
+# on the cue time, with restraint: accents >= 0.8 s apart, UI detail >= 90 ms apart, successive dings step up a semitone.
+sys.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
+import sfx_lib
+try: cues=sorted(json.load(open(f'{W}/sfx.json')),key=lambda c:(round(c[0],2),{'boom':0,'impact':0,'riser':1}.get(c[1],2)))
+except FileNotFoundError: cues=[]
+last={}; dstep=0; dlast=-9; placed=[]
+for t,typ in cues:
+    r=sfx_lib.render(typ, dstep if typ=='ding' else 0)
+    if r is None:
+        if typ in LIB: add(fx,LIB[typ],t,.55); placed.append([t,typ,'legacy'])
+        continue
+    x,anc,role=r
+    gap={'impact':.8,'whoosh':1.4,'riser':1.0}.get(role,.12)
+    if t-last.get(role,-9)<gap: placed.append([t,typ,'dropped (too close to the last '+role+')']); continue
+    # one accent per moment: no small sound stacked on an impact, no whoosh on top of an impact
+    if role in ('ui','pop','zip','whoosh') and abs(t-last.get('impact',-9))<.15: placed.append([t,typ,'dropped (on an impact)']); continue
+    if role in ('ui','pop') and any(abs(t-q[0])<.06 for q in placed if len(q)>3 and q[2] in ('ui','pop')): placed.append([t,typ,'dropped (stacked)']); continue
+    last[role]=t
+    if typ=='ding': dstep=dstep+1 if t-dlast<1.5 else 0; dlast=t
+    add(fx,x,t-anc,1.0); placed.append([round(t,3),typ,role,round(t-anc,3)])
+json.dump(placed,open(f'{W}/sfx_report.json','w'))
+# keep SFX out of the voice's 1-4 kHz while someone speaks (earshot: VO rule)
+spk=np.zeros(N)
+for l in tl['lines']:
+    a0=int(l['start']*SR); spk[a0:a0+int(l['dur']*SR)]=1
+spk=np.convolve(spk,np.ones(int(.08*SR))/int(.08*SR),'same')
+fx=fx-sfx_lib.bp(fx,1000,4000)*.75*spk
 fxduck=1-0.55*np.clip(e2/0.06,0,1)   # SFX also dip under speech
-mix=np.tanh((vo*1.4+mus+fx*.35*fxduck)*1.05)*.95   # viewer feedback 19 Nov: voices louder, SFX about half as loud; mix=mix[:int(total*SR)]
+mix=np.tanh((vo*1.4+mus+fx*.42*fxduck)*1.05)*.95   # viewer feedback 19 Nov: voices louder, SFX about half as loud; mix=mix[:int(total*SR)]
 sf.write(f'{W}/mix.wav',np.stack([mix,mix],1),SR)
 subprocess.run(['ffmpeg','-v','error','-y','-i',f'{W}/mix.wav','-af','loudnorm=I=-14:TP=-1.5:LRA=11','-ar','48000',f'{W}/mix_n.wav'],check=True)
 if OUT!='-': subprocess.run(['ffmpeg','-v','error','-y','-i',f'{W}/video_only.mp4','-i',f'{W}/mix_n.wav','-map','0:v','-map','1:a','-c:v','copy','-c:a','aac','-b:a','192k','-movflags','+faststart','-shortest',OUT],check=True)

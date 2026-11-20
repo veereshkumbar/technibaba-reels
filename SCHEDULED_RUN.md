@@ -17,7 +17,7 @@ Veer's target: grow @technibaba from 36 followers (15 Nov 2026) to 20,000 by mid
 
 ## 1. Setup
 `git clone --depth 1 https://github.com/veereshkumbar/technibaba-reels /tmp/tb && cd /tmp/tb && ./setup.sh` and fix every ERROR line.
-Read: FORMATS.md, PREMIUM_STYLE.md, GUIDES.md, LONG_FORMAT.md (tutorial slots), RUNBOOK.md (all of it, especially "Rules for scheduled runs" and "Auto-post rules"), this file, RESEARCH.md, CRAFT.md, SPLIT_FORMAT.md, DIRECTOR_FORMAT.md, brand/dynamics.md, brand/tokens.json, posted.md, research/topic_bank.md. Tutorial slots also read STEPS_FORMAT.md; the evening slot reads CREATOR_GUIDES.md.
+Read: FORMATS.md, PREMIUM_STYLE.md, SOUND_DESIGN.md, GUIDES.md, LONG_FORMAT.md (tutorial slots), RUNBOOK.md (all of it, especially "Rules for scheduled runs" and "Auto-post rules"), this file, RESEARCH.md, CRAFT.md, SPLIT_FORMAT.md, DIRECTOR_FORMAT.md, brand/dynamics.md, brand/tokens.json, posted.md, research/topic_bank.md. Tutorial slots also read STEPS_FORMAT.md; the evening slot reads CREATOR_GUIDES.md.
 
 ## 1b. Comments (every run, before anything else)
 1. Do the "Check DM" public replies in GUIDES.md.
@@ -41,7 +41,7 @@ No repeats from posted.md (30 days), no keyword reuse (30 days), different topic
 
 ## 4. Build (premium, split layout, HyperFrames)
 Look: PREMIUM_STYLE.md (monochrome, Inter, graphite cards, white keyword box, calm motion). Start from a copy of `examples/premium_upi_en` (keep `layout_premium`), write the script in Hinglish unless Veer says otherwise, and build the panel only with the `pipeline/premium.js` kit. Then exactly as SPLIT_FORMAT.md "Render with HyperFrames":
-script.py (LINES + BEATS, every line has a rig key) → engine/voice.py → pipeline/beats.py (all checks true) → engine/build.py → engine/shots.py (fix overlaps, keep everything inside the title-safe box) → engine/lofi.py (new seed/mood) → pipeline/hf_build.py WORKDIR bed.wav 0.16 (every panel element has a soft cue) → in hf/: hyperframes lint (0 errors) and snapshot (look at it, fix problems) → hyperframes render -q looks (run it in the foreground with a 600 s timeout; a backgrounded render gets cancelled when the shell call ends) → pipeline/check.py (ALL CHECKS PASS).
+script.py (LINES + BEATS, every line has a rig key) → engine/voice.py → pipeline/beats.py (all checks true) → engine/build.py → engine/shots.py (fix overlaps, keep everything inside the title-safe box) → engine/lofi.py (new seed/mood) → pipeline/hf_build.py WORKDIR bed.wav 0.16 (sound per SOUND_DESIGN.md: accents on meaning moments, 1-2 impacts, whooshes only on page changes; then check WORKDIR/sfx_report.json) → in hf/: hyperframes lint (0 errors) and snapshot (look at it, fix problems) → hyperframes render -q looks (run it in the foreground with a 600 s timeout; a backgrounded render gets cancelled when the shell call ends) → pipeline/check.py (ALL CHECKS PASS).
 Reel rules: 25–35 s (hard gate in beats.py: 22–36 s), full-screen hook that shows the payoff first and lands by 1.5 s, one visual per idea in the panel, a visual change every 2–3 s, at most two hit-stops, captions with one highlighted keyword. See "Engagement rules" below; they decide the script.
 
 ### Engagement rules (18 Nov 2026 data, apply to every slot)
