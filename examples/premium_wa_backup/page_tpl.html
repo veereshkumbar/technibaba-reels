@@ -1,0 +1,86 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "WhatsApp ka apna cloud backup" (premium look, Hindi, 10:00 trending tech 20 Nov 2026) =================
+ICONS.cloud='<path d="M-30,26 H30 C46,26 50,2 34,-4 C34,-24 12,-34 -2,-22 C-12,-34 -36,-28 -34,-6 C-50,-2 -46,26 -30,26Z"/>';
+ICONS.key='<circle cx="-18" cy="0" r="16"/><path d="M-2,0 H38 M24,0 V14 M34,0 V10"/>';
+ICONS.users='<circle cx="-16" cy="-14" r="12"/><path d="M-38,30 C-38,6 -28,0 -16,0 C-4,0 6,6 6,30"/><circle cx="18" cy="-10" r="10"/><path d="M8,30 C10,10 16,6 22,6 C32,6 40,12 40,30"/>';
+ICONS.storage='<rect x="-38" y="-30" width="76" height="22" rx="6"/><rect x="-38" y="8" width="76" height="22" rx="6"/><circle cx="24" cy="-19" r="3"/><circle cx="24" cy="19" r="3"/>';
+const F=i=>BT[i].f0;
+const q={l1:F(1),pur:WF(1,'purani'),wa:WF(1,'whatsapp'),cl:WF(1,'cloud'),gb:WF(1,'2'),fr:WF(1,'free'),
+ sh:F(2),who:WF(2,'jinka'),full:WF(2,'storage'),
+ s0:F(3),s1:F(4),st:WF(4,'settings'),ch:WF(4,'chats'),cb:WF(4,'chat'),cu:WF(4,'cloud'),wp:WF(4,'whatsapp'),
+ b0:F(5),b1:F(6),bt:WF(6,'beta'),dh:WF(6,'dheere'),sb:WF(6,'sabko'),
+ k0:F(7),lk:WF(7,'lock'),pk:WF(7,'passkey'),k64:WF(7,'64'),bh:WF(7,'bhoole'),gy:WF(7,'gaya'),
+ e0:F(8),gg:WF(8,'google'),ww:WF(8,'whatsapp')};
+[[HOOK_END+2,'blip'],[HOOK_END+10,'tick'],[q.pur,'crack'],[q.wa,'blip'],[q.cl,'pop'],[q.gb,'ding'],[q.sh,'blip'],[q.sh+8,'tick'],[q.who,'ding'],[q.full,'tick'],
+ [q.s0,'blip'],[q.s1,'blip'],[q.st,'tick'],[q.ch,'tick'],[q.cb,'tick'],[q.cu,'pop'],[q.wp,'ding'],
+ [q.b0,'blip'],[q.b1,'blip'],[q.bt,'tick'],[q.dh,'tick'],[q.sb,'ding'],
+ [q.k0,'blip'],[q.lk,'tick'],[q.pk,'type'],[q.k64,'type'],[q.bh,'blip'],[q.e0,'blip'],[q.gg,'tick'],[q.ww,'tick']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,138,p,PBADGE(icon,-320,0,o.icol||PR.text,40)+PT(-250,-6,44,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,36,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function bar(x,y,w,p,col){return `<rect x="${x}" y="${y}" width="${w}" height="14" rx="7" fill="${PR.card2}"/><rect x="${x}" y="${y}" width="${w*p}" height="14" rx="7" fill="${col}"/>`}
+function setRow(y,p,label,on,o={}){if(p<=0)return '';return `<g opacity="${p}" transform="translate(0,${(1-p)*16})"><rect x="-330" y="${y-42}" width="660" height="84" rx="18" fill="${PR.card2}" stroke="${on?PR.hl:PR.line}" stroke-width="2"/>${PT(-300,y+12,34,label,{a:'start',w:700,fill:on?PR.text:PR.muted})}${o.radio!==undefined?`<circle cx="290" cy="${y}" r="16" fill="none" stroke="${o.radio?PR.hl:PR.line2}" stroke-width="3"/>${o.radio?`<circle cx="290" cy="${y}" r="8" fill="${PR.hl}"/>`:''}`:PT(300,y+12,34,'›',{a:'end',w:600,fill:PR.dim})}${o.sub?PT(-300+tw(label,34,700)+18,y+10,24,o.sub,{a:'start',w:500,fill:PR.good}):''}</g>`}
+function phoneUI(p,title,inner){return PCARD(CX,610,760,700,p,`<rect x="-380" y="-350" width="760" height="78" rx="26" fill="${PR.card2}"/>${PT(-340,-298,32,'‹',{a:'start',w:600,fill:PR.muted})}${PT(-300,-300,30,title,{a:'start',w:700})}`+inner)}
+function content(n,f){let o='';
+ if(n=='q'){o+=PLABEL(CX,236,'Chat backup');
+  const pa=pin(f,HOOK_END+2),pb=pin(f,HOOK_END+10),pc=pin(f,q.cl,10),old=pin(f,q.pur,8);
+  o+=rowCard(370,pa,'storage','Google storage','',{icol:PR.bad,right:bar(-250,22,420,Math.min(1,pa),PR.bad)+PPILL(270,0,'FULL',pa,{size:26,col:PR.bad})});
+  o+=rowCard(545,pb,'chat','WhatsApp backup',f>=q.pur?'old way: only Google':'backup stopped',{icol:PR.bad,tfill:f>=q.pur?PR.muted:PR.text})+PSTRIKE(290,539,590,old);
+  o+=rowCard(740,pc,'cloud','WhatsApp cloud',f>=q.gb?'its own storage':'new',{on:f>=q.gb,icol:PR.good,right:PPILL(230,0,'2 GB FREE',pin(f,q.gb),{solid:1,size:26})});}
+ if(n=='rule'){o+=PLABEL(CX,236,'Two places for one backup');
+  const pl=pin(f,q.sh),pr=pin(f,q.sh+8);
+  o+=PCARD(315,440,380,250,pl,PBADGE('storage',0,-60,PR.bad,40)+PT(0,24,38,'Google full',{w:700})+PT(0,70,28,'backup stops',{w:500,fill:PR.bad}),{state:'bad'});
+  o+=PCARD(765,440,380,250,pr,PBADGE('cloud',0,-60,PR.good,40)+PT(0,24,38,'WhatsApp cloud',{w:700})+PT(0,70,28,'separate 2 GB',{w:500,fill:PR.good}),{state:'good'});
+  const ps=pin(f,q.sh+14,10);o+=PCARD(CX,740,800,190,ps,PBADGE('chat',-320,0,PR.text,40)+PT(-250,-22,28,'SEND THIS TO PAPA',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,26,34,f>=q.who?'whose phone says':'',{a:'start',w:700})+PT(-250,68,34,f>=q.full?'"storage full" every day':'',{a:'start',w:700}),{on:1});}
+ if(n=='how'){
+  if(f<q.s1){o+=PHEAD(CX,330,72,'Where is it?',f,q.s0,{step:3})+PT(CX,420,30,'inside WhatsApp, no new app',{w:500,fill:PR.muted,op:pin(f,q.s0+10)});
+   o+=PCARD(CX,640,560,250,pin(f,q.s0+6),PBADGE('storage',-180,0,PR.muted,52)+PARROW(-110,0,60,pin(f,q.s0+14),PR.line2)+PBADGE('cloud',130,0,PR.good,52));}
+  else {const t=f>=q.cu?'Cloud backup':f>=q.cb?'Chat backup':f>=q.ch?'Chats':'Settings';o+=PLABEL(CX,226,'WhatsApp > Settings');
+   const inner=f<q.cu?
+     setRow(-200,pin(f,q.st),'Settings',f>=q.st&&f<q.ch)+setRow(-90,pin(f,q.ch),'Chats',f>=q.ch&&f<q.cb)+setRow(20,pin(f,q.cb),'Chat backup',f>=q.cb)
+    :PT(-330,-200,26,'CLOUD BACKUP',{a:'start',w:600,fill:PR.muted,ls:3})+setRow(-110,pin(f,q.cu),'WhatsApp',f>=q.wp,{radio:f>=q.wp,sub:'2 GB free'})+setRow(0,pin(f,q.cu+6),'Google',false,{radio:false})+
+     PT(0,150,26,'switch any time',{w:500,fill:PR.muted,op:pin(f,q.wp+8)});
+   o+=phoneUI(pin(f,q.s1-4,10),t,inner);}}
+ if(n=='beta'){o+=PLABEL(CX,226,'Not on your phone yet?');
+  o+=rowCard(370,pin(f,q.b0),'phone','Option missing?',f>=q.bt?'normal for now':'',{});
+  const pu=pin(f,q.bt,10),lit=f>=q.sb?10:f>=q.dh?Math.min(10,2+Math.floor((f-q.dh)/6)):2;
+  o+=PCARD(CX,610,800,260,pu,PT(-360,-80,26,'BETA · ANDROID 2.26.46.4',{a:'start',w:600,fill:PR.muted,ls:3})+[...Array(10)].map((_,k)=>PICON('user',-324+k*72,10,.5,k<lit?PR.good:PR.dim,4)).join('')+PT(-360,100,30,f>=q.dh?'rolling out slowly':'a few users first',{a:'start',w:600}),{on:f>=q.sb});
+  o+=PT(CX,850,30,'Keep WhatsApp updated',{w:600,fill:PR.good,op:pin(f,q.sb+6)});}
+ if(n=='key'){o+=PLABEL(CX,226,'The catch');
+  o+=rowCard(370,pin(f,q.k0),'lock','Always locked',f>=q.lk?'end-to-end encrypted':'',{icol:PR.good});
+  const pk=pin(f,q.pk,10),dg=f>=q.k64?Math.min(16,Math.floor((f-q.k64)/1.5)):0;
+  o+=PCARD(CX,590,800,230,pk,PBADGE('key',-320,-30,PR.text,40)+PT(-250,-40,40,'Passkey',{a:'start',w:700})+PT(-250,0,26,'or a 64-digit key',{a:'start',w:500,fill:PR.muted})+PT(-360,80,34,'4821 9037 5562 1184'.slice(0,dg+Math.floor(dg/4))+(dg>=16?' …':''),{a:'start',w:700,fill:PR.num}),{on:f>=q.pk&&f<q.bh});
+  o+=PCARD(CX,820,800,150,pin(f,q.bh),PICON('warn',-320,0,.6,PR.bad,4)+PT(-250,-4,44,'Forget it = backup gone',{a:'start',w:700})+PT(-250,40,24,'nobody can open it for you',{a:'start',w:500,fill:PR.muted}),{state:'bad'});}
+ if(n=='end'){o+=PLABEL(CX,226,'Your pick');
+  const pg=pin(f,q.e0),pw=pin(f,q.e0+8);
+  o+=PCARD(315,440,380,250,pg,PBADGE('storage',0,-60,PR.text,40)+PT(0,24,40,'Google',{w:700})+PT(0,70,26,'uses your Google space',{w:500,fill:PR.muted}),{on:f>=q.gg&&f<q.ww});
+  o+=PCARD(765,440,380,250,pw,PBADGE('cloud',0,-60,PR.good,40)+PT(0,24,40,'WhatsApp',{w:700})+PT(0,70,26,'2 GB free, beta',{w:500,fill:PR.muted}),{on:f>=q.ww});
+  const pc=pin(f,q.gg,10);o+=PCARD(CX,720,800,200,pc,PT(-360,-40,26,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PPILL(-200,40,'GOOGLE',pin(f,q.gg+4),{size:34})+PPILL(160,40,'WHATSAPP',pin(f,q.ww),{solid:1,size:34}),{on:1});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,300,80,'Google storage *full*',f,4,{step:3})+PHEAD(540,400,80,'WhatsApp backup gone?',f,12,{step:3})+
+  PPILL(540,500,'NEW: WHATSAPP CLOUD · 2 GB FREE',pin(f,6),{solid:1,size:36})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
