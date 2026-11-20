@@ -1,0 +1,80 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "Aadhaar Biometric Lock" (premium look, Hindi, morning tutorial 20 Nov 2026) =================
+ICONS.finger='<path d="M-26,-14 C-22,-36 22,-36 26,-14"/><path d="M-30,6 C-32,-22 -12,-30 0,-30 C14,-30 32,-22 30,6 C30,20 26,30 22,38"/><path d="M-18,30 C-22,18 -20,4 -18,-6 C-14,-18 14,-18 18,-6 C20,6 18,22 12,36"/><path d="M0,-6 C-4,8 -4,24 -2,40"/>';
+ICONS.bank='<path d="M-40,-14 L0,-38 L40,-14Z"/><line x1="-30" y1="-6" x2="-30" y2="26"/><line x1="-10" y1="-6" x2="-10" y2="26"/><line x1="10" y1="-6" x2="10" y2="26"/><line x1="30" y1="-6" x2="30" y2="26"/><line x1="-42" y1="36" x2="42" y2="36"/>';
+ICONS.timer='<circle cx="0" cy="6" r="34"/><line x1="0" y1="6" x2="0" y2="-14"/><line x1="0" y1="6" x2="14" y2="14"/><line x1="-10" y1="-38" x2="10" y2="-38"/>';
+const F=i=>BT[i].f0;
+const q={l1:F(1),h:WF(2,'hoga'),lk:WF(2,'lock'),bk:WF(2,'bekaar'),sh:F(3),who:WF(3,'jinka'),bank:WF(3,'bank'),
+ s0:F(4),s1:F(5),num:WF(5,'aadhaar'),cap:WF(5,'captcha'),otp:WF(5,'otp'),lg:WF(5,'login'),
+ s2:F(6),tile:WF(6,'lock'),box:WF(6,'box'),tick:WF(6,'tick'),lock2:WF(6,'aur')+8,
+ u0:F(7),ang:WF(7,'angootha'),das:WF(8,'das'),un:WF(8,'unlock'),re:WF(8,'phir'),re2:WF(8,'apne'),
+ e0:F(9),call:WF(9,'1930'),pg:WF(9,'poori'),com:WF(9,'comment')};
+[[HOOK_END+2,'blip'],[HOOK_END+10,'tick'],[q.l1+10,'blip'],[q.h,'blip'],[q.lk,'ding'],[q.bk,'tick'],[q.sh,'blip'],[q.sh+8,'tick'],[q.who,'ding'],
+ [q.s0,'blip'],[q.s1,'blip'],[q.num,'type'],[q.cap,'type'],[q.otp,'type'],[q.lg,'tick'],[q.s2,'blip'],[q.tile,'pop'],[q.tick,'tick'],[q.lock2,'ding'],
+ [q.u0,'blip'],[q.ang,'tick'],[q.das,'blip'],[q.un,'tick'],[q.re2,'ding'],[q.e0,'blip'],[q.call,'ding'],[q.com,'blip'],[q.com+8,'type']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,138,p,PBADGE(icon,-320,0,o.icol||PR.text,40)+PT(-250,-6,44,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,36,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function field(y,p,label,val,o={}){if(p<=0)return '';return `<g opacity="${p}" transform="translate(0,${(1-p)*16})"><rect x="-330" y="${y-44}" width="660" height="88" rx="18" fill="${PR.card2}" stroke="${o.on?PR.hl:PR.line}" stroke-width="2"/>${PT(-300,y-8,22,label.toUpperCase(),{a:'start',w:600,fill:PR.muted,ls:2})}${PT(-300,y+28,34,val,{a:'start',w:700})}${o.ok?PICON('check',290,y,.55,PR.good,4):''}</g>`}
+function browser(p,url,inner){return PCARD(CX,610,760,700,p,`<rect x="-380" y="-350" width="760" height="78" rx="26" fill="${PR.card2}"/>`+[0,1,2].map(k=>`<circle cx="${-340+k*26}" cy="-311" r="7" fill="${PR.dim}"/>`).join('')+
+ `<rect x="-240" y="-334" width="560" height="46" rx="23" fill="${PR.bg}" stroke="${PR.line}" stroke-width="2"/>${PICON('lock',-214,-311,.3,PR.good,3)}${PT(-190,-301,26,url,{a:'start',w:600})}`+inner)}
+function content(n,f){let o='';
+ if(n=='q'){o+=PLABEL(CX,236,'Aadhaar fingerprint fraud');
+  const pa=pin(f,HOOK_END+2),pb=pin(f,HOOK_END+10),pc=pin(f,q.h,10),fail=pin(f,q.bk,8);
+  o+=rowCard(370,pa,'finger','Cloned fingerprint','copied from a document',{icol:PR.bad,right:fail>0?PPILL(270,0,'FAILS',fail,{size:26,col:PR.good}):''});
+  o+=rowCard(545,pb,'rupee','Cash withdrawn','no OTP, no call',{icol:PR.bad,tfill:f>=q.bk?PR.muted:PR.text})+PSTRIKE(290,539,590,fail);
+  o+=rowCard(740,pc,'lock','Biometric Lock',f>=q.lk?'turn it ON':'',{on:f>=q.lk,icol:PR.good,right:PPILL(250,0,'THE FIX',pin(f,q.lk),{solid:1,size:26})});}
+ if(n=='rule'){o+=PLABEL(CX,236,'Same fingerprint, two results');
+  const pl=pin(f,q.sh),pr=pin(f,q.sh+8);
+  o+=PCARD(315,440,380,250,pl,PBADGE('finger',0,-60,PR.bad,40)+PT(0,24,38,'Lock OFF',{w:700})+PT(0,70,28,'money can go',{w:500,fill:PR.bad}),{state:'bad'});
+  o+=PCARD(765,440,380,250,pr,PBADGE('lock',0,-60,PR.good,40)+PT(0,24,38,'Lock ON',{w:700})+PT(0,70,28,'scan is refused',{w:500,fill:PR.good}),{state:'good'});
+  const ps=pin(f,q.sh+14,10);o+=PCARD(CX,740,800,190,ps,PBADGE('chat',-320,0,PR.text,40)+PT(-250,-22,28,'SEND THIS TO PAPA',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,26,34,f>=q.who?'Aadhaar linked to':'whose',{a:'start',w:700})+PT(-250,68,34,f>=q.bank?'a bank account':'',{a:'start',w:700}),{on:1});}
+ if(n=='how'){
+  if(f<q.s1){o+=PHEAD(CX,330,72,'How to *lock* it?',f,q.s0,{step:3})+PT(CX,420,30,'free · 2 minutes · on any phone',{w:500,fill:PR.muted,op:pin(f,q.s0+10)});
+   o+=PCARD(CX,640,560,250,pin(f,q.s0+6),PBADGE('finger',-180,0,PR.text,52)+PARROW(-110,0,60,pin(f,q.s0+14),PR.line2)+PBADGE('lock',130,0,PR.good,52));}
+  else if(f<q.s2){o+=PLABEL(CX,226,'Step 1 · Login');
+   o+=browser(pin(f,q.s1-4,10),'myaadhaar.uidai.gov.in',PT(0,-200,30,'Type it yourself. No links.',{w:600,fill:PR.muted,op:pin(f,q.s1+8)})+
+    field(-90,pin(f,q.num),'Aadhaar number','XXXX XXXX 1234',{ok:f>=q.cap})+field(20,pin(f,q.cap),'Captcha','k7Pq2',{ok:f>=q.otp})+field(130,pin(f,q.otp),'OTP on Aadhaar mobile','• • • • • •',{ok:f>=q.lg,on:f<q.lg})+
+    (f>=q.lg?`<g opacity="${pin(f,q.lg)}"><rect x="-150" y="215" width="300" height="76" rx="38" fill="${PR.hl}"/>${PT(0,264,34,'Login',{w:700,fill:PR.hlText})}</g>`:''));}
+  else {o+=PLABEL(CX,226,'Step 2 · Lock');
+   const tp=pin(f,q.tile),ck=f>=q.tick,dn=f>=q.lock2;
+   o+=browser(1,'myaadhaar.uidai.gov.in',`<g opacity="${tp}"><rect x="-330" y="-240" width="660" height="150" rx="22" fill="${PR.card2}" stroke="${PR.hl}" stroke-width="2.5"/>${PBADGE('finger',-250,-165,PR.text,40)}${PT(-185,-170,38,'Lock/Unlock Biometrics',{a:'start',w:700})}${PT(-185,-128,24,'Aadhaar Services',{a:'start',w:500,fill:PR.muted})}</g>`+
+    `<g opacity="${pin(f,q.box)}"><rect x="-330" y="-50" width="60" height="60" rx="12" fill="${ck?PR.hl:'none'}" stroke="${ck?PR.hl:PR.line2}" stroke-width="3"/>${ck?PICON('check',-300,-20,.5,PR.hlText,5):''}${PT(-245,-28,28,'I understand: no fingerprint or',{a:'start',w:500,fill:PR.muted})}${PT(-245,8,28,'iris check until I unlock',{a:'start',w:500,fill:PR.muted})}</g>`+
+    `<g opacity="${pin(f,q.tick+6)}"><rect x="-170" y="70" width="340" height="86" rx="43" fill="${dn?PR.hl:'none'}" stroke="${PR.hl}" stroke-width="3"/>${PT(0,126,40,'Lock',{w:700,fill:dn?PR.hlText:PR.text})}</g>`+
+    (dn?`<g opacity="${pin(f,q.lock2)}">${PICON('lock',-150,240,.5,PR.good,4)}${PT(-110,252,34,'Biometrics locked',{a:'start',w:700,fill:PR.good})}</g>`:''));}}
+ if(n=='unlock'){o+=PLABEL(CX,226,'Step 3 · Need your fingerprint?');
+  o+=rowCard(370,pin(f,q.u0),'bank','Bank, ration, KYC',f>=q.ang?'a fingerprint scan is needed':'',{});
+  const pt=pin(f,q.das,10),sec=f>=q.un?Math.max(0,600-Math.floor((f-q.un)*2)):600,mm=String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');
+  o+=PCARD(CX,600,800,250,pt,PBADGE('timer',-300,0,PR.text,52)+PT(-210,-30,26,'UNLOCK FOR',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-210,56,96,f>=q.un?mm:'10 min',{a:'start',w:800,fill:PR.num}),{on:f>=q.un&&f<q.re});
+  o+=PCARD(CX,820,800,140,pin(f,q.re),PICON('lock',-320,0,.7,PR.good,4)+PT(-250,14,44,'Locks again by itself',{a:'start',w:700}),{state:'good'});}
+ if(n=='end'){o+=PLABEL(CX,226,'Step 4 · Money gone?');
+  o+=PCARD(CX,420,800,190,pin(f,q.e0),PBADGE('call',-320,0,PR.text,44)+PT(-250,-30,28,'CALL AT ONCE',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,50,84,f>=q.call?'1930':'',{a:'start',w:800})+PT(330,46,24,'or report at',{a:'end',w:500,fill:PR.muted})+PT(330,76,24,'cybercrime.gov.in',{a:'end',w:500,fill:PR.muted}),{on:f>=q.call&&f<q.com});
+  const pc=pin(f,q.pg,10),ty=Math.max(0,Math.min(5,Math.floor((f-q.com-8)/3)));o+=PT(CX,925,30,'Lock ON = cloned fingerprint fails',{w:600,fill:PR.good,op:pin(f,q.pg+6)});o+=PCARD(CX,700,800,230,pc,PT(-360,-50,26,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PT(-360,30,72,f>=q.com+8?'GUIDE'.slice(0,ty):'',{a:'start',w:800})+PPILL(230,30,'FULL GUIDE',pin(f,q.com+24),{solid:1,size:30})+PT(-360,90,24,'step-by-step guide in your DMs',{a:'start',w:500,fill:PR.muted,op:pin(f,q.com+30)}),{on:f>=q.com});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,300,80,'Cloned *fingerprint*',f,4,{step:3})+PHEAD(540,400,80,'No OTP. Money gone.',f,12,{step:3})+
+  PPILL(540,500,'FIX: BIOMETRIC LOCK',pin(f,16),{solid:1,size:40})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>

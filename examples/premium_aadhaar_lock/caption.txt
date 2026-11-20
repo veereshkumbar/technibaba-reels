@@ -1,0 +1,13 @@
+Aadhaar ka nakli angootha, bina OTP ke paise nikaal sakta hai. Jab tak Biometric Lock on nahi.
+
+2 minute ka kaam:
+1. myaadhaar.uidai.gov.in khud type karo > Login: Aadhaar number, captcha, OTP
+2. Lock/Unlock Biometrics > box pe tick > Lock
+3. Bank ya ration pe angootha lagana hai? Wahin se 10 minute ka Unlock, phir apne aap lock
+4. Paise kate? Turant 1930 ya cybercrime.gov.in
+
+Papa ko bhejo, jinka Aadhaar bank se juda hai. Comment karo GUIDE, step-by-step guide DM mein bhejenge.
+
+Mobile number Aadhaar se linked hona chahiye. Screen labels thode alag ho sakte hain, hamesha official UIDAI site follow karo. Sources: Paisabazaar (30 Oct 2026), CitizenNest (Jun 2026), BankBazaar, Groww (lock steps, 10-minute unlock); Deccan Herald (Karnataka CID advice), Axis Bank (AePS fraud, 1930); Business Today (new Aadhaar app, May 2026). Drawn illustration, no app screenshots.
+
+#technibaba #aadhaar #biometriclock #aadhaarsafety #cybersafety #aeps #techtips #hinglish

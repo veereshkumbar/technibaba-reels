@@ -1,6 +1,65 @@
 {
- "updated": "2026-11-19",
+ "updated": "2026-11-20",
  "guides": [
+  {
+   "slug": "lock-aadhaar-biometrics-myaadhaar",
+   "date": "2026-11-20",
+   "title": "Lock your Aadhaar fingerprint in 2 minutes (Biometric Lock)",
+   "lane": "Tutorial",
+   "summary": "With a cloned fingerprint, a fraudster can try to withdraw cash from an Aadhaar-linked bank account through AePS, without any OTP. Locking your Aadhaar biometrics makes fingerprint and iris checks fail until you unlock them.",
+   "steps": [
+    {
+     "title": "Log in to myAadhaar",
+     "body": "Type myaadhaar.uidai.gov.in into your browser yourself (do not open links from messages). Tap Login, enter your 12-digit Aadhaar number and the captcha, then the OTP sent to your Aadhaar-linked mobile number. Your mobile number must be registered with Aadhaar."
+    },
+    {
+     "title": "Open Lock/Unlock Biometrics",
+     "body": "Under Aadhaar Services, tap 'Lock/Unlock Biometrics'. Tick the box that says you understand biometric authentication will not work until you unlock, then tap Lock (on some screens 'Enable'). You will see a confirmation that your biometrics are locked."
+    },
+    {
+     "title": "Need your fingerprint at a bank or ration shop? Unlock for 10 minutes",
+     "body": "Go back to the same Lock/Unlock Biometrics page, log in with OTP and choose Unlock. The unlock is temporary: after about 10 minutes the lock turns on again by itself. Use 'Disable' only if you want to switch the lock off completely."
+    },
+    {
+     "title": "If money is taken",
+     "body": "Call 1930 (National Cybercrime Helpline) at once, or report at cybercrime.gov.in, and inform your bank."
+    }
+   ],
+   "tip": "Do it for your parents and grandparents too: anyone whose Aadhaar is linked to a bank account. The new Aadhaar app from UIDAI also lets you lock and manage biometrics.",
+   "caution": "Screen labels can change slightly; always follow the official UIDAI site. OTP-based Aadhaar checks still work while biometrics are locked. UIDAI never asks for your OTP on a call.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "Paisabazaar: How to lock, unlock and disable Aadhaar biometrics (updated 30 Oct 2026)",
+     "url": "https://www.paisabazaar.com/aadhar-card/lock-unlock-aadhaar-biometric-data/"
+    },
+    {
+     "title": "CitizenNest: Aadhaar biometric lock and unlock (updated 20 Jun 2026)",
+     "url": "https://www.citizennest.com/guide/aadhaar-biometric-lock-unlock"
+    },
+    {
+     "title": "BankBazaar: How to lock and unlock Aadhaar biometric online",
+     "url": "https://www.bankbazaar.com/aadhar-card/lock-unlock-aadhar-biometric-data-online.html"
+    },
+    {
+     "title": "Groww: Aadhaar biometric lock and unlock",
+     "url": "https://groww.in/p/aadhaar-card/aadhaar-biometric"
+    },
+    {
+     "title": "Deccan Herald: Lock Aadhaar biometrics to prevent fraud, say experts (Karnataka CID)",
+     "url": "https://www.deccanherald.com/india/karnataka/bengaluru/lock-aadhaar-biometrics-to-prevent-fraud-experts-2798402"
+    },
+    {
+     "title": "Axis Bank: Aadhaar Enabled Payment System frauds",
+     "url": "https://www.axis.bank.in/fraud-awareness/types-of-scams/aadhaar-enabled-payment-system-frauds"
+    },
+    {
+     "title": "Business Today: New Aadhaar app brings biometric lock (27 May 2026)",
+     "url": "https://www.businesstoday.in/india/story/maadhaar-app-to-be-discontinued-soon-new-app-brings-face-auth-qr-sharing-biometric-lock-533396-2026-05-27"
+    }
+   ]
+  },
   {
    "slug": "instagram-reel-blurry-after-upload-3-fixes",
    "date": "2026-11-19",
