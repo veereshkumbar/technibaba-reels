@@ -1,0 +1,143 @@
+{
+ "dateLabel": "20 NOV 2026",
+ "scenes": [
+  {
+   "id": "open",
+   "mode": "anchor",
+   "title": "Aaj ki|*TECH NEWS*",
+   "list": [
+    "IPO",
+    "Vivo",
+    "Gemini",
+    "Space"
+   ],
+   "lines": [
+    {
+     "hi": "चलो देखते हैं आज टेक की दुनिया में क्या हुआ. आखिरी खबर, आपके व्हाट्सऐप फ़ैमिली ग्रुप से जुड़ी है.",
+     "en": "Chalo dekhte hain aaj tech ki duniya mein kya hua. Aakhri khabar, aapke WhatsApp family group se judi hai.",
+     "pose": "wave",
+     "expr": "happy",
+     "big": 1,
+     "cap": "Aaj ki *tech news*"
+    }
+   ]
+  },
+  {
+   "id": "ipo",
+   "mode": "card",
+   "story": 1,
+   "kicker": "BUSINESS",
+   "icon": "globe",
+   "stat": "$81B",
+   "statSub": "raised in the IPO",
+   "headline": "*Anthropic* lists on Nasdaq in a *record IPO*",
+   "source": "Fox Business, Euronews via Yahoo Finance",
+   "lines": [
+    {
+     "hi": "नंबर एक. क्लॉड बनाने वाली एंथ्रॉपिक का आईपीओ आया. रिपोर्ट्स के मुताबिक, अब तक का सबसे बड़ा आईपीओ, इक्यासी अरब डॉलर.",
+     "en": "Number ek. Claude banane wali Anthropic ka IPO aaya. Reports ke mutabik, ab tak ka sabse bada IPO, 81 arab dollar.",
+     "pose": "count",
+     "expr": "shocked",
+     "cap": "Sabse bada *IPO*"
+    }
+   ]
+  },
+  {
+   "id": "vivo",
+   "mode": "card",
+   "story": 2,
+   "kicker": "INDIA",
+   "icon": "phone",
+   "stat": "26 NOV",
+   "statSub": "India launch date",
+   "headline": "Vivo *X500* series launches in India on *26 November*",
+   "source": "Vivo India via Digit, Beebom",
+   "lines": [
+    {
+     "hi": "नंबर दो. वीवो एक्स फ़ाइव हंड्रेड सीरीज़, छब्बीस नवंबर को भारत में लॉन्च. प्रो मैक्स में दो सौ मेगापिक्सल ज़ूम कैमरा.",
+     "en": "Number do. Vivo X500 series, chhabbees November ko Bharat mein launch. Pro Max mein do sau megapixel zoom camera.",
+     "pose": "palm",
+     "expr": "happy",
+     "cap": "*26 Nov* launch"
+    }
+   ]
+  },
+  {
+   "id": "gemini",
+   "mode": "card",
+   "story": 3,
+   "kicker": "AI",
+   "icon": "ai",
+   "stat": "1M",
+   "statSub": "token context window",
+   "headline": "Google releases *Gemini 4 Neon* for Pro and Ultra users",
+   "source": "Google, InfoWorld, TalkAndroid",
+   "lines": [
+    {
+     "hi": "नंबर तीन. गूगल का नया जेमिनी फ़ोर नियॉन आया, अभी सिर्फ़ प्रो और अल्ट्रा वालों के लिए.",
+     "en": "Number teen. Google ka naya Gemini 4 Neon aaya, abhi sirf Pro aur Ultra walon ke liye.",
+     "pose": "explain",
+     "expr": "explaining",
+     "cap": "Gemini *4 Neon*"
+    }
+   ]
+  },
+  {
+   "id": "space",
+   "mode": "card",
+   "story": 4,
+   "kicker": "SPACE",
+   "icon": "space",
+   "stat": "2029",
+   "statSub": "target launch",
+   "headline": "Google books *Blue Origin* rocket to put *AI chips in space*",
+   "source": "Via Satellite, The Next Web",
+   "lines": [
+    {
+     "hi": "नंबर चार. गूगल के ए आई चिप्स जाएँगे अंतरिक्ष में. ब्लू ओरिजिन का रॉकेट बुक, टारगेट दो हज़ार उनतीस.",
+     "en": "Number chaar. Google ke AI chips jayenge antariksh mein. Blue Origin ka rocket book, target 2029.",
+     "pose": "point",
+     "expr": "smug",
+     "cap": "AI chips *space* mein"
+    }
+   ]
+  },
+  {
+   "id": "whatsapp",
+   "mode": "card",
+   "story": 5,
+   "kicker": "APPS",
+   "icon": "phone",
+   "stat": "1,500",
+   "statSub": "members per group",
+   "headline": "WhatsApp groups go from 1,024 to *1,500 members*",
+   "source": "WABetaInfo, Beebom",
+   "lines": [
+    {
+     "hi": "और नंबर पाँच. व्हाट्सऐप ग्रुप में अब पंद्रह सौ लोग! पहले एक हज़ार चौबीस. ऐप अपडेट करो.",
+     "en": "Aur number paanch. WhatsApp group mein ab pandrah sau log! Pehle 1024. App update karo.",
+     "pose": "blown",
+     "expr": "shocked",
+     "big": 1,
+     "hit": "pandrah",
+     "cap": "Group mein *1,500*!"
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "mode": "anchor",
+   "title": "Roz subah|*7 baje*",
+   "lines": [
+    {
+     "hi": "आपके सबसे बड़े ग्रुप में कितने लोग? कमेंट करो, और फ़ैमिली ग्रुप में भेजो. रोज़ सुबह सात बजे.",
+     "en": "Aapke sabse bade group mein kitne log? Comment karo, aur family group mein bhejo. Roz subah saat baje.",
+     "pose": "point",
+     "expr": "happy",
+     "big": 1,
+     "cap": "Kitne *log*?"
+    }
+   ]
+  }
+ ]
+}
