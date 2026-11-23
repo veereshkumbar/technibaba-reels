@@ -1,0 +1,109 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "4K TV, phir bhi HD?" (premium look, Hindi, 21:00 Bollywood x tech 23 Nov 2026) =================
+ICONS.tv='<rect x="-44" y="-32" width="88" height="56" rx="6"/><path d="M-18,38 H18 M0,24 V38"/>';
+ICONS.film='<rect x="-38" y="-30" width="76" height="60" rx="8"/><path d="M-38,-12 H38 M-38,12 H38 M-20,-30 V-12 M0,-30 V-12 M20,-30 V-12"/>';
+ICONS.plug='<rect x="-26" y="-14" width="52" height="34" rx="4"/><path d="M-14,-14 V-34 M14,-14 V-34 M0,20 V40"/>';
+ICONS.card='<rect x="-40" y="-26" width="80" height="52" rx="8"/><path d="M-40,-8 H40"/>';
+const F=i=>BT[i].f0;
+const q={c0:F(1),cj:WF(1,'jab'),cc:WF(1,'chain'),cn:WF(1,'na'),
+ s0:F(2),sd:WF(2,'dost'),sp:WF(2,'premium'),sh:WF(2,'dekh'),
+ k0:F(3),
+ p0:F(4),pn:WF(4,'netflix'),ps:WF(4,'sirf'),pp:WF(4,'premium'),p6:WF(4,'649'),
+ l0:F(5),lp:WF(5,'page'),l4:WF(5,'4k'),ll:WF(5,'likha'),
+ t0:F(6),ts:WF(6,'stick'),th:WF(6,'hdcp'),tp:WF(6,'port'),tl:WF(6,'lagao'),ta:WF(6,'aksar'),
+ r0:F(7),rk:WF(7,'kamzor'),rn:WF(7,'netflix'),rq:WF(7,'quality'),
+ z0:F(8),z4:WF(8,'4k'),zh:WF(8,'hd')};
+[[HOOK_END+2,'blip'],[q.cj,'tick'],[q.cc+4,'ding'],[q.cn,'tick'],
+ [q.s0,'blip'],[q.sd,'ding'],[q.sp,'tick'],[q.sh,'pop'],
+ [q.k0,'blip'],[q.k0+6,'tick'],
+ [q.p0,'blip'],[q.pn,'tick'],[q.pn+8,'tick'],[q.pp,'ding'],[q.p6,'cash'],
+ [q.l0,'blip'],[q.lp,'tick'],[q.l4,'ding'],
+ [q.t0,'blip'],[q.ts,'tick'],[q.th,'ding'],[q.tl,'click'],[q.ta,'pop'],
+ [q.r0,'blip'],[q.rn,'tick'],[q.rq,'glitch'],
+ [q.z0,'blip'],[q.z4,'pop'],[q.zh,'tick']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+const tick=(x,y,p,col=PR.good)=>p<=0?'':`<g opacity="${p}"><circle cx="${x}" cy="${y}" r="22" fill="${col}"/>${PICON('check',x,y,.42,PR.hlText,4)}</g>`;
+const crossB=(x,y,p)=>p<=0?'':`<g opacity="${p}"><circle cx="${x}" cy="${y}" r="22" fill="${PR.bad}"/>${PICON('cross',x,y,.5,'#fff',4)}</g>`;
+// the 4-link chain: Plan, Film, TV, Port. st: 0 unknown, 1 good, 2 bad
+const LINKS=[['card','Plan'],['film','Film'],['tv','4K TV'],['plug','Port']];
+function chain(y,p,st,o={}){let g='';const xs=[180,420,660,900];
+ for(let i=0;i<3;i++)g+=`<line x1="${xs[i]+90}" y1="${y}" x2="${xs[i+1]-90}" y2="${y}" stroke="${st[i]==2||st[i+1]==2?PR.bad:PR.line2}" stroke-width="6" stroke-dasharray="${st[i]&&st[i+1]?'0':'10 10'}" opacity="${p}"/>`;
+ xs.forEach((x,i)=>{const pi=o.stagger?pin(f_,o.a+i*5):p;const c=st[i]==1?PR.good:st[i]==2?PR.bad:PR.muted;
+  g+=`<g opacity="${pi}"><rect x="${x-90}" y="${y-95}" width="180" height="190" rx="24" fill="${PR.card}" stroke="${st[i]?c:PR.line2}" stroke-width="${st[i]?4:2}"/>`+PICON(LINKS[i][0],x,y-25,.85,c,4)+PT(x,y+62,30,LINKS[i][1],{w:700,fill:st[i]==2?PR.bad:PR.text})+
+   (st[i]==1?tick(x+80,y-85,1):st[i]==2?crossB(x+80,y-85,1):'')+`</g>`});
+ return g}
+let f_=0;
+function tvHD(x,y,p,label,bad){return `<g opacity="${p}" transform="translate(${x},${y})"><rect x="-230" y="-140" width="460" height="270" rx="20" fill="${PR.card2}" stroke="${PR.line2}" stroke-width="4"/>`+
+ `<rect x="-205" y="-117" width="410" height="224" rx="10" fill="${PR.bg}"/>`+PT(0,24,96,label,{w:800,fill:bad?PR.bad:PR.good})+`<path d="M-70,170 H70 M0,130 V170" stroke="${PR.line2}" stroke-width="8"/></g>`}
+function content(n,f){let o='';f_=f;
+ if(n=='claim'){o+=PHEAD(CX,250,64,'4K = *poori chain*',f,HOOK_END+2,{step:3});
+  o+=chain(500,1,[0,0,1,0],{stagger:1,a:q.cj});
+  const pb=pin(f,q.cn);
+  o+=PCARD(CX,790,820,190,pb,PT(-360,-20,30,'Ek bhi kadi kamzor',{a:'start',w:600,fill:PR.muted})+PT(-360,44,58,'toh sab HD',{a:'start',w:800,fill:PR.bad})+PICON('tv',300,0,1.1,PR.bad,4),{state:'bad'});}
+ if(n=='share'){o+=PLABEL(CX,226,'Send this to');
+  o+=PCARD(CX,440,820,300,pin(f,q.s0,10),PBADGE('user',-330,-60,PR.text,48)+PT(-260,-70,46,'Woh dost',{a:'start',w:700})+PT(-260,-22,28,'Premium bharta hai, dekhta HD',{a:'start',w:500,fill:PR.muted,op:pin(f,q.sp)})+
+   PPILL(0,90,'"Bhai, 4K kahan hai?"',pin(f,q.sh),{size:44,col:PR.bad}),{on:f>=q.sd});
+  o+=PCARD(CX,750,820,200,pin(f,q.s0+10),PBADGE('check',-330,0,PR.good,46)+PT(-260,-10,40,'Bhejo, 3 kadi',{a:'start',w:700})+PT(-260,40,40,'check karwao',{a:'start',w:700,fill:PR.good}),{state:'good'});}
+ if(n=='chain'){o+=PHEAD(CX,250,76,'Kaun si *chain*?',f,q.k0,{step:2});
+  o+=chain(560,pin(f,q.k0),[0,0,1,0]);
+  o+=PT(CX,780,32,'TV toh 4K hai. Baaki 3?',{w:600,fill:PR.muted,op:pin(f,q.k0+6)});}
+ if(n=='plan'){o+=PLABEL(CX,226,'Kadi 1 · Netflix plan (India)');
+  const rows=[['Mobile','149','480p'],['Basic','199','720p'],['Standard','499','1080p'],['Premium','649','4K + HDR']];
+  rows.forEach((r,i)=>{const prem=i==3,lit=prem&&f>=q.pp;const y=330+i*150;
+   o+=PCARD(CX,y,820,128,pin(f,q.p0+i*5),PT(-360,14,42,r[0],{a:'start',w:700,fill:lit?PR.good:PR.text})+PT(40,14,40,'Rs '+r[1],{a:'middle',w:700,fill:prem?PR.num:PR.muted})+
+    PT(360,14,40,r[2],{a:'end',w:800,fill:prem?(lit?PR.good:PR.text):PR.muted}),{on:lit,state:lit?'good':''});});
+  o+=PT(CX,950,28,'4K sirf Premium mein',{w:600,fill:PR.good,op:pin(f,q.ps)});}
+ if(n=='label'){o+=PLABEL(CX,226,'Kadi 2 · film ka page');
+  o+=PCARD(CX,500,820,440,pin(f,q.l0),`<rect x="-380" y="-190" width="760" height="230" rx="16" fill="${PR.card2}"/>`+PICON('film',0,-80,1.3,PR.muted,4)+
+   PT(-380,96,40,'Film ka naam',{a:'start',w:700})+PT(-380,150,28,'2026 · Thriller',{a:'start',w:500,fill:PR.muted})+
+   `<g opacity="${pin(f,q.l4)}"><rect x="150" y="66" width="110" height="56" rx="10" fill="${PR.hl}"/>`+PT(205,106,32,'4K',{w:800,fill:PR.hlText})+`</g>`+
+   `<g opacity="${pin(f,q.l4+4)}"><rect x="272" y="66" width="110" height="56" rx="10" fill="none" stroke="${PR.line2}" stroke-width="2"/>`+PT(327,106,30,'HDR',{w:700,fill:PR.muted})+`</g>`,{on:f>=q.l4});
+  o+=PCARD(CX,830,820,130,pin(f,q.ll),PBADGE('warn',-330,0,PR.num,40)+PT(-260,-4,38,'Label nahi = HD hi',{a:'start',w:700})+PT(-260,38,24,'har film 4K mein nahi hoti',{a:'start',w:500,fill:PR.muted}));}
+ if(n=='port'){o+=PLABEL(CX,226,'Kadi 3 · TV ke peeche');
+  const ports=[['HDMI 1','HDCP 2.2'],['HDMI 2',''],['HDMI 3','']];
+  o+=PCARD(CX,470,820,380,pin(f,q.t0),'');
+  ports.forEach((pp,i)=>{const x=CX-280+i*280,lit=i==0&&f>=q.th;const pi=pin(f,q.t0+4+i*4);
+   o+=`<g opacity="${pi}"><rect x="${x-95}" y="400" width="190" height="80" rx="12" fill="${PR.bg}" stroke="${lit?PR.good:PR.line2}" stroke-width="${lit?5:3}"/><rect x="${x-60}" y="425" width="120" height="30" rx="6" fill="${PR.card2}"/>`+
+    PT(x,530,34,pp[0],{w:800,fill:lit?PR.good:PR.text})+PT(x,570,26,pp[1],{w:600,fill:PR.good,op:pin(f,q.th)})+`</g>`;});
+  // the stick slides in on 'lagao'
+  const sp=f<q.tl?0:Math.min(1,E.smooth((f-q.tl)/14));const sx=CX-280,sy=372-40*(1-sp);
+  o+=`<g opacity="${pin(f,q.ts)}"><rect x="${sx-40}" y="${sy-60}" width="80" height="110" rx="14" fill="${PR.card2}" stroke="${PR.line2}" stroke-width="3"/>`+PT(sx,sy+2,22,'STICK',{w:700,fill:PR.muted})+`</g>`;
+  o+=PCARD(CX,790,820,150,pin(f,q.ta),PBADGE('plug',-330,0,PR.text,42)+PT(-260,-6,36,'Aksar HDMI 1',{a:'start',w:700,fill:PR.good})+PT(-260,38,24,'cable: Premium High Speed HDMI',{a:'start',w:500,fill:PR.muted}),{on:f>=q.ta,state:'good'});}
+ if(n=='rule'){o+=PHEAD(CX,250,62,'Sabse *kamzor* kadi',f,q.r0,{step:3});
+  const bad=f>=q.rk;o+=chain(480,pin(f,q.r0),[1,1,1,bad?2:1]);
+  {const pa=pin(f,q.rk+6);if(pa>0)o+=`<g opacity="${pa}" stroke="${PR.bad}" stroke-width="6" fill="none" stroke-linecap="round"><path d="M900,590 V640 Q900,660 880,660 H${CX+20}"/><path d="M${CX+20},660 V695 M${CX},675 L${CX+20},698 L${CX+40},675"/></g>`;}
+  o+=tvHD(CX,800,pin(f,q.rn),'HD',1).replace('translate(540,800)','translate(540,800) scale(.62)');}
+ if(n=='end'){o+=PLABEL(CX,226,'Ek shabd mein');
+  o+=PCARD(CX,420,820,260,pin(f,q.z0),PBADGE('tv',-310,0,PR.text,56)+PT(-220,-24,54,'Aapka TV:',{a:'start',w:800})+PT(-220,50,58,'4K ya HD?',{a:'start',w:800,fill:PR.good}),{on:1});
+  const typed=f<q.z4?'':'4K';
+  o+=PCARD(CX,700,820,180,pin(f,q.z0+8),PBADGE('chat',-330,0,PR.text,44)+PT(-260,-30,24,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PT(-260,36,54,typed,{a:'start',w:800,fill:PR.good}),{on:f>=q.z4});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,270,80,'Naya *4K* TV',f,0,{instant:1})+PHEAD(540,370,80,'phir bhi HD?',f,0,{instant:1})+
+  PPILL(540,470,'DRISHYAM 3 · NETFLIX · 27 NOV',1,{solid:1,size:32})+
+  `<g transform="translate(470,640) scale(.78) translate(-540,-640)">`+tvHD(540,640,1,'HD',1)+`</g>`+PT(860,640,60,'4K?',{w:800,fill:PR.num})+PSTRIKE(792,620,928,1)+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
