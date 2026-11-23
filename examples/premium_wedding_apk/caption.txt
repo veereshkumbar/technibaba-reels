@@ -1,0 +1,13 @@
+Shaadi ka card WhatsApp pe aaya, aur file ke end mein .apk likha hai? Woh card nahi, app hai.
+
+Asli card PDF, photo ya video hota hai. Android pe 4 step:
+1. Settings mein search karo "Install unknown apps" > WhatsApp > Allow from this source OFF. Chrome aur Files bhi OFF
+2. Play Store > profile icon > Play Protect > Settings > Scan apps with Play Protect ON
+3. Phone bole "Install blocked"? Cancel dabao. Bhejne wala bole "Settings dabao", toh wahin ruko aur pehle usse call karke poocho
+4. Galti se khul gaya? Net band, app uninstall, bank ko call, aur 1930 ya cybercrime.gov.in
+
+Papa ko bhejo, jo har shaadi card khol dete hain. Comment karo GUIDE, step-by-step guide DM mein bhejenge.
+
+Menu names differ slightly by phone brand and Android version. Sources: Hyderabad Cyber Police advisory (ETV Bharat, May 2026), Rajasthan Police advisory (The Tribune); Pixel Phone Help and Samsung support (Install unknown apps); Google Android Help (Play Protect). Drawn illustration, no app screenshots.
+
+#technibaba #weddingseason #apkscam #whatsappscam #cybersafety #androidtips #techtips #hinglish

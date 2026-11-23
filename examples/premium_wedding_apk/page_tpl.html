@@ -1,0 +1,96 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "Wedding card APK" (premium look, Hindi, morning tutorial 23 Nov 2026) =================
+ICONS.finger='<path d="M-26,-14 C-22,-36 22,-36 26,-14"/><path d="M-30,6 C-32,-22 -12,-30 0,-30 C14,-30 32,-22 30,6 C30,20 26,30 22,38"/><path d="M-18,30 C-22,18 -20,4 -18,-6 C-14,-18 14,-18 18,-6 C20,6 18,22 12,36"/><path d="M0,-6 C-4,8 -4,24 -2,40"/>';
+ICONS.bank='<path d="M-40,-14 L0,-38 L40,-14Z"/><line x1="-30" y1="-6" x2="-30" y2="26"/><line x1="-10" y1="-6" x2="-10" y2="26"/><line x1="10" y1="-6" x2="10" y2="26"/><line x1="30" y1="-6" x2="30" y2="26"/><line x1="-42" y1="36" x2="42" y2="36"/>';
+ICONS.timer='<circle cx="0" cy="6" r="34"/><line x1="0" y1="6" x2="0" y2="-14"/><line x1="0" y1="6" x2="14" y2="14"/><line x1="-10" y1="-38" x2="10" y2="-38"/>';
+ICONS.file='<path d="M-26,-40 H12 L30,-22 V40 H-26Z"/><path d="M12,-40 V-22 H30"/>';
+ICONS.search='<circle cx="-8" cy="-8" r="24"/><line x1="10" y1="10" x2="32" y2="32"/>';
+ICONS.globe='<circle cx="0" cy="0" r="34"/><ellipse cx="0" cy="0" rx="14" ry="34"/><line x1="-34" y1="0" x2="34" y2="0"/>';
+ICONS.folder='<path d="M-38,-26 H-10 L-2,-16 H38 V32 H-38Z"/>';
+ICONS.wifioff='<path d="M-40,-8 a58,58 0 0 1 80,0 M-26,8 a36,36 0 0 1 52,0"/><circle cx="0" cy="34" r="3"/><line x1="-36" y1="-36" x2="36" y2="36"/>';
+const F=i=>BT[i].f0;
+const q={apk:WF(1,'apk'),ek:WF(1,'ek'),l2:F(2),har:WF(2,'har'),
+ sh:F(3),asli:WF(3,'asli'),pdf:WF(3,'pdf'),app:WF(3,'hota'),
+ s1:F(4),inst:WF(4,'install'),wa:WF(4,'whatsapp'),off:WF(4,'off'),c5:F(5),chr:WF(5,'chrome'),fil:WF(5,'files'),
+ s6:F(6),sab:WF(6,'sab'),phir:WF(6,'phir'),pp:WF(6,'protect'),scan:WF(6,'scan'),on:WF(6,'on'),
+ t7:F(7),set:WF(7,'settings'),t8:F(8),ruk:WF(8,'rukna'),chaal:WF(8,'chaal'),call:WF(8,'call'),
+ e0:F(9),net:WF(9,'net'),bank:WF(9,'bank'),n1930:WF(9,'1930'),pg:WF(9,'comment')-6,com:WF(9,'comment')};
+[[HOOK_END+2,'blip'],[HOOK_END+10,'pop'],[q.ek,'ding'],[q.l2,'blip'],[q.har,'tick'],
+ [q.sh,'blip'],[q.sh+8,'tick'],[q.asli,'ding'],[q.app,'tick'],
+ [q.s1+2,'blip'],[q.inst,'type'],[q.wa,'tick'],[q.off,'click'],[q.chr,'tick'],[q.fil,'tick'],[q.sab,'click'],[q.pp,'blip'],[q.scan,'tick'],[q.on,'ding'],
+ [q.t7,'blip'],[q.set,'tick'],[q.chaal,'tick'],[q.call,'ding'],
+ [q.e0,'blip'],[q.net,'tick'],[q.bank,'tick'],[q.n1930,'ding'],[q.com,'blip'],[q.com+8,'type']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,o.h||138,p,PBADGE(icon,-320,0,o.icol||PR.text,40)+PT(-250,-6,o.ts||44,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,36,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function tog(x,y,on,p=1){const k=on?1:0;return `<g opacity="${p}" transform="translate(${x},${y})"><rect x="-44" y="-24" width="88" height="48" rx="24" fill="${on?PR.hl:PR.card2}" stroke="${on?PR.hl:PR.line2}" stroke-width="2"/><circle cx="${on?20:-20}" cy="0" r="17" fill="${on?PR.hlText:PR.muted}"/></g>`}
+function togAt(f,a,from,to){if(f<a)return from;return to}
+function appRow(y,p,icon,name,on,hl){if(p<=0)return '';return `<g opacity="${p}" transform="translate(0,${(1-p)*16})"><rect x="-360" y="${y-50}" width="720" height="100" rx="20" fill="${PR.card2}" stroke="${hl?PR.hl:PR.line}" stroke-width="${hl?2.5:2}"/>${PBADGE(icon,-300,y,PR.text,32)}${PT(-250,y-4,36,name,{a:'start',w:700})}${PT(-250,y+30,22,'Allow from this source',{a:'start',w:500,fill:PR.muted})}${tog(280,y,on)}</g>`}
+function content(n,f){let o='';
+ if(n=='q'){o+=PLABEL(CX,226,'Wedding card on WhatsApp');
+  const pa=pin(f,HOOK_END+2),pb=pin(f,HOOK_END+10),red=f>=q.apk;
+  o+=PCARD(CX,370,800,170,pa,`<rect x="-360" y="-60" width="470" height="120" rx="22" fill="${PR.card2}"/>`+PICON('file',-310,0,.62,red?PR.bad:PR.text,3.5)+PT(-260,-8,38,'Wedding_Card.apk',{a:'start',w:700,fill:red?PR.bad:PR.text})+PT(-260,32,24,'1.2 MB · from a "friend"',{a:'start',w:500,fill:PR.muted})+PPILL(255,0,'APP, NOT A CARD',pin(f,q.apk),{size:22,col:PR.bad}),{state:red?'bad':''});
+  o+=rowCard(580,pb,'shield','Install blocked','unknown app from this source',{state:'good',icol:PR.good});
+  o+=PPILL(CX,760,'1 SETTING DID THIS',pin(f,q.ek),{solid:1,size:38});
+  o+=PT(CX,880,30,f>=q.har?'Papa opens every card...':'',{w:600,fill:PR.muted,op:pin(f,q.har)});}
+ if(n=='rule'){o+=PLABEL(CX,226,'Real card vs fake card');
+  const pl=pin(f,q.asli),pr=pin(f,q.sh+2);
+  o+=PCARD(315,430,380,250,pl,PBADGE('file',0,-60,PR.good,40)+PT(0,24,38,'Real card',{w:700})+PT(0,70,28,'PDF · photo · video',{w:500,fill:PR.good}),{state:'good'});
+  o+=PCARD(765,430,380,250,pr,PBADGE('warn',0,-60,PR.bad,40)+PT(0,24,38,'Fake card',{w:700})+PT(0,70,28,'.apk = an app',{w:500,fill:PR.bad}),{state:'bad'});
+  o+=PCARD(CX,730,800,190,pin(f,q.sh+10,10),PBADGE('chat',-320,0,PR.text,40)+PT(-250,-22,28,'SEND THIS TO PAPA',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,26,34,'who opens every',{a:'start',w:700})+PT(-250,68,34,'wedding card',{a:'start',w:700}),{on:1});}
+ if(n=='how'){
+  if(f<q.phir){o+=PLABEL(CX,226,'Step 1 · Settings');
+   const typed='Install unknown apps',nT=f<q.inst?0:Math.min(typed.length,Math.floor((f-q.inst)/1.4));
+   o+=PCARD(CX,330,800,110,pin(f,q.s1,8),PICON('search',-330,0,.5,PR.muted,3.5)+PT(-280,12,36,typed.slice(0,nT)||'Search settings',{a:'start',w:600,fill:nT?PR.text:PR.dim}),{on:f>=q.inst&&f<q.wa});
+   const pl=pin(f,q.s1+8,10),allOff=f>=q.sab;
+   o+=PCARD(CX,650,800,470,pl,PT(-360,-180,30,'Install unknown apps',{a:'start',w:700})+
+     appRow(-70,pin(f,q.s1+10),'chat','WhatsApp',f<q.off,f>=q.wa&&f<q.c5)+appRow(50,pin(f,q.s1+14),'globe','Chrome',!allOff,f>=q.chr&&f<q.sab)+appRow(170,pin(f,q.s1+18),'folder','Files',!allOff,f>=q.fil&&f<q.sab));
+   o+=PT(CX,940,28,allOff?'All OFF':'',{w:700,fill:PR.good,op:pin(f,q.sab)});}
+  else {o+=PLABEL(CX,226,'Step 2 · Play Store');
+   const crumbs=['Profile','Play Protect','Settings'];let x=-330;
+   let cr='';crumbs.forEach((c,k)=>{const p=pin(f,q.phir+4+k*6),w=tw(c,30,700)+40;cr+=`<g opacity="${p}"><rect x="${x}" y="-30" width="${w}" height="60" rx="30" fill="${k==1&&f>=q.pp?PR.hl:PR.card2}" stroke="${PR.line2}" stroke-width="2"/>${PT(x+w/2,10,30,c,{w:700,fill:k==1&&f>=q.pp?PR.hlText:PR.text})}</g>`;x+=w+(k<2?50:0);if(k<2)cr+=PARROW(x-44,0,x-8,p,PR.dim);});
+   o+=PCARD(CX,360,800,130,pin(f,q.phir,8),cr);
+   o+=PCARD(CX,600,800,200,pin(f,q.phir+20,10),PBADGE('shield',-320,0,PR.good,44)+PT(-250,-10,36,'Scan apps with',{a:'start',w:700})+PT(-250,34,36,'Play Protect',{a:'start',w:700})+tog(300,0,f>=q.on),{on:f>=q.on});
+   o+=PT(CX,800,28,'Checks apps from outside Play too',{w:600,fill:PR.muted,op:pin(f,q.on+6)});}}
+ if(n=='trap'){o+=PLABEL(CX,226,'Step 3 · The trick');
+  const stop=f>=q.ruk;
+  o+=PCARD(CX,450,760,390,pin(f,q.t7),PBADGE('warn',-300,-90,PR.num,40)+PT(-240,-80,36,'Install blocked',{a:'start',w:700})+PT(-330,-10,26,'Your phone is not allowed to install',{a:'start',w:500,fill:PR.muted})+PT(-330,24,26,'unknown apps from this source.',{a:'start',w:500,fill:PR.muted})+
+    `<g transform="translate(-170,100)"><rect x="-120" y="-36" width="240" height="72" rx="36" fill="${PR.hl}"/>${PT(0,11,30,'Cancel',{w:700,fill:PR.hlText})}</g>`+
+    `<g transform="translate(170,100)" opacity="${f>=q.set?1:.7}"><rect x="-120" y="-36" width="240" height="72" rx="36" fill="none" stroke="${stop?PR.bad:PR.line2}" stroke-width="${stop?3:2}"/>${PT(0,11,30,'Settings',{w:700,fill:stop?PR.bad:PR.text})}</g>`+PSTRIKE(60,100,280,pin(f,q.ruk,8))+
+    (f>=q.set&&!stop?`<g opacity="${pin(f,q.set)}">${PT(170,168,24,'"tap here" says the sender',{w:600,fill:PR.num})}</g>`:'')+(stop?PPILL(170,168,'DO NOT TAP',pin(f,q.ruk),{size:24,col:PR.bad}):''),{state:stop?'bad':''});
+  o+=rowCard(740,pin(f,q.call-4),'call','Call the sender first','real friend? ask on a call',{on:f>=q.call,icol:PR.good});}
+ if(n=='end'){o+=PLABEL(CX,226,'Step 4 · Opened it by mistake?');
+  o+=rowCard(340,pin(f,q.net),'wifioff','Internet off','then uninstall the app',{h:120,ts:40});
+  o+=rowCard(480,pin(f,q.bank),'bank','Call your bank','block cards and UPI',{h:120,ts:40});
+  o+=PCARD(CX,620,800,130,pin(f,q.n1930),PBADGE('call',-320,0,PR.text,40)+PT(-250,28,72,'1930',{a:'start',w:800})+PT(330,10,24,'or cybercrime.gov.in',{a:'end',w:500,fill:PR.muted}),{on:f>=q.n1930&&f<q.com});
+  const pc=pin(f,q.pg,10),ty=Math.max(0,Math.min(5,Math.floor((f-q.com-8)/3)));
+  o+=PCARD(CX,820,800,200,pc,PT(-360,-44,26,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PT(-360,30,66,f>=q.com+8?'GUIDE'.slice(0,ty):'',{a:'start',w:800})+PPILL(230,26,'FULL GUIDE',pin(f,q.com+24),{solid:1,size:30})+PT(-360,80,24,'step-by-step guide in your DMs',{a:'start',w:500,fill:PR.muted,op:pin(f,q.com+30)}),{on:f>=q.com});}
+ return o}
+ICONS.bank='<path d="M-40,-14 L0,-38 L40,-14Z"/><line x1="-30" y1="-6" x2="-30" y2="26"/><line x1="-10" y1="-6" x2="-10" y2="26"/><line x1="10" y1="-6" x2="10" y2="26"/><line x1="30" y1="-6" x2="30" y2="26"/><line x1="-42" y1="36" x2="42" y2="36"/>';
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,300,80,'Wedding card = *APK*',f,4,{step:3})+PHEAD(540,400,72,'Phone: install blocked',f,12,{step:3})+
+  PPILL(540,500,'FIX: 1 SETTING OFF',pin(f,16),{solid:1,size:40})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
