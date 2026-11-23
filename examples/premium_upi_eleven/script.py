@@ -1,0 +1,37 @@
+# ElevenLabs test of examples/premium_upi_hi. Hindi version of examples/premium_upi_en (same voices, same panels). Format 2: not A (hacker), not B (fake app), actually C (you, PIN to "receive").
+LINES=[
+('q','यूपीआई से पैसे गायब? शायद हैकर ने नहीं निकाले.','UPI se paise gayab? Shayad hacker ne nahi nikale.','b',''),
+('q','तो नकली ऐप?','Toh nakli app?','c',''),
+('q','वो भी नहीं. आपने खुद. पैसे लेने के लिए पिन डाला.','Woh bhi nahi. Aapne khud. Paise lene ke liye PIN daala.','b',''),
+('rule','नियम याद रखो. पैसे लेने के लिए पिन कभी नहीं लगता.','Niyam yaad rakho. Paise lene ke liye PIN kabhi nahi lagta.','b',''),
+('rule','ये उसको भेजो, जो घर में हर चीज़ पे पे दबा देता है.','Ye usko bhejo, jo ghar mein har cheez pe Pay daba deta hai.','b',''),
+('how','पर वो फँसाते कैसे हैं?','Par woh phansaate kaise hain?','c',''),
+('how','कोई बोलता है, मैं पैसे भेज रहा हूँ. फिर रिक्वेस्ट आती है. लगता है पैसे आ रहे हैं. असल में जा रहे हैं.','Koi bolta hai, main paise bhej raha hoon. Phir request aati hai. Lagta hai paise aa rahe hain. Asal mein ja rahe hain.','b',''),
+('fix','पिन मतलब पैसे जाएँगे. डिक्लाइन करो. पैसे गए? उन्नीस सौ तीस पे कॉल करो.','PIN matlab paise jayenge. Decline karo. Paise gaye? 1930 pe call karo.','b',''),
+('end','मतलब पैसे भेजने के लिए मेरा पिन चाहिए?','Matlab paise bhejne ke liye mera PIN chahiye?','c',''),
+('end','वो भेज नहीं रहा, ले रहा है. आपके साथ हुआ है? कमेंट करो, हाँ या ना.','Woh bhej nahi raha, le raha hai. Aapke saath hua hai? Comment karo, HAAN ya NA.','b',''),
+]
+# ElevenLabs (Veer's picks, 23 Nov 2026): Baba = Shivank, Chotu = Viraj. 4th item = free Kokoro fallback.
+VOICES={'c':('eleven:pHG3exaXQt8bmTWbaVOs',1.0,1.0,('kokoro:hm_psi',1.2,1.03)),'b':('eleven:QO2wwSVI9F7DwU5uUXDX',1.0,1.0,('kokoro:hm_omega',1.2,0.9))}
+BEATS=[
+ dict(emotion='calm',action='full-screen, palm out',rule='hook = the common guess, killed in one line',
+      keys=[(None,'b','explain','explaining',1),(None,'c','idle','neutral',0),('hacker','b','palm','smug',1)],caps=[('upi','UPI se paise *gayab*?'),('shayad','Shayad *hacker* nahi')]),
+ dict(emotion='curious',action='leans in',rule='second guess',
+      keys=[(None,'c','leanin','confused',1),(None,'b','idle','smug',0)],caps=[('toh','Toh *nakli app*?')]),
+ dict(emotion='serious',action='stop hand, then points at the viewer',rule='actually C, hit on AAPNE',hit='aapne',
+      keys=[(None,'b','stop','explaining',1),(None,'c','idle','confused',0),('aapne','b','point','explaining',1),('khud','c','blown','shocked',1)],caps=[('woh','Woh bhi *nahi*'),('aapne','*Aapne* khud'),('paise','Lene ke liye *PIN* daala')]),
+ dict(emotion='firm',action='counts one',rule='the rule',
+      keys=[(None,'b','count','explaining',1),(None,'c','idle','neutral',0),('kabhi','b','stop','angry',1)],caps=[('niyam','Yaad rakho *niyam*'),('paise','Paise lene mein *PIN nahi*')]),
+ dict(emotion='warm',action='points out of frame',rule='mid-video share ask',
+      keys=[(None,'b','point','happy',1),(None,'c','thumb','happy',0)],caps=[('ye','Ye *usko bhejo*'),('jo','jo har cheez pe *Pay* dabata hai')]),
+ dict(emotion='curious',action='shrug',rule='the stay',
+      keys=[(None,'c','shrug','confused',1),(None,'b','idle','neutral',0)],caps=[('par','Phansaate *kaise* hain?')]),
+ dict(emotion='explaining',action='explains, then palm',rule='message, request, flip',
+      keys=[(None,'b','explain','explaining',1),(None,'c','idle','neutral',0),('phir','b','point','explaining',1),('asal','b','palm','smug',1)],caps=[('koi','"Main paise *bhej* raha hoon"'),('phir','Phir *request* aati hai'),('asal','Asal mein paise *ja rahe*')]),
+ dict(emotion='firm',action='stop hand, then thumbs up',rule='the fix',
+      keys=[(None,'b','stop','angry',1),(None,'c','idle','neutral',0),('decline','b','thumb','happy',1)],caps=[('pin','PIN = paise *gaye*'),('decline','*Decline* karo'),('gaye','Paise gaye? Call *1930*')]),
+ dict(emotion='thinking',action='leans in',rule='loop question',
+      keys=[(None,'c','leanin','confused',1),(None,'b','idle','smug',0)],caps=[('matlab','Bhejne ke liye *mera PIN*?')]),
+ dict(emotion='calm',action='crosses arms, then waves',rule='one ask: HAAN or NA',
+      keys=[(None,'b','cross','smug',1),(None,'c','idle','neutral',0),('le','b','stop','angry',1),('comment','b','wave','happy',1)],caps=[('woh','Bhej nahi raha, *le raha hai*'),('comment','Comment karo *HAAN* ya NA')]),
+]

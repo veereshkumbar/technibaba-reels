@@ -18,4 +18,8 @@ Example: `examples/premium_upi_en` (English test, "It wasn't a hacker", 34 s).
 - **Motion:** entrances fade + rise 26 px (`pin`), word-by-word headline reveal, cross-fade between pages. No wobble, rotation, stamps or shakes.
 - **Sound:** soft cues only: `blip`, `tick`, `ding`, one `crack` for the twist; the hit still gets riser + boom. Music gain 0.16.
 - **Words:** short, exact, calm. "Decline the request", not "BHAAG!!". No exclamation marks on screen; no emojis anywhere.
-- **Characters** (Baba and Chotu) stay as they are, at 70% of the old split size (`PCS` in premium.js), on a dark studio floor with a soft spotlight (`strip()` default). Voices: Hindi Kokoro only (Veer: the American voices sound wrong in Hindi). Baba `kokoro:hm_omega` tempo 1.2, pitch 0.9 (deep, clear); Chotu `kokoro:hm_psi` 1.2, 1.03. See `examples/premium_upi_hi`.
+- **Characters** (Baba and Chotu) stay as they are, at 70% of the old split size (`PCS` in premium.js), on a dark studio floor with a soft spotlight (`strip()` default). Voices (Veer's picks, 24 Nov 2026): ElevenLabs Flash v2.5. Baba = Shivank `eleven:QO2wwSVI9F7DwU5uUXDX`, Chotu = Viraj `eleven:pHG3exaXQt8bmTWbaVOs`, each with a free Kokoro fallback as the 4th item, exactly like this:
+
+`VOICES={'c':('eleven:pHG3exaXQt8bmTWbaVOs',1.0,1.0,('kokoro:hm_psi',1.2,1.03)),'b':('eleven:QO2wwSVI9F7DwU5uUXDX',1.0,1.0,('kokoro:hm_omega',1.2,0.9))}`
+
+Write the TTS text in Devanagari. Keep a reel under 900 characters (ELEVEN_MAX_CHARS; ~500 is typical, about 250 credits). If ELEVENLABS_API_KEY is not set, or the API fails, voice.py falls back to Kokoro automatically; say so in the report. Never print or commit the key. No American voices for Hindi. See `examples/premium_upi_eleven` (and `examples/premium_upi_hi` for the Kokoro-only version).

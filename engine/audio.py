@@ -1,7 +1,7 @@
 """Mix voice + music + SFX and mux.  usage: python3 audio.py WORKDIR OUT.mp4|- [music_file] [music_gain=0.30]   (OUT "-" = only write WORKDIR/mix_n.wav)
 - voice from WORKDIR/timeline.json, SFX cues from WORKDIR/sfx.json ([[t,'whoosh'|'thud'|'pop'|'ding'|'type'|'cash'|'crack'|'blip'|'gameover'|'fall'|'tick'],...])
 - music: a royalty-free file (looped, ducked under voice) or, if none, a built-in synth beat."""
-import sys, json, subprocess, numpy as np, soundfile as sf
+import sys, os, json, subprocess, numpy as np, soundfile as sf
 W=sys.argv[1]; OUT=sys.argv[2]; MUSIC=sys.argv[3] if len(sys.argv)>3 and sys.argv[3]!='-' else None; MG=float(sys.argv[4]) if len(sys.argv)>4 else .30
 SR=48000; tl=json.load(open(f'{W}/timeline.json')); total=tl['total']; N=int(total*SR)+SR; rng=np.random.default_rng(1)
 def env(n,a=.005,d=None):
@@ -29,6 +29,8 @@ sf.write(f'{W}/vo_raw.wav',vo,SR)
 subprocess.run(['ffmpeg','-v','error','-y','-i',f'{W}/vo_raw.wav','-af',VCHAIN,'-ar',str(SR),'-ac','1',f'{W}/vo_chain.wav'],check=True)
 _v,_=sf.read(f'{W}/vo_chain.wav'); _v=_v[:N] if len(_v)>=N else np.pad(_v,(0,N-len(_v))); vo=_v/(np.abs(_v).max()+1e-9)*.95
 if MUSIC:
+    if os.path.abspath(MUSIC)==os.path.abspath(f'{W}/music.wav'):   # guard: input == output would truncate it and hang ffmpeg
+        import shutil as _sh; _sh.copy(MUSIC,f'{W}/bed_in.wav'); MUSIC=f'{W}/bed_in.wav'
     subprocess.run(['ffmpeg','-v','error','-y','-stream_loop','-1','-i',MUSIC,'-t',str(total+1),'-ac','1','-ar',str(SR),f'{W}/music.wav'],check=True)
     mus,_=sf.read(f'{W}/music.wav'); mus=np.pad(mus,(0,max(0,N-len(mus))))[:N]
 else:
