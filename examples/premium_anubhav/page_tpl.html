@@ -1,0 +1,92 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "Apni gali ka asli network speed" (TRAI Network Anubhav, premium look, Hindi, 10:00 trending tech 23 Nov 2026) =================
+ICONS.map='<path d="M-40,-30 L-14,-40 L14,-30 L40,-40 V30 L14,40 L-14,30 L-40,40Z"/><path d="M-14,-40 V30 M14,-30 V40"/>';
+ICONS.mpin='<path d="M0,40 C-24,10 -30,-2 -30,-14 a30,30 0 0 1 60,0 C30,-2 24,10 0,40Z"/><circle cx="0" cy="-14" r="10"/>';
+ICONS.home='<path d="M-36,0 L0,-32 L36,0 M-26,-8 V34 H26 V-8"/><rect x="-8" y="12" width="16" height="22"/>';
+ICONS.office='<rect x="-28" y="-38" width="56" height="76" rx="4"/><path d="M-14,-24 h8 M6,-24 h8 M-14,-8 h8 M6,-8 h8 M-14,8 h8 M6,8 h8 M-6,38 V24 H6 V38"/>';
+ICONS.car='<path d="M-40,12 V-2 L-28,-24 H28 L40,-2 V12Z M-40,12 H40"/><circle cx="-22" cy="16" r="9"/><circle cx="22" cy="16" r="9"/>';
+ICONS.tv='<rect x="-40" y="-30" width="80" height="52" rx="6"/><path d="M-14,36 H14 M0,22 V36"/>';
+const F=i=>BT[i].f0;
+const q={l1:F(1),gal:WF(1,'gali'),tr:WF(1,'trai'),nay:WF(1,'nayi'),as:WF(1,'asli'),sp:WF(1,'speed'),
+ sh:F(2),who:WF(2,'jo'),prt:WF(2,'port'),
+ s0:F(3),s1:F(4),map:WF(4,'map'),jg:WF(4,'jagah'),cmp:WF(4,'company'),mob:WF(4,'mobile'),
+ c0:F(5),c1:F(6),dj:WF(6,'do'),har:WF(6,'har'),dl:WF(6,'download'),ul:WF(6,'upload'),
+ d0:F(7),lt:WF(7,'logon'),dt:WF(7,'drive'),pt:WF(7,'port'),gl:WF(7,'gali'),
+ e0:F(8),jio:WF(8,'jio'),air:WF(8,'airtel'),vi:WF(8,'vi')};
+[[HOOK_END+2,'blip'],[HOOK_END+10,'tick'],[q.gal,'crack'],[q.tr,'blip'],[q.nay,'pop'],[q.sh,'blip'],[q.sh+8,'tick'],[q.prt,'ding'],
+ [q.s0,'blip'],[q.s1,'type'],[q.map,'pop'],[q.jg,'tick'],[q.cmp,'tick'],[q.mob,'ding'],
+ [q.c0,'blip'],[q.c1,'blip'],[q.dj,'pop'],[q.har,'tick'],[q.dl,'tick'],[q.ul,'ding'],
+ [q.d0,'blip'],[q.lt,'pop'],[q.dt,'pop'],[q.e0,'blip'],[q.jio,'tick'],[q.air,'tick'],[q.vi,'tick']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,138,p,PBADGE(icon,-320,0,o.icol||PR.text,40)+PT(-250,-6,44,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,36,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function bars(x,y,n,col){let s='';for(let k=0;k<4;k++){const h=14+k*12;s+=`<rect x="${x+k*22}" y="${y-h}" width="14" height="${h}" rx="3" fill="${k<n?col:PR.card2}" stroke="${PR.line2}" stroke-width="1"/>`}return s}
+function sbar(x,y,w,p,col){return `<rect x="${x}" y="${y}" width="${w}" height="16" rx="8" fill="${PR.card2}"/><rect x="${x}" y="${y}" width="${Math.max(0,w*p)}" height="16" rx="8" fill="${col}"/>`}
+function browser(p,url,typed,inner){const u=url.slice(0,typed);return PCARD(CX,610,800,700,p,`<rect x="-400" y="-350" width="800" height="84" rx="26" fill="${PR.card2}"/>`+PICON('lock',-350,-308,.42,PR.good,4)+PT(-318,-296,32,u+(typed<url.length?'|':''),{a:'start',w:700})+inner)}
+function mapArt(f,pp,pinOn){let s='';const g=`<g opacity="${pp}">`;s+=g;
+ for(let k=0;k<6;k++)s+=`<line x1="${-360}" y1="${-200+k*80}" x2="360" y2="${-220+k*86}" stroke="${PR.line2}" stroke-width="${k==2?10:3}"/>`;
+ for(let k=0;k<5;k++)s+=`<line x1="${-300+k*150}" y1="-240" x2="${-280+k*140}" y2="300" stroke="${PR.line2}" stroke-width="${k==2?10:3}"/>`;
+ [[-220,-120,PR.good],[80,-60,PR.num],[220,160,PR.bad],[-120,180,PR.good],[260,-170,PR.num]].forEach(([x,y,c],i)=>{s+=`<circle cx="${x}" cy="${y}" r="${14}" fill="${c}" opacity="${pin(f,q.map+4+i*2)*.85}"/>`});
+ s+='</g>';if(pinOn>0)s+=`<g transform="translate(-20,${30-(1-pinOn)*40})" opacity="${pinOn}">`+PICON('mpin',0,-30,1.1,PR.hl,5)+`</g>`+PPILL(-20,60,'MERA GHAR',pinOn,{size:24,solid:1});return s}
+function content(n,f){let o='';
+ if(n=='q'){o+=PLABEL(CX,236,'Network: ad vs your street');
+  const pa=pin(f,HOOK_END+2),pb=pin(f,HOOK_END+10),pc=pin(f,q.nay,10),st=pin(f,q.gal,8);
+  o+=rowCard(370,pa,'tv','Ad: "sabse fast"','whole country, on average',{right:bars(250,30,4,PR.good)});
+  o+=PSTRIKE(-180+CX,364,250+CX-60,st);
+  o+=rowCard(545,pb,'home','Mere ghar pe','1 bar, video atka',{icol:PR.bad,right:bars(250,30,1,PR.bad)});
+  o+=rowCard(740,pc,'map','TRAI Anubhav',f>=q.as?'speed on a map, by area':'new TRAI website',{on:f>=q.as,icol:PR.good,right:PPILL(250,0,'ASLI SPEED',pin(f,q.as),{solid:1,size:26})});}
+ if(n=='rule'){o+=PLABEL(CX,236,'Before you port your SIM');
+  const pl=pin(f,q.sh),pr=pin(f,q.sh+8);
+  o+=PCARD(315,440,380,250,pl,PBADGE('tv',0,-60,PR.bad,40)+PT(0,24,38,'Ad dekh ke',{w:700})+PT(0,70,28,'port kiya = risk',{w:500,fill:PR.bad}),{state:'bad'});
+  o+=PCARD(765,440,380,250,pr,PBADGE('map',0,-60,PR.good,40)+PT(0,24,38,'Gali dekh ke',{w:700})+PT(0,70,28,'port karo',{w:500,fill:PR.good}),{state:'good'});
+  const ps=pin(f,q.sh+14,10);o+=PCARD(CX,740,800,190,ps,PBADGE('user',-320,0,PR.text,40)+PT(-250,-22,28,'SEND THIS TO PAPA',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,26,34,f>=q.who?'who is thinking of':'',{a:'start',w:700})+PT(-250,68,34,f>=q.prt?'porting the SIM':'',{a:'start',w:700}),{on:1});}
+ if(n=='how'){
+  if(f<q.s1){o+=PHEAD(CX,330,72,'*Kaunsi* site?',f,q.s0,{step:3})+PT(CX,420,30,'free, no app to install',{w:500,fill:PR.muted,op:pin(f,q.s0+10)});
+   o+=PCARD(CX,640,560,250,pin(f,q.s0+6),PBADGE('phone',-180,0,PR.muted,52)+PARROW(-110,0,60,pin(f,q.s0+14),PR.line2)+PBADGE('map',130,0,PR.good,52));}
+  else {const url='anubhav.trai.gov.in',ty=Math.min(url.length,Math.floor((f-q.s1)/1.6));o+=PLABEL(CX,226,'TRAI Network Anubhav');
+   const pm=pin(f,q.map,10),pj=pin(f,q.jg,10);
+   let inner=`<g transform="translate(0,40)">`+mapArt(f,pm,pj)+`</g>`;
+   inner+=PPILL(-200,300,'COMPANY',pin(f,q.cmp),{size:28,solid:f>=q.cmp})+PPILL(110,300,'MOBILE',pin(f,q.mob),{size:28,solid:f>=q.mob});
+   o+=browser(pin(f,q.s1-4,10),url,ty,inner);}}
+ if(n=='cmp'){o+=PLABEL(CX,226,f>=q.c1?'Example view, not real data':'Two places?');
+  const ph=pin(f,q.c0),pw=pin(f,q.c0+8);
+  o+=PCARD(315,400,380,200,ph,PBADGE('home',0,-40,PR.text,40)+PT(0,46,38,'Ghar',{w:700}),{on:f>=q.dj});
+  o+=PCARD(765,400,380,200,pw,PBADGE('office',0,-40,PR.text,40)+PT(0,46,38,'Office',{w:700}),{on:f>=q.dj});
+  const pc=pin(f,q.har,10),gd=f>=q.har?Math.min(1,(f-q.har)/18):0,gu=f>=q.dl?Math.min(1,(f-q.dl)/18):0;
+  let rows='';[['Company A',.85,.6],['Company B',.55,.45],['Company C',.3,.25]].forEach(([nm,d,u],k)=>{const y=-60+k*80;rows+=PT(-360,y+8,30,nm,{a:'start',w:600})+sbar(-120,y-14,300,d*gd,PR.good)+sbar(-120,y+8,300,u*gu,PR.muted)});
+  o+=PCARD(CX,720,800,340,pc,PT(-360,-120,24,'DOWNLOAD',{a:'start',w:600,fill:PR.good,ls:3})+PT(-160,-120,24,'UPLOAD',{a:'start',w:600,fill:PR.muted,ls:3})+rows+PT(-360,150,22,'Shapes only. Check real speeds on the site.',{a:'start',w:500,fill:PR.dim}),{on:1});}
+ if(n=='data'){o+=PLABEL(CX,226,'Where the numbers come from');
+  o+=rowCard(370,pin(f,q.lt),'phone','Logon ke test','TRAI MySpeed app',{icol:PR.text});
+  o+=rowCard(540,pin(f,q.dt),'car','TRAI drive test','checked on the road',{icol:PR.text});
+  const pg=pin(f,q.pt,10);o+=PCARD(CX,760,800,190,pg,PBADGE('mpin',-320,0,PR.good,40)+PT(-250,-18,28,'THE RULE',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,30,42,f>=q.gl?'Port se pehle, apni gali':'Port se pehle...',{a:'start',w:700}),{on:f>=q.gl});}
+ if(n=='end'){o+=PLABEL(CX,226,'Your street, your pick');
+  o+=PHEAD(CX,370,64,'Aapki gali mein *kaun fast?*',f,q.e0,{step:3});
+  const pc=pin(f,q.e0+6,10);o+=PCARD(CX,620,800,220,pc,PT(-360,-50,26,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PPILL(-230,40,'JIO',pin(f,q.jio),{size:36})+PPILL(10,40,'AIRTEL',pin(f,q.air),{size:36})+PPILL(240,40,'VI',pin(f,q.vi),{solid:1,size:36}),{on:1});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,300,80,'Ad: sabse *fast*',f,4,{step:3})+PHEAD(540,400,80,'Ghar pe: 1 bar?',f,12,{step:3})+
+  PPILL(540,500,'CHECK: TRAI NETWORK ANUBHAV MAP',pin(f,6),{solid:1,size:34})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
