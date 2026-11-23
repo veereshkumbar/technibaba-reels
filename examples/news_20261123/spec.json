@@ -1,0 +1,143 @@
+{
+ "dateLabel": "23 NOV 2026",
+ "scenes": [
+  {
+   "id": "open",
+   "mode": "anchor",
+   "title": "Aaj ki|*TECH NEWS*",
+   "list": [
+    "Google",
+    "Motorola",
+    "Nothing",
+    "Prime Video"
+   ],
+   "lines": [
+    {
+     "hi": "चलो देखते हैं आज टेक की दुनिया में क्या हुआ. आखिरी खबर, आपके फ़ोन पे आने वाली कॉल से जुड़ी है.",
+     "en": "Chalo dekhte hain aaj tech ki duniya mein kya hua. Aakhri khabar, aapke phone pe aane wali call se judi hai.",
+     "pose": "wave",
+     "expr": "happy",
+     "big": 1,
+     "cap": "Aaj ki *tech news*"
+    }
+   ]
+  },
+  {
+   "id": "iitkgp",
+   "mode": "card",
+   "story": 1,
+   "kicker": "INDIA",
+   "icon": "ai",
+   "stat": "$5M",
+   "statSub": "for AI research",
+   "headline": "Google gives *IIT Kharagpur* $5 million for *AI research*",
+   "source": "PTI via Business Standard, DT Next; Indian Startup News",
+   "lines": [
+    {
+     "hi": "नंबर एक. गूगल, आई आई टी खड़गपुर को पचास लाख डॉलर दे रहा है, भारतीय भाषाओं वाले ए आई के लिए.",
+     "en": "Number ek. Google, IIT Kharagpur ko 5 million dollar de raha hai, Bharatiya bhashaon wale AI ke liye.",
+     "pose": "count",
+     "expr": "happy",
+     "cap": "IIT ko *$5M*"
+    }
+   ]
+  },
+  {
+   "id": "moto",
+   "mode": "card",
+   "story": 2,
+   "kicker": "INDIA",
+   "icon": "phone",
+   "stat": "7,000 mAh",
+   "statSub": "battery",
+   "headline": "Motorola *Edge 70 Neo* launches in India *tomorrow*",
+   "source": "TelecomTalk, FoneArena, Cashify",
+   "lines": [
+    {
+     "hi": "नंबर दो. मोटोरोला एज सेवंटी नियो, कल चौबीस नवंबर को भारत में लॉन्च. सात हज़ार एम ए एच की बैटरी.",
+     "en": "Number do. Motorola Edge 70 Neo, kal 24 November ko Bharat mein launch. Saat hazaar mAh ki battery.",
+     "pose": "palm",
+     "expr": "happy",
+     "cap": "*7,000 mAh* battery"
+    }
+   ]
+  },
+  {
+   "id": "nothing",
+   "mode": "card",
+   "story": 3,
+   "kicker": "TECH",
+   "icon": "chip",
+   "stat": "8 DEC",
+   "statSub": "reveal date",
+   "headline": "Nothing will show its first *screen-free AI device* on *8 December*",
+   "source": "My Mobile India, Tech-ish, ShiftDelete",
+   "lines": [
+    {
+     "hi": "नंबर तीन. नथिंग का पहला ए आई गैजेट, जिसमें स्क्रीन ही नहीं! आठ दिसंबर को दिखेगा.",
+     "en": "Number teen. Nothing ka pehla AI gadget, jismein screen hi nahi! Aath December ko dikhega.",
+     "pose": "explain",
+     "expr": "shocked",
+     "cap": "Screen *nahi*!"
+    }
+   ]
+  },
+  {
+   "id": "ott",
+   "mode": "card",
+   "story": 4,
+   "kicker": "FILMS",
+   "icon": "film",
+   "stat": "8",
+   "statSub": "episodes, all at once",
+   "headline": "*Blade Runner 2099* streams on Prime Video from *25 November*",
+   "source": "Collider, PPC Land, Wisevoter",
+   "lines": [
+    {
+     "hi": "नंबर चार. ब्लेड रनर टू थाउज़ंड निन्टी नाइन, पच्चीस नवंबर को प्राइम वीडियो पे. आठों एपिसोड एक साथ.",
+     "en": "Number chaar. Blade Runner 2099, pachchees November ko Prime Video pe. Aathon episode ek saath.",
+     "pose": "point",
+     "expr": "smug",
+     "cap": "*25 Nov* Prime pe"
+    }
+   ]
+  },
+  {
+   "id": "calls",
+   "mode": "card",
+   "story": 5,
+   "kicker": "INDIA",
+   "icon": "phone",
+   "stat": "1601",
+   "statSub": "service calls only",
+   "headline": "TRAI: courier, power and gas calls move to *1601* numbers",
+   "source": "TRAI via TelecomTalk, Trak.in, Pune Pulse",
+   "lines": [
+    {
+     "hi": "और नंबर पाँच. ट्राई के नियम से, कूरियर, बिजली और गैस वालों की असली कॉल, अब सोलह सौ एक वाले नंबर से आएँगी.",
+     "en": "Aur number paanch. TRAI ke niyam se, courier, bijli aur gas walon ki asli call, ab 1601 wale number se aayengi.",
+     "pose": "blown",
+     "expr": "shocked",
+     "big": 1,
+     "hit": "1601",
+     "cap": "Asli call: *1601*"
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "mode": "anchor",
+   "title": "Roz subah|*7 baje*",
+   "lines": [
+    {
+     "hi": "ये सोलह सौ एक वाली बात, फ़ैमिली ग्रुप में भेजो. रोज़ सुबह सात बजे, फ़ॉलो करो.",
+     "en": "Ye 1601 wali baat, family group mein bhejo. Roz subah saat baje, follow karo.",
+     "pose": "point",
+     "expr": "happy",
+     "big": 1,
+     "cap": "Family ko *bhejo*"
+    }
+   ]
+  }
+ ]
+}
