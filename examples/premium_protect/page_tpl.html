@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "CapCut ban hai, ab kispe?" (premium look, Hindi, 17:00 Creator Guide 20 Nov 2026) =================
+ICONS.music='<path d="M-10,26 V-30 L30,-38 V18"/><circle cx="-20" cy="26" r="12"/><circle cx="20" cy="18" r="12"/>';
+ICONS.film='<rect x="-38" y="-30" width="76" height="60" rx="8"/><path d="M-38,-12 H38 M-38,12 H38 M-20,-30 V-12 M0,-30 V-12 M20,-30 V-12"/>';
+// ================= reel art: "Meri reel chori? Content Protection" (premium look, Hindi, 17:00 Creator Guide 23 Nov 2026) =================
+ICONS.film='<rect x="-38" y="-30" width="76" height="60" rx="8"/><path d="M-38,-12 H38 M-38,12 H38 M-20,-30 V-12 M0,-30 V-12 M20,-30 V-12"/>';
+ICONS.copy='<rect x="-30" y="-36" width="50" height="58" rx="8"/><rect x="-14" y="-20" width="50" height="58" rx="8"/>';
+ICONS.eye='<path d="M-38,0 C-20,-26 20,-26 38,0 C20,26 -20,26 -38,0Z"/><circle cx="0" cy="0" r="10"/>';
+ICONS.eyeoff='<path d="M-38,0 C-20,-26 20,-26 38,0 C20,26 -20,26 -38,0Z"/><path d="M-30,-30 L30,30"/>';
+ICONS.link='<path d="M-6,10 L10,-6"/><path d="M-2,-18 L8,-28 C16,-36 30,-24 22,-16 L12,-6"/><path d="M2,18 L-8,28 C-16,36 -30,24 -22,16 L-12,6"/>';
+ICONS.release='<path d="M-30,6 A30,30 0 1,0 -20,-22"/><path d="M-34,-34 L-20,-22 L-34,-12"/>';
+ICONS.scan='<path d="M-36,-20 V-36 H-20 M20,-36 H36 V-20 M36,20 V36 H20 M-20,36 H-36 V20"/><path d="M-26,0 H26"/>';
+const F=i=>BT[i].f0;
+const q={r0:F(1),rt:WF(1,'theek'),rp:WF(1,'par'),rb:WF(1,'best'),rk:WF(1,'khud'),
+ s0:F(2),sd:WF(2,'dost'),sr:WF(2,'roz'),sc:WF(2,'chori'),
+ n0:F(3),e0:F(4),es:WF(4,'satrah'),ec:WF(4,'copy'),ek:WF(4,'scan'),
+ h0:F(5),hn:WF(5,'notification'),hp:WF(5,'professional'),ho:WF(5,'on'),
+ m0:F(6),mp:WF(6,'protected'),mc:WF(6,'copy'),mh:WF(6,'chhupao'),ml:WF(6,'credit'),
+ z0:F(7),zc:WF(7,'comment'),zg:WF(7,'guide'),zd:WF(7,'dm')};
+[[HOOK_END+2,'blip'],[q.rt,'ding'],[q.rp,'pop'],[q.rb,'tick'],
+ [q.s0,'blip'],[q.sd,'ding'],[q.sr,'tick'],[q.sc,'pop'],
+ [q.n0,'blip'],[q.n0+8,'tick'],[q.es,'tick'],[q.ec,'blip'],[q.ek,'ding'],
+ [q.h0,'blip'],[q.hn,'ding'],[q.hp,'tick'],[q.ho,'pop'],
+ [q.m0,'blip'],[q.mp,'ding'],[q.mc,'tick'],[q.mh,'pop'],[q.ml,'ding'],
+ [q.z0,'blip'],[q.z0+8,'tick'],[q.zc,'pop'],[q.zg,'ding'],[q.zd,'tick']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+const tick=(x,y,p,col=PR.good)=>p<=0?'':`<g opacity="${p}"><circle cx="${x}" cy="${y}" r="22" fill="${col}"/>${PICON('check',x,y,.42,PR.hlText,4)}</g>`;
+function row(y,p,num,title,sub,done,o={}){
+ return PCARD(CX,y,820,150,p,`<circle cx="-330" cy="0" r="40" fill="${done?PR.good:PR.card2}" stroke="${PR.line2}" stroke-width="2"/>`+PT(-330,14,38,num,{w:800,fill:done?PR.hlText:PR.text})+
+  PT(-260,-6,40,title,{a:'start',w:700})+PT(-260,36,26,sub,{a:'start',w:500,fill:PR.muted})+(done?PICON('check',330,0,.6,PR.good,4):''),{on:done&&o.on,state:done?'good':''})}
+// a small reel tile: thumbnail + handle
+function tile(x,y,p,handle,sub,bad){return `<g opacity="${p}" transform="translate(${x},${y})"><rect x="-170" y="-150" width="340" height="300" rx="26" fill="${PR.card}" stroke="${bad?PR.bad:PR.line2}" stroke-width="3"/>`+
+ `<rect x="-140" y="-124" width="280" height="160" rx="16" fill="${PR.card2}"/>${PICON('film',0,-44,.8,bad?PR.bad:PR.muted,4)}`+PT(0,82,32,handle,{w:700,fill:bad?PR.bad:PR.text})+PT(0,122,24,sub,{w:500,fill:PR.muted})+`</g>`}
+function content(n,f){let o='';
+ if(n=='report'){o+=PLABEL(CX,226,'Copy mili? Do tareeke');
+  o+=PCARD(CX,400,820,250,pin(f,HOOK_END+2),PT(-380,-72,24,'THEEK',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-380,4,64,'Report karo',{a:'start',w:800})+
+   PT(-380,60,28,'har copy khud dhoondho, form bharo',{a:'start',w:500,fill:PR.muted,op:pin(f,q.rt)})+(f>=q.rt?PICON('check',330,-10,.6,PR.muted,4):''));
+  const lit=f>=q.rk;
+  o+=PCARD(CX,710,820,300,pin(f,q.rp),PBADGE('scan',-330,-30,lit?PR.good:PR.muted,50)+PT(-250,-60,24,'BEST TAREEKA',{a:'start',w:600,fill:lit?PR.good:PR.muted,ls:3})+
+   PT(-250,0,46,'Instagram khud',{a:'start',w:700,op:pin(f,q.rb)})+PT(-250,56,46,'dhoondhega',{a:'start',w:700,fill:lit?PR.good:PR.text,op:pin(f,q.rk)})+
+   PT(250,120,30,'kaise?',{w:600,fill:PR.muted,op:pin(f,q.rk+14)}),{on:lit});}
+ if(n=='share'){o+=PLABEL(CX,226,'Send this to');
+  o+=PCARD(CX,440,820,300,pin(f,q.s0,10),PBADGE('user',-330,-60,PR.text,48)+PT(-260,-70,46,'Woh dost',{a:'start',w:700})+PT(-260,-22,28,'jiski reel roz chori hoti hai',{a:'start',w:500,fill:PR.muted,op:pin(f,q.sr)})+
+   PPILL(0,90,'"Bhai, meri reel phir copy"',pin(f,q.sc),{size:44,col:PR.bad}),{on:f>=q.sd});
+  o+=PCARD(CX,750,820,200,pin(f,q.s0+10),PBADGE('shield',-330,0,PR.good,46)+PT(-260,-10,40,'Bhejo, reel',{a:'start',w:700})+PT(-260,40,40,'bachao',{a:'start',w:700,fill:PR.good}),{state:'good'});}
+ if(n=='reveal'){
+  if(f<q.e0){o+=PHEAD(CX,330,76,'Naam *kya* hai?',f,q.n0,{step:3});
+   o+=PCARD(CX,640,560,300,pin(f,q.n0+4),PBADGE('shield',0,-50,PR.muted,56)+PT(0,90,64,'? ? ?',{w:800,fill:PR.muted}));}
+  else {const pe=pin(f,q.e0,8);
+   o+=PCARD(CX,370,820,300,pe,PBADGE('shield',-310,-20,PR.good,64)+PT(-210,-24,64,'Content',{a:'start',w:800})+PT(-210,44,64,'Protection',{a:'start',w:800,fill:PR.good})+PT(-210,100,26,'by Instagram · free',{a:'start',w:500,fill:PR.muted}),{on:1});
+   o+=PCARD(CX,620,820,120,pin(f,q.es),PT(-360,14,40,'Aaya',{a:'start',w:700})+PT(-230,14,40,'17 Nov 2026',{a:'start',w:700,fill:PR.num})+tick(330,0,pin(f,q.es)),{state:'good'});
+   o+=PCARD(CX,770,820,140,pin(f,q.ec),PBADGE('copy',-330,0,PR.text,42)+PT(-260,-6,40,'Copy reels scan',{a:'start',w:700})+PT(-260,36,26,'Instagram + Facebook pe',{a:'start',w:500,fill:PR.muted})+tick(330,0,pin(f,q.ek)),{state:'good',on:f>=q.ek});}}
+ if(n=='how'){o+=PLABEL(CX,226,'Kahan milega');
+  o+=PCARD(CX,340,820,130,pin(f,q.h0),PBADGE('warn',-330,0,PR.num,40)+PT(-260,-4,38,'Sabko abhi nahi mila',{a:'start',w:700})+PT(-260,38,24,'eligible creators ko, dheere dheere',{a:'start',w:500,fill:PR.muted}));
+  o+=row(510,pin(f,q.hn),'1','Notification','Activity feed mein',f>=q.hp,{on:0});
+  o+=row(680,pin(f,q.hp),'2','Your professional tools','Content protection dhoondho',f>=q.ho,{on:0});
+  o+=row(850,pin(f,q.ho),'3','On karo (enroll)','bas ek baar',f>=q.ho+12,{on:1});}
+ if(n=='match'){o+=PLABEL(CX,226,'Copy mili? 4 option');
+  o+=PCARD(CX,350,820,140,pin(f,q.m0),PBADGE('shield',-330,0,PR.good,44)+PT(-260,-4,40,'Nayi reels: auto',{a:'start',w:700})+PT(-260,38,26,'on karne ke baad har original reel',{a:'start',w:500,fill:PR.muted,op:pin(f,q.mp)})+tick(330,0,pin(f,q.mp)),{state:'good'});
+  const opt=(x,y,p,ic,t1,t2,lit)=>PCARD(x,y,390,190,p,PBADGE(ic,-120,-30,lit?PR.good:PR.muted,36)+PT(-70,-24,34,t1,{a:'start',w:700,fill:lit?PR.good:PR.text})+PT(-160,50,26,t2,{a:'start',w:500,fill:PR.muted}),{on:lit});
+  o+=opt(335,560,pin(f,q.mp+2),'eye','Track','copy pe nazar',0);
+  o+=opt(745,560,pin(f,q.mp+6),'eyeoff','Hide','from everyone',f>=q.mh&&f<q.ml);
+  o+=opt(335,770,pin(f,q.mp+10),'link','Credit link','"original by" aap',f>=q.ml);
+  o+=opt(745,770,pin(f,q.mp+14),'release','Release','copy rehne do',0);
+  o+=PT(CX,910,26,'Allow list: apna 2nd account / collab',{w:600,fill:PR.muted,op:pin(f,q.ml+16)});}
+ if(n=='end'){o+=PLABEL(CX,226,'Reel chori? Ab',);
+  o+=PCARD(CX,420,820,280,pin(f,q.z0),PT(-360,-60,40,'Report',{a:'start',w:800})+PT(-170,-60,30,'theek · har copy khud',{a:'start',w:500,fill:PR.muted})+
+   `<line x1="-380" y1="-10" x2="380" y2="-10" stroke="${PR.line}" stroke-width="2"/>`+PT(-360,60,44,'Content Protection',{a:'start',w:800,fill:PR.good})+PICON('shield',340,48,.5,PR.good,4),{on:1});
+  const typed='GUIDE'.slice(0,f<q.zg?0:Math.min(5,1+Math.floor((f-q.zg)/3)));
+  o+=PCARD(CX,720,820,180,pin(f,q.z0+8),PBADGE('chat',-330,0,PR.text,44)+PT(-260,-30,24,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PT(-260,36,54,typed+(f>=q.zc&&typed.length<5&&Math.floor(f/8)%2?'|':''),{a:'start',w:800,fill:PR.good})+
+   PPILL(250,36,'DM mein guide',pin(f,q.zd),{solid:1,size:28}),{on:f>=q.zg});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,270,80,'Meri reel *chori*',f,0,{instant:1})+PHEAD(540,370,80,'views usko?',f,0,{instant:1})+
+  PPILL(540,470,'FIX: CONTENT PROTECTION',1,{solid:1,size:34})+
+  tile(345,665,1,'@aap','original',0)+PARROW(522,665,568,1,PR.bad)+tile(745,665,1,'@copy_page','aapki reel, unke views',1)+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
