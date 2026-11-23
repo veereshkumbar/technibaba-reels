@@ -1,6 +1,61 @@
 {
- "updated": "2026-11-20",
+ "updated": "2026-11-23",
  "guides": [
+  {
+   "slug": "wedding-card-apk-install-unknown-apps-off",
+   "date": "2026-11-23",
+   "title": "Wedding card on WhatsApp is an .apk? Turn off \"Install unknown apps\"",
+   "lane": "Tutorial",
+   "summary": "A real wedding invitation is a PDF, photo or video. A file ending in .apk is an app, and fake invite apps are used to steal OTPs and empty bank accounts. Four steps to block them on Android.",
+   "steps": [
+    {
+     "title": "Check the file before you tap",
+     "body": "Look at the end of the file name. Wedding_Card.pdf or .jpg is a card. Wedding_Card.apk is an app: do not open it. If it came from a friend or relative, call them and ask if they sent it."
+    },
+    {
+     "title": "Turn off \"Install unknown apps\" for WhatsApp, Chrome and Files",
+     "body": "Open Settings and search for \"Install unknown apps\" (on Pixel: Settings > Apps > Special app access > Install unknown apps). Tap WhatsApp and turn \"Allow from this source\" off. Do the same for Chrome, Files and any other app that shows Allowed."
+    },
+    {
+     "title": "Keep Play Protect scanning on",
+     "body": "Open the Play Store > tap your profile icon (top right) > Play Protect > Settings (gear) > turn on \"Scan apps with Play Protect\"."
+    },
+    {
+     "title": "If the phone says Install blocked, stop there",
+     "body": "Tap Cancel. Do not tap Settings, even if the sender tells you to: that is the trick. If you already installed it: turn off mobile data and Wi-Fi, uninstall the app, call your bank to block cards and UPI, change your PINs, and call 1930 or report at cybercrime.gov.in."
+    }
+   ],
+   "tip": "Do this on your parents' phones too. Most new Android phones keep \"Install unknown apps\" off by default, so if WhatsApp shows Allowed, someone turned it on.",
+   "caution": "Menu names differ slightly by phone brand and Android version; searching \"Install unknown apps\" in Settings works on most phones. iPhones cannot install .apk files, but the same rule applies to unknown links.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "Hyderabad Cyber Police advisory on APK wedding invites (ETV Bharat, 25 May 2026)",
+     "url": "https://www.etvbharat.com/en/state/apk-files-as-wedding-invites-hyderabad-cyber-police-issue-advisory-on-new-cyber-fraud-strategy-enn26052501227"
+    },
+    {
+     "title": "Janjgir police arrest in wedding-card APK case (CG Khabar, 16 Nov 2026)",
+     "url": "https://cgkhabar.com/news/chhattisgarh-janjgir-police-arrests-man-from-kerala-for-wedding-card-apk-scam-20261116"
+    },
+    {
+     "title": "Pixel Phone Help: install unknown apps",
+     "url": "https://support.google.com/pixelphone/answer/7391672?hl=en"
+    },
+    {
+     "title": "Samsung: install apps from unknown sources",
+     "url": "https://www.samsung.com/us/support/troubleshoot/TSG10001913/"
+    },
+    {
+     "title": "Google Android Help: Google Play Protect",
+     "url": "https://support.google.com/android/answer/2812853?hl=en"
+    },
+    {
+     "title": "Rajasthan Police warning on WhatsApp wedding invites (The Tribune)",
+     "url": "https://www.tribuneindia.com/news/rajasthan/rajasthan-police-warn-against-scams-through-wedding-invites-on-whatsapp/"
+    }
+   ]
+  },
   {
    "slug": "capcut-banned-india-free-editor-vn-edits",
    "date": "2026-11-20",
