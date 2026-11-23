@@ -1,0 +1,184 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Inter;font-weight:500;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#07070F}#r{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}</style></head><body><div id="r"></div>
+<script>
+// GazeWell promo reel. frame(f) draws one 1080x1920 frame. Times come from window.T (voice timeline).
+const FPS=30, C={bg:'#07070F',bg2:'#0D0D1C',card:'#12122A',line:'rgba(255,255,255,.10)',text:'#F0F0FF',muted:'#9AA0C0',a1:'#00B4D8',a2:'#0096C7',a3:'#0077B6',pink:'#F48FC2',purp:'#A78BFA',good:'#5DE0B0',warm:'#FFC857'};
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>1-Math.pow(1-cl(x),3), sm=x=>{x=cl(x);return x*x*(3-2*x)};
+const pin=(t,a,d=.35)=>ease((t-a)/d), out=(t,a,d=.3)=>1-sm((t-a)/d);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const TX=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-size="${s}" font-weight="${o.w||700}" fill="${o.fill||C.text}" letter-spacing="${o.ls??-s*.02}" opacity="${o.op??1}">${esc(txt)}</text>`;
+const tw=(s,size,w=700)=>{let n=0;for(const ch of String(s))n+=ch==' '?.27:/[il.,'!|:;]/.test(ch)?.27:/[mwMW]/.test(ch)?.86:/[A-Z0-9]/.test(ch)?.66:.56;return n*size*(w>=700?1.04:1)};
+// headline with *keyword* in the brand gradient
+function HEAD(x,y,size,text,p){const raw=text.replace(/\*/g,''),fit=Math.min(size,size*940/(tw(raw,size,800)*1.08));
+ const sp=text.split('*').map((g,k)=>g?`<tspan fill="${k%2?'url(#gb)':C.text}">${esc(g)}</tspan>`:'').join('');
+ return `<g opacity="${p}" transform="translate(0,${(1-p)*24})"><text x="${x}" y="${y}" text-anchor="middle" font-size="${fit}" font-weight="800" letter-spacing="${-fit*.025}" style="white-space:pre">${sp}</text></g>`}
+const PILL=(x,y,txt,p=1,o={})=>{const s=o.size||30,w=tw(txt,s,700)+s*1.3;return `<g opacity="${p}" transform="translate(${x},${y+(1-p)*16})"><rect x="${-w/2}" y="${-s*1.05}" width="${w}" height="${s*1.65}" rx="${s*.82}" fill="${o.fill||'rgba(0,180,216,.12)'}" stroke="${o.col||'rgba(0,180,216,.55)'}" stroke-width="2"/>${TX(0,s*.12,s,txt,{w:700,fill:o.tcol||C.text})}</g>`};
+const CARD=(x,y,w,h,p,inner,o={})=>p<=0?'':`<g opacity="${p}" transform="translate(${x},${y+(1-p)*30}) scale(${.97+.03*p})"><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${o.r||34}" fill="${C.card}" stroke="${o.on?'rgba(0,180,216,.6)':C.line}" stroke-width="2"/><rect x="${-w/2+2}" y="${-h/2+2}" width="${w-4}" height="${Math.min(70,h/3)}" rx="${(o.r||34)-2}" fill="url(#sheen)"/>${inner}</g>`;
+
+// ---------- the camera scene: an invented parent's face in a nursery (what the phone camera "sees")
+function scene(){return `
+ <rect x="-300" y="-520" width="600" height="1040" fill="#E9DCCB"/>
+ <rect x="-300" y="-520" width="600" height="1040" fill="url(#room)"/>
+ <circle cx="190" cy="-380" r="70" fill="#FFF3D6" opacity=".9"/>
+ <!-- baby mobile: high-contrast shapes -->
+ <line x1="-170" y1="-520" x2="-170" y2="-420" stroke="#333" stroke-width="4"/><line x1="-250" y1="-420" x2="-90" y2="-420" stroke="#333" stroke-width="4"/>
+ <line x1="-250" y1="-420" x2="-250" y2="-360" stroke="#333" stroke-width="3"/><circle cx="-250" cy="-335" r="26" fill="#111"/><circle cx="-250" cy="-335" r="13" fill="#fff"/>
+ <line x1="-170" y1="-420" x2="-170" y2="-330" stroke="#333" stroke-width="3"/><path d="M-170,-330 l12,26 l28,4 l-20,19 l5,28 l-25,-13 l-25,13 l5,-28 l-20,-19 l28,-4z" fill="#E23B3B"/>
+ <line x1="-90" y1="-420" x2="-90" y2="-370" stroke="#333" stroke-width="3"/><rect x="-114" y="-370" width="48" height="48" fill="#111"/><rect x="-102" y="-358" width="24" height="24" fill="#fff"/>
+ <!-- parent -->
+ <path d="M-260,520 C-250,330 -150,250 0,250 C150,250 250,330 260,520 Z" fill="#2A9D8F"/>
+ <path d="M-70,250 C-50,300 50,300 70,250" fill="#22867A"/>
+ <rect x="-48" y="150" width="96" height="120" rx="30" fill="#D9A07A"/>
+ <path d="M-185,-70 C-200,-260 -80,-330 10,-320 C130,-312 205,-230 190,-60 C188,40 170,130 150,170 L-150,170 C-175,120 -186,40 -185,-70 Z" fill="#3B2418"/>
+ <ellipse cx="0" cy="-20" rx="140" ry="170" fill="#E8B48C"/>
+ <ellipse cx="-142" cy="-10" rx="22" ry="34" fill="#E1A47A"/><ellipse cx="142" cy="-10" rx="22" ry="34" fill="#E1A47A"/>
+ <path d="M-145,-80 C-120,-200 -10,-230 60,-210 C120,-195 150,-140 148,-70 C110,-150 30,-170 -40,-150 C-90,-136 -120,-110 -145,-80 Z" fill="#3B2418"/>
+ <ellipse cx="-52" cy="-30" rx="15" ry="19" fill="#241510"/><ellipse cx="52" cy="-30" rx="15" ry="19" fill="#241510"/>
+ <circle cx="-47" cy="-36" r="5" fill="#fff"/><circle cx="57" cy="-36" r="5" fill="#fff"/>
+ <path d="M-80,-72 C-62,-84 -40,-84 -24,-76 M24,-76 C40,-84 62,-84 80,-72" stroke="#3B2418" stroke-width="7" fill="none" stroke-linecap="round"/>
+ <path d="M0,-10 C6,12 8,24 0,32" stroke="#C98B63" stroke-width="5" fill="none" stroke-linecap="round"/>
+ <path d="M-52,58 C-28,90 28,90 52,58 C30,70 -30,70 -52,58 Z" fill="#B5473F"/><path d="M-44,60 C-20,70 20,70 44,60 L40,66 C18,74 -18,74 -40,66 Z" fill="#fff"/>
+ <ellipse cx="-88" cy="30" rx="26" ry="14" fill="#F08A7E" opacity=".35"/><ellipse cx="88" cy="30" rx="26" ry="14" fill="#F08A7E" opacity=".35"/>
+ <circle cx="-142" cy="24" r="7" fill="#FFC857"/><circle cx="142" cy="24" r="7" fill="#FFC857"/>`}
+// age (months) -> simulated infant vision filter, following the app's own timeline
+function visParams(a){return {blur:8.5*Math.pow(cl(1-a/12),1.2)+.3, sat:cl((a-3)/4)*1+.0, con:.42+.58*cl(a/5), vig:.75*cl(1-a/12)}}
+function phone(x,y,s,age,p,o={}){
+ const v=visParams(age);
+ return `<g opacity="${p}" transform="translate(${x},${y+(1-p)*40}) scale(${s*(.96+.04*p)})">
+  <rect x="-300" y="-560" width="600" height="1120" rx="84" fill="#0B0B14" stroke="#2A2A3E" stroke-width="6"/>
+  <rect x="-280" y="-540" width="560" height="1080" rx="66" fill="#000"/>
+  <clipPath id="scr"><rect x="-280" y="-540" width="560" height="1080" rx="66"/></clipPath>
+  <filter id="vis" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="${v.blur.toFixed(2)}"/><feColorMatrix type="saturate" values="${v.sat.toFixed(3)}"/>
+   <feComponentTransfer><feFuncR type="linear" slope="${v.con.toFixed(3)}" intercept="${(.5*(1-v.con)).toFixed(3)}"/><feFuncG type="linear" slope="${v.con.toFixed(3)}" intercept="${(.5*(1-v.con)).toFixed(3)}"/><feFuncB type="linear" slope="${v.con.toFixed(3)}" intercept="${(.5*(1-v.con)).toFixed(3)}"/></feComponentTransfer></filter>
+  <g clip-path="url(#scr)"><g filter="url(#vis)">${scene()}</g><rect x="-280" y="-540" width="560" height="1080" fill="url(#vig)" opacity="${v.vig.toFixed(3)}"/>
+   ${o.ui?`<rect x="-280" y="-540" width="560" height="150" fill="rgba(7,7,15,.55)"/><circle cx="-200" cy="-462" r="30" fill="url(#gb)"/>${TX(-200,-452,26,'A',{w:800,fill:'#07070F'})}${TX(-150,-470,28,o.name||'Aarav',{a:'start',w:800})}${TX(-150,-436,22,o.ageLabel||'',{a:'start',w:600,fill:C.a1})}
+   <rect x="150" y="-486" width="100" height="40" rx="20" fill="#E23B3B"/><circle cx="174" cy="-466" r="7" fill="#fff"/>${TX(214,-458,20,'LIVE',{w:800})}`:''}
+  </g>
+  <rect x="-80" y="-528" width="160" height="34" rx="17" fill="#000"/>
+ </g>`}
+function slider(x,y,age,p){const W=820,k=age/12;let o=`<g opacity="${p}" transform="translate(${x},${y})"><rect x="${-W/2}" y="-6" width="${W}" height="12" rx="6" fill="rgba(255,255,255,.12)"/><rect x="${-W/2}" y="-6" width="${W*k}" height="12" rx="6" fill="url(#gb)"/>`;
+ [0,3,6,9,12].forEach(m=>{o+=`<circle cx="${-W/2+W*m/12}" cy="0" r="7" fill="${m<=age?C.a1:'rgba(255,255,255,.3)'}"/>`+TX(-W/2+W*m/12,48,24,m==0?'Newborn':m+' mo',{w:600,fill:m<=age+.01?C.text:C.muted})});
+ return o+`<circle cx="${-W/2+W*k}" cy="0" r="20" fill="#fff" stroke="${C.a1}" stroke-width="6"/></g>`}
+function icon(x,y,s,p){return `<g opacity="${p}" transform="translate(${x},${y}) scale(${s*(.8+.2*ease(p))})"><rect x="-120" y="-120" width="240" height="240" rx="54" fill="#fff"/><image href="icon.png" x="-120" y="-120" width="240" height="240" clip-path="url(#ic)"/></g>`}
+
+
+const STAGES=[[0,'Newborn','Blurry · black, white & grey'],[2.5,'3 months','Sharper contrast'],[5,'4–6 months','Colour fills in'],[8,'7–9 months','Depth perception'],[11,'12 months','Near-adult clarity']];
+// full-bleed camera scene, clear on the left of `div`, baby vision on the right
+function bleed(age,div,zoom,showDiv){
+ const v=visParams(age), s=1.86*zoom, ty=1080;
+ const filt=`<filter id="bv" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="${(v.blur*1.0).toFixed(2)}"/><feColorMatrix type="saturate" values="${v.sat.toFixed(3)}"/><feComponentTransfer><feFuncR type="linear" slope="${v.con}" intercept="${.5*(1-v.con)}"/><feFuncG type="linear" slope="${v.con}" intercept="${.5*(1-v.con)}"/><feFuncB type="linear" slope="${v.con}" intercept="${.5*(1-v.con)}"/></feComponentTransfer></filter>`;
+ const g=`<g transform="translate(540,${ty}) scale(${s})">${scene()}</g>`;
+ let o=filt+`<clipPath id="cl"><rect x="0" y="0" width="${div}" height="1920"/></clipPath><clipPath id="cr"><rect x="${div}" y="0" width="${1080-div}" height="1920"/></clipPath>`;
+ o+=`<g clip-path="url(#cl)">${g}</g><g clip-path="url(#cr)"><g filter="url(#bv)">${g}</g><rect x="0" y="0" width="1080" height="1920" fill="url(#vig)" opacity="${v.vig*.8}"/></g>`;
+ o+=`<rect width="1080" height="1920" fill="url(#shadeTop)"/><rect width="1080" height="1920" fill="url(#shadeBot)"/>`;
+ if(showDiv>0) o+=`<g opacity="${showDiv}"><rect x="${div-3}" y="0" width="6" height="1920" fill="#fff"/><circle cx="${div}" cy="960" r="34" fill="#fff"/><path d="M${div-12},950 l-10,10 l10,10 M${div+12},950 l10,10 l-10,10" stroke="#07070F" stroke-width="5" fill="none" stroke-linecap="round"/></g>`;
+ return o}
+function flash(t,cuts){let a=0;cuts.forEach(c=>{if(t>=c&&t<c+.35)a=Math.max(a,.32*(1-(t-c)/.35))});return a>0?`<rect width="1080" height="1920" fill="#fff" opacity="${a.toFixed(3)}"/>`:''}
+// word-by-word kinetic headline (each word pops in on its own)
+function KIN(x,y,size,text,t0,t,step=.09){const words=[];text.split('*').forEach((g,k)=>g.split(' ').filter(Boolean).forEach(w=>words.push({w,kw:k%2})));
+ const raw=words.map(z=>z.w).join(' '),fit=Math.min(size,size*960/(tw(raw,size,800)*1.08));let total=0;const ws=words.map(z=>{const w=tw(z.w,fit,800)*1.04;total+=w;return w});total+=fit*.27*(words.length-1);
+ let cx=x-total/2,o='';words.forEach((z,i)=>{const p=pin(t,t0+i*step,.22),sc=.6+.4*ease(p);o+=`<g opacity="${p}" transform="translate(${cx+ws[i]/2},${y}) scale(${sc})"><text x="0" y="0" text-anchor="middle" font-size="${fit}" font-weight="800" fill="${z.kw?'url(#gb)':C.text}" letter-spacing="${-fit*.025}">${esc(z.w)}</text></g>`;cx+=ws[i]+fit*.27});return o}
+function frame(f){
+ const t=f/FPS, T=window.T, L=T.lines, W=T.w;
+ let o=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920"><defs>
+  <linearGradient id="gb" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00B4D8"/><stop offset=".55" stop-color="#7AA8FF"/><stop offset="1" stop-color="#C69CFF"/></linearGradient>
+  <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#0096C7" stop-opacity=".35"/><stop offset="1" stop-color="#0096C7" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glow2" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#A78BFA" stop-opacity=".25"/><stop offset="1" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+  <radialGradient id="vig" cx=".5" cy=".45" r=".7"><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="1"/></radialGradient>
+  <linearGradient id="room" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E7D3"/><stop offset="1" stop-color="#CDB9A4"/></linearGradient>
+  <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <linearGradient id="shadeTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07070F" stop-opacity=".97"/><stop offset=".2" stop-color="#07070F" stop-opacity=".75"/><stop offset=".34" stop-color="#07070F" stop-opacity="0"/></linearGradient>
+  <linearGradient id="shadeBot" x1="0" y1="0" x2="0" y2="1"><stop offset=".68" stop-color="#07070F" stop-opacity="0"/><stop offset="1" stop-color="#07070F" stop-opacity=".95"/></linearGradient>
+  <clipPath id="ic"><rect x="-120" y="-120" width="240" height="240" rx="54"/></clipPath></defs>
+  <rect width="1080" height="1920" fill="${C.bg}"/>
+  <ellipse cx="${540+120*Math.sin(t*.25)}" cy="${700+80*Math.cos(t*.2)}" rx="760" ry="760" fill="url(#glow)"/>
+  <ellipse cx="${300-100*Math.sin(t*.3)}" cy="1500" rx="600" ry="600" fill="url(#glow2)"/>`;
+ const cuts=[L[2][0]-.15,L[3][0]-.25,L[4][0]-.2,L[5][0]-.2,L[6][0]-.2,L[7][0]-.2];
+ // ---- HOOK + distance: full-bleed split (0 .. L[2][0])
+ if(t<L[2][0]){
+  const sweep=W(0,.52);                      // "But this is all they can actually see"
+  const div=t<sweep?1080:1080-1080*sm((t-sweep)/.9);
+  const zoom=1+.06*cl(t/11);
+  o+=bleed(0,div,zoom,t>=sweep&&t<sweep+1.2?1-sm((t-sweep-0.9)/.3):0);
+  if(t<L[1][0]){
+   o+=KIN(540,250,78,'Your newborn is *staring at you*',0.1,t,.12);
+   if(t>=sweep) o+=KIN(540,350,58,'but this is all they *see*',sweep+.1,t,.1);
+   // labels on each side while the split is visible
+   const lp=t<sweep?pin(t,.4):1-sm((t-sweep-.6)/.4);
+   o+=PILL(220,1640,'YOU SEE',lp,{size:30,fill:'rgba(255,255,255,.14)',col:'rgba(255,255,255,.5)'})+(t>=sweep?PILL(860,1640,'YOUR NEWBORN',pin(t,sweep+.2)*(1-sm((t-sweep-.9)/.4)),{size:30}):'');
+  } else {
+   o+=KIN(540,250,72,'*Blurry,* black & white',L[1][0],t,.1);
+   // distance ruler: 20-30 cm, at "twenty to thirty"
+   const r0=W(1,.45),rp=pin(t,r0,.5);
+   o+=`<g opacity="${rp}"><line x1="190" y1="1500" x2="${190+700*rp}" y2="1500" stroke="#fff" stroke-width="5"/>`+[0,1,2,3,4,5,6].map(i=>`<line x1="${190+i*700/6}" y1="1480" x2="${190+i*700/6}" y2="1520" stroke="#fff" stroke-width="4" opacity="${cl(rp*7-i)}"/>`).join('')+`</g>`+
+     `<g opacity="${pin(t,r0+.4)}">${TX(540,1610,96,'20–30 cm',{w:800,fill:'url(#gb)'})}${TX(540,1680,36,'the distance to your face during a feed',{w:600,fill:'#D8DCF0'})}</g>`;
+  }
+ }
+ // ---- age timeline in the phone (L[2])
+ if(t>=L[2][0]-.1&&t<L[3][0]){
+  const a2=L[2][0];
+  const ages=[[a2+.3,0],[W(2,.36),2.5],[W(2,.55),5],[W(2,.74),8],[W(2,.93),12]];
+  let age=0;for(let i=0;i<ages.length-1;i++){if(t>=ages[i][0])age=ages[i][1]+(ages[i+1][1]-ages[i][1])*sm((t-ages[i][0])/(ages[i+1][0]-ages[i][0]))}if(t>=ages[ages.length-1][0])age=12;
+  const st=STAGES.reduce((acc,s)=>age>=s[0]-.01?s:acc,STAGES[0]);
+  o+=KIN(540,250,72,'Month by month, it *comes into focus*',a2,t,.08);
+  o+=phone(540,900,.9+.03*cl((t-a2)/9),age,pin(t,a2,.45))+slider(540,1500,age,pin(t,a2+.2));
+  o+=`<g opacity="${pin(t,a2+.3)}">`+TX(540,1630,52,st[1],{w:800,fill:C.a1})+TX(540,1695,36,st[2],{w:600,fill:C.muted})+`</g>`;
+ }
+ // ---- GazeWell live (L[3])
+ if(t>=L[3][0]-.25&&t<L[4][0]){
+  const s0=L[3][0]-.25,ip=pin(t,s0,.5);
+  o+=`<ellipse cx="540" cy="330" rx="300" ry="300" fill="url(#glow)" opacity="${ip}"/>`+icon(540,330,1.05,ip)+KIN(540,580,70,'This is *GazeWell*',s0+.15,t,.12);
+  const age=6*sm((t-W(3,.3))/2.5);
+  o+=phone(540,1160,.76,age,pin(t,W(3,.15),.5),{ui:1,name:'Aarav',ageLabel:(age<1?'Newborn':Math.round(age)+' months')+' · auto-matched'});
+  o+=PILL(540,1740,'Live · on-device · matched to their age',pin(t,W(3,.7)),{size:30});
+ }
+ // ---- share (L[4]) with a flying paper plane
+ if(t>=L[4][0]-.2&&t<L[5][0]){
+  const s0=L[4][0]-.2,fl=sm((t-s0-.9)/1.0);
+  o+=CARD(540,900,920,560,pin(t,s0),`<g transform="translate(${-0+fl*520},${-150-fl*420}) rotate(${-20*fl}) scale(${1-.4*fl})"><circle r="74" fill="url(#gb)"/><path d="M-36,4 L36,-32 L15,36 L2,10 Z" fill="#07070F"/></g>`+
+    KIN(0,40,62,'Send this to someone',s0+.1,t,.08)+KIN(0,120,62,'who just became a *parent*',s0+.4,t,.08)+TX(0,210,32,'They\'ll want to see it too',{w:500,fill:C.muted,op:pin(t,s0+.8)}),{on:1});
+ }
+ // ---- feature montage (L[5]): four quick cards
+ if(t>=L[5][0]-.2&&t<L[6][0]){
+  const s0=L[5][0]-.2;
+  o+=KIN(540,250,68,'Also a calm *baby tracker*',s0,t,.08);
+  const seg=[[W(5,.0),'GROWTH','WHO growth charts'],[W(5,.33),'MILESTONES','Motor · social · language'],[W(5,.5),'MEMORIES','Every first, on a timeline'],[W(5,.68),'REMINDERS','Made for your baby\'s age']];
+  seg.forEach(([c,k,d],i)=>{const p=pin(t,c,.35),y=520+i*300,x=540+(1-p)*(i%2?260:-260);
+   let ill='';
+   if(i==0){let dd='';for(let j=0;j<=20;j++){const u=j/20*cl((t-c)/1.2);dd+=(j?'L':'M')+(130+u*230).toFixed(0)+','+(60-(u**.6)*110).toFixed(0)}ill=`<path d="${dd}" stroke="${C.a1}" stroke-width="6" fill="none" stroke-linecap="round"/>`}
+   if(i==1)ill=[0,1,2].map(j=>{const q=pin(t,c+.2+j*.18,.2);return `<circle cx="${190+j*80}" cy="10" r="26" fill="${q>.5?C.good:'none'}" stroke="${C.good}" stroke-width="4"/>${q>.5?`<path d="M${178+j*80},10 l8,9 l16,-18" stroke="#07070F" stroke-width="5" fill="none" stroke-linecap="round"/>`:''}`}).join('');
+   if(i==2)ill=['#F48FC2','#A78BFA','#00B4D8'].map((cc,j)=>`<rect x="${130+j*84}" y="-40" width="72" height="80" rx="14" fill="${cc}" opacity="${pin(t,c+.15+j*.12,.2)}"/>`).join('');
+   if(i==3)ill=`<g opacity="${pin(t,c+.15)}"><path d="M200,-44 a40,40 0 0 1 40,40 v36 l14,14 h-108 l14,-14 v-36 a40,40 0 0 1 40,-40z" fill="none" stroke="${C.warm}" stroke-width="6"/><circle cx="240" cy="-40" r="16" fill="#E23B3B"/></g>`;
+   o+=CARD(x,y,900,250,p,TX(-400,-30,30,k,{a:'start',w:800,fill:C.a1,ls:3})+TX(-400,30,44,d,{a:'start',w:700})+`<g transform="translate(80,0)">${ill}</g>`,{on:i==0});
+  });
+ }
+ // ---- privacy (L[6])
+ if(t>=L[6][0]-.2&&t<L[7][0]){
+  const s0=L[6][0]-.2,snap=pin(t,s0+.35,.18);
+  o+=CARD(540,900,800,760,pin(t,s0),
+   `<circle cx="0" cy="-120" r="150" fill="rgba(0,180,216,.12)" stroke="rgba(0,180,216,.5)" stroke-width="3"/><rect x="-64" y="-140" width="128" height="100" rx="20" fill="url(#gb)"/><path d="M-40,-140 v${-30+18*(1-snap)} a40,40 0 0 1 80,0 v${30-18*(1-snap)}" fill="none" stroke="#7AA8FF" stroke-width="15"/><circle cx="0" cy="-92" r="12" fill="#07070F"/>`+
+   KIN(0,130,56,'Camera feed never',s0+.2,t,.07)+KIN(0,205,56,'*leaves your phone*',s0+.45,t,.07),{on:1});
+ }
+ // ---- CTA (L[7] .. end): search bar typing + comment bubble
+ if(t>=L[7][0]-.2){
+  const s0=L[7][0]-.2;
+  o+=`<ellipse cx="540" cy="520" rx="380" ry="380" fill="url(#glow)" opacity="${pin(t,s0,.6)}"/>`+icon(540,500,1.25,pin(t,s0,.5))+KIN(540,780,92,'GazeWell',s0+.15,t,.1)+KIN(540,860,44,'See the world *through their eyes*',s0+.35,t,.06);
+  const sp=pin(t,W(7,.0)+.2,.35),typed='GazeWell'.slice(0,Math.floor(cl((t-W(7,.05)-.4)/.7)*8));
+  o+=`<g opacity="${sp}" transform="translate(540,${1040+(1-sp)*30})"><rect x="-420" y="-56" width="840" height="112" rx="30" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.22)" stroke-width="2"/><circle cx="-360" cy="-6" r="18" fill="none" stroke="${C.muted}" stroke-width="5"/><line x1="-347" y1="7" x2="-333" y2="21" stroke="${C.muted}" stroke-width="5" stroke-linecap="round"/>${TX(-300,16,44,typed+(Math.floor(t*2.5)%2?'|':''),{a:'start',w:700})}${TX(400,14,26,'App Store',{a:'end',w:600,fill:C.muted})}</g>`;
+  o+=TX(540,1180,38,'or',{w:600,fill:C.muted,op:pin(t,W(7,.45))});
+  const cp=pin(t,W(7,.55),.35);
+  o+=`<g opacity="${cp}" transform="translate(540,${1330+(1-cp)*30})"><rect x="-420" y="-80" width="840" height="160" rx="40" fill="url(#gb)"/><path d="M-330,-20 h90 a18,18 0 0 1 18,18 v38 a18,18 0 0 1 -18,18 h-50 l-26,22 v-22 h-14 a18,18 0 0 1 -18,-18 v-38 a18,18 0 0 1 18,-18z" fill="#07070F"/>${TX(-190,18,46,'Comment to get the link',{a:'start',w:800,fill:'#07070F'})}</g>`;
+  o+=TX(540,1500,26,'For iPhone · An educational simulation, not a medical device',{w:500,fill:C.muted,op:pin(t,W(7,.8))});
+ }
+ o+=flash(t,cuts);
+ // captions for muted viewers (skip where big text already says it)
+ const cp=window.CAPS.find(c=>t>=c[0]&&t<c[1]);
+ if(cp){const s=38,w=tw(cp[2],s,700)+70;o+=`<g opacity="${pin(t,cp[0],.15)}"><rect x="${540-w/2}" y="1800" width="${w}" height="64" rx="32" fill="rgba(7,7,15,.82)" stroke="rgba(255,255,255,.12)"/>${TX(540,1844,s,cp[2],{w:700})}</g>`}
+ o+=`<rect x="0" y="1912" width="${1080*t/T.total}" height="8" fill="url(#gb)"/>`;
+ document.getElementById('r').innerHTML=o+'</svg>';
+}
+</script></body></html>
