@@ -1,15 +1,13 @@
-# Scheduled run playbook (all 6 daily slots)
+# Scheduled run playbook (2 daily slots, from 24 Nov 2026)
 
 Every scheduled reel follows this file. The slot's own prompt only says which slot it is and what its topic lane is.
 
-| Slot (IST) | Lane | Notes |
-|---|---|---|
-| 06:38 morning | Tutorial: everyday tech how-to (phone, apps, settings, safety, money apps, travel tech) | Comment keyword + DM checklist |
-| 07:00 | TechniBaba Daily news bulletin (NEWS_FORMAT.md) | Biggest story first, then 5–7 stories, mostly tech |
-| 10:00 | Trending TECH | Today's tech story, explained simply |
-| 14:00 | Trending SPORTS through a tech angle | Tech behind the sport, the stat, the app, the broadcast |
-| 17:00 evening | Tutorial: Creator Guides (CREATOR_GUIDES.md) | How we make our videos, free tools, repos, skills |
-| 21:00 | Trending BOLLYWOOD / OTT / gaming through a tech angle | VFX, AI, streaming, box-office data, game tech |
+| Slot (IST) | Run starts | Lane | Notes |
+|---|---|---|---|
+| 11:00 | 10:25 | Tutorial: everyday tech how-to (phone, apps, settings, safety, payments, travel tech); Sunday = Creator Guide (CREATOR_GUIDES.md) + weekly brief | Comment keyword + DM guide |
+| 19:00 | 18:25 | Today's biggest story through tech: tech, sports (cricket first) or Bollywood/OTT/gaming | Verified facts, attribute every claim |
+
+Paused (not deleted, 23 Nov 2026): 7 AM news, 10 AM trending tech, 2 PM sports, 5 PM creator guide. Only two reels a day now, so each run picks the strongest topic of the day; quality over volume.
 If nothing in the lane is trending and safe today, use trending tech and say so.
 
 ## Target

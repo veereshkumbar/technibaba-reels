@@ -1,17 +1,19 @@
 # Scheduled tasks
 
-Five daily slots (IST). The full playbook every run follows is `SCHEDULED_RUN.md`.
+Two daily slots (IST) since 23 Nov 2026. The full playbook every run follows is `SCHEDULED_RUN.md`. The live prompts are stored in the scheduled tasks themselves.
 
-| Slot | Time | Status |
+| Slot | Run starts | Status |
 |---|---|---|
-| TechniBaba morning tutorial reel | 06:38 | exists (trig_01N9cQ8Chwi8Smpa64zgUJin) |
-| TechniBaba 7 AM news bulletin | 06:52 | TO CREATE |
-| TechniBaba 10 AM trending tech reel | 09:52 | TO CREATE |
-| TechniBaba 2 PM trending sports reel | 13:52 | TO CREATE |
-| TechniBaba evening creator guide reel | 17:00 | exists (trig_01FquY2ingpGnaR4zku2d2Q7) |
-| TechniBaba 9 PM Bollywood x tech reel | 20:52 | TO CREATE |
+| TechniBaba 11 AM tutorial reel | 10:25 | ACTIVE (trig_01N9cQ8Chwi8Smpa64zgUJin) |
+| TechniBaba 7 PM trending reel | 18:25 | ACTIVE (trig_01CanCTkN7ZdGJzs8E2c7HdS) |
+| TechniBaba 7 AM news bulletin | 06:52 | PAUSED (trig_01DDpoRa8Ew4PaLyZ3fE3d6v) |
+| TechniBaba 10 AM trending tech reel | 09:52 | PAUSED (trig_01JmsiSLvcZkhTF4LUwxdqN8) |
+| TechniBaba 2 PM trending sports reel | 13:52 | PAUSED (trig_01Mg5ofkPnU4qe3fESW3uC4D) |
+| TechniBaba evening creator guide reel | 17:00 | PAUSED (trig_01FquY2ingpGnaR4zku2d2Q7) |
 
-## How to create the three missing slots
+The sections below are the older prompts, kept for reference.
+
+## How to create the three missing slots (historical)
 The chat that built the pipeline cannot create scheduled tasks (it is attached to a private repo). Open a NEW chat with no repo attached and paste:
 
 > Create 3 scheduled tasks from https://github.com/veereshkumbar/technibaba-reels/blob/main/SCHEDULES.md, section "Prompts for the new slots": names, cron expressions and prompts exactly as written there. Push notifications on. Then list my scheduled tasks to confirm.
