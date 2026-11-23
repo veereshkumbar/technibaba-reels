@@ -1,0 +1,170 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Inter;font-weight:500;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#07070F}#r{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}</style></head><body><div id="r"></div>
+<script>
+// GazeWell promo reel. frame(f) draws one 1080x1920 frame. Times come from window.T (voice timeline).
+const FPS=30, C={bg:'#07070F',bg2:'#0D0D1C',card:'#12122A',line:'rgba(255,255,255,.10)',text:'#F0F0FF',muted:'#9AA0C0',a1:'#00B4D8',a2:'#0096C7',a3:'#0077B6',pink:'#F48FC2',purp:'#A78BFA',good:'#5DE0B0',warm:'#FFC857'};
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>1-Math.pow(1-cl(x),3), sm=x=>{x=cl(x);return x*x*(3-2*x)};
+const pin=(t,a,d=.35)=>ease((t-a)/d), out=(t,a,d=.3)=>1-sm((t-a)/d);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const TX=(x,y,s,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-size="${s}" font-weight="${o.w||700}" fill="${o.fill||C.text}" letter-spacing="${o.ls??-s*.02}" opacity="${o.op??1}">${esc(txt)}</text>`;
+const tw=(s,size,w=700)=>{let n=0;for(const ch of String(s))n+=ch==' '?.27:/[il.,'!|:;]/.test(ch)?.27:/[mwMW]/.test(ch)?.86:/[A-Z0-9]/.test(ch)?.66:.56;return n*size*(w>=700?1.04:1)};
+// headline with *keyword* in the brand gradient
+function HEAD(x,y,size,text,p){const raw=text.replace(/\*/g,''),fit=Math.min(size,size*940/(tw(raw,size,800)*1.08));
+ const sp=text.split('*').map((g,k)=>g?`<tspan fill="${k%2?'url(#gb)':C.text}">${esc(g)}</tspan>`:'').join('');
+ return `<g opacity="${p}" transform="translate(0,${(1-p)*24})"><text x="${x}" y="${y}" text-anchor="middle" font-size="${fit}" font-weight="800" letter-spacing="${-fit*.025}" style="white-space:pre">${sp}</text></g>`}
+const PILL=(x,y,txt,p=1,o={})=>{const s=o.size||30,w=tw(txt,s,700)+s*1.3;return `<g opacity="${p}" transform="translate(${x},${y+(1-p)*16})"><rect x="${-w/2}" y="${-s*1.05}" width="${w}" height="${s*1.65}" rx="${s*.82}" fill="${o.fill||'rgba(0,180,216,.12)'}" stroke="${o.col||'rgba(0,180,216,.55)'}" stroke-width="2"/>${TX(0,s*.12,s,txt,{w:700,fill:o.tcol||C.text})}</g>`};
+const CARD=(x,y,w,h,p,inner,o={})=>p<=0?'':`<g opacity="${p}" transform="translate(${x},${y+(1-p)*30}) scale(${.97+.03*p})"><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${o.r||34}" fill="${C.card}" stroke="${o.on?'rgba(0,180,216,.6)':C.line}" stroke-width="2"/><rect x="${-w/2+2}" y="${-h/2+2}" width="${w-4}" height="${Math.min(70,h/3)}" rx="${(o.r||34)-2}" fill="url(#sheen)"/>${inner}</g>`;
+
+// ---------- the camera scene: an invented parent's face in a nursery (what the phone camera "sees")
+function scene(){return `
+ <rect x="-300" y="-520" width="600" height="1040" fill="#E9DCCB"/>
+ <rect x="-300" y="-520" width="600" height="1040" fill="url(#room)"/>
+ <circle cx="190" cy="-380" r="70" fill="#FFF3D6" opacity=".9"/>
+ <!-- baby mobile: high-contrast shapes -->
+ <line x1="-170" y1="-520" x2="-170" y2="-420" stroke="#333" stroke-width="4"/><line x1="-250" y1="-420" x2="-90" y2="-420" stroke="#333" stroke-width="4"/>
+ <line x1="-250" y1="-420" x2="-250" y2="-360" stroke="#333" stroke-width="3"/><circle cx="-250" cy="-335" r="26" fill="#111"/><circle cx="-250" cy="-335" r="13" fill="#fff"/>
+ <line x1="-170" y1="-420" x2="-170" y2="-330" stroke="#333" stroke-width="3"/><path d="M-170,-330 l12,26 l28,4 l-20,19 l5,28 l-25,-13 l-25,13 l5,-28 l-20,-19 l28,-4z" fill="#E23B3B"/>
+ <line x1="-90" y1="-420" x2="-90" y2="-370" stroke="#333" stroke-width="3"/><rect x="-114" y="-370" width="48" height="48" fill="#111"/><rect x="-102" y="-358" width="24" height="24" fill="#fff"/>
+ <!-- parent -->
+ <path d="M-260,520 C-250,330 -150,250 0,250 C150,250 250,330 260,520 Z" fill="#2A9D8F"/>
+ <path d="M-70,250 C-50,300 50,300 70,250" fill="#22867A"/>
+ <rect x="-48" y="150" width="96" height="120" rx="30" fill="#D9A07A"/>
+ <path d="M-185,-70 C-200,-260 -80,-330 10,-320 C130,-312 205,-230 190,-60 C188,40 170,130 150,170 L-150,170 C-175,120 -186,40 -185,-70 Z" fill="#3B2418"/>
+ <ellipse cx="0" cy="-20" rx="140" ry="170" fill="#E8B48C"/>
+ <ellipse cx="-142" cy="-10" rx="22" ry="34" fill="#E1A47A"/><ellipse cx="142" cy="-10" rx="22" ry="34" fill="#E1A47A"/>
+ <path d="M-145,-80 C-120,-200 -10,-230 60,-210 C120,-195 150,-140 148,-70 C110,-150 30,-170 -40,-150 C-90,-136 -120,-110 -145,-80 Z" fill="#3B2418"/>
+ <ellipse cx="-52" cy="-30" rx="15" ry="19" fill="#241510"/><ellipse cx="52" cy="-30" rx="15" ry="19" fill="#241510"/>
+ <circle cx="-47" cy="-36" r="5" fill="#fff"/><circle cx="57" cy="-36" r="5" fill="#fff"/>
+ <path d="M-80,-72 C-62,-84 -40,-84 -24,-76 M24,-76 C40,-84 62,-84 80,-72" stroke="#3B2418" stroke-width="7" fill="none" stroke-linecap="round"/>
+ <path d="M0,-10 C6,12 8,24 0,32" stroke="#C98B63" stroke-width="5" fill="none" stroke-linecap="round"/>
+ <path d="M-52,58 C-28,90 28,90 52,58 C30,70 -30,70 -52,58 Z" fill="#B5473F"/><path d="M-44,60 C-20,70 20,70 44,60 L40,66 C18,74 -18,74 -40,66 Z" fill="#fff"/>
+ <ellipse cx="-88" cy="30" rx="26" ry="14" fill="#F08A7E" opacity=".35"/><ellipse cx="88" cy="30" rx="26" ry="14" fill="#F08A7E" opacity=".35"/>
+ <circle cx="-142" cy="24" r="7" fill="#FFC857"/><circle cx="142" cy="24" r="7" fill="#FFC857"/>`}
+// age (months) -> simulated infant vision filter, following the app's own timeline
+function visParams(a){return {blur:8.5*Math.pow(cl(1-a/12),1.2)+.3, sat:cl((a-3)/4)*1+.0, con:.42+.58*cl(a/5), vig:.75*cl(1-a/12)}}
+function phone(x,y,s,age,p,o={}){
+ const v=visParams(age);
+ return `<g opacity="${p}" transform="translate(${x},${y+(1-p)*40}) scale(${s*(.96+.04*p)})">
+  <rect x="-300" y="-560" width="600" height="1120" rx="84" fill="#0B0B14" stroke="#2A2A3E" stroke-width="6"/>
+  <rect x="-280" y="-540" width="560" height="1080" rx="66" fill="#000"/>
+  <clipPath id="scr"><rect x="-280" y="-540" width="560" height="1080" rx="66"/></clipPath>
+  <filter id="vis" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="${v.blur.toFixed(2)}"/><feColorMatrix type="saturate" values="${v.sat.toFixed(3)}"/>
+   <feComponentTransfer><feFuncR type="linear" slope="${v.con.toFixed(3)}" intercept="${(.5*(1-v.con)).toFixed(3)}"/><feFuncG type="linear" slope="${v.con.toFixed(3)}" intercept="${(.5*(1-v.con)).toFixed(3)}"/><feFuncB type="linear" slope="${v.con.toFixed(3)}" intercept="${(.5*(1-v.con)).toFixed(3)}"/></feComponentTransfer></filter>
+  <g clip-path="url(#scr)"><g filter="url(#vis)">${scene()}</g><rect x="-280" y="-540" width="560" height="1080" fill="url(#vig)" opacity="${v.vig.toFixed(3)}"/>
+   ${o.ui?`<rect x="-280" y="-540" width="560" height="150" fill="rgba(7,7,15,.55)"/><circle cx="-200" cy="-462" r="30" fill="url(#gb)"/>${TX(-200,-452,26,'A',{w:800,fill:'#07070F'})}${TX(-150,-470,28,o.name||'Aarav',{a:'start',w:800})}${TX(-150,-436,22,o.ageLabel||'',{a:'start',w:600,fill:C.a1})}
+   <rect x="150" y="-486" width="100" height="40" rx="20" fill="#E23B3B"/><circle cx="174" cy="-466" r="7" fill="#fff"/>${TX(214,-458,20,'LIVE',{w:800})}`:''}
+  </g>
+  <rect x="-80" y="-528" width="160" height="34" rx="17" fill="#000"/>
+ </g>`}
+function slider(x,y,age,p){const W=820,k=age/12;let o=`<g opacity="${p}" transform="translate(${x},${y})"><rect x="${-W/2}" y="-6" width="${W}" height="12" rx="6" fill="rgba(255,255,255,.12)"/><rect x="${-W/2}" y="-6" width="${W*k}" height="12" rx="6" fill="url(#gb)"/>`;
+ [0,3,6,9,12].forEach(m=>{o+=`<circle cx="${-W/2+W*m/12}" cy="0" r="7" fill="${m<=age?C.a1:'rgba(255,255,255,.3)'}"/>`+TX(-W/2+W*m/12,48,24,m==0?'Newborn':m+' mo',{w:600,fill:m<=age+.01?C.text:C.muted})});
+ return o+`<circle cx="${-W/2+W*k}" cy="0" r="20" fill="#fff" stroke="${C.a1}" stroke-width="6"/></g>`}
+function icon(x,y,s,p){return `<g opacity="${p}" transform="translate(${x},${y}) scale(${s*(.8+.2*ease(p))})"><rect x="-120" y="-120" width="240" height="240" rx="54" fill="#fff"/><image href="icon.png" x="-120" y="-120" width="240" height="240" clip-path="url(#ic)"/></g>`}
+
+const STAGES=[[0,'Newborn','Blurry · black, white & grey'],[2.5,'3 months','Sharper contrast'],[5,'4–6 months','Colour fills in'],[8,'7–9 months','Depth perception'],[11,'12 months','Near-adult clarity']];
+function frame(f){
+ const t=f/FPS, T=window.T, L=T.lines, W=T.w; // L[i]=[start,end]; W(i,frac)=time at that fraction of line i
+ let o=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920"><defs>
+  <linearGradient id="gb" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00B4D8"/><stop offset=".55" stop-color="#7AA8FF"/><stop offset="1" stop-color="#C69CFF"/></linearGradient>
+  <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#0096C7" stop-opacity=".35"/><stop offset="1" stop-color="#0096C7" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glow2" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#A78BFA" stop-opacity=".25"/><stop offset="1" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+  <radialGradient id="vig" cx=".5" cy=".45" r=".7"><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="1"/></radialGradient>
+  <linearGradient id="room" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E7D3"/><stop offset="1" stop-color="#CDB9A4"/></linearGradient>
+  <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <clipPath id="ic"><rect x="-120" y="-120" width="240" height="240" rx="54"/></clipPath></defs>
+  <rect width="1080" height="1920" fill="${C.bg}"/>
+  <ellipse cx="${540+120*Math.sin(t*.25)}" cy="${700+80*Math.cos(t*.2)}" rx="760" ry="760" fill="url(#glow)"/>
+  <ellipse cx="${300-100*Math.sin(t*.3)}" cy="${1500}" rx="600" ry="600" fill="url(#glow2)"/>`;
+ // brand bar
+ o+=`<g opacity="${cl(t*3)}"><image href="icon.png" x="56" y="54" width="64" height="64" clip-path="url(#icb)"/><clipPath id="icb"><rect x="56" y="54" width="64" height="64" rx="16"/></clipPath>${TX(136,98,34,'GazeWell',{a:'start',w:800})}</g>`;
+
+ // ---- 1+2: simulator and age timeline (0 .. L[3][0])
+ const tEndSim=L[3][0]-.2;
+ if(t<tEndSim+.4){
+  const k=out(t,tEndSim,.4);
+  // age: 0 until line 2 starts, then follows the spoken stages
+  const a2=L[2][0];
+  const ages=[[a2,0],[W(2,.33),2.5],[W(2,.55),5],[W(2,.72),8],[W(2,.92),12]];
+  let age=0; for(let i=0;i<ages.length-1;i++){if(t>=ages[i][0]) age=ages[i][1]+(ages[i+1][1]-ages[i][1])*sm((t-ages[i][0])/(ages[i+1][0]-ages[i][0]))} if(t>=ages[ages.length-1][0]) age=12;
+  o+=`<g opacity="${k}">`;
+  o+=HEAD(540,250,74,t<a2?'How your *newborn* sees you':'Their vision, *month by month*',pin(t,t<a2?.1:a2));
+  o+=phone(540,900,.9,age,pin(t,.05,.5));
+  if(t<a2){
+   const chips=[[W(1,.02),'Blurry'],[W(1,.18),'Black, white & grey'],[W(1,.42),'Clearest at 20–30 cm']];
+   chips.forEach(([c,s],i)=>o+=PILL(540,1530+i*100,s,pin(t,c),{size:40}));
+  } else {
+   const st=STAGES.reduce((acc,s)=>age>=s[0]-.01?s:acc,STAGES[0]);
+   o+=slider(540,1500,age,pin(t,a2));
+   o+=`<g opacity="${pin(t,a2+.2)}">`+TX(540,1630,46,st[1],{w:800,fill:C.a1})+TX(540,1690,34,st[2],{w:600,fill:C.muted})+`</g>`;
+  }
+  o+=`</g>`;
+ }
+ // ---- 3: GazeWell live (L[3])
+ if(t>=L[3][0]-.3&&t<L[4][0]+.3){
+  const s0=L[3][0]-.3,k=pin(t,s0)*out(t,L[4][0]-.1);
+  o+=`<g opacity="${k}">`+icon(540,330,1,pin(t,s0,.5))+HEAD(540,560,62,'See it *live*, at your baby\'s age',pin(t,s0+.3))+
+   phone(540,1150,.78,3,pin(t,s0+.2,.5),{ui:1,name:'Aarav',ageLabel:'3 months · auto-matched'})+
+   PILL(540,1730,'On-device · real-time',pin(t,W(3,.45)),{size:32})+`</g>`;
+ }
+ // ---- 4: share ask (L[4])
+ if(t>=L[4][0]-.2&&t<L[5][0]+.2){
+  const s0=L[4][0]-.2,k=pin(t,s0)*out(t,L[5][0]-.1);
+  o+=`<g opacity="${k}">`+CARD(540,900,900,520,pin(t,s0),
+    `<circle cx="0" cy="-130" r="70" fill="url(#gb)"/><g transform="translate(0,-130)"><path d="M-34,4 L34,-30 L14,34 L2,10 Z" fill="#07070F"/><path d="M2,10 L34,-30" stroke="url(#gb)" stroke-width="4"/></g>`+
+    TX(0,10,54,'Send this to a parent',{w:800})+TX(0,80,54,'with a little one',{w:800,fill:C.a1})+TX(0,170,32,'They\'ll want to see it too',{w:500,fill:C.muted}),{on:1})+`</g>`;
+ }
+ // ---- 5: growth (L[5])
+ if(t>=L[5][0]-.2&&t<L[6][0]+.2){
+  const s0=L[5][0]-.2,k=pin(t,s0)*out(t,L[6][0]-.1), dr=cl((t-s0-.5)/2.2);
+  let ch=`${TX(-380,-250,30,'GROWTH',{a:'start',w:800,fill:C.a1,ls:3})}${TX(380,-250,26,'WHO percentiles',{a:'end',w:600,fill:C.muted})}`;
+  const curve=(p,col)=>{let d='';for(let i=0;i<=40;i++){const x=-380+760*i/40*dr, y=200-(i/40*dr)**.6*360*p;d+=(i?'L':'M')+x.toFixed(1)+','+y.toFixed(1)}return `<path d="${d}" fill="none" stroke="${col}" stroke-width="4" stroke-linecap="round" opacity=".8"/>`};
+  ch+=`<line x1="-380" y1="200" x2="380" y2="200" stroke="rgba(255,255,255,.15)" stroke-width="2"/>`+curve(.62,'rgba(255,255,255,.25)')+curve(.8,C.a1)+curve(.97,'rgba(255,255,255,.25)');
+  [[.15,.75],[.3,.78],[.45,.82],[.6,.8],[.75,.84]].forEach(([u,pp],i)=>{const tt=s0+.8+i*.35;if(t>tt){const x=-380+760*u,y=200-(u**.6)*360*pp;ch+=`<circle cx="${x}" cy="${y}" r="${12*pin(t,tt,.2)}" fill="#fff" stroke="${C.a1}" stroke-width="5"/>`}});
+  o+=`<g opacity="${k}">`+HEAD(540,330,66,'A calm *baby tracker*',pin(t,s0))+CARD(540,860,900,640,pin(t,s0+.15),ch,{on:1});
+  [['Weight',W(5,.42)],['Height',W(5,.52)],['Head size',W(5,.64)]].forEach(([s,c],i)=>o+=PILL(260+i*280,1330,s,pin(t,c),{size:34}));
+  o+=`</g>`;
+ }
+ // ---- 6: milestones, memories, reminders (L[6])
+ if(t>=L[6][0]-.2&&t<L[7][0]+.2){
+  const s0=L[6][0]-.2,k=pin(t,s0)*out(t,L[7][0]-.1);
+  o+=`<g opacity="${k}">`+HEAD(540,300,64,'Every *first*, kept',pin(t,s0));
+  // milestones
+  const m1=W(6,0);let ms=TX(-380,-120,28,'MILESTONES',{a:'start',w:800,fill:C.a1,ls:3});
+  [['First social smile','Social'],['Holds head up','Motor'],['Coos and babbles','Language']].forEach(([s,c],i)=>{const tt=m1+.5+i*.45,p=pin(t,tt,.25);
+   ms+=`<rect x="-380" y="${-80+i*86}" width="760" height="70" rx="20" fill="rgba(255,255,255,.04)"/><circle cx="-340" cy="${-45+i*86}" r="20" fill="${p>.5?C.good:'none'}" stroke="${C.good}" stroke-width="3"/>${p>.5?`<path d="M-350,${-45+i*86} l7,8 l14,-16" stroke="#07070F" stroke-width="5" fill="none" stroke-linecap="round"/>`:''}${TX(-300,-35+i*86,30,s,{a:'start',w:700})}${TX(360,-35+i*86,24,c,{a:'end',w:600,fill:C.muted})}`});
+  o+=CARD(540,720,900,400,pin(t,s0+.1),ms,{on:1});
+  // memory timeline
+  const m2=W(6,.36);let mm=TX(-380,-60,28,'MEMORIES',{a:'start',w:800,fill:C.a1,ls:3});
+  [['Day 1','#F48FC2'],['Week 6','#A78BFA'],['Month 3','#00B4D8'],['Month 5','#FFC857']].forEach(([d,c],i)=>{const p=pin(t,m2+.2+i*.2,.3);mm+=`<g opacity="${p}" transform="translate(${-285+i*190},${30+(1-p)*20})"><rect x="-80" y="-60" width="160" height="120" rx="18" fill="${c}" opacity=".9"/><circle cx="0" cy="-8" r="26" fill="#fff" opacity=".85"/><path d="M-60,50 C-30,10 30,10 60,50 Z" fill="#fff" opacity=".6"/>${TX(0,100,24,d,{w:700,fill:C.muted})}</g>`});
+  o+=CARD(540,1170,900,300,pin(t,m2),mm);
+  // reminder notification
+  const m3=W(6,.72),pr=pin(t,m3,.4);
+  o+=`<g opacity="${pr}" transform="translate(540,${1470+(1-pr)*-60})"><rect x="-440" y="-70" width="880" height="140" rx="34" fill="rgba(30,30,50,.92)" stroke="rgba(255,255,255,.12)"/><image href="icon.png" x="-410" y="-44" width="88" height="88" clip-path="url(#icn)"/><clipPath id="icn"><rect x="-410" y="-44" width="88" height="88" rx="20"/></clipPath>${TX(-300,-12,26,'GAZEWELL · now',{a:'start',w:700,fill:C.muted})}${TX(-300,30,30,'Aarav turns 4 months this week. Time to log growth.',{a:'start',w:600})}</g>`;
+  o+=`</g>`;
+ }
+ // ---- 7: privacy (L[7])
+ if(t>=L[7][0]-.2&&t<L[8][0]+.2){
+  const s0=L[7][0]-.2,k=pin(t,s0)*out(t,L[8][0]-.1);
+  o+=`<g opacity="${k}">`+CARD(540,900,760,760,pin(t,s0),
+   `<circle cx="0" cy="-120" r="140" fill="rgba(0,180,216,.12)" stroke="rgba(0,180,216,.5)" stroke-width="3"/><rect x="-60" y="-140" width="120" height="96" rx="18" fill="url(#gb)"/><path d="M-38,-140 v-30 a38,38 0 0 1 76,0 v30" fill="none" stroke="#7AA8FF" stroke-width="14"/><circle cx="0" cy="-94" r="12" fill="#07070F"/>`+
+   TX(0,120,50,'Camera feed never',{w:800})+TX(0,186,50,'leaves your phone',{w:800,fill:C.a1})+TX(0,262,30,'Processed on-device',{w:500,fill:C.muted}),{on:1})+`</g>`;
+ }
+ // ---- 8: CTA (L[8] .. end)
+ if(t>=L[8][0]-.2){
+  const s0=L[8][0]-.2;
+  o+=`<ellipse cx="540" cy="760" rx="420" ry="420" fill="url(#glow)" opacity="${pin(t,s0,.6)}"/>`+icon(540,760,1.5,pin(t,s0,.6))+
+   HEAD(540,1130,96,'GazeWell',pin(t,s0+.2))+HEAD(540,1220,50,'See the world *through their eyes*',pin(t,W(8,.2)))+
+   PILL(540,1390,'Search "GazeWell" on the App Store',pin(t,W(8,.55)),{size:38,fill:'#fff',col:'#fff',tcol:'#07070F'})+
+   TX(540,1520,26,'For iPhone · An educational simulation, not a medical device',{w:500,fill:C.muted,op:pin(t,W(8,.7))});
+ }
+ // captions (muted viewers)
+ const cp=window.CAPS.find(c=>t>=c[0]&&t<c[1]);
+ if(cp&&t<L[8][0]-.2){const s=40,w=tw(cp[2],s,700)+70;o+=`<g opacity="${pin(t,cp[0],.15)}"><rect x="${540-w/2}" y="1790" width="${w}" height="66" rx="33" fill="rgba(7,7,15,.8)" stroke="rgba(255,255,255,.12)"/>${TX(540,1835,s,cp[2],{w:700})}</g>`}
+ o+=`<rect x="0" y="1912" width="${1080*t/T.total}" height="8" fill="url(#gb)"/>`;
+ document.getElementById('r').innerHTML=o+'</svg>';
+}
+</script></body></html>
