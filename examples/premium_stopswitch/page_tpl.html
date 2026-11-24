@@ -1,0 +1,80 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "RBI Stop Switch draft" (premium look, Hindi, 7 PM trending 24 Nov 2026) =================
+ICONS.bank='<path d="M-40,-14 L0,-38 L40,-14Z"/><line x1="-30" y1="-6" x2="-30" y2="26"/><line x1="-10" y1="-6" x2="-10" y2="26"/><line x1="10" y1="-6" x2="10" y2="26"/><line x1="30" y1="-6" x2="30" y2="26"/><line x1="-42" y1="36" x2="42" y2="36"/>';
+ICONS.timer='<circle cx="0" cy="6" r="34"/><line x1="0" y1="6" x2="0" y2="-14"/><line x1="0" y1="6" x2="14" y2="14"/><line x1="-10" y1="-38" x2="10" y2="-38"/>';
+ICONS.repeat='<path d="M-30,-6 A30,30 0 0 1 26,-16"/><path d="M14,-26 L28,-16 L16,-4"/><path d="M30,6 A30,30 0 0 1 -26,16"/><path d="M-14,26 L-28,16 L-16,4"/>';
+ICONS.cal='<rect x="-34" y="-28" width="68" height="62" rx="8"/><line x1="-34" y1="-10" x2="34" y2="-10"/><line x1="-16" y1="-38" x2="-16" y2="-20"/><line x1="16" y1="-38" x2="16" y2="-20"/>';
+const F=i=>BT[i].f0;
+const q={l1:F(1),galat:WF(1,'galat'),rbi:WF(1,'rbi'),btn:WF(1,'button'),sw:WF(1,'switch'),l2:F(2),kya:WF(2,'kya'),
+ sh:F(3),papa:WF(3,'papa'),otp:WF(3,'otp'),
+ s4:F(4),dab:WF(4,'dabao'),pay:WF(4,'payment'),band:WF(4,'band'),aana:WF(4,'aana'),s5:F(5),emi:WF(5,'emi'),s6:F(6),chal:WF(6,'chalte'),
+ s7:F(7),bada:WF(7,'bada'),tp:WF(7,'trusted'),ek:WF(7,'ek'),haan:WF(7,'haan'),tabhi:WF(7,'tabhi'),
+ s8:F(8),draft:WF(8,'draft'),july:WF(8,'july'),
+ e0:F(9),jald:WF(9,'jald'),pg:WF(9,'papa')-6,com:WF(9,'chahiye')};
+[[HOOK_END+2,'blip'],[q.rbi,'tick'],[q.sw,'click'],[q.sw+10,'pop'],[q.kya,'blip'],
+ [q.sh+2,'blip'],[q.papa,'ding'],[q.otp,'glitch'],
+ [q.dab,'click'],[q.band,'blip'],[q.aana,'ding'],[q.emi,'tick'],[q.chal,'ding'],
+ [q.bada,'tick'],[q.tp,'popin'],[q.ek,'tick'],[q.tabhi,'cash'],
+ [q.draft,'blip'],[q.july,'ding'],
+ [q.jald,'ding'],[q.com,'blip'],[q.com+8,'type']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,o.h||130,p,PBADGE(icon,-320,0,o.icol||PR.text,40)+PT(-250,-6,o.ts||40,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,34,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function tog(x,y,on,p=1,s=1){return `<g opacity="${p}" transform="translate(${x},${y}) scale(${s})"><rect x="-44" y="-24" width="88" height="48" rx="24" fill="${on?PR.hl:PR.card2}" stroke="${on?PR.hl:PR.line2}" stroke-width="2"/><circle cx="${on?20:-20}" cy="0" r="17" fill="${on?PR.hlText:PR.muted}"/></g>`}
+function swCard(y,f,a,onF,h=200){const on=f>=onF;return PCARD(CX,y,800,h,pin(f,a,10),PBADGE('bank',-320,0,on?PR.good:PR.text,44)+PT(-250,-8,48,'Stop switch',{a:'start',w:800})+PT(-250,36,26,on?'ON · new payments out stopped':'one tap, from your bank app',{a:'start',w:500,fill:on?PR.good:PR.muted})+tog(280,0,on,1,1.5),{on})}
+function content(n,f){let o='';
+ if(n=='q'){o+=PLABEL(CX,226,'RBI · draft directions · 23 Nov 2026');
+  o+=swCard(400,f,HOOK_END+2,q.sw,230);
+  o+=PPILL(CX,600,'DRAFT · FEEDBACK TILL 14 DEC',pin(f,q.rbi),{size:28});
+  o+=PHEAD(CX,770,64,'Kya *rukega*?',f,q.kya,{step:3});}
+ if(n=='share'){o+=PLABEL(CX,226,'First, send this');
+  o+=PCARD(CX,400,800,220,pin(f,q.sh+2,10),PBADGE('chat',-320,0,PR.text,44)+PT(-250,-30,28,'SEND THIS TO PAPA',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,20,38,'who keeps getting',{a:'start',w:700})+PT(-250,66,38,'OTP calls',{a:'start',w:700}),{on:f>=q.papa});
+  o+=rowCard(650,pin(f,q.otp-4),'call','Unknown caller','"Bank se bol raha hoon, OTP batao"',{state:'bad',icol:PR.bad,ts:38});}
+ if(n=='stop'){o+=PLABEL(CX,226,'Stop switch ON');
+  o+=swCard(340,f,q.s4,q.dab,150);
+  const bl=f>=q.band,ok=f>=q.aana,em=f>=q.chal;
+  o+=rowCard(510,pin(f,q.pay-6),'arrowOut','New payments out','every payment you start',{state:bl?'bad':'',icol:bl?PR.bad:PR.text,right:PPILL(290,0,'STOPPED',pin(f,q.band),{size:22,col:PR.bad})});
+  o+=rowCard(660,pin(f,q.aana-4),'arrowIn','Money coming in','you still receive',{state:ok?'good':'',icol:PR.good,right:PPILL(290,0,'WORKS',pin(f,q.aana+4),{size:22,col:PR.good})});
+  o+=rowCard(810,pin(f,q.emi-2),'repeat','EMI and auto-pay','existing mandates',{state:em?'good':'',icol:em?PR.good:PR.text,right:PPILL(262,0,'KEEP RUNNING',pin(f,q.chal),{size:22,col:PR.good})});}
+ if(n=='trust'){o+=PLABEL(CX,226,'Trusted person · 18+');
+  o+=rowCard(340,pin(f,q.s7+2),'rupee','Big transfer','above the limit you set',{});
+  o+=rowCard(500,pin(f,q.tp-2),'user','Trusted person','sees amount + payee',{on:f>=q.tp&&f<q.ek});
+  const ap=f>=q.haan;
+  o+=rowCard(660,pin(f,q.ek-2),'timer','1 hour to say yes','no reply = declined',{state:ap?'good':'',icol:ap?PR.good:PR.num,right:PPILL(270,0,f>=q.tabhi?'SENT':'APPROVED',pin(f,q.haan),{size:24,col:PR.good,solid:f>=q.tabhi})});
+  o+=PT(CX,800,26,'Not for UPI, shop or auto-pay payments',{w:600,fill:PR.muted,op:pin(f,q.ek+10)});}
+ if(n=='when'){o+=PLABEL(CX,226,'Status');
+  o+=rowCard(350,pin(f,q.s8+2),'cal','23 Nov 2026','RBI draft · feedback till 14 Dec',{});
+  o+=rowCard(510,pin(f,q.july-4),'bank','By 1 July 2027','banks must offer it · or earlier',{on:f>=q.july});
+  o+=PPILL(CX,680,'NOT LIVE YET',pin(f,q.draft),{size:34,col:PR.num});}
+ if(n=='end'){o+=PLABEL(CX,226,'Coming soon');
+  o+=swCard(370,f,q.e0,q.jald,200);
+  const pc=pin(f,q.pg,10),ty=Math.max(0,Math.min(4,Math.floor((f-q.com-8)/3)));
+  o+=PCARD(CX,660,800,220,pc,PT(-360,-50,26,'Papa ke liye chahiye?',{a:'start',w:600,fill:PR.muted})+PT(-360,36,72,f>=q.com+8?'HAAN'.slice(0,ty):'',{a:'start',w:800})+PPILL(250,26,'HAAN ya NA',pin(f,q.com+20),{solid:1,size:30}),{on:f>=q.com});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,300,76,'Scam hua? *STOP* button',f,0,{instant:true})+PHEAD(540,400,60,'RBI ka naya draft',f,0,{instant:true})+
+  PPILL(540,500,'1 TAP: ALL NEW PAYMENTS OUT STOPPED',1,{solid:1,size:30})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
