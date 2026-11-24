@@ -1,0 +1,40 @@
+{"guide":"whatsapp-stop-strangers-adding-you-to-groups","title":"WhatsApp Scam Groups Band: 3 Setting, 1 Minute | TechniBaba",
+"scenes":[
+{"id":"intro","type":"title","head":"TechniBaba Guide","title":"WhatsApp Scam Groups","sub":"Anjaan log add hi nahi kar payenge","chips":["1 MIN|SETUP","3|SETTINGS"],
+ "lines":[
+ {"who":"c","hi":"बाबा! पापा को फिर किसी ने स्टॉक टिप्स वाले ग्रुप में डाल दिया!","en":"Baba! Papa ko phir kisi ne stock tips wale group mein daal diya!","pose":"blown","expr":"shocked","cap":"Phir *scam group*!","big":1},
+ {"who":"b","hi":"एग्ज़िट करने से कुछ नहीं होगा. कल नया ग्रुप आएगा.","en":"Exit karne se kuch nahi hoga. Kal naya group aayega.","pose":"stop","expr":"smug","cap":"*Exit* se kuch nahi","big":1,"react":"confused"},
+ {"who":"b","hi":"आज तीन सेटिंग्स, एक मिनट में. फिर कोई अनजान आपको ऐड नहीं कर पाएगा.","en":"Aaj teen settings, ek minute mein. Phir koi anjaan aapko add nahi kar paayega.","pose":"count","expr":"explaining","cap":"*3 settings*, 1 minute","big":1,"react":"happy"}]},
+{"id":"why","type":"points","head":"Ye groups kaise kaam karte hain?","color":"#ffd23f","items":["Anjaan number aapko add karta hai","500% profit ke screenshots","Phir app ya UPI pe paise maangte","Exit karo, kal naya group"],
+ "lines":[
+ {"who":"b","hi":"कोई भी अनजान नंबर आपको सीधा ग्रुप में डाल देता है.","en":"Koi bhi anjaan number aapko seedha group mein daal deta hai.","pose":"explain","expr":"explaining","cap":"*Anjaan* number","show":1,"show_new":1,"big":1},
+ {"who":"b","hi":"वहाँ प्रॉफ़िट के स्क्रीनशॉट, फिर किसी ऐप या यू पी आई पे पैसे.","en":"Wahan profit ke screenshot, phir kisi app ya UPI pe paise.","pose":"point","expr":"explaining","cap":"Profit ke *screenshot*","show":3,"show_new":2},
+ {"who":"c","hi":"और पापा एग्ज़िट करते हैं, तो कल नया ग्रुप!","en":"Aur Papa exit karte hain, toh kal naya group!","pose":"shrug","expr":"confused","cap":"Kal *naya* group","show":4,"show_new":1,"react":"smug"}]},
+{"id":"step1","type":"phone","chip":"STEP 1","head":"Groups: My contacts","app":"WhatsApp","path":["Settings","Privacy","Groups","My contacts"],"items":["Everyone hatao"],
+ "lines":[
+ {"who":"b","hi":"पहला: व्हाट्सऐप में सेटिंग्स, फिर प्राइवेसी खोलो.","en":"Pehla: WhatsApp mein Settings, phir Privacy kholo.","pose":"phone","expr":"explaining","cap":"Settings > *Privacy*","show":2,"big":1},
+ {"who":"b","hi":"ग्रुप्स पे टैप करो. एवरीवन हटाओ, माय कॉन्टैक्ट्स चुनो.","en":"Groups pe tap karo. Everyone hatao, My contacts chuno.","pose":"point","expr":"explaining","cap":"*My contacts* chuno","show":5},
+ {"who":"c","hi":"एंड्रॉइड में सेटिंग्स कहाँ है?","en":"Android mein Settings kahan hai?","pose":"leanin","expr":"confused","cap":"Android pe *Settings*?","react":"explaining"},
+ {"who":"b","hi":"ऊपर तीन डॉट्स में. आईफ़ोन में नीचे सेटिंग्स टैब.","en":"Upar teen dots mein. iPhone mein neeche Settings tab.","pose":"explain","expr":"happy","cap":"*3 dots* menu","react":"happy"}]},
+{"id":"step2","type":"points","chip":"STEP 2","head":"Anjaan ne add kiya?","color":"#5de0b0","items":["Ab seedha add nahi kar sakta","Sirf private chat mein invite","Invite 3 din mein expire","Anjaan invite kabhi mat kholo"],
+ "lines":[
+ {"who":"c","hi":"और अनजान नंबर वाला फिर भी जोड़े तो?","en":"Aur anjaan number wala phir bhi jode toh?","pose":"leanin","expr":"confused","cap":"*Phir bhi* jode toh?","react":"smug"},
+ {"who":"b","hi":"जोड़ ही नहीं पाएगा. बस प्राइवेट चैट में इनवाइट भेज सकता है.","en":"Jod hi nahi paayega. Bas private chat mein invite bhej sakta hai.","pose":"stop","expr":"angry","cap":"Sirf *invite*","show":2,"show_new":2,"big":1,"hit":"nahi"},
+ {"who":"b","hi":"वो इनवाइट तीन दिन में खत्म. आप बस मत खोलना.","en":"Woh invite teen din mein khatam. Aap bas mat kholna.","pose":"palm","expr":"explaining","cap":"*Mat* kholna","show":4,"show_new":2},
+ {"who":"b","hi":"और अगर फिर भी किसी ग्रुप में दिखे, तो व्हाट्सऐप एक सेफ़्टी स्क्रीन दिखाता है. वहीं से लेफ्ट करो.","en":"Aur agar phir bhi kisi group mein dikhe, toh WhatsApp ek safety screen dikhata hai. Wahin se leave karo.","pose":"point","expr":"explaining","cap":"*Safety screen* se leave","react":"happy"}]},
+{"id":"step3","type":"phone","chip":"STEP 3","head":"Anjaan calls: silent","app":"WhatsApp","path":["Settings","Privacy","Calls","Silence unknown callers"],"items":["Calls list mein dikhenge"],
+ "lines":[
+ {"who":"c","hi":"और वो अनजान कॉल्स?","en":"Aur woh anjaan calls?","pose":"shrug","expr":"confused","cap":"Anjaan *calls*?","react":"smug"},
+ {"who":"b","hi":"प्राइवेसी, कॉल्स, साइलेंस अननोन कॉलर्स, ऑन.","en":"Privacy, Calls, Silence unknown callers, ON.","pose":"phone","expr":"explaining","cap":"Silence unknown: *ON*","show":4,"big":1},
+ {"who":"b","hi":"घंटी नहीं बजेगी, पर कॉल लिस्ट में दिख जाएगी.","en":"Ghanti nahi bajegi, par call list mein dikh jaayegi.","pose":"explain","expr":"happy","cap":"*Call list* mein dikhegi","show":5,"show_new":1}]},
+{"id":"safe","type":"points","chip":"YAAD RAKHO","head":"Paise kate?","color":"#e5383b","items":["Asli advisor group mein add nahi karta","Fixed profit ka vaada = KHATRA","Kisi link ya app pe paise mat bhejo","Paise kate: turant 1930"],
+ "lines":[
+ {"who":"b","hi":"याद रखो, असली एडवाइज़र अनजान लोगों को ग्रुप में नहीं डालता.","en":"Yaad rakho, asli advisor anjaan logon ko group mein nahi daalta.","pose":"count","expr":"explaining","cap":"Asli advisor *aisa nahi*","show":2,"show_new":2,"big":1},
+ {"who":"b","hi":"पैसे कट गए, तो तुरंत उन्नीस सौ तीस, या साइबर क्राइम डॉट जी ओ वी डॉट इन.","en":"Paise kat gaye, toh turant 1930, ya cybercrime.gov.in.","pose":"point","expr":"explaining","cap":"Turant *1930*","show":4,"show_new":2}]},
+{"id":"recap","type":"recap","head":"Recap: 3 setting","items":["Groups: My contacts","Anjaan invite mat kholo","Silence unknown callers ON"],
+ "lines":[
+ {"who":"c","hi":"मतलब: माय कॉन्टैक्ट्स, इनवाइट मत खोलो, और साइलेंस ऑन.","en":"Matlab: My contacts, invite mat kholo, aur Silence ON.","pose":"count","expr":"happy","cap":"Contacts. Invite. *Silence.*","show":3,"show_new":3,"big":1}]},
+{"id":"outro","type":"outro","head":"Papa ko bhejo","sub":"Mummy-papa ke phone pe bhi kar do","items":["subscribe","instagram"],
+ "lines":[
+ {"who":"b","hi":"पूरा गाइड डिस्क्रिप्शन में है. ये वीडियो पापा को भेजो, और सब्सक्राइब करो.","en":"Poora guide description mein hai. Ye video Papa ko bhejo, aur subscribe karo.","pose":"wave","expr":"happy","cap":"*Papa* ko bhejo","show":1,"show_new":1}]}
+]}
