@@ -1,0 +1,88 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "WhatsApp groups privacy" (premium look, Hindi, morning tutorial 24 Nov 2026) =================
+ICONS.finger='<path d="M-26,-14 C-22,-36 22,-36 26,-14"/><path d="M-30,6 C-32,-22 -12,-30 0,-30 C14,-30 32,-22 30,6 C30,20 26,30 22,38"/><path d="M-18,30 C-22,18 -20,4 -18,-6 C-14,-18 14,-18 18,-6 C20,6 18,22 12,36"/><path d="M0,-6 C-4,8 -4,24 -2,40"/>';
+ICONS.bank='<path d="M-40,-14 L0,-38 L40,-14Z"/><line x1="-30" y1="-6" x2="-30" y2="26"/><line x1="-10" y1="-6" x2="-10" y2="26"/><line x1="10" y1="-6" x2="10" y2="26"/><line x1="30" y1="-6" x2="30" y2="26"/><line x1="-42" y1="36" x2="42" y2="36"/>';
+ICONS.timer='<circle cx="0" cy="6" r="34"/><line x1="0" y1="6" x2="0" y2="-14"/><line x1="0" y1="6" x2="14" y2="14"/><line x1="-10" y1="-38" x2="10" y2="-38"/>';
+ICONS.group='<circle cx="-16" cy="-14" r="14"/><circle cx="18" cy="-10" r="11"/><path d="M-42,30 C-40,6 -30,0 -16,0 C-2,0 8,6 10,30"/><path d="M14,8 C28,8 38,14 40,30"/>';
+ICONS.mute='<path d="M-30,-12 H-14 L6,-30 V30 L-14,12 H-30Z"/><line x1="16" y1="-14" x2="40" y2="14"/><line x1="40" y1="-14" x2="16" y2="14"/>';
+ICONS.link='<path d="M-6,10 L10,-6"/><path d="M-2,-18 L8,-28 A16,16 0 0 1 30,-6 L20,4"/><path d="M2,18 L-8,28 A16,16 0 0 1 -30,6 L-20,-4"/>';
+ICONS.exit='<path d="M-6,-34 H-34 V34 H-6"/><line x1="-12" y1="0" x2="36" y2="0"/><path d="M22,-14 L36,0 L22,14"/>';
+const F=i=>BT[i].f0;
+const q={exit:WF(1,'exit'),jab:WF(1,'jab'),set:WF(1,'setting'),l2:F(2),roz:WF(2,'roz'),
+ sh:F(3),pehle:WF(3,'pehle'),papa:WF(3,'papa'),phir:WF(3,'phir'),wa:WF(3,'whatsapp'),st:WF(3,'settings'),pr:WF(3,'privacy'),
+ s4:F(4),grp:WF(4,'groups'),every:WF(4,'everyone'),hatao:WF(4,'hatao'),my:WF(4,'my'),
+ s5:F(5),anj:WF(5,'anjaan'),s6:F(6),jod:WF(6,'jod'),nahi:WF(6,'nahi'),bas:WF(6,'bas'),inv:WF(6,'invite'),mat:WF(6,'mat'),
+ s7:F(7),s8:F(8),cpr:WF(8,'privacy'),cal:WF(8,'calls'),sil:WF(8,'silence'),on:WF(8,'on'),
+ e0:F(9),apn:WF(9,'apnon'),pg:WF(9,'comment')-6,com:WF(9,'comment')};
+[[HOOK_END+2,'blip'],[HOOK_END+10,'pop'],[q.exit,'tick'],[q.set,'ding'],[q.roz,'tick'],
+ [q.sh+2,'blip'],[q.papa,'ding'],[q.wa,'tick'],[q.st,'tick'],[q.pr,'click'],
+ [q.grp,'click'],[q.every,'tick'],[q.my,'ding'],
+ [q.anj,'blip'],[q.inv,'tick'],[q.mat,'ding'],
+ [q.cal,'click'],[q.sil,'tick'],[q.on,'ding'],
+ [q.e0+4,'ding'],[q.e0+12,'ding'],[q.apn,'ding'],[q.com,'blip'],[q.com+8,'type']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,o.h||138,p,PBADGE(icon,-320,0,o.icol||PR.text,40)+PT(-250,-6,o.ts||44,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,36,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function tog(x,y,on,p=1){return `<g opacity="${p}" transform="translate(${x},${y})"><rect x="-44" y="-24" width="88" height="48" rx="24" fill="${on?PR.hl:PR.card2}" stroke="${on?PR.hl:PR.line2}" stroke-width="2"/><circle cx="${on?20:-20}" cy="0" r="17" fill="${on?PR.hlText:PR.muted}"/></g>`}
+function crumbs(y,list,f,a,step,hiIdx,hiF){let x=0;const ws=list.map(c=>tw(c,30,700)+40),tot=ws.reduce((s,w)=>s+w,0)+50*(list.length-1);x=-tot/2;let cr='';
+ list.forEach((c,k)=>{const p=pin(f,a+k*step),w=ws[k],hi=k==hiIdx&&f>=hiF;cr+=`<g opacity="${p}"><rect x="${x}" y="-30" width="${w}" height="60" rx="30" fill="${hi?PR.hl:PR.card2}" stroke="${PR.line2}" stroke-width="2"/>${PT(x+w/2,10,30,c,{w:700,fill:hi?PR.hlText:PR.text})}</g>`;x+=w+(k<list.length-1?50:0);if(k<list.length-1)cr+=PARROW(x-44,0,x-8,p,PR.dim);});
+ return PCARD(CX,y,800,130,pin(f,a-4,8),cr)}
+function radio(y,p,label,sel,hl){if(p<=0)return '';return `<g opacity="${p}" transform="translate(0,${(1-p)*16})"><rect x="-360" y="${y-46}" width="720" height="92" rx="20" fill="${PR.card2}" stroke="${hl?PR.hl:PR.line}" stroke-width="${hl?2.5:2}"/><circle cx="-300" cy="${y}" r="20" fill="none" stroke="${sel?PR.hl:PR.muted}" stroke-width="3"/>${sel?`<circle cx="-300" cy="${y}" r="10" fill="${PR.hl}"/>`:''}${PT(-250,y+12,36,label,{a:'start',w:700,fill:sel||hl?PR.text:PR.muted})}</g>`}
+function content(n,f){let o='';
+ if(n=='q'){o+=PLABEL(CX,226,'WhatsApp · new group');
+  const pa=pin(f,HOOK_END+2),pb=pin(f,HOOK_END+10),ex=f>=q.exit;
+  o+=PCARD(CX,380,800,190,pa,PBADGE('group',-320,-10,PR.bad,46)+PT(-250,-26,40,'Stock Tips 500% Profit',{a:'start',w:700})+PT(-250,20,26,'Unknown number added Papa',{a:'start',w:500,fill:PR.muted})+PPILL(-110,66,'1,024 MEMBERS',pb,{size:20,col:PR.bad}),{state:'bad'});
+  o+=rowCard(600,pin(f,q.exit-4),'exit','Exit group','tomorrow: a new group',{h:130,ts:40,right:PSTRIKE(-250,-18,60,pin(f,q.exit+10,10))});
+  o+=PPILL(CX,770,'1 SETTING STOPS THIS',pin(f,q.set),{solid:1,size:38});
+  o+=PT(CX,890,30,f>=q.roz?'Every day a new group...':'',{w:600,fill:PR.muted,op:pin(f,q.roz)});}
+ if(n=='share'){o+=PLABEL(CX,226,'First, send this');
+  o+=PCARD(CX,390,800,220,pin(f,q.sh+2,10),PBADGE('chat',-320,0,PR.text,44)+PT(-250,-30,28,'SEND THIS TO PAPA',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,20,38,'who gets added to',{a:'start',w:700})+PT(-250,66,38,'every group',{a:'start',w:700}),{on:f>=q.papa&&f<q.phir});
+  o+=PLABEL(CX,600,'Step 1 · open',{op:pin(f,q.phir)});
+  o+=crumbs(690,['WhatsApp','Settings','Privacy'],f,q.wa,Math.max(4,(q.pr-q.wa)/2),2,q.pr);}
+ if(n=='how'){o+=PLABEL(CX,226,'Privacy › Groups');
+  o+=PCARD(CX,330,800,110,pin(f,q.s4,8),PBADGE('group',-330,0,PR.text,34)+PT(-275,12,36,'Who can add me to groups',{a:'start',w:700}),{on:f>=q.grp&&f<q.every});
+  const sel=f>=q.my?1:0,pl=pin(f,q.grp+4,10);
+  o+=PCARD(CX,650,800,430,pl,radio(-120,pin(f,q.grp+6),'Everyone',!sel,f>=q.every&&!sel)+PSTRIKE(-250,-120,-40,f>=q.hatao&&!sel?pin(f,q.hatao,8):0)+radio(0,pin(f,q.grp+10),'My contacts',sel,sel)+radio(120,pin(f,q.grp+14),'My contacts except...',0,0));
+  o+=PT(CX,920,30,sel?'Strangers can no longer add you':'',{w:700,fill:PR.good,op:pin(f,q.my+6)});}
+ if(n=='invite'){o+=PLABEL(CX,226,'Step 2 · Unknown number');
+  const blk=f>=q.jod;
+  o+=rowCard(360,pin(f,q.s5+2),'user','Unknown number',blk?'cannot add you any more':'tries to add you...',{state:blk?'good':'',icol:blk?PR.good:PR.text,right:blk?PPILL(250,0,'BLOCKED',pin(f,q.jod),{size:22,col:PR.good}):''});
+  o+=PCARD(CX,620,800,250,pin(f,q.bas,10),PBADGE('link',-320,-30,PR.num,40)+PT(-250,-40,38,'Group invite',{a:'start',w:700})+PT(-250,0,26,'sent in a private chat',{a:'start',w:500,fill:PR.muted})+PT(-250,34,26,'expires in 3 days',{a:'start',w:500,fill:PR.muted})+PPILL(0,92,'DO NOT OPEN',pin(f,q.mat),{size:26,col:PR.bad}),{state:f>=q.mat?'bad':''});}
+ if(n=='calls'){o+=PLABEL(CX,226,'Step 3 · Unknown calls');
+  o+=crumbs(340,['Privacy','Calls'],f,q.s8+2,Math.max(4,q.cal-q.s8-2),1,q.cal);
+  const on=f>=q.on;
+  o+=PCARD(CX,580,800,200,pin(f,q.sil-2,10),PBADGE('mute',-320,0,on?PR.good:PR.text,44)+PT(-250,-10,36,'Silence unknown',{a:'start',w:700})+PT(-250,34,36,'callers',{a:'start',w:700})+tog(300,0,on),{on});
+  o+=PT(CX,780,28,on?'Missed calls still show in Calls':'',{w:600,fill:PR.muted,op:pin(f,q.on+6)});}
+ if(n=='end'){o+=PLABEL(CX,226,'Done in 1 minute');
+  const tick=(y,a,t)=>PCARD(CX,y,800,104,pin(f,a),PBADGE('check',-330,0,PR.good,30)+PT(-280,12,34,t,{a:'start',w:700}),{h:104});
+  o+=tick(330,q.e0+4,'Groups: My contacts');o+=tick(450,q.e0+12,'Invites: do not open');o+=tick(570,q.apn-6,'Unknown calls: silenced');
+  const pc=pin(f,q.pg,10),ty=Math.max(0,Math.min(5,Math.floor((f-q.com-8)/3)));
+  o+=PCARD(CX,780,800,200,pc,PT(-360,-44,26,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PT(-360,30,66,f>=q.com+8?'GUIDE'.slice(0,ty):'',{a:'start',w:800})+PPILL(230,26,'FULL GUIDE',pin(f,q.com+24),{solid:1,size:30})+PT(-360,80,24,'step-by-step guide in your DMs',{a:'start',w:500,fill:PR.muted,op:pin(f,q.com+30)}),{on:f>=q.com});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,300,80,'Papa: *scam* group again',f,4,{step:3})+PHEAD(540,400,72,'Exit won’t stop it',f,12,{step:3})+
+  PPILL(540,500,'FIX: 1 SETTING',pin(f,16),{solid:1,size:40})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>

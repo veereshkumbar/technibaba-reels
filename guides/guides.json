@@ -1,6 +1,53 @@
 {
- "updated": "2026-11-23",
+ "updated": "2026-11-24",
  "guides": [
+  {
+   "slug": "whatsapp-stop-strangers-adding-you-to-groups",
+   "date": "2026-11-24",
+   "title": "Stop strangers adding you (or your parents) to WhatsApp scam groups",
+   "lane": "Tutorial",
+   "summary": "Leaving a 'stock tips' or 'profit' group does not stop the next one. One WhatsApp privacy setting means only your contacts can add you to groups; everyone else can only send an invite you can ignore.",
+   "steps": [
+    {
+     "title": "Open Privacy",
+     "body": "Open WhatsApp > Settings > Privacy. (On Android, Settings is in the three-dot menu at the top right; on iPhone it is the Settings tab at the bottom.)"
+    },
+    {
+     "title": "Change who can add you to groups",
+     "body": "Tap Groups. Change Everyone to My contacts (or My contacts except... to exclude some contacts too). Confirm. Now only people saved in your contacts can add you directly."
+    },
+    {
+     "title": "Ignore invites from unknown numbers",
+     "body": "If someone not allowed tries to add you, they can only send a group invite in a private chat. It expires after 3 days. Do not open invites from numbers you do not know. If you are still added to a group by someone outside your contacts, WhatsApp shows a safety overview screen where you can leave the group straight away."
+    },
+    {
+     "title": "Silence unknown callers",
+     "body": "Settings > Privacy > Calls > turn on Silence unknown callers. Calls from numbers not in your contacts will not ring, but they still appear in your Calls list."
+    }
+   ],
+   "tip": "Do this on your parents' phones too: it takes under a minute and stops most stock-tip and 'task job' group spam at the source.",
+   "caution": "No real investment advisor adds strangers to WhatsApp groups promising fixed profits. Never pay into an app or account shared in such a group. If you lost money, call 1930 or report at cybercrime.gov.in.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "WhatsApp Blog: New privacy settings for groups",
+     "url": "https://blog.whatsapp.com/new-privacy-settings-for-groups?lang=en"
+    },
+    {
+     "title": "Bitdefender: How to block spammy group invites and silence unwanted calls on WhatsApp",
+     "url": "https://www.bitdefender.com/en-gb/blog/hotforsecurity/how-to-block-spammy-group-invites-and-silence-unwanted-calls-on-whatsapp"
+    },
+    {
+     "title": "TalkAndroid: How to stop strangers adding you to WhatsApp groups",
+     "url": "https://www.talkandroid.com/530268-how-to-finally-stop-strangers-from-adding-you-to-unwanted-whatsapp-groups-87321/"
+    },
+    {
+     "title": "Fox News: WhatsApp bans 6.8M scam accounts, launches safety tool",
+     "url": "https://www.foxnews.com/tech/whatsapp-bans-6-8m-scam-accounts-launches-safety-tool"
+    }
+   ]
+  },
   {
    "slug": "instagram-content-protection-reel-reposted",
    "date": "2026-11-23",
