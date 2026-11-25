@@ -1,0 +1,43 @@
+{"guide":"whatsapp-linked-devices-who-is-logged-in","title":"WhatsApp Mein Kaun Logged In Hai? 2 Tap Mein Nikalo | TechniBaba",
+"scenes":[
+{"id":"intro","type":"title","head":"TechniBaba Guide","title":"WhatsApp Linked Devices","sub":"Kaun abhi bhi aapke account mein logged in hai","chips":["1 MIN|CHECK","2|TAP"],
+ "lines":[
+ {"who":"c","hi":"बाबा! ये लैपटॉप वाला व्हाट्सऐप, एक बार खोला था कॉलेज में.","en":"Baba! Ye laptop wala WhatsApp, ek baar khola tha college mein.","pose":"phone","expr":"confused","cap":"Ek baar *khola* tha","big":1},
+ {"who":"b","hi":"टैब बंद किया था? वो लॉग आउट नहीं होता.","en":"Tab band kiya tha? Woh log out nahi hota.","pose":"stop","expr":"smug","cap":"*Tab band* = log out nahi","big":1,"react":"shocked"},
+ {"who":"b","hi":"आज एक लिस्ट देखेंगे, और दो टैप में सबको बाहर करेंगे.","en":"Aaj ek list dekhenge, aur do tap mein sabko bahar karenge.","pose":"count","expr":"explaining","cap":"*2 tap* mein bahar","big":1,"react":"happy"}]},
+{"id":"why","type":"points","head":"Linked device kya kar sakta hai?","color":"#ffd23f","items":["Aapki chats padh sakta hai","Aapke naam se message bhej sakta hai","Aapka phone band ho tab bhi chalta hai","30 din tak apne aap nahi hatta"],
+ "lines":[
+ {"who":"b","hi":"लिंक्ड डिवाइस आपकी चैट्स पढ़ सकता है.","en":"Linked device aapki chats padh sakta hai.","pose":"explain","expr":"explaining","cap":"Chats *padh* sakta hai","show":1,"show_new":1,"big":1},
+ {"who":"b","hi":"और आपके नाम से मैसेज भी भेज सकता है.","en":"Aur aapke naam se message bhi bhej sakta hai.","pose":"point","expr":"angry","cap":"Aapke *naam* se message","show":2,"show_new":1},
+ {"who":"c","hi":"पर मेरा फ़ोन तो बंद था!","en":"Par mera phone toh band tha!","pose":"shrug","expr":"shocked","cap":"Phone *band* tha!","show":3,"show_new":1,"react":"smug"},
+ {"who":"b","hi":"दो हज़ार इक्कीस के बाद लिंक्ड डिवाइस फ़ोन के बिना भी चलता है. तीस दिन तक.","en":"2021 ke baad linked device phone ke bina bhi chalta hai. 30 din tak.","pose":"explain","expr":"explaining","cap":"*30 din* tak chalu","show":4,"show_new":1,"hit":"30"}]},
+{"id":"step1","type":"phone","chip":"STEP 1","head":"Linked devices kholo","app":"WhatsApp","path":["WhatsApp","3 dot / Settings","Linked devices"],"items":["Android: upar 3 dot","iPhone: neeche Settings"],
+ "lines":[
+ {"who":"b","hi":"पहला: व्हाट्सऐप खोलो, और लिंक्ड डिवाइसेस पे जाओ.","en":"Pehla: WhatsApp kholo, aur Linked devices pe jao.","pose":"phone","expr":"explaining","cap":"*Linked devices*","show":3,"big":1},
+ {"who":"c","hi":"एंड्रॉइड में कहाँ मिलेगा?","en":"Android mein kahan milega?","pose":"leanin","expr":"confused","cap":"Android pe *kahan*?","react":"explaining"},
+ {"who":"b","hi":"एंड्रॉइड में ऊपर तीन डॉट्स. आईफ़ोन में नीचे सेटिंग्स टैब.","en":"Android mein upar teen dots. iPhone mein neeche Settings tab.","pose":"explain","expr":"happy","cap":"*3 dots* ya Settings","show":5,"show_new":2,"react":"happy"}]},
+{"id":"step2","type":"points","chip":"STEP 2","head":"List padho","color":"#5de0b0","items":["Har row = ek computer ya tablet","Saath mein last active time","Cyber cafe, office PC, dost ka laptop","Jo pehchante nahi, wahi khatra"],
+ "lines":[
+ {"who":"b","hi":"हर लाइन एक कंप्यूटर या टैबलेट है, जो अभी आपके अकाउंट में है.","en":"Har line ek computer ya tablet hai, jo abhi aapke account mein hai.","pose":"point","expr":"explaining","cap":"Har row = ek *device*","show":1,"show_new":1,"big":1},
+ {"who":"b","hi":"साथ में लिखा होता है, आख़िरी बार कब चला.","en":"Saath mein likha hota hai, aakhiri baar kab chala.","pose":"explain","expr":"explaining","cap":"*Last active* time","show":2,"show_new":1},
+ {"who":"c","hi":"मतलब साइबर कैफ़े वाला भी दिखेगा?","en":"Matlab cyber cafe wala bhi dikhega?","pose":"leanin","expr":"shocked","cap":"*Cyber cafe* wala bhi?","show":3,"show_new":1,"react":"smug"},
+ {"who":"b","hi":"हाँ. और जो आप पहचानते नहीं, वही हटाना है.","en":"Haan. Aur jo aap pehchante nahi, wahi hatana hai.","pose":"stop","expr":"angry","cap":"Jo *pehchante nahi*","show":4,"show_new":1}]},
+{"id":"step3","type":"phone","chip":"STEP 3","head":"Log out karo","app":"WhatsApp","path":["Linked devices","Us device pe tap","Log out"],"items":["Row list se hat jaayegi","Har anjaan device ke liye dohrao"],
+ "lines":[
+ {"who":"b","hi":"उस डिवाइस पे टैप करो, और लॉग आउट दबाओ.","en":"Us device pe tap karo, aur Log out dabao.","pose":"phone","expr":"explaining","cap":"Tap, phir *Log out*","show":3,"big":1,"hit":"out"},
+ {"who":"b","hi":"वो लाइन लिस्ट से हट जाएगी, और वो कंप्यूटर बाहर.","en":"Woh line list se hat jaayegi, aur woh computer bahar.","pose":"palm","expr":"happy","cap":"Computer *bahar*","show":4,"show_new":1},
+ {"who":"c","hi":"और अगर तीन चार अनजान दिखें?","en":"Aur agar teen chaar anjaan dikhen?","pose":"shrug","expr":"confused","cap":"*Teen chaar* dikhen?","react":"explaining"},
+ {"who":"b","hi":"हर एक के लिए यही दोहराओ. एक साथ चार डिवाइस तक जुड़ सकते हैं.","en":"Har ek ke liye yahi dohrao. Ek saath char device tak jud sakte hain.","pose":"count","expr":"explaining","cap":"Max *4 device*","show":5,"show_new":1,"react":"happy"}]},
+{"id":"safe","type":"points","chip":"YAAD RAKHO","head":"Dusre ke computer pe?","color":"#e5383b","items":["Tab band karna log out nahi hai","Web page pe khud Log out dabao","Cyber cafe aur kiosk se bacho","Mahine mein ek baar list dekho"],
+ "lines":[
+ {"who":"b","hi":"सरकार की साइबर विंग ने अठारह नवंबर को एडवाइज़री दी थी.","en":"Sarkar ki cyber wing ne 18 November ko advisory di thi.","pose":"explain","expr":"explaining","cap":"*Advisory*: 18 November","show":1,"show_new":1,"big":1},
+ {"who":"b","hi":"टैब बंद करना लॉग आउट नहीं है. वेब पेज पे ख़ुद लॉग आउट दबाओ.","en":"Tab band karna log out nahi hai. Web page pe khud Log out dabao.","pose":"stop","expr":"angry","cap":"Khud *Log out* dabao","show":2,"show_new":1},
+ {"who":"b","hi":"साइबर कैफ़े और पब्लिक कंप्यूटर पे व्हाट्सऐप वेब मत खोलो.","en":"Cyber cafe aur public computer pe WhatsApp Web mat kholo.","pose":"point","expr":"explaining","cap":"Public PC pe *mat* kholo","show":3,"show_new":1},
+ {"who":"b","hi":"और महीने में एक बार ये लिस्ट देख लो. दस सेकंड लगते हैं.","en":"Aur mahine mein ek baar ye list dekh lo. Das second lagte hain.","pose":"thumb","expr":"happy","cap":"*Har mahine* 10 second","show":4,"show_new":1,"react":"happy"}]},
+{"id":"recap","type":"recap","head":"Recap: 3 step","items":["Linked devices kholo","Anjaan device pe Log out","Har mahine list check"],
+ "lines":[
+ {"who":"c","hi":"मतलब: लिस्ट खोलो, लॉग आउट करो, और हर महीने देखो.","en":"Matlab: list kholo, Log out karo, aur har mahine dekho.","pose":"count","expr":"happy","cap":"Kholo. Log out. *Check.*","show":3,"show_new":3,"big":1}]},
+{"id":"outro","type":"outro","head":"Dost ko bhejo","sub":"Jo dusre ke laptop pe WhatsApp kholta hai","items":["subscribe","instagram"],
+ "lines":[
+ {"who":"b","hi":"पूरा गाइड डिस्क्रिप्शन में है. ये वीडियो उस दोस्त को भेजो, और सब्सक्राइब करो.","en":"Poora guide description mein hai. Ye video us dost ko bhejo, aur subscribe karo.","pose":"wave","expr":"happy","cap":"*Dost* ko bhejo","show":1,"show_new":1}]}
+]}
