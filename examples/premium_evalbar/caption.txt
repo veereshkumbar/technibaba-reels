@@ -1,0 +1,6 @@
+Eval bar Sindarov ki taraf jhuka, matlab Gukesh haar raha? Nahi. Aur ye jeet ka chance bhi nahi.
+- Bar = chess engine (jaise Stockfish) ka score, pyaadon (pawns) mein. +1 = White lagbhag ek pyaada aage, minus = Black aage, 0 ke paas = barabar.
+- Thodi badhat jeet ki guarantee nahi: insaan ko wahi chaal ghadi ke dabaav mein dhoondhni padti hai (Chess.com).
+- World Championship, Geneva: Game 1 draw (0.5-0.5). Game 2 aaj shaam 7:30 PM IST, Gukesh White se. 14 games, pehle 7.5 points wala champion.
+Ye reel us dost ko bhejo jo bar dekhkar "Gukesh gaya" chillata hai. Aaj kaun jeetega? GUKESH ya SINDAROV, comment karo.
+#Gukesh #WorldChessChampionship #Chess #ChessIndia #Stockfish #TechExplained #TechniBaba

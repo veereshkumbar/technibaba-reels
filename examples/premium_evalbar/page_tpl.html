@@ -1,0 +1,97 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "Eval bar = score, not result" (premium look, Hindi, 7 PM trending 25 Nov 2026) =================
+ICONS.timer='<circle cx="0" cy="6" r="34"/><line x1="0" y1="6" x2="0" y2="-14"/><line x1="0" y1="6" x2="14" y2="14"/><line x1="-10" y1="-38" x2="10" y2="-38"/>';
+ICONS.cal='<rect x="-34" y="-28" width="68" height="62" rx="8"/><line x1="-34" y1="-10" x2="34" y2="-10"/><line x1="-16" y1="-38" x2="-16" y2="-20"/><line x1="16" y1="-38" x2="16" y2="-20"/>';
+ICONS.chip='<rect x="-26" y="-26" width="52" height="52" rx="8"/><rect x="-12" y="-12" width="24" height="24" rx="3"/><line x1="-14" y1="-38" x2="-14" y2="-26"/><line x1="14" y1="-38" x2="14" y2="-26"/><line x1="-14" y1="26" x2="-14" y2="38"/><line x1="14" y1="26" x2="14" y2="38"/><line x1="-38" y1="-14" x2="-26" y2="-14"/><line x1="-38" y1="14" x2="-26" y2="14"/><line x1="26" y1="-14" x2="38" y2="-14"/><line x1="26" y1="14" x2="38" y2="14"/>';
+ICONS.pawn='<circle cx="0" cy="-22" r="12"/><path d="M-10,-10 L-14,18 L14,18 L10,-10Z"/><line x1="-24" y1="30" x2="24" y2="30"/>';
+ICONS.trophy='<path d="M-22,-32 H22 V-8 A22,22 0 0 1 -22,-8Z"/><path d="M-22,-24 H-36 A14,14 0 0 0 -22,-4"/><path d="M22,-24 H36 A14,14 0 0 1 22,-4"/><line x1="0" y1="14" x2="0" y2="26"/><line x1="-16" y1="32" x2="16" y2="32"/>';
+const F=i=>BT[i].f0;
+const q={l1:F(1),nahi:WF(1,'nahi'),jeet:WF(1,'chance'),comp:WF(1,'computer'),score:WF(1,'score'),pyd:WF(1,'pyaadon'),l2:F(2),kaise:WF(2,'kaise'),
+ sh:F(3),dost:WF(3,'dost'),gaya:WF(3,'gaya'),
+ s4:F(4),eng:WF(4,'engine'),num:WF(4,'number'),plus:WF(4,'plus'),aage:WF(4,'aage'),s5:F(5),minus:WF(5,'minus'),zero:WF(5,'zero'),bar:WF(5,'barabar'),
+ s6:F(6),jt:WF(6,'jeetega'),s7:F(7),zr:WF(7,'nahi'),ins:WF(7,'insaan'),ghadi:WF(7,'ghadi'),
+ s8:F(8),draw:WF(8,'draw'),aaj:WF(8,'aaj'),baje:WF(8,'baje'),
+ e0:F(9),hn:WF(9,'haar'),kaun:WF(9,'kaun'),com:WF(9,'gukesh')};
+[[HOOK_END+2,'blip'],[q.nahi,'tick'],[q.jeet,'tick'],[q.comp,'popin'],[q.kaise,'blip'],
+ [q.sh+2,'blip'],[q.dost,'ding'],[q.gaya,'glitch'],
+ [q.eng,'popin'],[q.plus,'tick'],[q.aage,'ding'],[q.minus,'tick'],[q.zero,'blip'],[q.bar,'ding'],
+ [q.jt,'tick'],[q.ins,'popin'],[q.ghadi,'tick'],
+ [q.draw,'blip'],[q.aaj,'popin'],[q.baje,'ding'],
+ [q.hn,'tick'],[q.kaun,'blip'],[q.com+8,'type']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+const clampv=(v,a,b)=>Math.max(a,Math.min(b,v));
+function vAt(f,keys){let v=keys[0][1];for(let i=1;i<keys.length;i++){const [fa,va]=keys[i-1],[fb,vb]=keys[i];if(f>=fb)v=vb;else if(f>fa){const t=E.smooth(Math.min(1,(f-fa)/Math.max(1,fb-fa)));v=va+(vb-va)*t;break;}else break;}return v}
+function fmt(v){const r=Math.round(v*10)/10;return (r>0?'+':r<0?'−':'')+Math.abs(r).toFixed(1)}
+// vertical eval bar: black on top, white at the bottom; + = more white (White better)
+function evalBar(x,y,w,h,v,p,o={}){if(p<=0)return '';const top=y-h/2,split=y-clampv(v,-4.5,4.5)/5*h/2;
+ return `<g opacity="${p}" transform="translate(0,${(1-p)*26})">`+
+ `<rect x="${x-w/2-4}" y="${top-4}" width="${w+8}" height="${h+8}" rx="12" fill="none" stroke="${PR.line2}" stroke-width="2"/>`+
+ `<rect x="${x-w/2}" y="${top}" width="${w}" height="${h}" rx="9" fill="#111114"/>`+
+ `<rect x="${x-w/2}" y="${split}" width="${w}" height="${top+h-split}" rx="9" fill="#F4F4F6"/>`+
+ `<line x1="${x-w/2-14}" y1="${y}" x2="${x+w/2+14}" y2="${y}" stroke="${PR.hl}" stroke-width="2" opacity=".7"/>`+
+ PT(x,top-26,o.ns||40,fmt(v),{w:700,fill:PR.num})+
+ (o.tl?PT(x,top+h+44,22,o.bl||'',{w:600,fill:PR.muted,ls:2}):'')+`</g>`}
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(o.cx||CX,y,o.w||800,o.h||130,p,PBADGE(icon,-(o.w||800)/2+80,0,o.icol||PR.text,40)+PT(-(o.w||800)/2+150,-6,o.ts||40,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-(o.w||800)/2+150,34,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function guessCard(y,p,txt,sub,strike,o={}){const w=540;return PCARD(690,y,w,120,p,PT(-w/2+36,-4,36,txt,{a:'start',w:700,fill:o.good?PR.text:(strike>0?PR.muted:PR.text)})+PT(-w/2+36,34,22,sub,{a:'start',w:500,fill:PR.muted})+PSTRIKE(-w/2+30,-16,-w/2+30+tw(txt,36,700)+12,strike),o)}
+function content(n,f){let o='';
+ if(n=='q'){o+=PLABEL(CX,226,'Eval bar · example');
+  const v=vAt(f,[[HOOK_END,-0.8],[q.score,-0.8]]);
+  o+=PT(250,262,22,'SINDAROV',{w:600,fill:PR.muted,ls:2})+evalBar(250,560,74,420,v,1)+PT(250,812,22,'GUKESH',{w:600,fill:PR.muted,ls:2});
+  o+=guessCard(380,pin(f,HOOK_END+2),'Gukesh haar raha','guess A',pin(f,q.nahi,8));
+  o+=guessCard(520,pin(f,q.jeet-4),'Jeet ka chance','guess B',pin(f,q.jeet+8,8));
+  o+=guessCard(660,pin(f,q.comp-2),'Computer score','in pawns',0,{on:f>=q.score,good:1});
+  o+=PHEAD(690,800,56,'Pyaadon mein? *Kaise*',f,q.l2,{step:3});}
+ if(n=='share'){o+=PLABEL(CX,226,'First, send this');
+  o+=PCARD(CX,400,800,220,pin(f,q.sh+2,10),PBADGE('chat',-320,0,PR.text,44)+PT(-250,-30,28,'SEND THIS TO THE FRIEND',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,20,38,'who sees the bar dip',{a:'start',w:700})+PT(-250,66,38,'and yells:',{a:'start',w:700}),{on:f>=q.dost});
+  o+=PCARD(CX,650,800,150,pin(f,q.gaya-6),PT(0,18,64,'"Gukesh gaya!"',{w:800,fill:PR.bad}),{state:'bad'});}
+ if(n=='eng'){o+=PLABEL(CX,226,'Engine score · e.g. Stockfish');
+  const v=vAt(f,[[q.s4,0],[q.plus,0],[q.plus+12,1.0],[q.minus,1.0],[q.minus+12,-1.0],[q.zero,-1.0],[q.zero+12,0]]);
+  o+=evalBar(230,560,74,460,v,pin(f,q.s4,10),{ns:44});
+  const W=600,X=640;
+  o+=rowCard(370,pin(f,q.num-4),'pawn','+1.0','White ~1 pawn ahead',{cx:X,w:W,on:f>=q.plus&&f<q.minus,icol:PR.text});
+  o+=rowCard(530,pin(f,q.minus-4),'pawn','−1.0','Black ahead',{cx:X,w:W,on:f>=q.minus&&f<q.zero});
+  o+=rowCard(690,pin(f,q.zero-4),'check','Near 0.0','about even',{cx:X,w:W,state:f>=q.bar?'good':'',icol:PR.good});}
+ if(n=='human'){o+=PLABEL(CX,226,'+1 = jeet?');
+  o+=rowCard(370,pin(f,q.s6+2),'chip','Engine','best move, computer speed',{});
+  o+=rowCard(530,pin(f,q.ins-2),'user','Insaan','must find that move',{on:f>=q.ins&&f<q.ghadi});
+  o+=rowCard(690,pin(f,q.ghadi-2),'timer','Clock running','pressure on every move',{state:'bad',icol:PR.bad});
+  o+=PPILL(CX,845,'SLIGHT EDGE ≠ GUARANTEED WIN',pin(f,q.zr),{size:30,col:PR.num});}
+ if(n=='tonight'){o+=PLABEL(CX,226,'World Championship · Geneva');
+  o+=rowCard(360,pin(f,q.draw-4),'cal','Game 1 · draw','24 Nov · 0.5 – 0.5',{});
+  o+=rowCard(520,pin(f,q.aaj-2),'timer','Game 2 · aaj','7:30 PM IST · Gukesh: White',{on:f>=q.aaj,icol:PR.good});
+  o+=rowCard(680,pin(f,q.baje+4),'trophy','14 games','first to 7.5 points wins',{});}
+ if(n=='end'){o+=PLABEL(CX,226,'Tonight, 7:30 PM');
+  const v=vAt(f,[[q.e0,0]]);
+  o+=evalBar(230,520,64,360,v,pin(f,q.e0,10),{ns:38});
+  o+=PCARD(640,430,600,150,pin(f,q.e0+2,10),PT(0,-14,40,'Bar = score',{w:700})+PT(0,32,28,'not the result',{w:500,fill:PR.muted}),{on:f>=q.hn&&f<q.kaun});
+  const pc=pin(f,q.kaun-4,10),ty=Math.max(0,Math.min(6,Math.floor((f-q.com-8)/3)));
+  o+=PCARD(640,660,600,220,pc,PT(-260,-50,26,'Aaj kaun jeetega?',{a:'start',w:600,fill:PR.muted})+PT(-260,30,64,f>=q.com+8?'GUKESH'.slice(0,ty):'',{a:'start',w:800})+PPILL(0,88,'GUKESH ya SINDAROV',pin(f,q.com+20),{solid:1,size:26}),{on:f>=q.com});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,300,72,'Bar neeche = *haar*?',f,0,{instant:true})+PHEAD(540,395,52,'Gukesh vs Sindarov · Game 2',f,0,{instant:true})+
+  PPILL(540,495,'BAR = COMPUTER SCORE, NOT RESULT',1,{solid:1,size:30})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
