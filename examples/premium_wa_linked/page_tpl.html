@@ -1,0 +1,108 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "Who is still logged into your WhatsApp" (premium, tutorial 25 Nov 2026) =================
+ICONS.laptop='<path d="M-38,-26 H38 V18 H-38Z"/><line x1="-50" y1="30" x2="50" y2="30"/><line x1="-38" y1="18" x2="38" y2="18"/>';
+ICONS.tabx='<path d="M-40,-30 H40 V30 H-40Z"/><line x1="-40" y1="-12" x2="40" y2="-12"/><path d="M-10,2 L10,22 M10,2 L-10,22"/>';
+ICONS.cal='<rect x="-34" y="-26" width="68" height="60" rx="8"/><line x1="-34" y1="-8" x2="34" y2="-8"/><line x1="-18" y1="-38" x2="-18" y2="-20"/><line x1="18" y1="-38" x2="18" y2="-20"/>';
+ICONS.dots='<circle cx="0" cy="-20" r="4"/><circle cx="0" cy="0" r="4"/><circle cx="0" cy="20" r="4"/><rect x="-26" y="-40" width="52" height="80" rx="10"/>';
+ICONS.tablet='<rect x="-30" y="-38" width="60" height="76" rx="8"/><circle cx="0" cy="28" r="3"/>';
+const F=i=>BT[i].f0;
+const q={mere:WF(1,'mere'),koi:WF(1,'koi'),juda:WF(1,'juda'),
+ w0:F(2),tab:WF(2,'tab'),band:WF(2,'band'),wahan:WF(2,'wahan'),n30:WF(2,'30'),login:WF(2,'login'),rehta:WF(2,'rehta'),
+ sh:F(3),dost:WF(3,'dost'),dusre:WF(3,'dusre'),lap:WF(3,'laptop'),
+ p0:F(4),and:WF(4,'android'),dot:WF(4,'dot'),iph:WF(4,'iphone'),set:WF(4,'settings'),lnk:WF(4,'linked'),dev:WF(4,'devices'),
+ l5:F(5),koi5:WF(5,'koi'),dikha:WF(5,'dikha'),
+ o0:F(6),otap:WF(6,'tap'),olog:WF(6,'log'),oout:WF(6,'out'),okh:WF(6,'khatam'),
+ k0:F(7),har:WF(8,'har'),klist:WF(8,'list'),char:WF(8,'char'),jud:WF(8,'jud'),
+ e0:F(9),aapke:WF(9,'aapke'),pg:WF(9,'comment')-6,com:WF(9,'comment')};
+[[HOOK_END+2,'blip'],[q.juda,'pop'],[q.koi,'ding'],
+ [q.tab,'click'],[q.band,'tick'],[q.n30,'crack'],[q.login,'tick'],
+ [q.sh+2,'blip'],[q.dost,'ding'],[q.dusre,'tick'],
+ [q.and,'click'],[q.set,'tick'],[q.lnk,'click'],[q.dev,'pop'],[q.dikha,'blip'],
+ [q.otap,'click'],[q.olog,'click'],[q.oout,'ding'],[q.okh,'tick'],
+ [q.har,'blip'],[q.char,'tick'],
+ [q.e0+4,'ding'],[q.e0+12,'ding'],[q.aapke,'ding'],[q.com,'blip'],[q.com+8,'type']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,o.h||138,p,PBADGE(icon,-320,0,o.icol||PR.text,40)+PT(-250,-6,o.ts||42,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,36,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function crumbs(y,list,f,a,step,hiIdx,hiF){let x=0;const ws=list.map(c=>tw(c,28,700)+40),tot=ws.reduce((s,w)=>s+w,0)+44*(list.length-1);x=-tot/2;let cr='';
+ list.forEach((c,k)=>{const p=pin(f,a+k*step),w=ws[k],hi=k==hiIdx&&f>=hiF;cr+=`<g opacity="${p}"><rect x="${x}" y="-30" width="${w}" height="60" rx="30" fill="${hi?PR.hl:PR.card2}" stroke="${PR.line2}" stroke-width="2"/>${PT(x+w/2,9,28,c,{w:700,fill:hi?PR.hlText:PR.text})}</g>`;x+=w+(k<list.length-1?44:0);if(k<list.length-1)cr+=PARROW(x-40,0,x-8,p,PR.dim);});
+ return PCARD(CX,y,800,126,pin(f,a-4,8),cr)}
+function content(n,f){let o='';
+ if(n=='res'){o+=PLABEL(CX,226,'WhatsApp · Linked devices');
+  const pa=pin(f,HOOK_END+2),out=f>=q.koi;
+  o+=rowCard(390,pa,'laptop','Windows · Chrome',out?'logged out':'last active 2 days ago',
+    {h:170,state:out?'':'bad',icol:out?PR.dim:PR.bad,tfill:out?PR.dim:PR.text,
+     right:out?PPILL(250,0,'LOGGED OUT',pin(f,q.koi),{size:22,col:PR.good}):PPILL(250,0,'UNKNOWN',pin(f,q.juda),{size:22,col:PR.bad})});
+  o+=PSTRIKE(140,384,940,out?pin(f,q.koi,8):0);
+  o+=PCARD(CX,620,800,150,pin(f,q.koi+8,10),PBADGE('check',-320,0,PR.good,40)+PT(-250,12,42,'No devices linked',{a:'start',w:700,fill:PR.good}),{state:'good'});
+  o+=PPILL(CX,790,'2 TAP MEIN',pin(f,q.koi+16),{solid:1,size:36});}
+ if(n=='why'){o+=PLABEL(CX,226,'Tab band = log out nahi');
+  o+=rowCard(360,pin(f,q.tab-2,8),'tabx','Tab band kiya','session chalu rehta hai',{h:150});
+  o+=PCARD(CX,610,800,230,pin(f,q.wahan,10),PBADGE('cal',-320,-6,PR.num,44)
+    +PT(-250,-30,120,f>=q.n30?'30':'',{a:'start',w:800,fill:PR.num})
+    +PT(-60,-30,42,f>=q.n30?'din':'',{a:'start',w:700,fill:PR.num})
+    +PT(-250,46,30,f>=q.login?'tab tak laptop logged in':'',{a:'start',w:500,fill:PR.muted}),{on:f>=q.n30});
+  o+=PT(CX,840,30,f>=q.rehta?'Phone band ho, phir bhi chalta hai':'',{w:600,fill:PR.muted,op:pin(f,q.rehta)});
+  o+=PT(CX,900,28,f>=q.rehta?'Cyber cafe, dost ka laptop, office PC':'',{w:500,fill:PR.dim,op:pin(f,q.rehta+8)});}
+ if(n=='share'){o+=PLABEL(CX,226,'First, send this');
+  o+=PCARD(CX,420,800,240,pin(f,q.sh+2,10),PBADGE('chat',-320,0,PR.text,44)
+    +PT(-250,-46,28,'SEND THIS TO THE FRIEND',{a:'start',w:600,fill:PR.muted,ls:3})
+    +PT(-250,10,40,'who opens WhatsApp',{a:'start',w:700})
+    +PT(-250,60,40,'on someone else laptop',{a:'start',w:700}),{on:f>=q.dost&&f<q.lap});
+  o+=PPILL(CX,640,'CAFE · OFFICE · DOST KA PC',pin(f,q.dusre),{size:28});
+  o+=PLABEL(CX,780,'Phir 2 tap',{op:pin(f,q.lap)});}
+ if(n=='path'){o+=PLABEL(CX,226,'Step 1 · kholo');
+  o+=crumbs(330,['WhatsApp','3 dot / Settings','Linked devices'],f,q.and,Math.max(5,(q.lnk-q.and)/2),2,q.lnk);
+  o+=PT(CX,452,26,f>=q.iph?'Android: 3 dot   ·   iPhone: Settings':'',{w:500,fill:PR.dim,op:pin(f,q.iph)});
+  o+=rowCard(600,pin(f,q.dev,10),'laptop','Windows · Chrome','last active 2 days ago',
+    {h:150,state:f>=q.koi5?'bad':'',icol:f>=q.koi5?PR.bad:PR.text,right:PPILL(250,0,'UNKNOWN',pin(f,q.koi5),{size:22,col:PR.bad})});
+  o+=rowCard(770,pin(f,q.dev+10,10),'tablet','Your tablet','last active today',{h:150,icol:PR.good});}
+ if(n=='out'){o+=PLABEL(CX,226,'Step 2 · do tap');
+  const gone=f>=q.oout;
+  o+=rowCard(370,pin(f,q.o0+2,8),'laptop','Windows · Chrome',gone?'logged out':'tap kiya',
+    {h:160,state:gone?'':'bad',icol:gone?PR.dim:PR.bad,tfill:gone?PR.dim:PR.text,on:f>=q.otap&&f<q.olog,
+     right:PSTRIKE(-250,-16,250,gone?pin(f,q.oout,8):0)});
+  o+=PCARD(CX,600,800,160,pin(f,q.olog,8),PBADGE('arrowOut',-320,0,gone?PR.good:PR.bad,40)
+    +PT(-250,12,46,'Log out',{a:'start',w:800,fill:gone?PR.good:PR.text}),{state:gone?'good':'bad',on:f>=q.olog&&f<q.oout});
+  o+=PPILL(CX,760,'KHATAM',pin(f,q.okh),{solid:1,size:36});}
+ if(n=='keep'){o+=PLABEL(CX,226,'Step 3 · aadat');
+  o+=rowCard(370,pin(f,q.k0+2,8),'cal','Har mahine ek nazar','Linked devices list',{h:150,icol:PR.good,on:f>=q.har&&f<q.char});
+  o+=PT(CX,500,30,'Mahine mein ek baar, 10 second',{w:500,fill:PR.muted,op:pin(f,q.k0+10)});
+  o+=PCARD(CX,620,800,220,pin(f,q.char-4,10),PBADGE('phone',-320,-4,PR.num,44)
+    +PT(-250,-18,96,f>=q.char?'4':'',{a:'start',w:800,fill:PR.num})
+    +PT(-180,-18,40,f>=q.char?'device tak':'',{a:'start',w:700,fill:PR.num})
+    +PT(-250,52,28,f>=q.jud?'ek saath jud sakte hain':'',{a:'start',w:500,fill:PR.muted}),{on:f>=q.char});
+  o+=PT(CX,840,28,f>=q.jud?'30 din baad khud hat jaate hain':'',{w:500,fill:PR.muted,op:pin(f,q.jud+6)});}
+ if(n=='end'){o+=PLABEL(CX,226,'Done in 1 minute');
+  const tick=(y,a,t)=>PCARD(CX,y,800,104,pin(f,a),PBADGE('check',-330,0,PR.good,30)+PT(-280,12,34,t,{a:'start',w:700}),{h:104});
+  o+=tick(330,q.e0+4,'Linked devices kholo');o+=tick(450,q.e0+12,'Anjaan device: Log out');o+=tick(570,q.aapke-6,'Har mahine check');
+  const pc=pin(f,q.pg,10),ty=Math.max(0,Math.min(5,Math.floor((f-q.com-8)/3)));
+  o+=PCARD(CX,780,800,200,pc,PT(-360,-44,26,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PT(-360,30,66,f>=q.com+8?'GUIDE'.slice(0,ty):'',{a:'start',w:800})+PPILL(230,26,'FULL GUIDE',pin(f,q.com+24),{solid:1,size:30})+PT(-360,80,24,'step-by-step guide in your DMs',{a:'start',w:500,fill:PR.muted,op:pin(f,q.com+30)}),{on:f>=q.com});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,290,76,'*Anjaan laptop* mere',f,-14,{step:2})+PHEAD(540,386,76,'WhatsApp mein juda tha',f,-6,{step:2})+
+  PPILL(540,500,'2 TAP MEIN BAHAR',pin(f,-3,5),{solid:1,size:40})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>

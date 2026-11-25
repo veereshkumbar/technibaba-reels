@@ -1,6 +1,57 @@
 {
- "updated": "2026-11-24",
+ "updated": "2026-11-25",
  "guides": [
+  {
+   "slug": "whatsapp-linked-devices-who-is-logged-in",
+   "date": "2026-11-25",
+   "title": "Check who is still logged into your WhatsApp, and log them out",
+   "lane": "Tutorial",
+   "summary": "Closing a browser tab does not log you out of WhatsApp Web. A linked computer keeps working even when your phone is offline, and WhatsApp only disconnects it after 30 days of inactivity. Open Linked devices, look at the list, and log out anything you do not recognise. Takes under a minute.",
+   "steps": [
+    {
+     "title": "Open Linked devices",
+     "body": "Android: open WhatsApp, tap the three-dot menu at the top right, then Linked devices. iPhone: open WhatsApp, tap Settings at the bottom right, then Linked devices."
+    },
+    {
+     "title": "Read the list",
+     "body": "Each row is a computer, browser or tablet that is signed into your account, with the time it was last active. Anything you do not recognise, or any place you only used once (a cyber cafe, an office PC, a friend's laptop), should not be there."
+    },
+    {
+     "title": "Log out the device",
+     "body": "Tap the device you want to remove, then tap Log out. The row disappears and that computer is signed out of your account. Repeat for every device you do not recognise."
+    },
+    {
+     "title": "Make it a habit",
+     "body": "Check this list about once a month. WhatsApp allows up to four linked devices at a time, disconnects a linked device after 30 days of inactivity, and logs linked devices out if your phone itself is not used for more than 14 days. Turn on WhatsApp notifications so you are told when a new device is linked."
+    }
+   ],
+   "tip": "If you have to use WhatsApp Web on a computer that is not yours, use a private or incognito window and log out manually from the web page before you leave. Closing the tab or shutting the browser is not a log out.",
+   "caution": "A linked device can read your chats and send messages as you. On 18 November 2026 the National Cyber Crime Threat Analytics Unit, under the Home Ministry's I4C, issued an advisory, Safe Use of WhatsApp Web, telling people to log out after every session and not to use WhatsApp Web on cyber cafes, public kiosks, hotel business centres or borrowed computers. If your account has been misused, report it at cybercrime.gov.in or call 1930.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "WhatsApp Help Centre: About linked devices",
+     "url": "https://faq.whatsapp.com/378279804439436/"
+    },
+    {
+     "title": "WhatsApp Help Centre: How to unlink a device",
+     "url": "https://faq.whatsapp.com/834124628020911/"
+    },
+    {
+     "title": "CIOL: Govt warns of WhatsApp Web risks to sensitive business data",
+     "url": "https://www.ciol.com/news/govt-warns-of-whatsapp-web-risks-to-sensitive-business-data-12835004"
+    },
+    {
+     "title": "Lapaas Voice: Home Ministry warns against WhatsApp Web for sensitive work",
+     "url": "https://lapaasvoice.com/home-ministry-warns-against-whatsapp-web-for-sensitive-work-advises-users-to-log-out-after-every-session"
+    },
+    {
+     "title": "Gulf News: Your WhatsApp could still be linked to a device you don't use",
+     "url": "https://gulfnews.com/lifestyle/your-whatsapp-could-still-be-linked-to-a-device-you-dont-use-or-dont-own-heres-how-to-check-1.500694345"
+    }
+   ]
+  },
   {
    "slug": "whatsapp-stop-strangers-adding-you-to-groups",
    "date": "2026-11-24",
