@@ -14,13 +14,14 @@ Each skit has a tag line the viewer sends to a named colleague: "Ye apne designe
 5. Ending asks one thing: a one-word comment ("aapka sabse bada version number?") plus a share ask naming the role.
 6. Caption: no emojis, hook line, 2 lines, the share ask naming the role, 5-8 hashtags (include the role tag, e.g. #developerlife #designerlife #managerlife).
 
-## Wall text (in the set, back wall)
-- Neon sign "FOLLOW KARO @technibaba" (objects Wall_Follow1 and Wall_Follow2, mint, always on).
-- Poster (Wall_Joke text object, 3 short lines) changes per episode to a one-line in-joke for that role. Examples: Developer "WORKS ON / MY MACHINE", Designer "BAS EK / PIXEL / HILA DO", Manager "KAL TAK / KAR DENA", QA "BUG NAHI / FEATURE HAI", Freelancer "ADVANCE / KAB AAYEGA", Editor "FINAL_V9 / REAL_FINAL". Keep to 3 lines, 10 characters each.
-- The poster line is visible for the whole reel, so it must be a joke that works before the viewer reads any caption.
+## Wall text (top empty space of the back wall)
+- Line 1, neon mint, always on: "FOLLOW KARO  @technibaba" (object Wall_Follow1).
+- Line 2, cream clay letters, changes per episode: the role's in-joke on ONE line, 19 characters or fewer (object Wall_Joke, set `data.body`). Examples: Developer "WORKS ON MY MACHINE", Designer "BAS EK PIXEL HILA DO", Manager "KAL TAK KAR DENA", QA "BUG NAHI FEATURE HAI", Freelancer "ADVANCE KAB AAYEGA", Editor "FINAL_V9 REAL_FINAL".
+- Both sit above the string lights, centred, so they never touch the window or the characters. The old poster board is hidden.
+- The joke is visible for the whole reel, so it must work before the viewer reads any caption.
 
 ## Queue file (scheduled runs write it; chat renders it)
-`clay_queue/YYYY-MM-DD.json`: `{ "role": "...", "wall_joke": "A\nB\nC", "lines": [{"who":"h|b","text":"..."}], "caption": "...", "comment_question": "..." }`
+`clay_queue/YYYY-MM-DD.json`: `{ "role": "...", "wall_joke": "ONE LINE", "lines": [{"who":"h|b","text":"..."}], "caption": "...", "comment_question": "..." }`
 
 ## Render notes
 Blender set at `technibaba_clay/clay_set.blend` on Veer's Mac. Output media_type VIDEO then file_format FFMPEG; keep resolution at 1080x1920. Animation on twos at 15 fps, doubled to 30 in the final ffmpeg step. Voices ElevenLabs: Host = Viraj, coin Baba = Shivank. Keep the first-version audio mix (loudnorm about -16 LUFS), Veer preferred it.
