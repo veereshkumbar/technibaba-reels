@@ -1,0 +1,93 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+ICONS.globe='<circle cx="0" cy="0" r="36"/><ellipse cx="0" cy="0" rx="15" ry="36"/><line x1="-36" y1="0" x2="36" y2="0"/>';
+ICONS.bug='<ellipse cx="0" cy="6" rx="20" ry="28"/><line x1="-20" y1="0" x2="-38" y2="-8"/><line x1="20" y1="0" x2="38" y2="-8"/><line x1="-20" y1="16" x2="-38" y2="24"/><line x1="20" y1="16" x2="38" y2="24"/><line x1="-10" y1="-22" x2="-18" y2="-38"/><line x1="10" y1="-22" x2="18" y2="-38"/>';
+// ================= reel art: "Phone pe LIVE, asli live nahi" (premium, trending 26 Nov 2026) =================
+ICONS.tv='<rect x="-40" y="-30" width="80" height="54" rx="8"/><path d="M-14,36 H14 M0,24 V36"/>';
+ICONS.ball='<circle cx="0" cy="0" r="34"/><path d="M-12,-32 C-2,-12 -2,12 -12,32 M12,-32 C2,-12 2,12 12,32"/>';
+ICONS.cal='<rect x="-34" y="-28" width="68" height="62" rx="8"/><line x1="-34" y1="-10" x2="34" y2="-10"/><line x1="-16" y1="-38" x2="-16" y2="-20"/><line x1="16" y1="-38" x2="16" y2="-20"/>';
+ICONS.timer='<circle cx="0" cy="6" r="34"/><line x1="0" y1="6" x2="0" y2="-14"/><line x1="0" y1="6" x2="14" y2="14"/><line x1="-10" y1="-38" x2="10" y2="-38"/>';
+ICONS.bolt='<path d="M6,-40 L-20,6 H2 L-6,40 L22,-8 H0 Z"/>';
+ICONS.pause='<line x1="-12" y1="-26" x2="-12" y2="26"/><line x1="12" y1="-26" x2="12" y2="26"/>';
+const F=i=>BT[i].f0;
+const q={
+ l0:F(1),liv:WF(1,'live'),asl:WF(1,'asli'),rep:WF(1,'reports'),tv:WF(1,'tv'),n20:WF(1,'2030'),pee:WF(1,'peeche'),
+ t0:F(2),kal:WF(2,'kal'),t330:WF(2,'330'),dt:WF(2,'doosra'),
+ s0:F(3),dost:WF(3,'dost'),score:WF(3,'score'),big:WF(3,'bigaadta'),
+ w0:F(4),fast:WF(4,'fast'),
+ c0:F(5),cnet:WF(5,'net'),c6:WF(5,'6'),tuk:WF(5,'tukdon'),kaat:WF(5,'kaatta'),
+ b0:F(6),b3:WF(6,'3'),jama:WF(6,'jama'),b18:WF(6,'18'),yah:WF(6,'yahin'),
+ x0:F(7),tez:WF(7,'tez'),low:WF(7,'low'),on:WF(7,'on'),pau:WF(7,'pause'),dob:WF(7,'dobara'),
+ e0:F(8),ekal:WF(8,'kispe'),eph:WF(8,'phone'),etv:WF(8,'tv')};
+[[HOOK_END+2,'blip'],[q.liv,'tick'],[q.asl,'pop'],[q.tv,'tick'],[q.pee,'crack'],
+ [q.t0+2,'blip'],[q.t330,'ding'],[q.dt,'tick'],
+ [q.s0+2,'blip'],[q.dost,'ding'],[q.score,'type'],
+ [q.w0+2,'blip'],[q.fast,'tick'],
+ [q.c0+4,'pop'],[q.c6,'tick'],[q.tuk,'tick'],
+ [q.b3,'ding'],[q.jama,'ding'],[q.b18,'pop'],
+ [q.tez,'blip'],[q.low,'click'],[q.on,'ding'],[q.pau,'click'],[q.dob,'ding'],
+ [q.e0+4,'blip'],[q.eph,'pop'],[q.etv,'pop']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+// screen card: a TV or phone showing the same ball. lagS = seconds behind
+function screen(x,y,w,p,icon,title,state,label,lit,col){return PCARD(x,y,w,300,p,
+  PBADGE(icon,0,-80,col||PR.text,40)+PT(0,0,30,title,{w:600,fill:PR.muted,ls:2})+
+  PT(0,70,58,state,{w:800,fill:lit?(col||PR.text):PR.text})+PT(0,120,24,label,{w:500,fill:PR.muted}),{on:lit&&!col,state:lit&&col?(col==PR.bad?'bad':'good'):''})}
+function chunk(x,y,p,lbl,fill){return p<=0?'':`<g opacity="${p}" transform="translate(${x},${y+(1-p)*20})"><rect x="-80" y="-60" width="160" height="120" rx="18" fill="${fill?PR.hl:PR.card2}" stroke="${PR.line2}" stroke-width="2"/>${PT(0,14,40,lbl,{w:800,fill:fill?PR.hlText:PR.text})}</g>`}
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,o.h||130,p,PBADGE(icon,-320,0,o.icol||PR.text,38)+PT(-250,-4,o.ts||40,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,36,25,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function content(n,f){let o='';
+ if(n=='live'){o+=PLABEL(CX,226,'Same ball · do screen');
+  const lit=f>=q.tv;
+  o+=screen(310,410,400,pin(f,HOOK_END+2),'tv','TV','OUT!','abhi',true,PR.good);
+  o+=screen(770,410,400,pin(f,q.liv-2),'phone','PHONE · LIVE',f>=q.pee?'~25 sec':'bowling...',f>=q.pee?'peeche':'abhi bhi',f>=q.asl,PR.bad);
+  o+=PPILL(CX,640,'LIVE = ASLI LIVE?',pin(f,q.asl),{size:36,col:PR.bad})+PSTRIKE(CX-230,628,CX+230,pin(f,q.asl+6,8));
+  o+=PCARD(CX,800,800,150,pin(f,q.n20-2,8),PBADGE('timer',-320,0,PR.num,40)+PT(-250,-4,46,'20-30 sec peeche',{a:'start',w:800,fill:PR.num})+PT(-250,40,24,'TV ke mukable · AWS, Selectra, DStv',{a:'start',w:500,fill:PR.muted}),{on:f>=q.pee});}
+ if(n=='test'){o+=PLABEL(CX,226,'Kal subah · live');
+  o+=PCARD(CX,400,800,220,pin(f,q.t0+2,8),PBADGE('cal',-320,0,PR.text,44)+PT(-250,-40,28,'NZ VS IND · 2ND TEST',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,20,64,'3:30 AM',{a:'start',w:800,fill:f>=q.t330?PR.num:PR.text})+PT(-250,66,26,'IST · Hagley Oval, Christchurch',{a:'start',w:500,fill:PR.muted}),{on:f>=q.t330});
+  o+=PCARD(CX,700,800,260,pin(f,q.s0+2,10),PBADGE('chat',-320,0,PR.text,44)+PT(-250,-62,28,'SEND THIS TO',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,0,42,'us dost ko jo',{a:'start',w:700})+PT(-250,56,42,'score bhej deta hai',{a:'start',w:700,fill:f>=q.score?PR.bad:PR.text})+PT(-250,100,24,'"Bumrah ne le liya!"',{a:'start',w:500,fill:PR.muted,op:pin(f,q.big)}),{on:f>=q.dost});
+  o+=PLABEL(CX,900,'Sony Sports Network · SonyLIV',{op:pin(f,q.dt)});}
+ if(n=='why'){o+=PLABEL(CX,226,'Sawaal');
+  o+=PHEAD(CX,420,72,'Net *fast* hai',f,q.w0,{step:3});
+  o+=PCARD(CX,640,800,170,pin(f,q.fast,8),PBADGE('bolt',-320,0,PR.good,40)+PT(-250,14,46,'Phir bhi peeche kyun?',{a:'start',w:800}));}
+ if(n=='chunk'){o+=PLABEL(CX,226,f>=q.b0?'Player ka buffer':'App video ko kaat-ta hai');
+  const st=Math.max(4,(q.kaat-q.c0-4)/4);
+  for(let k=0;k<4;k++){const filled=f>=q.b0&&k<3&&f>=q.b3+k*5;o+=chunk(225+k*210,420,pin(f,q.c0+4+k*st),'6s',filled);}
+  o+=PT(CX,540,28,'Ek tukda = aksar 6 second',{w:500,fill:PR.muted,op:pin(f,q.c6+4)});
+  const bx=PCARD(CX,750,800,220,pin(f,q.b0+2,8),PBADGE('pause',-320,0,PR.text,44)+PT(-250,-36,28,'PLAY TABHI JAB',{a:'start',w:600,fill:PR.muted,ls:3})+PT(-250,20,46,'3 tukde jama',{a:'start',w:800})+PT(120,20,64,f>=q.b18?'= 18s':'',{a:'start',w:800,fill:PR.num}),{on:f>=q.b18});
+  o+=bx;o+=PLABEL(CX,906,'Source: AWS Media · HLS guide',{op:pin(f,q.b18+6)});}
+ if(n=='fix'){o+=PLABEL(CX,226,'Kya karein');
+  o+=rowCard(350,pin(f,q.x0+2),'bolt','Tez net','delay nahi ghatta',{state:'bad',icol:PR.bad,right:PPILL(260,0,'NAHI',pin(f,q.tez+6),{size:24,col:PR.bad})});
+  o+=rowCard(510,pin(f,q.low-2),'timer','Low latency mode','agar app mein ho',{state:f>=q.on?'good':'',icol:f>=q.on?PR.good:PR.text,right:PPILL(260,0,'ON',pin(f,q.on),{size:26,solid:1})});
+  o+=rowCard(670,pin(f,q.pau-2),'pause','Pause kiya?','stream band karke dobara kholo',{state:f>=q.dob?'good':'',icol:f>=q.dob?PR.good:PR.text});
+  o+=PLABEL(CX,800,'Source: Selectra, 2 Nov 2026',{op:pin(f,q.dob+6)});}
+ if(n=='end'){o+=PLABEL(CX,226,'Kal 3:30 AM');
+  o+=PHEAD(CX,400,72,'Kal match *kispe*?',f,q.e0,{step:3});
+  o+=screen(310,650,400,pin(f,q.eph-2),'phone','PHONE','20-30s late','ya',f>=q.eph,PR.bad);
+  o+=screen(770,650,400,pin(f,q.etv-2),'tv','TV','~6s','ya',f>=q.etv,PR.good);}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,290,76,'Padosi: *OUT!*',f,-14,{step:2})+PHEAD(540,386,62,'Mera phone: abhi bowling',f,-6,{step:2})+
+  PPILL(540,500,'PHONE LIVE = 20-30 SEC PEECHE',pin(f,-3,5),{solid:1,size:38})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
