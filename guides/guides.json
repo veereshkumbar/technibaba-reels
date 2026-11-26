@@ -1,6 +1,53 @@
 {
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "guides": [
+  {
+   "slug": "chrome-virus-alert-notifications-block",
+   "date": "2026-11-26",
+   "title": "\"Virus detected\" alerts on your phone? Block the website notifications in Chrome",
+   "lane": "Tutorial",
+   "summary": "Those \"Virus detected\", \"Bill overdue\" or \"Police notice\" pop-ups usually come from a website that was once allowed to send notifications. The permission is not a virus, so a scan finds nothing, but the site can keep pushing fake alerts. Block the site in Chrome in under a minute.",
+   "steps": [
+    {
+     "title": "Find the site",
+     "body": "Swipe down to open the notification shade. The alert shows Chrome and the website's name. If the notification has an Unsubscribe button, tap it."
+    },
+    {
+     "title": "Open Chrome's notification list",
+     "body": "Open Chrome > tap the three dots (More) at the top right > Settings > Site settings > Notifications. You will see every site that is allowed to send notifications."
+    },
+    {
+     "title": "Block every site you do not know",
+     "body": "Tap each unknown site under Allowed and change it to Block. Keep only sites you really use, like your bank or work site."
+    },
+    {
+     "title": "From now on, tap Block",
+     "body": "When a website asks to \"show notifications\" (often disguised as \"tap Allow to continue\" or \"to prove you are not a robot\"), tap Block."
+    }
+   ],
+   "tip": "On some phones the path is Chrome > three dots > Settings > Notifications, which lists the same sites. Chrome also removes the permission automatically from some sites you never interact with.",
+   "caution": "Never tap the alert itself and never install a \"cleaner\" or \"antivirus\" app that the alert pushes. If you already shared bank details or paid money, call 1930 or report on cybercrime.gov.in.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "Malwarebytes: Why scammers want you to allow notifications (12 Nov 2026)",
+     "url": "https://www.malwarebytes.com/blog/mobile/2026/11/why-scammers-want-you-to-allow-notifications"
+    },
+    {
+     "title": "Android Authority: Chrome on Android fights notification spam (11 Aug 2026)",
+     "url": "https://androidauthority.com/chrome-android-notification-spam-3696867"
+    },
+    {
+     "title": "Google Chrome blog: automatic notification permission removal (10 Oct 2025)",
+     "url": "https://blog.google/chromium/automatic-notification-permission/"
+    },
+    {
+     "title": "Digital Citizen: How to stop spam notifications on Android",
+     "url": "https://www.digitalcitizen.life/stop-spam-notifications-android/"
+    }
+   ]
+  },
   {
    "slug": "whatsapp-linked-devices-who-is-logged-in",
    "date": "2026-11-25",

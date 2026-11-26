@@ -1,0 +1,109 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "Who is still logged into your WhatsApp" (premium, tutorial 25 Nov 2026) =================
+// ================= reel art: "Virus detected? It was Allow" (premium, tutorial 26 Nov 2026) =================
+ICONS.globe='<circle cx="0" cy="0" r="36"/><ellipse cx="0" cy="0" rx="15" ry="36"/><line x1="-36" y1="0" x2="36" y2="0"/>';
+ICONS.bug='<ellipse cx="0" cy="6" rx="20" ry="28"/><line x1="-20" y1="0" x2="-38" y2="-8"/><line x1="20" y1="0" x2="38" y2="-8"/><line x1="-20" y1="16" x2="-38" y2="24"/><line x1="20" y1="16" x2="38" y2="24"/><line x1="-10" y1="-22" x2="-18" y2="-38"/><line x1="10" y1="-22" x2="18" y2="-38"/>';
+ICONS.dots='<circle cx="0" cy="-20" r="4"/><circle cx="0" cy="0" r="4"/><circle cx="0" cy="20" r="4"/>';
+ICONS.cop='<path d="M-30,-14 L0,-34 L30,-14 Z"/><rect x="-24" y="-14" width="48" height="12"/><circle cx="0" cy="18" r="16"/>';
+const F=i=>BT[i].f0;
+const q={
+ n0:F(1),vir:WF(1,'virus'),hack:WF(1,'hacker'),site:WF(1,'website'),allow:WF(1,'allow'),
+ a0:F(3),a3:F(4),jab:WF(4,'jab'),nak:WF(4,'nakli'),bv:WF(4,'virus'),bb:WF(4,'bill'),bp:WF(4,'police'),
+ sh:F(2),papa:WF(2,'papa'),jinka:WF(2,'jinka'),
+ p0:F(5),chr:WF(5,'chrome'),dot:WF(5,'dot'),set:WF(5,'settings'),sset:WF(5,'site'),noti:WF(5,'notifications'),
+ p6:F(6),das:WF(6,'das'),
+ b0:F(7),btap:WF(7,'tap'),blk:WF(7,'block'),bkh:WF(7,'khatam'),
+ x0:F(8),xal:WF(8,'allow'),xbl:WF(8,'block'),
+ e0:F(9),eal:WF(9,'allow'),pg:WF(9,'comment')-6,com:WF(9,'comment')};
+[[HOOK_END+2,'blip'],[q.vir,'tick'],[q.hack,'tick'],[q.allow,'crack'],
+ [q.a0+2,'blip'],[q.jab,'pop'],[q.bv,'ding'],[q.bb,'ding'],[q.bp,'ding'],
+ [q.sh+2,'blip'],[q.papa,'ding'],[q.jinka,'tick'],
+ [q.chr,'click'],[q.dot,'tick'],[q.set,'tick'],[q.sset,'click'],[q.noti,'pop'],[q.das,'blip'],
+ [q.btap,'click'],[q.blk,'ding'],[q.bkh,'tick'],
+ [q.xal,'blip'],[q.xbl,'click'],
+ [q.e0+4,'ding'],[q.e0+12,'ding'],[q.eal,'ding'],[q.com,'blip'],[q.com+8,'type']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,o.h||138,p,PBADGE(icon,-320,0,o.icol||PR.text,40)+PT(-250,-6,o.ts||42,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,36,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function crumbs(y,list,f,a,step,hiIdx,hiF){let x=0;const ws=list.map(c=>tw(c,28,700)+40),tot=ws.reduce((s,w)=>s+w,0)+44*(list.length-1);x=-tot/2;let cr='';
+ list.forEach((c,k)=>{const p=pin(f,a+k*step),w=ws[k],hi=k==hiIdx&&f>=hiF;cr+=`<g opacity="${p}"><rect x="${x}" y="-30" width="${w}" height="60" rx="30" fill="${hi?PR.hl:PR.card2}" stroke="${PR.line2}" stroke-width="2"/>${PT(x+w/2,9,28,c,{w:700,fill:hi?PR.hlText:PR.text})}</g>`;x+=w+(k<list.length-1?44:0);if(k<list.length-1)cr+=PARROW(x-40,0,x-8,p,PR.dim);});
+ return PCARD(CX,y,800,126,pin(f,a-4,8),cr)}
+// the browser permission prompt: hi = 'allow' | 'block'
+function prompt(y,p,f,hi,hiF){if(p<=0)return '';const on=f>=hiF;
+ const btn=(x,t,lit)=>`<rect x="${x-120}" y="-6" width="240" height="72" rx="36" fill="${lit?PR.hl:PR.card2}" stroke="${PR.line2}" stroke-width="2"/>`+PT(x,42,32,t,{w:700,fill:lit?PR.hlText:PR.text});
+ return PCARD(CX,y,800,250,p,PBADGE('globe',-320,-60,PR.text,36)+PT(-262,-70,30,'Ek anjaan site',{a:'start',w:700})+PT(-262,-30,26,'wants to show notifications',{a:'start',w:500,fill:PR.muted})
+   +btn(-150,'Block',hi=='block'&&on)+btn(150,'Allow',hi=='allow'&&on),{on:on})}
+function alertCard(y,p,icon,t,s,col){return PCARD(CX,y,800,120,p,PBADGE(icon,-320,0,col||PR.bad,34)+PT(-262,-4,34,t,{a:'start',w:700})+PT(-262,32,24,s,{a:'start',w:500,fill:PR.muted}),{h:120,state:'bad'})}
+function content(n,f){let o='';
+ if(n=='nota'){o+=PLABEL(CX,226,'Papa ka phone · notifications');
+  o+=alertCard(350,pin(f,HOOK_END+2),'warn','Virus detected','Chrome · ek anjaan site');
+  const cx=(x,a,t,on)=>PPILL(x,560,t,pin(f,a),{size:46,col:PR.bad})+PSTRIKE(x-150,546,x+150,pin(f,a+4,8));
+  o+=cx(330,q.vir,'VIRUS');o+=cx(750,q.hack,'HACKER');
+  o+=PCARD(CX,760,800,170,pin(f,q.site,10),PBADGE('globe',-320,0,PR.good,40)+PT(-250,14,42,'Website ko',{a:'start',w:700})+PPILL(80,12,'Allow',pin(f,q.allow),{solid:1,size:38})+PT(170,14,42,f>=q.allow?'mila':'',{a:'start',w:700}),{on:f>=q.allow});}
+ if(n=='allow'){o+=PLABEL(CX,226,'Ek tap = permission');
+  o+=prompt(370,pin(f,q.a0+2,8),f,'allow',q.a0+8);
+  o+=PT(CX,540,30,f>=q.jab?'Ab site jab chahe alert bhej sakti hai':'',{w:600,fill:PR.muted,op:pin(f,q.jab)});
+  o+=alertCard(640,pin(f,q.bv-2,8),'bug','Virus detected','nakli');
+  o+=alertCard(770,pin(f,q.bb-2,8),'rupee','Bill overdue','nakli');
+  o+=alertCard(900,pin(f,q.bp-2,8),'cop','Police notice','nakli');}
+ if(n=='share'){o+=PLABEL(CX,226,'Pehle, ye bhejo');
+  o+=PCARD(CX,420,800,240,pin(f,q.sh+2,10),PBADGE('chat',-320,0,PR.text,44)
+    +PT(-250,-46,28,'SEND THIS TO PAPA',{a:'start',w:600,fill:PR.muted,ls:3})
+    +PT(-250,10,40,'jinka phone bolta hai',{a:'start',w:700})
+    +PT(-250,60,40,'virus, virus, virus',{a:'start',w:700,fill:PR.bad}),{on:f>=q.papa});
+  o+=PPILL(CX,650,'PAPA · MUMMY · DADI',pin(f,q.jinka),{size:30});
+  o+=PLABEL(CX,780,'Phir 3 step',{op:pin(f,q.jinka+10)});}
+ if(n=='path'){o+=PLABEL(CX,226,'Step 1 · kholo');
+  const st=Math.max(4,(q.noti-q.chr)/4);
+  o+=crumbs(330,['Chrome','3 dot','Settings'],f,q.chr,st,-1,0);
+  o+=crumbs(470,['Site settings','Notifications'],f,q.sset,st,1,q.noti);
+  const s1=pin(f,q.noti+6,10),s2=pin(f,q.noti+12,10),s3=pin(f,q.noti+18,10),lit=f>=q.das;
+  o+=rowCard(640,s1,'globe','Anjaan quiz site','Allowed',{h:110,ts:34,icol:lit?PR.bad:PR.text,state:lit?'bad':''});
+  o+=rowCard(765,s2,'globe','Anjaan news site','Allowed',{h:110,ts:34,icol:lit?PR.bad:PR.text,state:lit?'bad':''});
+  o+=rowCard(890,s3,'globe','+ 8 aur sites','Allowed',{h:110,ts:34,icol:lit?PR.bad:PR.text,state:lit?'bad':''});}
+ if(n=='block'){o+=PLABEL(CX,226,'Step 2 · block');
+  const done=f>=q.blk;
+  o+=rowCard(370,pin(f,q.b0+2,8),'globe','Anjaan quiz site',done?'Blocked':'Allowed',
+    {h:150,state:done?'good':'bad',icol:done?PR.good:PR.bad,on:f>=q.btap&&f<q.blk,
+     right:done?PPILL(250,0,'BLOCKED',pin(f,q.blk),{size:22,col:PR.good}):''});
+  o+=PCARD(CX,580,800,150,pin(f,q.btap,8),PBADGE('cross',-320,0,done?PR.good:PR.text,40)
+    +PT(-250,14,46,'Block',{a:'start',w:800,fill:done?PR.good:PR.text}),{state:done?'good':'',on:f>=q.btap&&f<q.blk});
+  o+=PT(CX,720,28,f>=q.blk?'Har anjaan site ke saath yahi':'',{w:500,fill:PR.muted,op:pin(f,q.blk+4)});
+  o+=PPILL(CX,820,'KHATAM',pin(f,q.bkh),{solid:1,size:36});}
+ if(n=='next'){o+=PLABEL(CX,226,'Step 3 · aage se');
+  o+=prompt(400,pin(f,q.x0+2,8),f,'block',q.xbl);
+  o+=PT(CX,600,32,f>=q.xbl?'Allow sirf apni bank / kaam ki site ko':'',{w:600,fill:PR.muted,op:pin(f,q.xbl+4)});
+  o+=PT(CX,660,28,f>=q.xbl?'Alert pe tap karke koi app install nahi':'',{w:500,fill:PR.dim,op:pin(f,q.xbl+10)});}
+ if(n=='end'){o+=PLABEL(CX,226,'Done in 1 minute');
+  const tick=(y,a,t)=>PCARD(CX,y,800,104,pin(f,a),PBADGE('check',-330,0,PR.good,30)+PT(-280,12,34,t,{a:'start',w:700}),{h:104});
+  o+=tick(330,q.e0+4,'Site settings > Notifications');o+=tick(450,q.e0+12,'Anjaan site: Block');o+=tick(570,q.eal-6,'Aage se Allow nahi');
+  const pc=pin(f,q.pg,10),ty=Math.max(0,Math.min(5,Math.floor((f-q.com-8)/3)));
+  o+=PCARD(CX,780,800,200,pc,PT(-360,-44,26,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PT(-360,30,66,f>=q.com+8?'GUIDE'.slice(0,ty):'',{a:'start',w:800})+PPILL(230,26,'FULL GUIDE',pin(f,q.com+24),{solid:1,size:30})+PT(-360,80,24,'step-by-step guide on technibaba.com',{a:'start',w:500,fill:PR.muted,op:pin(f,q.com+30)}),{on:f>=q.com});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,290,76,'*Virus detected?*',f,-14,{step:2})+PHEAD(540,386,64,'Papa ka phone, roz',f,-6,{step:2})+
+  PPILL(540,500,'VIRUS NAHI · HACKER NAHI',pin(f,-3,5),{solid:1,size:40})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
