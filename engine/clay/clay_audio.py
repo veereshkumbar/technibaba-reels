@@ -3,7 +3,7 @@
 usage: clay_audio.py WORKDIR            (WORKDIR holds script.py with VOICES and LINES, see CLAY_FORMAT.md)
 Writes WORKDIR/vo/lNN.mp3|wav, cues/lNN.json (host lines, Rhubarb), anim.json, vo_full.wav, mix_final.wav, sfx_events.json, caps_filter.txt, cap/cNN.txt.
 Reuses existing vo/lNN.mp3 (no ElevenLabs spend). Needs env ELEVENLABS_API_KEY only for missing lines. Needs rhubarb on PATH or $RHUBARB."""
-import sys, os, json, math, subprocess, urllib.request, shutil, numpy as np, soundfile as sf
+import sys, os, json, math, textwrap, subprocess, urllib.request, shutil, numpy as np, soundfile as sf
 W = os.path.abspath(sys.argv[1]); os.chdir(W)
 HERE = os.path.dirname(os.path.abspath(__file__)); ENG = os.path.dirname(HERE)
 ns = {}; exec(open('script.py').read(), ns); VOICES, LINES = ns['VOICES'], ns['LINES']
@@ -71,7 +71,7 @@ sh('ffmpeg', '-y', '-i', 'vo_full.wav', '-i', 'bed.wav', '-i', 'sfx.wav', '-filt
 # captions
 parts = []
 for s in segs:
-    open(f"cap/c{s['i']:02d}.txt", 'w').write(s['cap'])
+    open(f"cap/c{s['i']:02d}.txt", 'w').write('\n'.join(textwrap.wrap(s['cap'], 26)))
     col = 'white' if s['who'] == 'h' else '0x5DE0B0'
     parts.append(f"drawtext=fontfile=/usr/share/fonts/opentype/inter/Inter-Bold.otf:textfile=cap/c{s['i']:02d}.txt:fontsize=68:fontcolor={col}:borderw=7:bordercolor=black@0.85:shadowx=0:shadowy=4:shadowcolor=black@0.5:line_spacing=10:x=(w-text_w)/2:y=1400-text_h/2:enable='between(t,{s['start']:.3f},{s['start']+s['dur']+0.1:.3f})'")
 open('caps_filter.txt', 'w').write(','.join(parts))
