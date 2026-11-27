@@ -1,0 +1,36 @@
+# Plain split layout (TEST old-look, 27 Nov 2026 19:00): "Ball pad pe ruki, phir laal line stumps tak kaise?"  c = Chotu, b = Techni Baba.
+LINES=[
+('q','बाबा! बॉल पैड पे रुक गई. फिर लाल लाइन स्टंप्स तक कैसे गई?','Baba! Ball pad pe ruk gayi. Phir laal line stumps tak kaise gayi?','c',''),
+('claim','सब सोचते हैं वो रीप्ले है. रीप्ले नहीं. कंप्यूटर का अंदाज़ा है.','Sab sochte hain woh replay hai. Replay nahi. Computer ka andaaza hai.','b',''),
+('share','ये उस दोस्त को भेजो, जो बोले टीवी पे दिखा, तो पक्का!','Ye us dost ko bhejo, jo bole TV pe dikha, toh pakka!','c',''),
+('cams','मैदान में छह या ज़्यादा कैमरे, हर फ़्रेम में बॉल ढूँढते हैं.','Maidan mein chhe ya zyada camere, har frame mein ball dhoondhte hain.','b',''),
+('cams','पर फ़ोटो तो फ़्लैट है. थ्री डी कैसे?','Par photo toh flat hai. 3D kaise?','c',''),
+('tri','दो कैमरे, एक ही पल. दोनों की लाइन जहाँ मिले, बॉल वहीं है.','Do camere, ek hi pal. Dono ki line jahan mile, ball wahin hai.','b',''),
+('path','पैड तक रास्ता असली. पैड के बाद, गणित से आगे खींचा जाता है.','Pad tak raasta asli. Pad ke baad, maths se aage kheencha jaata hai.','b',''),
+('path','तो अंदाज़ा ग़लत भी हो सकता है?','Toh andaaza galat bhi ho sakta hai?','c',''),
+('end','थोड़ा. इसीलिए क़रीबी फ़ैसले में अंपायर का कॉल चलता है.','Thoda. Isiliye kareebi faisle mein umpire ka call chalta hai.','b',''),
+('end','आप बताओ, बॉल ट्रैकिंग पे भरोसा, या शक?','Aap batao, ball tracking pe BHAROSA, ya SHAQ?','c',''),
+]
+VOICES={'c':('eleven:pHG3exaXQt8bmTWbaVOs',1.0,1.0,('kokoro:hm_psi',1.24,1.06)),'b':('eleven:QO2wwSVI9F7DwU5uUXDX',1.0,1.0,('kokoro:hm_omega',1.2,0.95))}
+BEATS=[
+ dict(emotion='shocked',action='hands on head, then points at the red line',rule='hook by 1.5s, full-screen payoff before the split',
+      keys=[(None,'c','blown','shocked',1),(None,'b','idle','neutral',0),('laal','c','point','confused',1),('kaise','c','shrug','confused',1)],caps=[('baba','Ball *pad* pe ruki...'),('laal','Phir *laal line*?'),('kaise','Stumps tak *kaise*?')]),
+ dict(emotion='calm',action='stop hand on replay, points on andaaza',rule='claim by 6s: it is a prediction',hit='andaaza',
+      keys=[(None,'b','explain','smug',1),(None,'c','idle','neutral',0),('nahi','b','stop','explaining',1),('andaaza','b','point','explaining',1),('andaaza','c','blown','shocked',1)],caps=[('sab','Sab sochte: *replay*'),('nahi','Replay *NAHI*'),('andaaza','Computer ka *andaaza*')]),
+ dict(emotion='sheepish',action='laughs, points sideways at the phone',rule='share ask on screen at 8-12s',
+      keys=[(None,'c','phone','happy',1),(None,'b','idle','smug',0),('dost','c','point','happy',1),('pakka','c','up','happy',1)],caps=[('ye','Us *dost* ko bhejo...'),('tv','*TV pe dikha*...'),('pakka','= *pakka*?')]),
+ dict(emotion='explaining',action='counts cameras, points up at the ground',rule='one visual: cameras around the ground',
+      keys=[(None,'b','count','explaining',1),(None,'c','idle','neutral',0),('chhe','b','point','explaining',1),('frame','c','leanin','confused',0)],caps=[('maidan','*Maidan* mein...'),('chhe','*6+ camere*'),('frame','Har *frame* mein ball')]),
+ dict(emotion='curious',action='shrug',rule='reaction beat, planted question',
+      keys=[(None,'c','shrug','confused',1),(None,'b','idle','smug',0)],caps=[('par','Camera = *flat* photo'),('3d','Toh *3D* kaise?')]),
+ dict(emotion='explaining',action='both hands, then points where lines meet',rule='lines cross on the spoken word',
+      keys=[(None,'b','explain','explaining',1),(None,'c','idle','neutral',0),('mile','b','point','explaining',1),('wahin','c','thumb','happy',1)],caps=[('do','*2 camere*, ek pal'),('mile','Lines jahan *milein*'),('wahin','Ball *wahin*')]),
+ dict(emotion='stern',action='palm on real, stop hand on maths',rule='hit-stop on MATHS (the twist)',hit='maths',
+      keys=[(None,'b','explain','explaining',0),(None,'c','idle','neutral',0),('asli','b','thumb','happy',1),('baad','b','point','explaining',1),('maths','b','stop','smug',1),('maths','c','blown','shocked',1)],caps=[('pad','Pad tak: *ASLI*'),('baad','Pad ke *baad*...'),('maths','*Maths* se aage')]),
+ dict(emotion='worried',action='leans in, hands on head',rule='short reaction beat',
+      keys=[(None,'c','leanin','confused',1),(None,'b','idle','smug',0),('galat','c','blown','shocked',1)],caps=[('toh','Andaaza *galat*?')]),
+ dict(emotion='calm',action='palm, then points up at the stamp',rule='answer the question in the last 20%',
+      keys=[(None,'b','palm','explaining',1),(None,'c','idle','neutral',0),('kareebi','b','count','explaining',0),('umpire','b','point','explaining',1)],caps=[('thoda','*Thoda* sa'),('kareebi','*Kareebi* faisla?'),('umpire','= *Umpire\'s call*')]),
+ dict(emotion='proud',action='points at the comment box, waves',rule='one ask at the end, loops to the hook',
+      keys=[(None,'c','point','happy',1),(None,'b','idle','happy',0),('bharosa','b','wave','happy',1)],caps=[('aap','Ball *tracking* pe...'),('bharosa','*BHAROSA ya SHAQ?*')]),
+]
