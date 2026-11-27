@@ -1,6 +1,53 @@
 {
- "updated": "2026-11-26",
+ "updated": "2026-11-27",
  "guides": [
+  {
+   "slug": "upi-autopay-check-cancel-unknown-mandates",
+   "date": "2026-11-27",
+   "title": "Money leaving every month? Check and cancel unknown UPI AutoPay mandates",
+   "lane": "Tutorial",
+   "summary": "One UPI PIN on an AutoPay (mandate) request approves debits every month, not just once. Forgotten free trials and fake 'bill' requests can keep taking money. Check the live AutoPay list in your UPI app and cancel anything you do not recognise.",
+   "steps": [
+    {
+     "title": "Google Pay: open your AutoPay list",
+     "body": "Open Google Pay > tap your profile picture (top right) > Autopay. Open the Live tab: these mandates can still debit your account."
+    },
+    {
+     "title": "PhonePe: open your AutoPay list",
+     "body": "Open PhonePe > tap your profile picture > under Payment Management, tap AutoPay. In other UPI apps look under Profile or Settings for AutoPay, Mandates or Subscriptions."
+    },
+    {
+     "title": "Cancel anything you do not recognise",
+     "body": "Google Pay: tap the mandate in the Live tab > Cancel autopay > enter your UPI PIN. PhonePe: select the AutoPay > Remove AutoPay. You can also pause a mandate instead of cancelling it."
+    },
+    {
+     "title": "From now on: check for the word Recurring",
+     "body": "A one-time bill (electricity, KYC fee, 'lottery tax') should never ask you to approve a Recurring or Monthly mandate. If a request from an unknown number says Recurring, tap Decline. You never need your UPI PIN to receive money."
+    }
+   ],
+   "tip": "Check the list once every few months, and do it on your parents' phones too. Cancelling stops future debits; it does not refund past ones, so also cancel the subscription with the company.",
+   "caution": "Loan repayment mandates cannot be cancelled from the UPI app; contact the lender. If you lost money to a scam, call 1930 or report at cybercrime.gov.in and inform your bank right away.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "Google Pay Help: Manage your UPI Autopay mandates",
+     "url": "https://support.google.com/pay/india/answer/10840624?hl=en"
+    },
+    {
+     "title": "PhonePe Help: modify or delete an AutoPay",
+     "url": "https://cms.phonepe.com/en/myhelp/autopay-payment-reminders/autopay/autopay-external-merchant-platforms/how-do-i-modify-or-delete-autopay-i-have-authorised-using-phonep"
+    },
+    {
+     "title": "PhonePe Trust and Safety: How to identify fraudulent subscription mandates (4 Mar 2026)",
+     "url": "https://www.phonepe.com/blog/trust-and-safety/how-to-identify-fraudulent-subscription-mandates/"
+    },
+    {
+     "title": "HDFC Bank: How to cancel a UPI AutoPay mandate",
+     "url": "https://www.hdfc.bank.in/payments/services/cancel-upi-autopay-mandate"
+    }
+   ]
+  },
   {
    "slug": "chrome-virus-alert-notifications-block",
    "date": "2026-11-26",

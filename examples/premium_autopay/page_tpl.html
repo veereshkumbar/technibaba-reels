@@ -1,0 +1,109 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "Ek PIN, har mahine: hidden UPI AutoPay" (premium, tutorial 27 Nov 2026) =================
+ICONS.cal='<rect x="-34" y="-28" width="68" height="62" rx="8"/><line x1="-34" y1="-10" x2="34" y2="-10"/><line x1="-16" y1="-40" x2="-16" y2="-20"/><line x1="16" y1="-40" x2="16" y2="-20"/>';
+ICONS.repeat='<path d="M-30,-6 a30,30 0 0 1 52,-16 M22,-34 V-20 H8"/><path d="M30,6 a30,30 0 0 1 -52,16 M-22,34 V20 H-8"/>';
+const F=i=>BT[i].f0;
+const q={
+ n0:F(1),pin1:WF(1,'pin'),par:WF(1,'par'),ap:WF(1,'autopay'),kat:WF(1,'katauti'),hm:WF(1,'mahine'),
+ sh:F(2),papa:WF(2,'papa'),req:WF(2,'request'),c3:F(3),c3a:WF(3,'autopay'),
+ g0:F(4),gg:WF(4,'google'),gpr:WF(4,'profile'),gap:WF(4,'autopay'),glv:WF(4,'live'),
+ p0:F(5),ppp:WF(5,'phonepe'),ppr:WF(5,'profile'),ppm:WF(5,'payment'),pap:WF(5,'autopay'),
+ t0:F(6),teen:WF(6,'teen'),
+ k0:F(7),ktap:WF(7,'tap'),kc:WF(7,'cancel'),kpin:WF(7,'upi'),kkh:WF(7,'khatam'),
+ x0:F(8),xrec:WF(8,'recurring'),xdec:WF(8,'decline'),
+ e0:F(9),eap:WF(9,'autopay'),pg:WF(9,'comment')-6,com:WF(9,'comment')};
+[[HOOK_END+2,'blip'],[q.pin1,'tick'],[q.par,'crack'],[q.kat+4,'ding'],[q.hm,'ding'],
+ [q.sh+2,'blip'],[q.papa,'ding'],[q.req,'tick'],[q.c3a,'blip'],
+ [q.gpr,'click'],[q.gap,'tick'],[q.glv,'pop'],
+ [q.ppr,'click'],[q.ppm,'tick'],[q.pap,'pop'],[q.teen,'glitch'],
+ [q.ktap,'click'],[q.kc,'ding'],[q.kpin,'type'],[q.kkh,'tick'],
+ [q.xrec,'blip'],[q.xdec,'click'],
+ [q.e0+4,'ding'],[q.e0+12,'ding'],[q.eap,'ding'],[q.com,'blip'],[q.com+8,'type']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,o.h||138,p,PBADGE(icon,-320,0,o.icol||PR.text,40)+PT(-250,-6,o.ts||42,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,36,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function crumbs(y,list,f,a,step,hiIdx,hiF){let x=0;const ws=list.map(c=>tw(c,28,700)+40),tot=ws.reduce((s,w)=>s+w,0)+44*(list.length-1);x=-tot/2;let cr='';
+ list.forEach((c,k)=>{const p=pin(f,a+k*step),w=ws[k],hi=k==hiIdx&&f>=hiF;cr+=`<g opacity="${p}"><rect x="${x}" y="-30" width="${w}" height="60" rx="30" fill="${hi?PR.hl:PR.card2}" stroke="${PR.line2}" stroke-width="2"/>${PT(x+w/2,9,28,c,{w:700,fill:hi?PR.hlText:PR.text})}</g>`;x+=w+(k<list.length-1?44:0);if(k<list.length-1)cr+=PARROW(x-40,0,x-8,p,PR.dim);});
+ return PCARD(CX,y,800,126,pin(f,a-4,8),cr)}
+function btn(x,y,t,lit,w=240){return `<rect x="${x-w/2}" y="${y-36}" width="${w}" height="72" rx="36" fill="${lit?PR.hl:PR.card2}" stroke="${PR.line2}" stroke-width="2"/>`+PT(x,y+11,32,t,{w:700,fill:lit?PR.hlText:PR.text})}
+function mandate(y,p,f,name,sub,bad,o={}){return rowCard(y,p,'repeat',name,sub,Object.assign({h:112,ts:36,icol:bad?PR.bad:PR.text,state:bad?'bad':''},o))}
+function content(n,f){let o='';
+ if(n=='hook'){o+=PLABEL(CX,226,'Sab yahi sochte hain');
+  o+=PCARD(CX,350,800,150,pin(f,q.n0+2,8),PBADGE('pin',-320,0,PR.text,40)+PT(-250,14,46,'Ek PIN = ek payment',{a:'start',w:800}),{});
+  o+=PSTRIKE(160,350,920,pin(f,q.par,8));
+  o+=PCARD(CX,560,800,170,pin(f,q.ap-2,8),PBADGE('repeat',-320,0,PR.bad,40)+PT(-250,-8,44,'AutoPay pe 1 PIN',{a:'start',w:800})+PT(-250,40,28,'= approval for every month',{a:'start',w:500,fill:PR.muted}),{state:'bad',on:f>=q.ap});
+  const m=(x,a,t)=>PPILL(x,740,t,pin(f,a),{size:32,col:PR.bad});
+  o+=m(300,q.kat,'DEC  - Rs 299');o+=m(780,q.kat+8,'JAN  - Rs 299');o+=m(540,q.hm,'FEB  - Rs 299');
+  o+=PT(CX,900,24,f>=q.hm?'Example amount':'',{w:500,fill:PR.dim,op:pin(f,q.hm+4)});}
+ if(n=='share'){o+=PLABEL(CX,226,'Pehle, ye bhejo');
+  o+=PCARD(CX,420,800,240,pin(f,q.sh+2,10),PBADGE('chat',-320,0,PR.text,44)
+    +PT(-250,-46,28,'SEND THIS TO PAPA',{a:'start',w:600,fill:PR.muted,ls:3})
+    +PT(-250,10,40,'jo har request pe',{a:'start',w:700})
+    +PT(-250,60,40,'PIN daalte hain',{a:'start',w:700,fill:PR.bad}),{on:f>=q.papa});
+  o+=PPILL(CX,650,'PAPA · MUMMY · DADI',pin(f,q.req),{size:30});
+  if(f>=q.c3-2)o+=PHEAD(CX,820,48,'Kaunsa *AutoPay* chalu?',f,q.c3,{step:2});}
+ if(n=='gpay'){o+=PLABEL(CX,226,'Step 1 · Google Pay');
+  o+=crumbs(330,['Profile photo','Autopay','Live'],f,q.gpr,Math.max(4,(q.glv-q.gpr)/2),2,q.glv);
+  const tp=pin(f,q.gap,10);
+  o+=PCARD(CX,500,800,120,tp,btn(-250,0,'Live',f>=q.glv,220)+btn(0,0,'Pending',0,220)+btn(250,0,'Completed',0,220),{h:120});
+  o+=PT(CX,640,30,f>=q.glv?'Live = jo abhi bhi paise kaat sakte hain':'',{w:600,fill:PR.muted,op:pin(f,q.glv+8)});
+  o+=mandate(770,pin(f,q.glv+8,10),f,'Monthly AutoPay','Live · tap to see details',0);}
+ if(n=='ppe'){o+=PLABEL(CX,226,f>=q.t0?'Papa ki list':'Step 1 · PhonePe');
+  if(f<q.t0){o+=crumbs(330,['Profile','Payment Management'],f,q.ppr,Math.max(4,(q.pap-q.ppr)/2),-1,0);
+   o+=crumbs(470,['AutoPay'],f,q.pap,4,0,q.pap);
+   o+=PT(CX,620,28,f>=q.pap?'Kisi bhi UPI app mein: Profile > AutoPay':'',{w:500,fill:PR.muted,op:pin(f,q.pap+6)});}
+  else{const lit=f>=q.teen;
+   o+=mandate(350,pin(f,q.t0+2,8),f,'Anjaan app','Monthly · Rs 199',lit);
+   o+=mandate(480,pin(f,q.t0+8,8),f,'Free trial jo khatam hua','Monthly · Rs 299',lit);
+   o+=mandate(610,pin(f,q.t0+14,8),f,'Bill payment?','Recurring · Rs 499',lit);
+   o+=PPILL(CX,760,'3 ANJAAN AUTOPAY',pin(f,q.teen),{solid:1,size:34});
+   o+=PT(CX,850,24,'Example list',{w:500,fill:PR.dim,op:pin(f,q.teen+6)});}}
+ if(n=='cancel'){o+=PLABEL(CX,226,'Step 2 · cancel');
+  const done=f>=q.kkh;
+  o+=mandate(350,pin(f,q.k0+2,8),f,'Anjaan app',done?'Cancelled':'Monthly · Rs 199',!done,
+    {h:130,state:done?'good':'bad',icol:done?PR.good:PR.bad,on:f>=q.ktap&&f<q.kc,right:done?PPILL(250,0,'CANCELLED',pin(f,q.kkh),{size:22,col:PR.good}):''});
+  o+=PCARD(CX,540,800,130,pin(f,q.kc-2,8),PBADGE('cross',-320,0,PR.text,36)+PT(-250,14,44,'Cancel autopay',{a:'start',w:800}),{on:f>=q.kc&&f<q.kpin,h:130});
+  const np=Math.max(0,Math.min(4,Math.floor((f-q.kpin)/3)));let dots='';for(let k=0;k<4;k++)dots+=`<rect x="${-150+k*80}" y="-30" width="60" height="60" rx="12" fill="${PR.card2}" stroke="${PR.line2}" stroke-width="2"/>`+(k<np?`<circle cx="${-120+k*80}" cy="0" r="10" fill="${PR.text}"/>`:'');
+  o+=PCARD(CX,720,800,150,pin(f,q.kpin-2,8),PT(-340,8,30,'UPI PIN',{a:'start',w:700})+`<g transform="translate(140,0)">${dots}</g>`,{h:150});
+  o+=PPILL(CX,870,'KHATAM',pin(f,q.kkh),{solid:1,size:36});}
+ if(n=='next'){o+=PLABEL(CX,226,'Step 3 · aage se');
+  const lit=f>=q.xrec;
+  o+=PCARD(CX,420,800,300,pin(f,q.x0+2,8),PBADGE('bell',-320,-80,PR.text,36)+PT(-262,-90,32,'Electricity bill pending',{a:'start',w:700})
+    +PT(-262,-48,26,'Mandate request · random number',{a:'start',w:500,fill:PR.muted})
+    +PPILL(-150,20,'RECURRING · MONTHLY',lit?1:0,{size:26,col:PR.bad})
+    +btn(-150,100,'Decline',f>=q.xdec)+btn(150,100,'Approve',0),{state:lit?'bad':'',on:lit});
+  o+=PT(CX,640,32,lit?'Ek baar ke bill pe Recurring = khatra':'',{w:700,fill:PR.text,op:pin(f,q.xrec+4)});
+  o+=PT(CX,700,28,f>=q.xdec?'Scam ho gaya? Turant 1930':'',{w:500,fill:PR.muted,op:pin(f,q.xdec+6)});}
+ if(n=='end'){o+=PLABEL(CX,226,'Done in 1 minute');
+  const tick=(y,a,t)=>PCARD(CX,y,800,104,pin(f,a),PBADGE('check',-330,0,PR.good,30)+PT(-280,12,34,t,{a:'start',w:700}),{h:104});
+  o+=tick(330,q.e0+4,'Profile > AutoPay > Live');o+=tick(450,q.e0+12,'Anjaan: Cancel + UPI PIN');o+=tick(570,q.eap,'Bill pe Recurring? Decline');
+  const pc=pin(f,q.pg,10),ty=Math.max(0,Math.min(5,Math.floor((f-q.com-8)/3)));
+  o+=PCARD(CX,780,800,200,pc,PT(-360,-44,26,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PT(-360,30,66,f>=q.com+8?'GUIDE'.slice(0,ty):'',{a:'start',w:800})+PPILL(230,26,'FULL GUIDE',pin(f,q.com+24),{solid:1,size:30})+PT(-360,80,24,'step-by-step guide on technibaba.com',{a:'start',w:500,fill:PR.muted,op:pin(f,q.com+30)}),{on:f>=q.com});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,290,76,'*Ek PIN*, har mahine?',f,-14,{step:2})+PHEAD(540,386,60,'Papa ke paise, auto-cut',f,-6,{step:2})+
+  PPILL(540,500,'AUTOPAY CHECK · 3 STEP',pin(f,-3,5),{solid:1,size:40})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>
