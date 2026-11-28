@@ -28,3 +28,6 @@ Blender set at `technibaba_clay/clay_set.blend` on Veer's Mac. Output media_type
 
 ## Camera angles
 Veer's rule (28 Nov 2026): the same angle every time does not work. The engine now varies angles automatically (see engine/clay/README.md, "Camera angles"). Aim for at least six distinct cameras per episode, a wall-text opener, and a punch angle (low, high, tilted or mouth close-up) on the last line.
+
+## Laptop stickers
+Every episode also gets three short funny sticker lines on the laptop lid (queue JSON field `laptop_texts`: [top, main, bottom]), written to tie in with the joke or just be funny on their own. Veer's examples: APPLE NAHI HY, IDHAR KYA DHEKRA HY, SARAM KAR BHAI. Plain text only, no logos.

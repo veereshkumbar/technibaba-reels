@@ -13,3 +13,6 @@ Scene: `technibaba_clay/clay_set.blend` on Veer's Mac (objects Host, H_*, Baba c
 
 Each episode gets a seeded random plan: varied opener that shows the wall text, angle by speaker (never the same camera twice in a row or twice in a row for the same speaker), a wide at the middle line, a punch angle on the last line, a varied end shot, and a mid-line cut on lines longer than 2.4 s. The script prints `camera plan:` with frame:camera pairs. Set `ANGLE_SEED=<int>` before `exec` to force another plan. Timeline markers drive the camera, so test stills must render at cut frames and must not set `scene.camera`.
 Tip: `device_commit_files` once delivered a stale copy when the staged file was overwritten at the same path; stage a new filename and check the file size on the Mac.
+
+## Laptop lid stickers (28 Nov 2026, Veer)
+The host's laptop lid carries three funny Hinglish sticker lines (top small, main large, bottom small), for example APPLE NAHI HY / IDHAR KYA DHEKRA HY / SARAM KAR BHAI. Set `LAP_TEXTS=('top','main','bottom')` before `exec` (write them per episode so they tie in with the joke; long lines wrap automatically). Without it the script picks from `LAP_TOP`, `LAP_MAIN`, `LAP_BOT`. Plain words only, never logos. Objects are named `LapTxt1..3`, parented to `LaptopLid`, and recreated every run.

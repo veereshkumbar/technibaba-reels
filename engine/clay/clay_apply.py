@@ -19,6 +19,32 @@ for n in ('CAM_Baba', 'CAM_Host', 'CAM_Wide'):
     D[n].location = D[n]['base_loc']
 # wall text
 if 'WALL_JOKE' in globals() and WALL_JOKE: D['Wall_Joke'].data.body = WALL_JOKE
+# funny sticker text on the laptop lid (Veer, 28 Nov 2026). Set LAP_TEXTS=(top, main, bottom) before exec; ideally written per episode
+# to tie in with the joke. Fallback: random picks from the pools below. Plain text words only, no logos.
+LAP_TOP = ['APPLE NAHI HY', 'YE MAC NAHI HY', 'WIFI MERA, RULES MERE', 'LAPTOP BHI THAK GAYA']
+LAP_MAIN = ['IDHAR KYA DHEKRA HY', 'BUG NAHI FEATURE HY', 'CTRL+Z MERI ZINDAGI KA', 'CHAI GIRI HY, PAAS MAT AA', 'MEETING MEIN HOON']
+LAP_BOT = ['SARAM KAR BHAI', 'PEECHE SE MAT DEKH', 'EK MINUTE, DEPLOY CHAL RAHA HY', 'SLACK BAND HY, MAIN BHI']
+if 'LAP_TEXTS' not in globals() or not LAP_TEXTS:
+    _lr = random.Random(N * 17 + len(segs) * 5); LAP_TEXTS = (_lr.choice(LAP_TOP), _lr.choice(LAP_MAIN), _lr.choice(LAP_BOT))
+for _o in [o for o in D if o.name.startswith('LapTxt')]:
+    _cu = _o.data; bpy.data.objects.remove(_o, do_unlink=True); bpy.data.curves.remove(_cu)
+def _wrap(t, lim):
+    if '\n' in t or len(t) <= lim or ' ' not in t: return t
+    ws = t.split(' '); best = min(range(1, len(ws)), key=lambda k: abs(len(' '.join(ws[:k])) - len(' '.join(ws[k:]))))
+    return ' '.join(ws[:best]) + '\n' + ' '.join(ws[best:])
+if 'WallCream' in bpy.data.materials and 'LapYellow' not in bpy.data.materials:
+    _m = bpy.data.materials['WallCream'].copy(); _m.name = 'LapYellow'
+    _m.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = (1.0, 0.78, 0.18, 1.0)
+_lm = {'cream': bpy.data.materials['WallCream'], 'mint': bpy.data.materials['WallMint'], 'yellow': bpy.data.materials['LapYellow']}
+def _put(name, text, z, cap, lim, mname):
+    text = _wrap(text.upper(), lim); ml = max(len(l) for l in text.split('\n'))
+    cu = bpy.data.curves.new(name, 'FONT'); cu.body = text; cu.font = D['Wall_Joke'].data.font
+    cu.size = min(cap, 0.44 / (ml * 0.75)); cu.extrude = 0.004; cu.align_x = 'CENTER'; cu.align_y = 'CENTER'; cu.materials.append(_lm[mname])
+    o = bpy.data.objects.new(name, cu); S.collection.objects.link(o); o.parent = D['LaptopLid']
+    o.location = (0.0, -0.0085, z); o.rotation_euler = (1.5708, 0, 0)
+_put('LapTxt2', LAP_TEXTS[0], 0.285, 0.03, 16, 'mint')
+_put('LapTxt1', LAP_TEXTS[1], 0.17, 0.065, 11, 'cream')
+_put('LapTxt3', LAP_TEXTS[2], 0.05, 0.034, 16, 'yellow')
 # ---- camera angle library (tested on the set, 28 Nov 2026) -------------------------------------------------
 # Veer's rule: never the same angle every episode. Each episode picks a different mix, seeded by ANGLE_SEED
 # (set ANGLE_SEED=<int> before exec to force a plan; default is derived from the episode).
