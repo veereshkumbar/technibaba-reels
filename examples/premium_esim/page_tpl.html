@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Pop;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:Pop;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2)}
+@font-face{font-family:Pop;font-weight:900;src:url(file:///tmp/fonts/node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2)}
+html,body{margin:0;background:#000}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Pop}
+@font-face{font-family:Inter;font-weight:400;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///tmp/fonts/node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+html,body{margin:0;background:#0A0A0C}#root{width:1080px;height:1920px;overflow:hidden}text{font-family:Inter}
+</style></head><body><div id="root"></div><script>
+const TOKENS=__TOKENS__;
+const BEATS=__BEATS__;
+__RIGS__
+__STAGE__
+__SPLIT__
+__PREMIUM__
+// ================= reel art: "No Service = eSIM scam check" (premium, tutorial 28 Nov 2026) =================
+ICONS.sim='<path d="M-26,-40 H14 L30,-24 V40 H-26Z"/><rect x="-14" y="-8" width="32" height="34" rx="4"/><line x1="-14" y1="9" x2="18" y2="9"/><line x1="2" y1="-8" x2="2" y2="26"/>';
+ICONS.nosig='<line x1="-30" y1="30" x2="-30" y2="18"/><line x1="-12" y1="30" x2="-12" y2="6"/><line x1="6" y1="30" x2="6" y2="-6"/><line x1="24" y1="30" x2="24" y2="-18"/><path d="M-36,-30 L36,36"/>';
+ICONS.link='<path d="M-6,10 a16,16 0 0 0 22,0 l16,-16 a16,16 0 0 0 -22,-22 l-8,8"/><path d="M6,-10 a16,16 0 0 0 -22,0 l-16,16 a16,16 0 0 0 22,22 l8,-8"/>';
+ICONS.bank='<path d="M-40,-14 L0,-38 L40,-14 Z"/><line x1="-40" y1="36" x2="40" y2="36"/><line x1="-26" y1="-6" x2="-26" y2="28"/><line x1="0" y1="-6" x2="0" y2="28"/><line x1="26" y1="-6" x2="26" y2="28"/>';
+const F=i=>BT[i].f0;
+const q={
+ h0:F(1),tw:WF(1,'tower'),par:WF(1,'par'),num:WF(1,'number'),ph:WF(1,'phone'),
+ sh:F(2),papa:WF(2,'papa'),cc:WF(2,'customer'),q3:F(3),
+ w0:F(4),call:WF(4,'call'),upg:WF(4,'upgrade'),link:WF(4,'link'),wnum:WF(4,'number'),otp:WF(4,'otp'),scam:WF(4,'scammer'),
+ a0:F(5),kaat:WF(5,'kaat'),esim:WF(5,'esim'),off:WF(5,'official'),
+ b0:F(6),net:WF(6,'network'),tur:WF(6,'turant'),bank:WF(6,'bank'),comp:WF(6,'company'),
+ c0:F(7),ss:WF(7,'sanchar'),ch:WF(7,'chakshu'),rep:WF(7,'report'),pai:WF(7,'paise'),n19:WF(7,'1930'),
+ e0:F(8),al:WF(8,'alert'),pg:WF(8,'comment')-6,com:WF(8,'comment')};
+[[HOOK_END+2,'blip'],[q.tw,'tick'],[q.par,'crack'],[q.ph,'ding'],
+ [q.sh+2,'blip'],[q.papa,'ding'],[q.cc,'tick'],[q.q3+2,'blip'],
+ [q.call,'click'],[q.link,'tick'],[q.wnum,'glitch'],[q.otp,'pop'],
+ [q.a0+4,'blip'],[q.esim,'ding'],
+ [q.net,'glitch'],[q.bank,'click'],[q.comp,'click'],
+ [q.ss,'tick'],[q.ch,'tick'],[q.rep,'pop'],[q.n19,'ding'],
+ [q.e0+4,'ding'],[q.e0+12,'ding'],[q.al,'ding'],[q.com,'blip'],[q.com+8,'type']].forEach(([f,t])=>sfx(f,t));
+const CX=540;
+function rowCard(y,p,icon,title,sub,o={}){return PCARD(CX,y,800,o.h||138,p,PBADGE(icon,-320,0,o.icol||PR.text,40)+PT(-250,-6,o.ts||42,title,{a:'start',w:700,fill:o.tfill||PR.text})+PT(-250,36,26,sub,{a:'start',w:500,fill:PR.muted})+(o.right||''),o)}
+function crumbs(y,list,f,a,step,hiIdx,hiF){let x=0;const ws=list.map(c=>tw(c,28,700)+40),tot=ws.reduce((s,w)=>s+w,0)+44*(list.length-1);x=-tot/2;let cr='';
+ list.forEach((c,k)=>{const p=pin(f,a+k*step),w=ws[k],hi=k==hiIdx&&f>=hiF;cr+=`<g opacity="${p}"><rect x="${x}" y="-30" width="${w}" height="60" rx="30" fill="${hi?PR.hl:PR.card2}" stroke="${PR.line2}" stroke-width="2"/>${PT(x+w/2,9,28,c,{w:700,fill:hi?PR.hlText:PR.text})}</g>`;x+=w+(k<list.length-1?44:0);if(k<list.length-1)cr+=PARROW(x-40,0,x-8,p,PR.dim);});
+ return PCARD(CX,y,800,126,pin(f,a-4,8),cr)}
+function btn(x,y,t,lit,w=240,col){return `<rect x="${x-w/2}" y="${y-36}" width="${w}" height="72" rx="36" fill="${lit?PR.hl:PR.card2}" stroke="${col||PR.line2}" stroke-width="2"/>`+PT(x,y+11,32,t,{w:700,fill:lit?PR.hlText:PR.text})}
+function mini(x,y,p,title,status,bad,o={}){// small phone card
+ return `<g opacity="${p}" transform="translate(${x},${y})"><rect x="-150" y="-150" width="300" height="300" rx="34" fill="${PR.card}" stroke="${bad?PR.bad:PR.line2}" stroke-width="${bad?3:2}"/>`+
+  PICON(o.icon||'phone',0,-58,1.1,bad?PR.bad:PR.text,4)+PT(0,34,30,title,{w:700})+PT(0,84,26,status,{w:600,fill:bad?PR.bad:PR.good})+`</g>`}
+function content(n,f){let o='';
+ if(n=='hook'){o+=PLABEL(CX,226,'Sab yahi sochte hain');
+  o+=PCARD(CX,350,800,150,pin(f,q.h0+2,8),PBADGE('nosig',-320,0,PR.text,40)+PT(-250,14,44,'No Service = tower',{a:'start',w:800}),{});
+  o+=PSTRIKE(160,350,920,pin(f,q.par,8));
+  o+=PT(CX,500,30,f>=q.par?'Kabhi kabhi:':'',{w:600,fill:PR.muted,op:pin(f,q.par+2)});
+  o+=mini(330,700,pin(f,q.num-2,8),'Papa','No Service',1,{icon:'nosig'});
+  o+=PARROW(500,700,580,pin(f,q.num+4,10),PR.bad);
+  o+=mini(750,700,pin(f,q.ph-4,8),'Kisi aur ka','Papa ka number',0,{icon:'hacker'});}
+ if(n=='share'){o+=PLABEL(CX,226,'Pehle, ye bhejo');
+  o+=PCARD(CX,420,800,240,pin(f,q.sh+2,10),PBADGE('chat',-320,0,PR.text,44)
+    +PT(-250,-46,28,'SEND THIS TO PAPA',{a:'start',w:600,fill:PR.muted,ls:3})
+    +PT(-250,10,40,'jo customer care ki',{a:'start',w:700})
+    +PT(-250,60,40,'har baat maante hain',{a:'start',w:700,fill:PR.bad}),{on:f>=q.papa});
+  o+=PPILL(CX,650,'PAPA · MUMMY · DADI',pin(f,q.cc),{size:30});
+  if(f>=q.q3-2)o+=PHEAD(CX,820,56,'Number gaya *kaise*?',f,q.q3,{step:2});}
+ if(n=='how'){o+=PLABEL(CX,226,'Scam aise hota hai');
+  o+=rowCard(340,pin(f,q.call,8),'call','"SIM upgrade karo"','Call: customer care banke',{h:120,ts:38,on:f>=q.call&&f<q.link});
+  o+=rowCard(480,pin(f,q.link,8),'link','eSIM activation link','Dabaya, aur...',{h:120,ts:38,state:f>=q.wnum?'bad':'',icol:f>=q.wnum?PR.bad:PR.text,on:f>=q.link&&f<q.wnum});
+  o+=mini(330,720,pin(f,q.wnum,8),'Papa ka SIM','No Service',1,{icon:'nosig'});
+  o+=PARROW(500,720,580,pin(f,q.wnum+6,10),PR.bad);
+  o+=mini(750,720,pin(f,q.otp-2,8),'Scammer eSIM',f>=q.otp?'Number + OTP':'Number',1,{icon:'hacker'});}
+ if(n=='s1'){o+=PLABEL(CX,226,'Step 1 · call kaato');
+  o+=PCARD(CX,420,800,280,pin(f,q.a0+2,8),PBADGE('call',-320,-70,PR.text,40)+PT(-250,-80,38,'Customer care',{a:'start',w:700})
+    +PT(-250,-36,26,'"Aapka SIM upgrade karna hai"',{a:'start',w:500,fill:PR.muted})
+    +btn(-150,70,'Decline',f>=q.kaat,240,PR.bad)+btn(150,70,'Accept',0),{state:f>=q.kaat?'bad':'',on:f>=q.kaat&&f<q.esim});
+  o+=rowCard(680,pin(f,q.esim,8),'sim','eSIM sirf khud lo','Official app ya store se',{h:130,ts:40,state:'good',icol:PR.good,on:f>=q.esim});
+  o+=PT(CX,820,26,f>=q.off?'Kisi call ya link ke kehne pe nahi':'',{w:500,fill:PR.muted,op:pin(f,q.off+6)});}
+ if(n=='s2'){o+=PLABEL(CX,226,'Step 2 · turant');
+  o+=PCARD(CX,350,800,130,pin(f,q.b0+2,8),PBADGE('nosig',-320,0,PR.bad,40)+PT(-250,-4,42,'No Service',{a:'start',w:800,fill:PR.bad})+PT(-250,38,26,'achanak, aur wapas nahi aaya',{a:'start',w:500,fill:PR.muted}),{state:'bad',h:130,on:f>=q.net&&f<q.tur});
+  o+=rowCard(510,pin(f,q.bank,8),'bank','Bank ko call','Kisi aur ke phone se',{h:120,ts:40,on:f>=q.bank&&f<q.comp});
+  o+=rowCard(650,pin(f,q.comp,8),'sim','Mobile company ko call','SIM / eSIM ka haal pucho',{h:120,ts:40,on:f>=q.comp});
+  o+=PPILL(CX,800,'DER = PAISE GAYE',pin(f,q.tur),{size:30,col:PR.bad});}
+ if(n=='s3'){o+=PLABEL(CX,226,'Step 3 · report');
+  o+=crumbs(340,['Sanchar Saathi','Chakshu','Report'],f,q.ss,Math.max(4,(q.rep-q.ss)/2),2,q.rep);
+  o+=PT(CX,460,30,f>=q.ch?'sancharsaathi.gov.in':'',{w:700,fill:PR.muted,op:pin(f,q.ch+4)});
+  o+=PCARD(CX,640,800,190,pin(f,q.pai,8),PBADGE('rupee',-320,0,PR.text,40)+PT(-250,-20,32,'Paise gaye?',{a:'start',w:600,fill:PR.muted})+PT(-250,44,70,'1930',{a:'start',w:800,fill:PR.num})+PT(40,40,28,'cybercrime.gov.in',{a:'start',w:600,fill:PR.muted}),{h:190,on:f>=q.n19});}
+ if(n=='end'){o+=PLABEL(CX,226,'Papa ke phone ke liye');
+  const tick=(y,a,t)=>PCARD(CX,y,800,104,pin(f,a),PBADGE('check',-330,0,PR.good,30)+PT(-280,12,34,t,{a:'start',w:700}),{h:104});
+  o+=tick(330,q.e0+4,'SIM upgrade call? Kaato');o+=tick(450,q.e0+12,'No Service? Bank + company');o+=tick(570,q.al,'Chakshu report · 1930');
+  const pc=pin(f,q.pg,10),ty=Math.max(0,Math.min(5,Math.floor((f-q.com-8)/3)));
+  o+=PCARD(CX,780,800,200,pc,PT(-360,-44,26,'Add a comment...',{a:'start',w:500,fill:PR.dim})+PT(-360,30,66,f>=q.com+8?'GUIDE'.slice(0,ty):'',{a:'start',w:800})+PPILL(230,26,'FULL GUIDE',pin(f,q.com+24),{solid:1,size:30})+PT(-360,80,24,'step-by-step guide on technibaba.com',{a:'start',w:500,fill:PR.muted,op:pin(f,q.com+30)}),{on:f>=q.com});}
+ return o}
+function overlay(f){const sp=spAt(f);if(sp>=1)return '';const a=1-sp;
+ return `<g opacity="${a}">`+PHEAD(540,290,80,'*No Service?*',f,-14,{step:2})+PHEAD(540,386,56,'Papa ka number, kisi aur ke paas',f,-6,{step:2})+
+  PPILL(540,500,'ESIM SCAM CHECK · 3 STEP',pin(f,-3,5),{solid:1,size:40})+`</g>`}
+const DEFS=`<defs>${FACE.DEFS}${SPLIT_DEFS}${PDEFS}</defs>`;
+function render(t){const f0=Math.round(t*FPS),f=warp(f0);
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">${DEFS}`;
+ s+=charLayer(f,strip)+panelLayer(f,content)+overlay(f)+caption(f,capY(f));
+ s+=`<rect x="0" y="1912" width="${1080*f0/NF}" height="8" fill="#5DE0B0" opacity=".9"/></svg>`;
+ document.getElementById('root').innerHTML=s}
+render(0);
+</script></body></html>

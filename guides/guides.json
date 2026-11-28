@@ -2,6 +2,53 @@
  "updated": "2026-11-27",
  "guides": [
   {
+   "slug": "no-service-esim-sim-upgrade-scam-check",
+   "date": "2026-11-28",
+   "title": "Sudden No Service? Check for the eSIM / SIM upgrade scam",
+   "lane": "Tutorial",
+   "summary": "Scammers call as customer care, offer a SIM upgrade or eSIM, and send an activation link. If it works, your phone shows No Service and your calls, SMS and OTPs go to their eSIM. Three things to do.",
+   "steps": [
+    {
+     "title": "1. Cut any SIM upgrade or eSIM call",
+     "body": "If a caller or message asks you to upgrade your SIM, convert to eSIM, click an activation link, scan a QR code or share an OTP, end the call and do not click. Only request an eSIM yourself, through your mobile operator's official app or store. TRAI does not call about disconnecting your number; disconnection for billing, KYC or misuse is done by your operator."
+    },
+    {
+     "title": "2. Sudden No Service that does not come back? Act at once",
+     "body": "From another phone, call your bank (ask them to block UPI, cards and net banking if needed) and your mobile operator's official customer care (ask whether a new SIM or eSIM was issued on your number)."
+    },
+    {
+     "title": "3. Report it",
+     "body": "Report the suspected fraud call or SMS on Sanchar Saathi: sancharsaathi.gov.in > Chakshu (Report Suspected Fraud), within 30 days. If money was lost, call 1930 or file at cybercrime.gov.in right away."
+    }
+   ],
+   "tip": "Send this to parents and anyone who trusts every 'customer care' caller. A real upgrade never needs you to click a link from a caller.",
+   "caution": "Never share an OTP, UPI PIN or eSIM QR code with anyone who calls you, whatever name they use.",
+   "youtube": "",
+   "reel": "",
+   "sources": [
+    {
+     "title": "India TV: Govt (I4C) issues eSIM scam warning",
+     "url": "https://www.indiatvnews.com/technology/news/govt-issues-esim-scam-warning-scammers-can-hijack-your-physical-sim-here-s-how-to-protect-yourself-2025-08-30-1005899"
+    },
+    {
+     "title": "Digit: eSIM scam is targeting users in India",
+     "url": "https://www.digit.in/news/general/esim-scam-is-targeting-users-in-india-heres-how-it-happens-and-how-to-stay-safe.html"
+    },
+    {
+     "title": "TRAI press release 22/2025: Beware of fraudulent calls impersonating TRAI",
+     "url": "https://trai.gov.in/sites/default/files/2025-04/PR_No.22of2025.pdf"
+    },
+    {
+     "title": "Sanchar Saathi: Chakshu, Report Suspected Fraud",
+     "url": "https://sancharsaathi.gov.in/sfc/"
+    },
+    {
+     "title": "Gizmo Times (28 Nov 2026): Fake KYC and SIM disconnection scams",
+     "url": "https://www.gizmotimes.com/telecommunication/fake-kyc-sim-disconnection-messages-india/52530"
+    }
+   ]
+  },
+  {
    "slug": "upi-autopay-check-cancel-unknown-mandates",
    "date": "2026-11-27",
    "title": "Money leaving every month? Check and cancel unknown UPI AutoPay mandates",
