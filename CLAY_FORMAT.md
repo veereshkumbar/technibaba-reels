@@ -25,3 +25,6 @@ Each skit has a tag line the viewer sends to a named colleague: "Ye apne designe
 
 ## Render notes
 Blender set at `technibaba_clay/clay_set.blend` on Veer's Mac. Output media_type VIDEO then file_format FFMPEG; keep resolution at 1080x1920. Animation on twos at 15 fps, doubled to 30 in the final ffmpeg step. Voices ElevenLabs: Host = Viraj, coin Baba = Shivank. Keep the first-version audio mix (loudnorm about -16 LUFS), Veer preferred it.
+
+## Camera angles
+Veer's rule (28 Nov 2026): the same angle every time does not work. The engine now varies angles automatically (see engine/clay/README.md, "Camera angles"). Aim for at least six distinct cameras per episode, a wall-text opener, and a punch angle (low, high, tilted or mouth close-up) on the last line.
